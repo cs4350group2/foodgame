@@ -1,0 +1,34 @@
+# Godot 4+ editor/import cache
+.godot/
+
+# Godot export credentials/presets can contain local machine paths or secrets.
+export_presets.cfg
+
+# Generated exports/builds
+/android/
+/build/
+/builds/
+/dist/
+/export/
+/exports/
+/package/
+
+# Godot/editor temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.autosave
+*.tscn*.tmp
+*.scn*.tmp
+
+# Logs and crash dumps
+*.log
+*.dmp
+*.crash
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
