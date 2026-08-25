@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ibniegk33ssv"]
+
+[ext_resource type="Script" uid="uid://qdv3o214qxpb" path="res://src/player.gd" id="1_lowyb"]
+
+[node name="Node2D" type="Node2D" unique_id=106563848]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=959339092]
+motion_mode = 1
+script = ExtResource("1_lowyb")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1482721947]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1961298677]
