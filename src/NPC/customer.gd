@@ -2,6 +2,7 @@ class_name Customer
 extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
+@onready var world = get_tree().current_scene
 
 var move_speed = 2.0
 
@@ -17,7 +18,7 @@ enum State {
 }
 
 var current_state = State.IDLE
-var assigned_sittingNode = null
+var assigned_sittingNode: SittingNode = null
 
 func _ready():
 	change_state(State.IDLE)
@@ -103,13 +104,15 @@ func exit_state(state:State):
 
 func state_idle(delta):
 	# Decide what the customer should do next
-
-	change_state(State.WALKING_TO_TABLE)
-
+	world.assign_sittingNode(self)
+	
+	if assigned_sittingNode != null:
+		change_state(State.WALKING_TO_TABLE)
 
 func state_walking_to_table(delta):
 	# Set navigation target somewhere else
 	# navigation_agent.target_position = table_position
+	update_target_location(assigned_sittingNode.global_position)
 
 	if nav_agent.is_navigation_finished():
 		change_state(State.SITTING)
@@ -173,6 +176,9 @@ func state_leaving(delta):
 	# Walk toward the restaurant exit
 
 	if nav_agent.is_navigation_finished():
+		if assigned_sittingNode != null:
+			assigned_sittingNode.free()
+		
 		queue_free()
 		return
 		

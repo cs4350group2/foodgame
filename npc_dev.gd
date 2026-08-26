@@ -21,7 +21,6 @@ func assign_sittingNode(customer: Customer):
 		print("No vacant sittingNode!")
 		return
 		
-	customer.update_target_location(sittingNode.global_position)
 	customer.assigned_sittingNode = sittingNode
 	
 	print("Assigned sittingNode: ", sittingNode.name)
