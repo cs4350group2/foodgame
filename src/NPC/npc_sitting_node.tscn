@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bafqd0yn4tein"]
+
+[ext_resource type="Script" uid="uid://bleu56ats4lt1" path="res://src/NPC/npc_sitting_node.gd" id="1_t7noo"]
+
+[node name="SittingNode" type="CSGBox3D" unique_id=747953572]
+script = ExtResource("1_t7noo")
