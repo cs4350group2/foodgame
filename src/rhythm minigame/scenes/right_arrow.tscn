@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dgha80cx5jky7"]
+
+[ext_resource type="PackedScene" uid="uid://bdssewhawp5re" path="res://src/rhythm minigame/scenes/parent_arrow.tscn" id="1_y6sww"]
+[ext_resource type="Texture2D" uid="uid://c6gsiqjd3gj8k" path="res://assets/rhythm minigame/PNG/Black/2x/arrowRight.png" id="2_x23o6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
+radius = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yujwt"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_66mjf"]
+radius = 4.0
+
+[node name="ParentArrow" unique_id=1316662934 instance=ExtResource("1_y6sww")]
+
+[node name="ArrowDown" parent="." index="0" unique_id=543169254]
+texture = ExtResource("2_x23o6")
+
+[node name="RightPerfect" type="Area2D" parent="." index="1" unique_id=613683]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightPerfect" index="0" unique_id=813341495]
+shape = SubResource("CircleShape2D_xrivr")
+
+[node name="RightGood1" type="Area2D" parent="." index="2" unique_id=1662897376]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RightGood1" index="0" unique_id=1780070598]
+position = Vector2(0, -26)
+shape = SubResource("CircleShape2D_yujwt")
+
+[node name="RightGood2" type="Area2D" parent="." index="3" unique_id=1223537375]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="RightGood2" index="0" unique_id=1745683309]
+position = Vector2(0, 26)
+shape = SubResource("CircleShape2D_66mjf")
