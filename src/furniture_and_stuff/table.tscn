@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cw4e41pqdssf1"]
+
+[ext_resource type="Script" uid="uid://dgjckjn3vjg6a" path="res://src/furniture_and_stuff/table.gd" id="1_e47e4"]
+[ext_resource type="Texture2D" uid="uid://bitnxopa3ttqa" path="res://assets/table.png" id="1_vleoj"]
+
+[node name="Table" type="Node2D" unique_id=1621060250]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=358658861]
+script = ExtResource("1_e47e4")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=281929939]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_vleoj")
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1679649915]
+scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(0, 0, 0, 128, 128, 128, 128, 0)

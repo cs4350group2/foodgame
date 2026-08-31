@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://e1bci2esh1te"]
+
+[ext_resource type="Script" uid="uid://b55b5q142b4jq" path="res://src/furniture_and_stuff/counter.gd" id="1_652s2"]
+[ext_resource type="Texture2D" uid="uid://bbvocxqgodgsa" path="res://assets/counter.png" id="1_b4ep8"]
+
+[node name="Counter" type="Node2D" unique_id=1141167870]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=116479339]
+script = ExtResource("1_652s2")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=190245547]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_b4ep8")
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1284794555]
+scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(0, 0, 0, 128, 128, 128, 128, 0)

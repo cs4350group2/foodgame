@@ -2,6 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://1msvlvjm52rs" path="res://assets/wall.png" id="1_la7um"]
 [ext_resource type="PackedScene" uid="uid://ibniegk33ssv" path="res://src/player/player.tscn" id="2_xv147"]
+[ext_resource type="PackedScene" uid="uid://c5aocwflib6sl" path="res://src/furniture_and_stuff/stove.tscn" id="3_em31m"]
+[ext_resource type="PackedScene" uid="uid://e1bci2esh1te" path="res://src/furniture_and_stuff/counter.tscn" id="4_w7y1s"]
+[ext_resource type="PackedScene" uid="uid://cw4e41pqdssf1" path="res://src/furniture_and_stuff/table.tscn" id="5_5vox1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xv147"]
 texture = ExtResource("1_la7um")
@@ -23,3 +26,48 @@ tile_set = SubResource("TileSet_1vivr")
 
 [node name="Node2D" parent="." unique_id=106563848 instance=ExtResource("2_xv147")]
 position = Vector2(218, 226)
+
+[node name="Stove" parent="." unique_id=1987563180 instance=ExtResource("3_em31m")]
+position = Vector2(1280, 64)
+
+[node name="Stove2" parent="." unique_id=207787602 instance=ExtResource("3_em31m")]
+position = Vector2(1216, 64)
+
+[node name="Stove3" parent="." unique_id=2010070444 instance=ExtResource("3_em31m")]
+position = Vector2(1152, 64)
+
+[node name="Counter" parent="." unique_id=1141167870 instance=ExtResource("4_w7y1s")]
+position = Vector2(832, 64)
+
+[node name="Counter2" parent="." unique_id=969373736 instance=ExtResource("4_w7y1s")]
+position = Vector2(832, 128)
+
+[node name="Counter3" parent="." unique_id=1144487809 instance=ExtResource("4_w7y1s")]
+position = Vector2(832, 192)
+
+[node name="Counter4" parent="." unique_id=1633746132 instance=ExtResource("4_w7y1s")]
+position = Vector2(832, 256)
+
+[node name="Counter5" parent="." unique_id=1802016633 instance=ExtResource("4_w7y1s")]
+position = Vector2(832, 320)
+
+[node name="Counter6" parent="." unique_id=1294212023 instance=ExtResource("4_w7y1s")]
+position = Vector2(896, 320)
+
+[node name="Counter7" parent="." unique_id=1810057968 instance=ExtResource("4_w7y1s")]
+position = Vector2(960, 320)
+
+[node name="Counter8" parent="." unique_id=360665905 instance=ExtResource("4_w7y1s")]
+position = Vector2(1024, 320)
+
+[node name="Counter9" parent="." unique_id=183817979 instance=ExtResource("4_w7y1s")]
+position = Vector2(1088, 320)
+
+[node name="Counter10" parent="." unique_id=505527515 instance=ExtResource("4_w7y1s")]
+position = Vector2(1152, 320)
+
+[node name="Table" parent="." unique_id=1621060250 instance=ExtResource("5_5vox1")]
+position = Vector2(448, 192)
+
+[node name="Table2" parent="." unique_id=1688200623 instance=ExtResource("5_5vox1")]
+position = Vector2(448, 512)

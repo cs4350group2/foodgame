@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c5aocwflib6sl"]
+
+[ext_resource type="Script" uid="uid://l2dp8l7nwrup" path="res://src/furniture_and_stuff/stove.gd" id="1_ksysi"]
+[ext_resource type="Texture2D" uid="uid://dxtseq48japky" path="res://assets/stove.png" id="1_xcu4q"]
+
+[node name="Stove" type="Node2D" unique_id=1987563180]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=159942825]
+script = ExtResource("1_ksysi")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=501241476]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_xcu4q")
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=298183613]
+scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(0, 0, 0, 128, 128, 128, 128, 0)

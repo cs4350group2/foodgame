@@ -6,6 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t4jh7"]
 size = Vector2(63, 64)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1vivr"]
+radius = 96.0
+
 [node name="Node2D" type="Node2D" unique_id=106563848]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=959339092]
@@ -20,3 +23,9 @@ offset = Vector2(64, 64)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1961298677]
 position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_t4jh7")
+
+[node name="InteractionArea" type="Area2D" parent="CharacterBody2D" unique_id=51132447]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/InteractionArea" unique_id=1826751541]
+position = Vector2(32, 32)
+shape = SubResource("CircleShape2D_1vivr")
