@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_twiq2"]
 [ext_resource type="Script" uid="uid://c1kc73k2ndr3t" path="res://npc_dev.gd" id="1_wdm20"]
+[ext_resource type="Script" uid="uid://c13jwmdtv0dqf" path="res://src/NPC/restaurant.gd" id="3_0iqps"]
 [ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="3_myoyu"]
 [ext_resource type="PackedScene" uid="uid://bafqd0yn4tein" path="res://src/NPC/npc_sitting_node.tscn" id="4_iqrmb"]
 
@@ -62,15 +63,20 @@ transform = Transform3D(0.76604444, 0, 0.6427877, 0, 1, 0, -0.6427877, 0, 0.7660
 size = Vector3(3.5, 1.5, 0.2)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1654862345]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0, -0.18999994)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, -0.1, -0.18999994)
 navigation_mesh = SubResource("NavigationMesh_xrivr")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D" unique_id=853060730]
 use_collision = true
 size = Vector3(50, 1, 50)
 
-[node name="Customer" parent="." unique_id=259023669 instance=ExtResource("3_myoyu")]
+[node name="Restaurant" type="Node2D" parent="." unique_id=1998027659]
+script = ExtResource("3_0iqps")
+
+[node name="Customer" parent="Restaurant" unique_id=259023669 instance=ExtResource("3_myoyu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1, 1.6, 7.3)
 
-[node name="SittingNode" parent="." unique_id=747953572 instance=ExtResource("4_iqrmb")]
+[node name="SittingNodes" type="Node2D" parent="Restaurant" unique_id=1320803014]
+
+[node name="SittingNode" parent="Restaurant/SittingNodes" unique_id=747953572 instance=ExtResource("4_iqrmb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1869197, 1, 8.485034)

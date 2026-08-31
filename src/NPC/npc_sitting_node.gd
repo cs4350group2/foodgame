@@ -1,23 +1,19 @@
 class_name SittingNode
 extends CSGBox3D
 
-var vacant
-var serving_customer
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	vacant = true
-	pass # Replace with function body.
+var vacant := true
+var serving_customer: Customer = null
 
 func is_vacant() -> bool:
-	return vacant
-	
-func reserve():
-	vacant = false
-	
-func free():
-	vacant = true
+	return vacant and serving_customer == null
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func reserve() -> void:
+	vacant = false
+
+func assign_customer(customer: Customer) -> void:
+	serving_customer = customer
+	vacant = false
+
+func clear() -> void:
+	serving_customer = null
+	vacant = true

@@ -1,7 +1,8 @@
 class_name Customer
 extends CharacterBody3D
 
-@onready var nav_agent = $NavigationAgent3D
+@onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var restaurant: Restaurant = $".."
 @onready var world = get_tree().current_scene
 
 var move_speed = 2.0
@@ -20,15 +21,36 @@ enum State {
 var current_state = State.IDLE
 var assigned_sittingNode: SittingNode = null
 
+func assign_sitting_node(node: SittingNode):
+	self.assigned_sittingNode = node
+
 func _ready():
 	change_state(State.IDLE)
 
 func _physics_process(delta):
-	var current_location = global_transform.origin
-	var next_location = nav_agent.get_next_path_position()
-	var new_velocity = (next_location - current_location).normalized() * move_speed
-	
-	velocity = new_velocity
+	match current_state:
+		State.IDLE:
+			state_idle(delta)
+		State.WALKING_TO_TABLE:
+			state_walking_to_table(delta)
+		State.SITTING:
+			state_sitting(delta)
+		State.ORDERING:
+			state_ordering(delta)
+		State.WAITING_FOR_FOOD:
+			state_waiting_for_food(delta)
+		State.EATING:
+			state_eating(delta)
+		State.FINISHED:
+			state_finished(delta)
+		State.LEAVING:
+			state_leaving(delta)
+
+func move_toward_navigation_target() -> void:
+	var next_position := nav_agent.get_next_path_position()
+	var direction := global_position.direction_to(next_position)
+
+	velocity = direction * move_speed
 	move_and_slide()
 
 func update_target_location(target_location):
@@ -104,7 +126,7 @@ func exit_state(state:State):
 
 func state_idle(delta):
 	# Decide what the customer should do next
-	world.assign_sittingNode(self)
+	restaurant.assign_sittingNode(self)
 	
 	if assigned_sittingNode != null:
 		change_state(State.WALKING_TO_TABLE)
@@ -117,13 +139,8 @@ func state_walking_to_table(delta):
 	if nav_agent.is_navigation_finished():
 		change_state(State.SITTING)
 		return
-
-	var next_position = nav_agent.get_next_path_position()
-	var direction = global_position.direction_to(next_position)
-
-	velocity = direction * move_speed
-	move_and_slide()
-
+	
+	move_toward_navigation_target()
 
 func state_sitting(delta):
 	# Wait for some amount of time before ordering
@@ -177,7 +194,7 @@ func state_leaving(delta):
 
 	if nav_agent.is_navigation_finished():
 		if assigned_sittingNode != null:
-			assigned_sittingNode.free()
+			assigned_sittingNode.clear()
 		
 		queue_free()
 		return
