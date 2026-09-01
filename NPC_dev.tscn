@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://bi7cxwdrnj4wy"]
+
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_twiq2"]
+[ext_resource type="Script" uid="uid://c1kc73k2ndr3t" path="res://npc_dev.gd" id="1_wdm20"]
+[ext_resource type="Script" uid="uid://c13jwmdtv0dqf" path="res://src/NPC/restaurant.gd" id="3_0iqps"]
+[ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="3_myoyu"]
+[ext_resource type="PackedScene" uid="uid://bafqd0yn4tein" path="res://src/NPC/npc_sitting_node.tscn" id="4_iqrmb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_h2yge"]
+sky_material = SubResource("ProceduralSkyMaterial_0xm2m")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_h2yge")
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_xrivr"]
+vertices = PackedVector3Array(-24.5, 0.6000001, -24.5, -24.5, 0.6000001, 24.5, 24.5, 0.6000001, 24.5, 24.5, 0.6000001, -24.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+cell_height = 0.05
+agent_max_climb = 0.05
+
+[node name="NPCTestingScene" type="Node3D" unique_id=2071807807]
+script = ExtResource("1_wdm20")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=465812824]
+environment = SubResource("Environment_1bvp3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=502506347]
+transform = Transform3D(0.111618906, -0.60760444, -0.78635746, 0.6330223, -0.56651103, 0.52758694, -0.7660444, -0.5566705, 0.3213938, 4.4, 9.8, 3)
+shadow_enabled = true
+
+[node name="ProtoController" parent="." unique_id=1615094132 instance=ExtResource("1_twiq2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.8, 7.5)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1591982623]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0, -0.18999994)
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=994787370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0.6, -0.18999994)
+use_collision = true
+size = Vector3(10, 0.3, 10)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1984119811]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.8000001, 0)
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1757884389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 1.2, 2.9)
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=499780606]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2599998, 0.41, 0.6)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1213886114]
+transform = Transform3D(0.9396926, 0, -0.34202012, 0, 1, 0, 0.34202012, 0, 0.9396926, 3.4, 1.8, -2.6399999)
+size = Vector3(3.5, 2.1000001, 0.2)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1166317976]
+transform = Transform3D(0.76604444, 0, 0.6427877, 0, 1, 0, -0.6427877, 0, 0.76604444, -0.90211236, 1.0999998, -2.4579196)
+size = Vector3(3.5, 1.5, 0.2)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1654862345]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, -0.1, -0.18999994)
+navigation_mesh = SubResource("NavigationMesh_xrivr")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D" unique_id=853060730]
+use_collision = true
+size = Vector3(50, 1, 50)
+
+[node name="Restaurant" type="Node2D" parent="." unique_id=1998027659]
+script = ExtResource("3_0iqps")
+
+[node name="Customer" parent="Restaurant" unique_id=259023669 instance=ExtResource("3_myoyu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1, 1.6, 7.3)
+
+[node name="SittingNodes" type="Node2D" parent="Restaurant" unique_id=1320803014]
+
+[node name="SittingNode" parent="Restaurant/SittingNodes" unique_id=747953572 instance=ExtResource("4_iqrmb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1869197, 1, 8.485034)
