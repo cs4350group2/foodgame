@@ -176,7 +176,6 @@ func state_ordering(delta):
 	if order_taken:
 		change_state(State.WAITING_FOR_FOOD)
 
-
 func state_waiting_for_food(delta):
 	# Wait until restaurant tells us the food is ready
 
@@ -186,32 +185,32 @@ func state_waiting_for_food(delta):
 func state_eating(delta):
 	# Play eating animation
 	# Decrease food/eating timer
-
-	# Example:
-	# if eating_timer <= 0:
-	#     change_state(State.FINISHED)
-
-	pass
-
+	var finish_eating = false
+	var eating_time = 20
+	
+	await get_tree().create_timer(eating_time).timeout
+	finish_eating = true
+	
+	if finish_eating:
+		change_state(State.FINISHED)
 
 func state_finished(delta):
 	# Pay, finish eating, etc.
-
-	change_state(State.LEAVING)
+	var paid = false
+	
+	if paid:
+		change_state(State.LEAVING)
 
 
 func state_leaving(delta):
 	# Walk toward the restaurant exit
-
+	# update_target_location(exit)
+	
+	move_toward_navigation_target()
+	
 	if nav_agent.is_navigation_finished():
 		if assigned_sittingNode != null:
 			assigned_sittingNode.clear()
 		
 		queue_free()
 		return
-		
-	var next_position = nav_agent.get_next_path_position()
-	var direction = global_position.direction_to(next_position)
-
-	velocity = direction * move_speed
-	move_and_slide()
