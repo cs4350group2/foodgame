@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="foodgame"
-run/main_scene="uid://bi7cxwdrnj4wy"
+run/main_scene="uid://bx7cw268w4v8j"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

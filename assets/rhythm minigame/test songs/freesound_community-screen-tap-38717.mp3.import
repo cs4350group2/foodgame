@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b0u7d176l2x3y"
+path="res://.godot/imported/freesound_community-screen-tap-38717.mp3-1525fefdd8025e1c9cab6318b762107c.mp3str"
+
+[deps]
+
+source_file="res://assets/rhythm minigame/test songs/freesound_community-screen-tap-38717.mp3"
+dest_files=["res://.godot/imported/freesound_community-screen-tap-38717.mp3-1525fefdd8025e1c9cab6318b762107c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

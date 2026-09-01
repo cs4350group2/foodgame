@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://6djpu0leink6"]
+
+[ext_resource type="PackedScene" uid="uid://bdssewhawp5re" path="res://src/rhythm minigame/parent_arrow.tscn" id="1_wvv7q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
+radius = 41.340054
+
+[node name="ParentArrow" unique_id=1316662934 instance=ExtResource("1_wvv7q")]
+
+[node name="Down" type="Area2D" parent="." index="1" unique_id=1710517724]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Down" index="0" unique_id=885710053]
+shape = SubResource("CircleShape2D_xrivr")
