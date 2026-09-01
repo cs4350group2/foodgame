@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bi7cxwdrnj4wy"]
+[gd_scene format=3 uid="uid://b63kdoyscljg4"]
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bflinwj3lf3lo" path="res://models/bartable.tscn" id="2_0xm2m"]
@@ -38,46 +38,46 @@ size = Vector2(10, 10)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0xm2m"]
 data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=579835186]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1005867969]
 environment = SubResource("Environment_h2yge")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=747953589]
 transform = Transform3D(0.94997203, -0.2561621, 0.17870116, 0, 0.57214594, 0.82015187, -0.31233492, -0.7791214, 0.54352266, 0, 17.7, 12)
 shadow_enabled = true
 
-[node name="ProtoController" parent="." instance=ExtResource("1_ig7tw")]
+[node name="ProtoController" parent="." unique_id=1737577017 instance=ExtResource("1_ig7tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 1.8920331, 0.9579706)
 
-[node name="bartable" parent="." instance=ExtResource("2_0xm2m")]
+[node name="bartable" parent="." unique_id=1473802843 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6, 0, -2.5)
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1567508079]
 mesh = SubResource("PlaneMesh_0xm2m")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=1292298415]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=547599403]
 shape = SubResource("ConcavePolygonShape3D_0xm2m")
 
-[node name="Floor2" type="MeshInstance3D" parent="."]
+[node name="Floor2" type="MeshInstance3D" parent="." unique_id=1622225128]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 mesh = SubResource("PlaneMesh_0xm2m")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor2" unique_id=1054849496]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D" unique_id=1391781272]
 shape = SubResource("ConcavePolygonShape3D_0xm2m")
 
-[node name="Floor3" type="MeshInstance3D" parent="."]
+[node name="Floor3" type="MeshInstance3D" parent="." unique_id=77929501]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
 mesh = SubResource("PlaneMesh_0xm2m")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor3"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor3" unique_id=1118329246]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D" unique_id=216793616]
 shape = SubResource("ConcavePolygonShape3D_0xm2m")
