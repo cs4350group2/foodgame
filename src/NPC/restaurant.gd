@@ -2,6 +2,24 @@ class_name Restaurant
 extends Node2D
 
 @onready var sittingNodes = $SittingNodes.get_children()
+var customers: Array[Customer] = []
+var orders: Array[Order] = []
+
+func add_customer(customer: Customer):
+	customers.append(customer)
+
+func remove_customer(customer: Customer):
+	customers.erase(customer)
+	
+func add_order(order: Order):
+	orders.append(order)
+
+func remove_order(order: Order):
+	orders.erase(order)
+
+func complete_order(order: Order):
+	order.complete_order()
+	remove_order(order)
 
 func find_vacant_sittingNode() -> SittingNode:
 		for node in sittingNodes:

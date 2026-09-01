@@ -18,8 +18,13 @@ enum State {
 	LEAVING
 }
 
+func get_state_name(state: State) -> String:
+	return State.keys()[state]
+
 var current_state = State.IDLE
 var assigned_sittingNode: SittingNode = null
+var order_taken = false
+var order: Order
 
 func assign_sitting_node(node: SittingNode):
 	self.assigned_sittingNode = node
@@ -62,6 +67,7 @@ func change_state(new_state: State):
 	if current_state == new_state:
 		return
 		
+	print("Changing state from: ", get_state_name(current_state), " to ", get_state_name(new_state))
 	exit_state(current_state)
 	current_state = new_state
 	enter_state(current_state)
@@ -145,32 +151,37 @@ func state_walking_to_table(delta):
 func state_sitting(delta):
 	# Wait for some amount of time before ordering
 
-	# Example:
-	# if sit_timer <= 0:
-	#     change_state(State.ORDERING)
+	# Wait until sitting animation finish
+	# Execute sitting animation here
+	
+	# Play reading menu animation for random seconds
+	var view_menu_time = randf_range(5.0, 10.0)
+	
+	await get_tree().create_timer(view_menu_time).timeout
+	
+	change_state(State.ORDERING)
 
-	pass
-
+func take_order() -> Order:
+	order_taken = true
+	return order
 
 func state_ordering(delta):
 	# Choose food / send order to restaurant system
+	order = Order.new(["Burger", "Fries"])
 
 	# Example:
 	# order = choose_random_food()
 	# restaurant.place_order(self, order)
 
-	change_state(State.WAITING_FOR_FOOD)
+	if order_taken:
+		change_state(State.WAITING_FOR_FOOD)
 
 
 func state_waiting_for_food(delta):
 	# Wait until restaurant tells us the food is ready
 
-	# Example:
-	# if food_received:
-	#     change_state(State.EATING)
-
-	pass
-
+	if order.is_order_completed():
+		change_state(State.EATING)
 
 func state_eating(delta):
 	# Play eating animation

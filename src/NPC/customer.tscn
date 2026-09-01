@@ -9,17 +9,18 @@ albedo_color = Color(5.390644e-06, 0.7026503, 0.77468157, 1)
 material = SubResource("StandardMaterial3D_b1lj4")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i2whk"]
+radius = 0.3
+height = 1.8
 
 [node name="Customer" type="CharacterBody3D" unique_id=259023669 groups=["customers"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_i2whk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1140959115]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_13qdw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1488200544]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, 0)
 shape = SubResource("CapsuleShape3D_i2whk")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1135132478]
