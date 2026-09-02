@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bi7cxwdrnj4wy"]
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_twiq2"]
-[ext_resource type="Script" uid="uid://c1kc73k2ndr3t" path="res://npc_dev.gd" id="1_wdm20"]
+[ext_resource type="Script" uid="uid://c1kc73k2ndr3t" path="res://src/NPC/npc_dev.gd" id="1_wdm20"]
 [ext_resource type="Script" uid="uid://c13jwmdtv0dqf" path="res://src/NPC/restaurant.gd" id="3_0iqps"]
 [ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="3_myoyu"]
 [ext_resource type="PackedScene" uid="uid://bafqd0yn4tein" path="res://src/NPC/npc_sitting_node.tscn" id="4_iqrmb"]
@@ -34,7 +34,7 @@ transform = Transform3D(0.111618906, -0.60760444, -0.78635746, 0.6330223, -0.566
 shadow_enabled = true
 
 [node name="ProtoController" parent="." unique_id=1615094132 instance=ExtResource("1_twiq2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.8, 7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.799999, 0.100000024, 12.5)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1591982623]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0, -0.18999994)
@@ -74,7 +74,7 @@ size = Vector3(50, 1, 50)
 script = ExtResource("3_0iqps")
 
 [node name="Customer" parent="Restaurant" unique_id=259023669 instance=ExtResource("3_myoyu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1, 1.6, 7.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1, 1.3, 7.3)
 
 [node name="SittingNodes" type="Node2D" parent="Restaurant" unique_id=1320803014]
 
