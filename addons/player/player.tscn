@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bgoqkn2518vol"]
+
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_dverj"]
+
+[node name="ProtoController" unique_id=1842546302 instance=ExtResource("1_dverj")]
+
+[node name="InteractRay" type="RayCast3D" parent="Head/Camera3D" parent_id_path=PackedInt32Array(1544456086) index="0" unique_id=1972078482]
+target_position = Vector3(0, 0, -2)

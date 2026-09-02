@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://b63kdoyscljg4"]
 
-[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bgoqkn2518vol" path="res://addons/player/player.tscn" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://bflinwj3lf3lo" path="res://models/bartable.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://dpqqqk623fihy" path="res://addons/player/player.gd" id="2_5vw27"]
 [ext_resource type="Texture2D" uid="uid://dwme0hy0mmk8f" path="res://Textures/Wall_KitchenTiles_01/Wall_KitchenTiles_01_basecolor.jpg" id="3_272bh"]
 [ext_resource type="Texture2D" uid="uid://c5hs0ea85li4p" path="res://Textures/Wall_KitchenTiles_01/Wall_KitchenTiles_01_ambientocclusion.jpg" id="4_5vw27"]
 [ext_resource type="Texture2D" uid="uid://chbbiohwxajwt" path="res://Textures/Wall_KitchenTiles_01/Wall_KitchenTiles_01_metallic.jpg" id="5_kek77"]
@@ -47,8 +48,9 @@ environment = SubResource("Environment_h2yge")
 transform = Transform3D(0.94997203, -0.2561621, 0.17870116, 0, 0.57214594, 0.82015187, -0.31233492, -0.7791214, 0.54352266, 0, 17.7, 12)
 shadow_enabled = true
 
-[node name="ProtoController" parent="." unique_id=1737577017 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 1.8920331, 0.9579706)
+[node name="ProtoController" parent="." unique_id=1842546302 instance=ExtResource("1_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.892, 0.958)
+script = ExtResource("2_5vw27")
 
 [node name="bartable" parent="." unique_id=1473802843 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6, 0, -2.5)
