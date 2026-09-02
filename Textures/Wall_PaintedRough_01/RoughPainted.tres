@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://be0dacp5omd7o"]
+
+[ext_resource type="Texture2D" uid="uid://oqb3pu0hrliu" path="res://Textures/Wall_PaintedRough_01/Wall_PaintedRough_01_basecolor.jpg" id="1_cdtyq"]
+[ext_resource type="Texture2D" uid="uid://8c138g05y4n6" path="res://Textures/Wall_PaintedRough_01/Wall_PaintedRough_01_ambientocclusion.jpg" id="2_cdtyq"]
+[ext_resource type="Texture2D" uid="uid://vo70ywfxu34o" path="res://Textures/Wall_Decorated_01/Wall_Decorated_01_metallic.jpg" id="3_1sj18"]
+[ext_resource type="Texture2D" uid="uid://ct8nutqb61i8x" path="res://Textures/Wall_PaintedRough_01/Wall_PaintedRough_01_normal.jpg" id="4_yiy00"]
+[ext_resource type="Texture2D" uid="uid://dus5ncvodp7fm" path="res://Textures/Wall_PaintedRough_01/Wall_PaintedRough_01_glossiness.jpg" id="5_1sj18"]
+
+[resource]
+albedo_texture = ExtResource("1_cdtyq")
+metallic = 1.0
+metallic_texture = ExtResource("3_1sj18")
+roughness_texture = ExtResource("5_1sj18")
+normal_enabled = true
+normal_texture = ExtResource("4_yiy00")
+ao_enabled = true
+ao_texture = ExtResource("2_cdtyq")
+uv1_scale = Vector3(10, 10, 10)
