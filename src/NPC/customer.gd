@@ -167,7 +167,7 @@ func take_order() -> Order:
 
 func state_ordering(delta):
 	# Choose food / send order to restaurant system
-	order = Order.new(["Burger", "Fries"])
+	# order = Order.new(["Burger", "Fries"])
 
 	# Example:
 	# order = choose_random_food()

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_twiq2"]
 [ext_resource type="Script" uid="uid://c1kc73k2ndr3t" path="res://src/NPC/npc_dev.gd" id="1_wdm20"]
-[ext_resource type="Script" uid="uid://c13jwmdtv0dqf" path="res://src/NPC/restaurant.gd" id="3_0iqps"]
+[ext_resource type="Script" uid="uid://c13jwmdtv0dqf" path="res://src/restaurant/restaurant.gd" id="3_0iqps"]
 [ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="3_myoyu"]
 [ext_resource type="PackedScene" uid="uid://bafqd0yn4tein" path="res://src/NPC/npc_sitting_node.tscn" id="4_iqrmb"]
 
