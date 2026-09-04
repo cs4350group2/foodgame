@@ -17,5 +17,6 @@ func try_interact() -> void:
 	while target != null and not target.is_in_group("interactables"):
 		target = target.get_parent()
 
-	if target != null and target.has_method("interact"):
-		target.interact(self)
+	var interactable := target as Interactable
+	if interactable != null:
+		interactable.interact(self)
