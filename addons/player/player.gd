@@ -1,4 +1,5 @@
-extends "res://addons/proto_controller/proto_controller.gd"
+extends ProtoController
+class_name Player
 
 @onready var interact_ray: RayCast3D = $Head/Camera3D/InteractRay
 

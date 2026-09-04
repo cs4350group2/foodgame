@@ -19,6 +19,14 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://2wind731ofh6"
+
+[autoload]
+
+AudioManager="*uid://diljxx64vyoov"
+
 [dotnet]
 
 project/assembly_name="foodgame"

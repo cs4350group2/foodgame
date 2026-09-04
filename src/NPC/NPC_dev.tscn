@@ -76,7 +76,7 @@ size = Vector3(50, 1, 50)
 script = ExtResource("3_0iqps")
 
 [node name="Customer" parent="Restaurant" unique_id=259023669 instance=ExtResource("3_myoyu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1, 1.6, 7.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1, 1.3, 7.3)
 
 [node name="SittingNodes" type="Node2D" parent="Restaurant" unique_id=1320803014]
 

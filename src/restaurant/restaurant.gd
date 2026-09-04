@@ -5,8 +5,14 @@ extends Node2D
 var customers: Array[Customer] = []
 var orders: Array[Order] = []
 
+func _ready() -> void:
+	for child in self.get_children():
+		if child is Customer:
+			add_customer(child)
+
 func add_customer(customer: Customer):
 	customers.append(customer)
+	assign_sittingNode(customer)
 
 func remove_customer(customer: Customer):
 	customers.erase(customer)
