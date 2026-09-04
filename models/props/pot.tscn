@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bsw6l7t53h11e"]
+
+[ext_resource type="PackedScene" uid="uid://dbkwev7gdoisp" path="res://assets/individualsfiles/pot.fbx" id="1_5ro2p"]
+
+[node name="pot" unique_id=715979015 instance=ExtResource("1_5ro2p")]
+
+[node name="Cylinder_009" parent="." index="0"]
+transform = Transform3D(25, 0, 0, 0, -1.0927847e-06, 4.594, 0, -25, -2.008101e-07, 0, 0, 0)

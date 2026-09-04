@@ -2,7 +2,7 @@ class_name Customer
 extends CharacterBody3D
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var restaurant: Restaurant = $".."
+@onready var animation_player: AnimationPlayer = $CharacterBody3D/Timmy/AnimationPlayer
 @onready var world = get_tree().current_scene
 
 var move_speed = 2.0
@@ -132,7 +132,6 @@ func exit_state(state:State):
 
 func state_idle(delta):
 	# Decide what the customer should do next
-	restaurant.assign_sittingNode(self)
 	
 	if assigned_sittingNode != null:
 		change_state(State.WALKING_TO_TABLE)
@@ -141,6 +140,7 @@ func state_walking_to_table(delta):
 	# Set navigation target somewhere else
 	# navigation_agent.target_position = table_position
 	update_target_location(assigned_sittingNode.global_position)
+	#animation_player.play("Walk")
 
 	if nav_agent.is_navigation_finished():
 		change_state(State.SITTING)
@@ -167,7 +167,7 @@ func take_order() -> Order:
 
 func state_ordering(delta):
 	# Choose food / send order to restaurant system
-	order = Order.new(["Burger", "Fries"])
+	# order = Order.new(["Burger", "Fries"])
 
 	# Example:
 	# order = choose_random_food()

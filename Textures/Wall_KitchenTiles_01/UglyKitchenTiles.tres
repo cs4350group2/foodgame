@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dqgd4cvquio3c"]
+
+[ext_resource type="Texture2D" uid="uid://dwme0hy0mmk8f" path="res://Textures/Wall_KitchenTiles_01/Wall_KitchenTiles_01_basecolor.jpg" id="1_rnwr4"]
+[ext_resource type="Texture2D" uid="uid://w11ie185gi1n" path="res://Textures/Wall_Decorated_01/Wall_Decorated_01_ambientocclusion.jpg" id="2_6s0lg"]
+[ext_resource type="Texture2D" uid="uid://vo70ywfxu34o" path="res://Textures/Wall_Decorated_01/Wall_Decorated_01_metallic.jpg" id="3_ukcgx"]
+[ext_resource type="Texture2D" uid="uid://dbtdw2wrr2hwx" path="res://Textures/Wall_KitchenTiles_01/Wall_KitchenTiles_01_normalOgl.jpg" id="4_7crwq"]
+[ext_resource type="Texture2D" uid="uid://c12pq20w6nepx" path="res://Textures/Wall_KitchenTiles_01/Wall_KitchenTiles_01_roughness.jpg" id="5_yan6u"]
+
+[resource]
+albedo_texture = ExtResource("1_rnwr4")
+metallic = 1.0
+metallic_texture = ExtResource("3_ukcgx")
+roughness_texture = ExtResource("5_yan6u")
+normal_enabled = true
+normal_texture = ExtResource("4_7crwq")
+ao_enabled = true
+ao_texture = ExtResource("2_6s0lg")
+uv1_scale = Vector3(10, 10, 10)
