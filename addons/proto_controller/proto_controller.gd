@@ -118,6 +118,21 @@ func _physics_process(delta: float) -> void:
 	
 	# Use velocity to actually move
 	move_and_slide()
+	
+	# Push RigidBody3D objects we collide with
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var body := collision.get_collider()
+
+		if body is RigidBody3D:
+			var push_dir := -collision.get_normal()
+			push_dir.y = 0.0
+
+			if push_dir.length() > 0.0:
+				push_dir = push_dir.normalized()
+
+				var push_strength := velocity.length() * 0.08
+				body.apply_central_impulse(push_dir * push_strength)
 
 
 ## Rotate us to look around.
