@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://b63kdoyscljg4"]
 
-[ext_resource type="PackedScene" uid="uid://bgoqkn2518vol" path="res://addons/player/player.tscn" id="1_074og"]
+[ext_resource type="PackedScene" uid="uid://bgoqkn2518vol" path="res://src/player/player.tscn" id="1_074og"]
 [ext_resource type="PackedScene" uid="uid://bflinwj3lf3lo" path="res://models/counters/bartable.tscn" id="2_0xm2m"]
 [ext_resource type="Material" uid="uid://dqgd4cvquio3c" path="res://Textures/Wall_KitchenTiles_01/UglyKitchenTiles.tres" id="2_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://bta3mj4pbg36v" path="res://models/physics food/meatCooked.tscn" id="4_82xsv"]
 [ext_resource type="PackedScene" uid="uid://cmsh146hphpjm" path="res://models/counters/bartableCorner.tscn" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://dpuyc6bpxycoe" path="res://models/bartableDrawer.tscn" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dh2vbcu4qhou4" path="res://models/interactable stations/bartableSink.tscn" id="9_kek77"]
@@ -16,6 +17,7 @@
 [ext_resource type="Material" uid="uid://be0dacp5omd7o" path="res://Textures/Wall_PaintedRough_01/RoughPainted.tres" id="17_yaehf"]
 [ext_resource type="PackedScene" uid="uid://8pmn7ri3q83k" path="res://models/interactable stations/fridge.tscn" id="18_074og"]
 [ext_resource type="PackedScene" uid="uid://de1mj6x1iytdx" path="res://models/props/lamp.tscn" id="18_cegan"]
+[ext_resource type="PackedScene" uid="uid://k8gtv0ur6iqb" path="res://models/physics food/meatRaw.tscn" id="19_82xsv"]
 [ext_resource type="PackedScene" uid="uid://c5toepeu4b86f" path="res://models/interactable stations/stoveWPot.tscn" id="19_cegan"]
 [ext_resource type="PackedScene" uid="uid://ceo84dcj3hstn" path="res://models/interactable stations/trash.tscn" id="20_82xsv"]
 
@@ -76,6 +78,7 @@ material = ExtResource("17_yaehf")
 [node name="Main" type="Node3D" unique_id=579835186]
 
 [node name="Player" parent="." unique_id=1842546302 instance=ExtResource("1_074og")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1398200764]
 transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 0, 0, 0)
@@ -100,6 +103,9 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=547599403]
 shape = SubResource("ConcavePolygonShape3D_0xm2m")
+
+[node name="RigidBody3D" parent="Floor/StaticBody3D" unique_id=1600686416 instance=ExtResource("4_82xsv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.103923, 2.161038, -2.4229891)
 
 [node name="Floor2" type="MeshInstance3D" parent="." unique_id=1622225128]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
@@ -275,3 +281,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.742, 0)
 
 [node name="lamp2" parent="." unique_id=1714337645 instance=ExtResource("18_cegan")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4.742, 0)
+
+[node name="RigidBody3D" parent="." unique_id=563726617 instance=ExtResource("19_82xsv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2000003, 2.3, -3.3)
