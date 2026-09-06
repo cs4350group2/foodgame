@@ -8,8 +8,8 @@ data = PackedVector3Array(0.057299998, -0.0252, -0.01, 0.057299998, 0.01, -0.01,
 
 [node name="workplan_001" unique_id=301511810 instance=ExtResource("1_g066b")]
 
-[node name="Cube_009" parent="." index="0" unique_id=724091002]
-transform = Transform3D(25, 0, 0, 0, -1.0927847e-06, 25, 0, -25, -1.0927847e-06, 0, 0.25, 0)
+[node name="Cube_009" parent="." index="0" unique_id=1324972288]
+transform = Transform3D(25, 0, 0, 0, -1.0927847e-06, 25, 0, -25, -1.0927847e-06, -0.029476643, 0.25, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube_009" index="0" unique_id=2100714006]
 script = ExtResource("2_jwbuh")
