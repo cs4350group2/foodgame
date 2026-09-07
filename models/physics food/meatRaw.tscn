@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://k8gtv0ur6iqb"]
+
+[ext_resource type="PackedScene" uid="uid://cpcbxu1opppol" path="res://models/props/food/meatRaw.tscn" id="1_m76kh"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vrxuu"]
+friction = 0.8
+bounce = 0.3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m76kh"]
+size = Vector3(0.28936362, 0.1, 0.19076672)
+
+[node name="RigidBody3D" type="RigidBody3D" unique_id=563726617]
+physics_material_override = SubResource("PhysicsMaterial_vrxuu")
+
+[node name="meatraw2" parent="." unique_id=381339205 instance=ExtResource("1_m76kh")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1536775286]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0006245822, 0.03430293, -0.0072802827)
+shape = SubResource("BoxShape3D_m76kh")

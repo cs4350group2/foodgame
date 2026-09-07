@@ -4,6 +4,7 @@
 # Happy prototyping!
 
 extends CharacterBody3D
+class_name ProtoController
 
 ## Can we move around?
 @export var can_move : bool = true
@@ -30,15 +31,15 @@ extends CharacterBody3D
 
 @export_group("Input Actions")
 ## Name of Input Action to move Left.
-@export var input_left : String = "ui_left"
+@export var input_left : String = "move_left"
 ## Name of Input Action to move Right.
-@export var input_right : String = "ui_right"
+@export var input_right : String = "moveright"
 ## Name of Input Action to move Forward.
-@export var input_forward : String = "ui_up"
+@export var input_forward : String = "move_fwd"
 ## Name of Input Action to move Backward.
-@export var input_back : String = "ui_down"
+@export var input_back : String = "move_back"
 ## Name of Input Action to Jump.
-@export var input_jump : String = "ui_accept"
+@export var input_jump : String = "jump"
 ## Name of Input Action to Sprint.
 @export var input_sprint : String = "sprint"
 ## Name of Input Action to toggle freefly mode.
@@ -117,6 +118,21 @@ func _physics_process(delta: float) -> void:
 	
 	# Use velocity to actually move
 	move_and_slide()
+	
+	# Push RigidBody3D objects we collide with
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var body := collision.get_collider()
+
+		if body is RigidBody3D:
+			var push_dir := -collision.get_normal()
+			push_dir.y = 0.0
+
+			if push_dir.length() > 0.0:
+				push_dir = push_dir.normalized()
+
+				var push_strength := velocity.length() * 0.08
+				body.apply_central_impulse(push_dir * push_strength)
 
 
 ## Rotate us to look around.
