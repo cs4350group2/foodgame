@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dlswh1bo53qbp"]
+
+[ext_resource type="Script" uid="uid://trcygqn8bghd" path="res://src/test/music_test.gd" id="1_10udw"]
+[ext_resource type="Resource" uid="uid://dibhfexgjqvj" path="res://src/music/mud_dagored.tres" id="2_qeccv"]
+
+[node name="MusicTest" type="Node3D" unique_id=1058301499]
+script = ExtResource("1_10udw")
+audio_data = ExtResource("2_qeccv")
