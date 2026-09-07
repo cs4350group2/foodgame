@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c4iascsgu3xbp"]
+
+[ext_resource type="PackedScene" uid="uid://v0xcuh0476dl" path="res://assets/food/stationProps/woodenbox.fbx" id="1_bnvi6"]
+
+[node name="woodenbox" unique_id=1654059166 instance=ExtResource("1_bnvi6")]
+
+[node name="woodenbox" parent="." index="0" unique_id=688608245]
+transform = Transform3D(200, 0, 0, 0, -8.742278e-06, 200, 0, -200, -8.742278e-06, 0, 0, 0)

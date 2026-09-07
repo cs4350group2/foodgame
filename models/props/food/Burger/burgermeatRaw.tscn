@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cubk4yy6d5h6g"]
+
+[ext_resource type="PackedScene" uid="uid://bpyo8vcf5t17w" path="res://assets/food/burger/burgermeat.gltf" id="1_0p0gc"]
+[ext_resource type="Shader" uid="uid://bx6kdp2gpgy8g" path="res://models/props/food/Burger/burgermeatRaw.gdshader" id="2_2urai"]
+[ext_resource type="Texture2D" uid="uid://cw76y17epo815" path="res://assets/food/burger/burgermeat_color.png" id="3_84p7h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2urai"]
+render_priority = 0
+shader = ExtResource("2_2urai")
+shader_parameter/albedo_texture = ExtResource("3_84p7h")
+shader_parameter/raw_color = Color(0.8235294, 0.41568628, 0.4392157, 1)
+
+[node name="burgermeat2" unique_id=484982101 instance=ExtResource("1_0p0gc")]
+
+[node name="burgermeat" parent="." index="0" unique_id=1774469617]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+surface_material_override/0 = SubResource("ShaderMaterial_2urai")

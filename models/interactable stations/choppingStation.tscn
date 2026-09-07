@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://nunteaagavmm"]
+
+[ext_resource type="PackedScene" uid="uid://bflinwj3lf3lo" path="res://models/counters/bartable.tscn" id="1_steq3"]
+[ext_resource type="PackedScene" uid="uid://1g6wlemfk4de" path="res://models/props/cuttingboard.tscn" id="2_h0jya"]
+[ext_resource type="PackedScene" uid="uid://dj6cb51qotoex" path="res://models/props/knife.tscn" id="3_75l0p"]
+
+[node name="Node3D" type="Node3D" unique_id=1074580101]
+
+[node name="workplan" parent="." unique_id=1513500207 instance=ExtResource("1_steq3")]
+
+[node name="cuttingboard" parent="." unique_id=302539372 instance=ExtResource("2_h0jya")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4777637, 0.11066392)
+
+[node name="knife2" parent="." unique_id=1254057496 instance=ExtResource("3_75l0p")]
+transform = Transform3D(-4.371139e-08, -1, 0, -4.371139e-08, 1.9106855e-15, -1, 1, -4.371139e-08, -4.371139e-08, 0, 0.46761703, -0.32424873)
