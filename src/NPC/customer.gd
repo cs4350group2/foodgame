@@ -3,9 +3,6 @@ extends CharacterBody3D
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var animation_player: AnimationPlayer = $CharacterBody3D/Timmy/AnimationPlayer
-@onready var world = get_tree().current_scene
-
-var move_speed = 2.0
 
 enum State {
 	IDLE,
@@ -25,11 +22,15 @@ var current_state = State.IDLE
 var assigned_sittingNode: SittingNode = null
 var order_taken = false
 var order: Order
+var move_speed = 2.0
+var customer_lvl: int
+var patience_lvl: float
 
 func assign_sitting_node(node: SittingNode):
 	self.assigned_sittingNode = node
 
 func _ready():
+	customer_lvl = randi_range(1, 3)
 	change_state(State.IDLE)
 
 func _physics_process(delta):
@@ -166,12 +167,14 @@ func take_order() -> Order:
 	return order
 
 func state_ordering(delta):
-	# Choose food / send order to restaurant system
-	# order = Order.new(["Burger", "Fries"])
-
-	# Example:
-	# order = choose_random_food()
-	# restaurant.place_order(self, order)
+	# Decide order
+	if order == null:
+		var menu: Dictionary = RestaurantManager.get_menu()
+		var food_data = menu["foods"].pick_random()
+		print(food_data["name"], food_data["price"], food_data["rarity"])
+		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"])
+		var order_item = OrderItem.new(food, customer_lvl)
+		order = Order.new([order_item])
 
 	if order_taken:
 		change_state(State.WAITING_FOR_FOOD)

@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://bi7cxwdrnj4wy"]
 
-[ext_resource type="Script" uid="uid://c1kc73k2ndr3t" path="res://npc_dev.gd" id="1_wdm20"]
-[ext_resource type="PackedScene" uid="uid://bgoqkn2518vol" path="res://addons/player/player.tscn" id="2_0iqps"]
-[ext_resource type="Script" uid="uid://c13jwmdtv0dqf" path="res://src/NPC/restaurant.gd" id="3_0iqps"]
-[ext_resource type="Script" uid="uid://dpqqqk623fihy" path="res://addons/player/player.gd" id="3_0qev5"]
+[ext_resource type="Script" uid="uid://c1kc73k2ndr3t" path="res://src/NPC/npc_dev.gd" id="1_wdm20"]
+[ext_resource type="PackedScene" uid="uid://bgoqkn2518vol" path="res://src/player/player.tscn" id="2_0iqps"]
+[ext_resource type="Script" uid="uid://c08kngi0a0cac" path="res://src/restaurant/restaurant.gd" id="3_0iqps"]
 [ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="3_myoyu"]
 [ext_resource type="PackedScene" uid="uid://bafqd0yn4tein" path="res://src/NPC/npc_sitting_node.tscn" id="4_iqrmb"]
 
@@ -36,7 +35,6 @@ shadow_enabled = true
 
 [node name="ProtoController" parent="." unique_id=1842546302 instance=ExtResource("2_0iqps")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.8, 7.55)
-script = ExtResource("3_0qev5")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1591982623]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0, -0.18999994)

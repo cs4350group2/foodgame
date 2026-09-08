@@ -26,6 +26,7 @@ buses/default_bus_layout="uid://2wind731ofh6"
 [autoload]
 
 AudioManager="*uid://diljxx64vyoov"
+RestaurantManager="*uid://c13jwmdtv0dqf"
 
 [dotnet]
 
