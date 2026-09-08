@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b8tvo7btxogng"]
+
+[ext_resource type="PackedScene" uid="uid://nl1u2n5clfcw" path="res://models/props/plate.tscn" id="1_e56cx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h6w4q"]
+size = Vector3(0.09998861, 0.09998861, 0.03043213)
+
+[node name="RigidBody3D" type="RigidBody3D" unique_id=1561412531]
+
+[node name="plate" parent="." unique_id=1897826909 instance=ExtResource("1_e56cx")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=302133334]
+transform = Transform3D(8, 0, 0, 0, -3.496911e-07, -8, 0, 8, -3.496911e-07, 0, 0.051279135, 2.2414821e-09)
+shape = SubResource("BoxShape3D_h6w4q")

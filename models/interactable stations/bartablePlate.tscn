@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dnog75r3ow708"]
+
+[ext_resource type="PackedScene" uid="uid://bflinwj3lf3lo" path="res://models/counters/bartable.tscn" id="1_dwlgo"]
+[ext_resource type="PackedScene" uid="uid://nl1u2n5clfcw" path="res://models/props/plate.tscn" id="2_pggfy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qf7sd"]
+size = Vector3(0.89868164, 0.17871094, 0.9416504)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oo0pn"]
+albedo_color = Color(0.288518, 0.28851798, 0.28851798, 1)
+
+[node name="Node3D" type="Node3D" unique_id=2067101646]
+
+[node name="workplan" parent="." unique_id=1513500207 instance=ExtResource("1_dwlgo")]
+
+[node name="plate" parent="." unique_id=1897826909 instance=ExtResource("2_pggfy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47749084, 0)
+
+[node name="plate2" parent="." unique_id=1485220027 instance=ExtResource("2_pggfy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5249216, 0)
+
+[node name="plate3" parent="." unique_id=1558383410 instance=ExtResource("2_pggfy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57442886, 0)
+
+[node name="plate4" parent="." unique_id=298795225 instance=ExtResource("2_pggfy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62512606, 0)
+
+[node name="plate5" parent="." unique_id=1100732473 instance=ExtResource("2_pggfy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6675818, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1527052792]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.379, 0)
+mesh = SubResource("BoxMesh_qf7sd")
+surface_material_override/0 = SubResource("StandardMaterial3D_oo0pn")
