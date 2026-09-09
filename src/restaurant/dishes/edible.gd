@@ -13,3 +13,6 @@ func get_edible_name() -> String:
 
 func get_price() -> float:
 	return price
+
+func is_equal(other: Edible) -> bool:
+	return edible_name == other.edible_name
