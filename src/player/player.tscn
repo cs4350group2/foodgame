@@ -40,5 +40,9 @@ target_position = Vector3(0, 0, -3)
 
 [node name="Crosshair" type="Control" parent="CanvasLayer" unique_id=965388831]
 layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 mouse_filter = 2
 script = ExtResource("2_rxibo")

@@ -2,6 +2,37 @@ extends ProtoController
 class_name Player
 
 @onready var interact_ray: RayCast3D = $Head/Camera3D/InteractRay
+var focused_component: InteractComponent
+
+func _ready() -> void:
+	super._ready()
+	interact_ray.add_exception(self)
+
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+	update_focus()
+
+func update_focus() -> void:
+	interact_ray.force_raycast_update()
+	var next_component := get_look_component()
+
+	if not is_instance_valid(focused_component):
+		focused_component = null
+
+	if next_component == focused_component:
+		return
+
+	if focused_component != null:
+		focused_component.set_highlighted(false)
+
+	focused_component = next_component
+
+	if focused_component != null:
+		focused_component.set_highlighted(true)
+
+func _exit_tree() -> void:
+	if is_instance_valid(focused_component):
+		focused_component.set_highlighted(false)
 
 func _unhandled_input(event: InputEvent) -> void:
 	super._unhandled_input(event)
@@ -30,8 +61,7 @@ func get_look_component() -> InteractComponent:
 	return null
 	
 func try_interact() -> void:
-	interact_ray.force_raycast_update()
-	
-	var component := get_look_component()
-	if component != null:
-		component.interact(self)
+	update_focus()
+
+	if is_instance_valid(focused_component):
+		focused_component.interact(self)
