@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://d1ptjikdr5fob"]
+
+[ext_resource type="PackedScene" uid="uid://2nshyr7skpa6" path="res://assets/food/burger/burgerbreaddown.gltf" id="1_fb2uh"]
+
+[node name="burgerbreaddown2" unique_id=598705122 instance=ExtResource("1_fb2uh")]
+
+[node name="burgerbreaddown" parent="." index="0" unique_id=1021063471]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

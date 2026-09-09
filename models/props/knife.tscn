@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dj6cb51qotoex"]
+
+[ext_resource type="PackedScene" uid="uid://c6xv7clen3ngp" path="res://assets/food/stationProps/knife2.fbx" id="1_w6gj5"]
+
+[node name="knife2" unique_id=1254057496 instance=ExtResource("1_w6gj5")]
