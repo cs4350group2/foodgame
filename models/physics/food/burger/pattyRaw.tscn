@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dhc7fs6slmjns"]
+
+[ext_resource type="PackedScene" uid="uid://cubk4yy6d5h6g" path="res://models/props/food/Burger/burgermeatRaw.tscn" id="1_c0vkw"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qf7sd"]
+height = 0.17858887
+radius = 0.30126953
+
+[node name="RigidBody3D" type="RigidBody3D" unique_id=337328989]
+
+[node name="burgermeat2" parent="." unique_id=484982101 instance=ExtResource("1_c0vkw")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1485274625]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0018920898, 0)
+shape = SubResource("CylinderShape3D_qf7sd")

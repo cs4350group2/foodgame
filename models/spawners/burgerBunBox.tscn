@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cwexcopcjevoa"]
+
+[ext_resource type="PackedScene" uid="uid://c4iascsgu3xbp" path="res://models/props/woodenbox.tscn" id="1_e1ddy"]
+[ext_resource type="Texture2D" uid="uid://be8gqt7it3txb" path="res://models/physics/food/burger/Screenshot 2026-09-07 230653.png" id="2_b1xis"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vgq1p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e4tav"]
+albedo_texture = ExtResource("2_b1xis")
+
+[sub_resource type="BoxMesh" id="BoxMesh_qf7sd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e1ddy"]
+
+[node name="Node3D" type="Node3D" unique_id=1684884210]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1718466456]
+transform = Transform3D(0.4, 0, 0, 0, -1.7484556e-08, -0.4, 0, 0.4, -1.7484556e-08, 0, 0, 0.5006093)
+mesh = SubResource("PlaneMesh_vgq1p")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_e4tav")
+
+[node name="woodenbox" parent="." unique_id=1654059166 instance=ExtResource("1_e1ddy")]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=295517422]
+visible = false
+mesh = SubResource("BoxMesh_qf7sd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=628357465]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=133775841]
+shape = SubResource("BoxShape3D_e1ddy")

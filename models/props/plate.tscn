@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://nl1u2n5clfcw"]
+
+[ext_resource type="PackedScene" uid="uid://c1xohekujwlwg" path="res://assets/individualsfiles/plate.fbx" id="1_fjqyv"]
+
+[node name="plate" unique_id=1897826909 instance=ExtResource("1_fjqyv")]
+
+[node name="assiette" parent="." index="0" unique_id=14345946]
+transform = Transform3D(8, 0, 0, 0, -3.496911e-07, 8, 0, -8, -3.496911e-07, 0, 0, 0)

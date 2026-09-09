@@ -5,4 +5,4 @@
 [node name="meatraw2" unique_id=381339205 instance=ExtResource("1_kp5ol")]
 
 [node name="meatraw" parent="." index="0" unique_id=762923949]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

@@ -6,28 +6,36 @@ extends Node
 # store the BPMs of what we're currently playing for matching purposes
 var bgm_bpm: float = 0.0
 var rm_bpm: float = 0.0
+var song_first_beat: float = 0.0
 
-# we might also need the first beat time to sync, or just assume it starts from 0.0
+func play_bgm(audio_data: AudioData, from_position: float = 0.0):
+	play_bgm_to_target_bpm(audio_data, audio_data.bpm, from_position)
 
-func play_bgm(audio_stream: AudioStream, original_bpm: float, 
+func play_bgm_to_target_bpm(audio_data: AudioData, 
 			  target_bpm: float, from_position: float = 0.0):
-	assert(original_bpm > 0)
+	assert(audio_data.bpm > 0)
 	assert(target_bpm > 0)
-	
+	var audio_stream := audio_data.audio_stream
+	var original_bpm := audio_data.bpm
 	bgm_player.stream = audio_stream
 	bgm_player.pitch_scale = target_bpm / original_bpm
 	bgm_bpm = target_bpm
+	# for beat matching purposes
+	song_first_beat = audio_data.first_beat
 	bgm_player.play(from_position)
-
-func play_rhythm_and_match_bgm(audio_stream: AudioStream, original_bpm: float,
-							   from_position: float = 0.0):
-	play_rhythm(audio_stream, original_bpm, bgm_bpm, from_position)
-
-func play_rhythm(audio_stream: AudioStream, original_bpm: float,
-				 target_bpm: float, from_position: float = 0.0):
-	assert(original_bpm > 0)
-	assert(target_bpm > 0)
 	
+	print("Song playing!")
+
+func play_rhythm_and_match_bgm(audio_data: AudioData,
+							   from_position: float = 0.0):
+	play_rhythm_to_target_bpm(audio_data, bgm_bpm, from_position)
+
+func play_rhythm_to_target_bpm(audio_data: AudioData,
+				 target_bpm: float, from_position: float = 0.0):
+	assert(audio_data.bpm > 0)
+	assert(target_bpm > 0)
+	var audio_stream := audio_data.audio_stream
+	var original_bpm := audio_data.bpm
 	rm_player.stream = audio_stream
 	rm_player.pitch_scale = target_bpm / original_bpm
 	rm_bpm = target_bpm

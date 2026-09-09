@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://sr2ufnlhcojo"]
+
+[ext_resource type="PackedScene" uid="uid://bpyo8vcf5t17w" path="res://assets/food/burger/burgermeat.gltf" id="1_0p0gc"]
+
+[node name="burgermeat2" unique_id=484982101 instance=ExtResource("1_0p0gc")]
+
+[node name="burgermeat" parent="." index="0" unique_id=1774469617]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
