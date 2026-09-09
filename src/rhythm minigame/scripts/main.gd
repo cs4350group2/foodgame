@@ -26,7 +26,7 @@ var current_time_ms: float = 0.0
 
 @export var note_lead_time_ms: float = 1000.0 # each note takes 1 full second to fall from top of screen to judgment line (if arrow_speed in parent_arrow.gd is changed, this should be changed too)
 
-@export var perfect_time_window_ms = 80
+@export var perfect_time_window_ms = 100
 @export var good_time_window_ms = 200 
 
 # arrow generators
@@ -55,6 +55,7 @@ signal miss(input_judgment : String)
 signal cooking_start
 signal cooking_end
 signal results_display
+signal hide_lane(lane_name : String)
 
 # variables to display on results screen
 var num_perfects : int = 0
@@ -70,22 +71,25 @@ var chart_stream : AudioStream
 var is_game_started : bool = false
 var is_audio_started : bool = false
 
+const ALL_NIGHT_BURGUNDY_TRIMMED_ = preload("uid://bgx2ev5nxatk8") # rhythm minigame audio track (testing only one for now)
+const MUD_DAGORED = preload("uid://dibhfexgjqvj") # BGM 
+
 func _ready() -> void:
 	rhythm_result_screen.visible = false
 	
-	var chart_path: String = "res://assets/rhythm minigame/charts/test_song.fsc"
-	var audio_filename: String = load_rhythm_music(chart_path)
-
-	var full_audio_path: String = "res://assets/rhythm minigame/test songs/" + audio_filename
-
-	chart_stream = load(full_audio_path)
+	var speed_mult : float = MUD_DAGORED.bpm / ALL_NIGHT_BURGUNDY_TRIMMED_.bpm # since this happens before audio starts playing and the values are set
 	
-	chart_notes = load_rhythm_chart(chart_path) # for testing purposes, will have to hardcode specific cases in the future
+	var chart_path: String = "res://assets/rhythm minigame/charts/all_night.fsc"
+	
+	chart_notes = load_rhythm_chart(chart_path, speed_mult) # for testing purposes, will have to hardcode specific cases in the future
 	
 	# include a slight delay before the cooking start text pops up
 	await get_tree().create_timer(1.0).timeout
 	
 	cooking_start.emit()
+	
+	hide_lane.emit("up")
+	hide_lane.emit("down")
 	
 	# wait 4 seconds before the chart begins, then starts the minigame
 	await get_tree().create_timer(4.5).timeout
@@ -120,11 +124,14 @@ func _process(delta: float) -> void:
 	
 		if current_time_ms >= 0.0:
 			is_audio_started = true
-			AudioManager.play_rhythm(chart_stream, 120, 120, 0.0) # for now we don't have the BGM yet, so target_bpm = original_bpm
+			# AudioManager.play_rhythm_and_match_bgm(ALL_NIGHT_BURGUNDY_TRIMMED_, 0.0) 
+			AudioManager.set_rm_volume(0.5)
+			AudioManager.play_rhythm_to_target_bpm(ALL_NIGHT_BURGUNDY_TRIMMED_, MUD_DAGORED.bpm, 0.0) 
 			current_time_ms = 0.0
 	
 	else:
-		current_time_ms = AudioManager.get_rhythm_playback_position() * 1000
+		var pitch: float = AudioManager.rm_player.pitch_scale
+		current_time_ms = (AudioManager.get_rhythm_playback_position() / pitch) * 1000.0
 		
 	while not chart_notes.is_empty() and (chart_notes[0]["time"] <= current_time_ms + note_lead_time_ms):
 		var note_data: Dictionary = chart_notes.pop_front()
@@ -185,9 +192,8 @@ func check_hit(lane_name: String, judgment_arrow: Node2D) -> void:
 		return
 		
 	var closest_arrow: Node2D = lane_array[0] # this is the oldest live arrow
-	
-	var current_ms: float = AudioManager.get_rhythm_playback_position() * 1000.0
-	var time_diff: float = abs(current_ms - closest_arrow.target_hit_time_ms)
+
+	var time_diff: float = abs(current_time_ms - closest_arrow.target_hit_time_ms)
 	
 	if time_diff > good_time_window_ms:
 		return
@@ -212,7 +218,7 @@ func remove_arrow(arrow: Arrow, lane_name: String) -> void:
 	active_notes[lane_name].erase(arrow)
 	arrow.free()
 
-func load_rhythm_chart(file_path: String) -> Array:
+func load_rhythm_chart(file_path: String, speed_mult : float) -> Array:
 	# parses fluXis chart text data and returns the HitObjects array (array of notes)
 	if not FileAccess.file_exists(file_path):
 		print("Chart file not found!")
@@ -223,32 +229,20 @@ func load_rhythm_chart(file_path: String) -> Array:
 	file.close()
 	
 	var json = JSON.new()
-	if json.parse(json_string) == OK:
-		var data = json.data
+	if json.parse(json_string) != OK:
+		print("Failed to load rhythm chart as JSON.")
+		return []
 		
-		if data.has ("HitObjects"):
-			return data["HitObjects"]
-			
-	print("Failed to load rhythm chart as JSON.")
-	return []
-
-func load_rhythm_music(file_path: String) -> String:
-	# parses fluXis chart text data and returns the AudioFile name
-	if not FileAccess.file_exists(file_path):
-		print("Chart file not found!")
-		return ""
+	var data = json.data	
+	var parsed_notes: Array = []
 	
-	var file = FileAccess.open(file_path, FileAccess.READ)
-	var json_string = file.get_as_text()
-	file.close()
+	var raw_notes: Array = data.get("HitObjects", [])
 	
-	var json = JSON.new()
-	if json.parse(json_string) == OK:
-		var data = json.data
+	for note in raw_notes:
+		# scales each note's timestamp according to the speed multiplier
+		var note_data : Dictionary = note.duplicate()
 		
-		if data.has ("AudioFile"):
-			return data["AudioFile"]
-			
-	print("Failed to load rhythm music as JSON.")
-	return ""
+		note_data["time"] = float(note["time"]) / speed_mult 
+		parsed_notes.append(note_data)
 	
+	return parsed_notes

@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://byyqk0trirk32" path="res://assets/rhythm minigame/PNG/Black/1x/minus.png" id="5_a4bex"]
 [ext_resource type="PackedScene" uid="uid://cmrdu3uwy8hl1" path="res://src/rhythm minigame/scenes/arrow_generator_down.tscn" id="5_icq7t"]
 [ext_resource type="PackedScene" uid="uid://dn5u3m4d2cn4x" path="res://src/rhythm minigame/scenes/judgment_arrow_left.tscn" id="6_qng50"]
+[ext_resource type="Script" uid="uid://cqo6iestotmqe" path="res://src/rhythm minigame/scenes/judgment_hud.gd" id="6_roy14"]
 [ext_resource type="PackedScene" uid="uid://bi7li6mmfwcgu" path="res://src/rhythm minigame/scenes/judgment_arrow_right.tscn" id="7_plxat"]
 [ext_resource type="Theme" uid="uid://dcj8ax4pmivsw" path="res://assets/rhythm minigame/themes/input_judgment_and_combo_count.tres" id="9_hxyw5"]
 [ext_resource type="Script" uid="uid://bjrqksanscus0" path="res://src/rhythm minigame/scripts/input_margin.gd" id="10_d5ufd"]
@@ -34,6 +35,7 @@ position = Vector2(600, 0)
 position = Vector2(475, 0)
 
 [node name="JudgmentHUD" type="Node2D" parent="." unique_id=1435270143]
+script = ExtResource("6_roy14")
 
 [node name="JudgmentLine" type="Sprite2D" parent="JudgmentHUD" unique_id=59846979]
 position = Vector2(551, 624)

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AudioData" format=3 uid="uid://bgx2ev5nxatk8"]
+
+[ext_resource type="Script" uid="uid://dkblfy12lap7h" path="res://src/audio_manager/audio_data.gd" id="1_kcjat"]
+[ext_resource type="AudioStream" uid="uid://jwmo8w80oxus" path="res://assets/music/All Night - trimmed version.mp3" id="1_ln8fm"]
+
+[resource]
+script = ExtResource("1_kcjat")
+audio_stream = ExtResource("1_ln8fm")
+bpm = 120.0
+metadata/_custom_type_script = "uid://dkblfy12lap7h"
