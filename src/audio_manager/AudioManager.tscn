@@ -9,4 +9,4 @@ script = ExtResource("1_t2ckh")
 bus = &"BGM"
 
 [node name="RhythmMusicStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2066837136]
-bus = &"SFX"
+bus = &"Rhythm Music"
