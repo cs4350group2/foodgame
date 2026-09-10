@@ -1,4 +1,10 @@
-extends Interactable
+extends Node3D
 
-func interact(player: Player) -> void:
+@onready var interaction: InteractComponent = $"InteractComponent"
+
+func _ready() -> void:
+	interaction.interacted.connect(_on_interacted)
+
+func _on_interacted(_player: Player) -> void:
 	print("Interacted with the sink.")
+	# Washing.
