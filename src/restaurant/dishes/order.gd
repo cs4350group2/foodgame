@@ -7,11 +7,11 @@ var items_received: Array[OrderItem] = []
 func _init(order_items: Array[OrderItem]):
 	items = order_items
 
-func is_item_in_order(item_received: OrderItem) -> bool:
+func find_item_in_order(item_received: OrderItem) -> OrderItem:
 	for item in items:
 		if item.edible.is_equal(item_received.edible):
-			return true
-	return false
+			return item
+	return null
 
 func is_order_completed() -> bool:
 	for item in items:
@@ -44,14 +44,21 @@ func get_order_total_price() -> float:
 func add_order_item(item: OrderItem) -> void:
 	items.append(item)
 
-func receive_order_item(item_received: OrderItem) -> void:
+# Return true if successfully received item, else return false
+func receive_order_item(item: OrderItem) -> bool:
 	# Reject invalid item
-	if not is_item_in_order(item_received):
-		return
+	var order_item = find_item_in_order(item)
+	if order_item == null :
+		return false
 
-	for item in items_received:
-		if item.edible.is_equal(item_received.edible):
-			item.quantity += item_received.quantity
-			return
-
-	items_received.append(item_received)
+	for received_item in items_received:
+		if received_item.edible.is_equal(item.edible):
+			var remaining_quantity_required = order_item.quantity - received_item.quantity
+			if item.quantity > remaining_quantity_required:
+				return false
+			else:
+				received_item.quantity += item.quantity
+				items_received.append(item)
+				return true
+			
+	return false

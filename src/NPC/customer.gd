@@ -28,8 +28,15 @@ var customer_lvl: int
 func assign_sitting_node(node: SittingNode):
 	self.assigned_sittingNode = node
 
+func initialize_customer(level: int, patience: float) -> void:
+	customer_lvl = level
+	max_patience = patience
+	RestaurantManager.add_customer(self)
+
 func _ready():
-	customer_lvl = randi_range(1, 3)
+	var customer_lvl = randi_range(1, 3)
+	var patience_lvl = 10
+	initialize_customer(customer_lvl, patience_lvl)
 	change_state(State.IDLE)
 
 func _physics_process(delta):
@@ -88,7 +95,8 @@ func enter_state(state: State):
 			# Start sitting animation
 			# Play reading menu animation for random seconds
 			# $AnimationPlayer.play("sit")
-			wait_at_table()
+			var view_menu_time = randf_range(5.0, 10.0)
+			wait_at_table(view_menu_time)
 			pass
 
 		State.ORDERING:
@@ -156,9 +164,7 @@ func state_walking_to_table(delta):
 	move_toward_navigation_target()
 
 var done_waiting_at_table: bool
-func wait_at_table() -> void:
-	var view_menu_time = randf_range(5.0, 10.0)
-
+func wait_at_table(view_menu_time: float) -> void:
 	print("Customer is looking at menu for ", view_menu_time, " seconds")
 	done_waiting_at_table = false
 	await get_tree().create_timer(view_menu_time).timeout
@@ -188,7 +194,7 @@ func state_ordering(delta):
 		change_state(State.WAITING_FOR_FOOD)
 
 # Seconds that the customer will wait
-@export var max_patience: float = 120.0 
+@export var max_patience: float
 var patience: float
 
 func get_current_patience() -> float:
