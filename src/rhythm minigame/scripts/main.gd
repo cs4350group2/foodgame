@@ -26,8 +26,8 @@ var current_time_ms: float = 0.0
 
 @export var note_lead_time_ms: float = 1000.0 # each note takes 1 full second to fall from top of screen to judgment line (if arrow_speed in parent_arrow.gd is changed, this should be changed too)
 
-@export var perfect_time_window_ms = 100
-@export var good_time_window_ms = 200 
+@export var perfect_time_window_ms = 50
+@export var good_time_window_ms = 150
 
 # arrow generators
 @onready var arrow_generator_left : Node2D = $ArrowGeneratorLeft
@@ -71,15 +71,17 @@ var chart_stream : AudioStream
 var is_game_started : bool = false
 var is_audio_started : bool = false
 
-const ALL_NIGHT_BURGUNDY_TRIMMED_ = preload("uid://bgx2ev5nxatk8") # rhythm minigame audio track (testing only one for now)
+const ALL_NIGHT_BURGUNDY_TRIMMED_ = preload("uid://bgx2ev5nxatk8") # rhythm minigame burger track 
+const HARLEM_HEAT_DAGORED_TRIMMED_ = preload("uid://drtgu1sgw60te") # rhythm minigame steak track
+const PIRATE_TAVERN_MAGIKSOLO_TRIMMED_ = preload("uid://3tm476mhsfm7") # rhythm minigame stew track
 const MUD_DAGORED = preload("uid://dibhfexgjqvj") # BGM 
 
 func _ready() -> void:
 	rhythm_result_screen.visible = false
 	
-	var speed_mult : float = MUD_DAGORED.bpm / ALL_NIGHT_BURGUNDY_TRIMMED_.bpm # since this happens before audio starts playing and the values are set
+	var speed_mult : float = MUD_DAGORED.bpm / PIRATE_TAVERN_MAGIKSOLO_TRIMMED_.bpm # since this happens before audio starts playing and the values are set
 	
-	var chart_path: String = "res://assets/rhythm minigame/charts/all_night.fsc"
+	var chart_path: String = "res://assets/rhythm minigame/charts/pirate_tavern.fsc"
 	
 	chart_notes = load_rhythm_chart(chart_path, speed_mult) # for testing purposes, will have to hardcode specific cases in the future
 	
@@ -87,9 +89,6 @@ func _ready() -> void:
 	await get_tree().create_timer(1.0).timeout
 	
 	cooking_start.emit()
-	
-	hide_lane.emit("up")
-	hide_lane.emit("down")
 	
 	# wait 4 seconds before the chart begins, then starts the minigame
 	await get_tree().create_timer(4.5).timeout
@@ -126,7 +125,7 @@ func _process(delta: float) -> void:
 			is_audio_started = true
 			# AudioManager.play_rhythm_and_match_bgm(ALL_NIGHT_BURGUNDY_TRIMMED_, 0.0) 
 			AudioManager.set_rm_volume(0.5)
-			AudioManager.play_rhythm_to_target_bpm(ALL_NIGHT_BURGUNDY_TRIMMED_, MUD_DAGORED.bpm, 0.0) 
+			AudioManager.play_rhythm_to_target_bpm(PIRATE_TAVERN_MAGIKSOLO_TRIMMED_, MUD_DAGORED.bpm, 0.0) 
 			current_time_ms = 0.0
 	
 	else:
@@ -134,9 +133,21 @@ func _process(delta: float) -> void:
 		current_time_ms = (AudioManager.get_rhythm_playback_position() / pitch) * 1000.0
 		
 	while not chart_notes.is_empty() and (chart_notes[0]["time"] <= current_time_ms + note_lead_time_ms):
-		var note_data: Dictionary = chart_notes.pop_front()
-		spawn_note_from_data(note_data)
+		var is_chord: bool = chart_notes.size() >= 2 and abs(chart_notes[0]["time"] - chart_notes[1]["time"]) < 0.1
+		
+		if is_chord:
+			# pop both notes together and connect them
+			var note_a_data: Dictionary = chart_notes.pop_front()
+			var note_b_data: Dictionary = chart_notes.pop_front()
+		
+			var arrow_a: Arrow = spawn_note_from_data(note_a_data)
+			var arrow_b: Arrow = spawn_note_from_data(note_b_data)
 	
+			arrow_a.setup_connector(arrow_b)
+		else:
+			var note_data: Dictionary = chart_notes.pop_front()
+			spawn_note_from_data(note_data)
+			
 	check_missed_notes(current_time_ms)
 	
 func _input(event: InputEvent) -> void:
@@ -165,7 +176,7 @@ func check_missed_notes(current_ms: float) -> void:
 			num_misses += 1
 			remove_arrow(oldest_arrow, lane_name)
 
-func spawn_note_from_data(note_data: Dictionary) -> void:
+func spawn_note_from_data(note_data: Dictionary) -> Arrow:
 	var lane_name: String = LANE_MAP[int(note_data["lane"])]
 	var hit_time_ms: float = note_data["time"]
 	
@@ -185,6 +196,12 @@ func spawn_note_from_data(note_data: Dictionary) -> void:
 	new_arrow.target_hit_time_ms = hit_time_ms
 	active_notes[lane_name].append(new_arrow)
 	
+	if new_arrow.connector_line:
+		# by default, hide line connector
+		new_arrow.connector_line.visible = false
+	
+	return new_arrow
+				
 func check_hit(lane_name: String, judgment_arrow: Node2D) -> void:
 	var lane_array: Array = active_notes[lane_name]
 	

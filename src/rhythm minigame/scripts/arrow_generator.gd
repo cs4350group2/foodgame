@@ -6,8 +6,3 @@ func make_arrow() -> Arrow:
 	var instance = arrow_to_generate.instantiate()
 	add_child(instance)
 	return instance
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
