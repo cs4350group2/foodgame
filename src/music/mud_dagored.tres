@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AudioData" format=3 uid="uid://dibhfexgjqvj"]
+
+[ext_resource type="Script" uid="uid://dkblfy12lap7h" path="res://src/audio_manager/audio_data.gd" id="1_5kbos"]
+[ext_resource type="AudioStream" uid="uid://cm2ah00r8r1x1" path="res://assets/music/Dagored - Mud (BGM).mp3" id="1_g23p4"]
+
+[resource]
+script = ExtResource("1_5kbos")
+audio_stream = ExtResource("1_g23p4")
+bpm = 105.0
+metadata/_custom_type_script = "uid://dkblfy12lap7h"

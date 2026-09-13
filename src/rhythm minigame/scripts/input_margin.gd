@@ -4,7 +4,6 @@ extends MarginContainer
 @onready var main: Node2D = $"../.."
 @onready var timer: Timer = $InputJudgment/Timer
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	main.hit.connect(successful_hit)

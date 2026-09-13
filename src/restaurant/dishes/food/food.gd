@@ -13,3 +13,9 @@ func get_rarity_level() -> int:
 # Price is base price multiplied by rarity.
 func get_price() -> float:
 	return price * rarity_level
+
+func is_equal(other: Edible) -> bool:
+	return (
+		edible_name == other.edible_name
+		and rarity_level == other.rarity_level
+	)

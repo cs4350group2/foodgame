@@ -3,9 +3,6 @@ extends CharacterBody3D
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var animation_player: AnimationPlayer = $CharacterBody3D/Timmy/AnimationPlayer
-@onready var world = get_tree().current_scene
-
-var move_speed = 2.0
 
 enum State {
 	IDLE,
@@ -25,11 +22,21 @@ var current_state = State.IDLE
 var assigned_sittingNode: SittingNode = null
 var order_taken = false
 var order: Order
+var move_speed = 2.0
+var customer_lvl: int
 
 func assign_sitting_node(node: SittingNode):
 	self.assigned_sittingNode = node
 
+func initialize_customer(level: int, patience: float) -> void:
+	customer_lvl = level
+	max_patience = patience
+	RestaurantManager.add_customer(self)
+
 func _ready():
+	var customer_lvl = randi_range(1, 3)
+	var patience_lvl = 10
+	initialize_customer(customer_lvl, patience_lvl)
 	change_state(State.IDLE)
 
 func _physics_process(delta):
@@ -61,7 +68,11 @@ func move_toward_navigation_target() -> void:
 func update_target_location(target_location):
 	nav_agent.target_position = target_location
 
-# State Management
+func _process(delta: float) -> void:
+	match current_state:
+		pass
+
+# -------------- State Management ----------------------------------
 
 func change_state(new_state: State):
 	if current_state == new_state:
@@ -70,7 +81,7 @@ func change_state(new_state: State):
 	print("Changing state from: ", get_state_name(current_state), " to ", get_state_name(new_state))
 	exit_state(current_state)
 	current_state = new_state
-	enter_state(current_state)
+	enter_state(new_state)
 	
 func enter_state(state: State):
 	match state:
@@ -82,7 +93,10 @@ func enter_state(state: State):
 
 		State.SITTING:
 			# Start sitting animation
+			# Play reading menu animation for random seconds
 			# $AnimationPlayer.play("sit")
+			var view_menu_time = randf_range(5.0, 10.0)
+			wait_at_table(view_menu_time)
 			pass
 
 		State.ORDERING:
@@ -90,6 +104,7 @@ func enter_state(state: State):
 			pass
 
 		State.WAITING_FOR_FOOD:
+			start_waiting_for_food()
 			pass
 
 		State.EATING:
@@ -148,36 +163,53 @@ func state_walking_to_table(delta):
 	
 	move_toward_navigation_target()
 
-func state_sitting(delta):
-	# Wait for some amount of time before ordering
+var done_waiting_at_table: bool
+func wait_at_table(view_menu_time: float) -> void:
+	print("Customer is looking at menu for ", view_menu_time, " seconds")
+	done_waiting_at_table = false
+	await get_tree().create_timer(view_menu_time).timeout
+	done_waiting_at_table = true
 
+func state_sitting(delta):
 	# Wait until sitting animation finish
 	# Execute sitting animation here
-	
-	# Play reading menu animation for random seconds
-	var view_menu_time = randf_range(5.0, 10.0)
-	
-	await get_tree().create_timer(view_menu_time).timeout
-	
-	change_state(State.ORDERING)
+	if done_waiting_at_table:
+		change_state(State.ORDERING)
 
-func take_order() -> Order:
+func take_order() -> void:
+	RestaurantManager.add_order(order)
 	order_taken = true
-	return order
 
 func state_ordering(delta):
-	# Choose food / send order to restaurant system
-	# order = Order.new(["Burger", "Fries"])
-
-	# Example:
-	# order = choose_random_food()
-	# restaurant.place_order(self, order)
+	# Decide order
+	if order == null:
+		var menu: Dictionary = RestaurantManager.get_menu()
+		var food_data = menu["foods"].pick_random()
+		print(food_data["name"], food_data["price"], food_data["rarity"])
+		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"])
+		var order_item = OrderItem.new(food, customer_lvl)
+		order = Order.new([order_item])
 
 	if order_taken:
 		change_state(State.WAITING_FOR_FOOD)
 
+# Seconds that the customer will wait
+@export var max_patience: float
+var patience: float
+
+func get_current_patience() -> float:
+	return patience
+
+func start_waiting_for_food() -> void:
+	patience = max_patience
+
 func state_waiting_for_food(delta):
 	# Wait until restaurant tells us the food is ready
+	patience -= delta
+	if patience <= 0.0:
+		patience = 0.0
+		print(self, " leaving because out of patience")
+		change_state(State.LEAVING)
 
 	if order.is_order_completed():
 		change_state(State.EATING)
@@ -197,6 +229,8 @@ func state_eating(delta):
 func state_finished(delta):
 	# Pay, finish eating, etc.
 	var paid = false
+	
+	# Go to counter/Leave money on table for collection
 	
 	if paid:
 		change_state(State.LEAVING)

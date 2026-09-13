@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://1g6wlemfk4de"]
+
+[ext_resource type="PackedScene" uid="uid://cr0f4ae136esf" path="res://assets/food/stationProps/cuttingboard.fbx" id="1_g5ao8"]
+
+[node name="cuttingboard" unique_id=302539372 instance=ExtResource("1_g5ao8")]
+
+[node name="cuttingboard" parent="." index="0" unique_id=1692901982]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
