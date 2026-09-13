@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var animation_player: AnimationPlayer = $CharacterBody3D/Timmy/AnimationPlayer
+@onready var interaction: InteractComponent = $InteractComponent
 
 enum State {
 	IDLE,
@@ -31,13 +32,20 @@ func assign_sitting_node(node: SittingNode):
 func initialize_customer(level: int, patience: float) -> void:
 	customer_lvl = level
 	max_patience = patience
-	RestaurantManager.add_customer(self)
 
 func _ready():
 	var customer_lvl = randi_range(1, 3)
 	var patience_lvl = 10
 	initialize_customer(customer_lvl, patience_lvl)
+	interaction.interacted.connect(_on_interacted)
 	change_state(State.IDLE)
+
+func _on_interacted(_player: Player) -> void:
+	match current_state:
+		State.ORDERING:
+			take_order()
+			
+	print("Interacted with the customer.")
 
 func _physics_process(delta):
 	match current_state:
@@ -147,6 +155,7 @@ func exit_state(state:State):
 
 func state_idle(delta):
 	# Decide what the customer should do next
+	RestaurantManager.add_customer(self)
 	
 	if assigned_sittingNode != null:
 		change_state(State.WALKING_TO_TABLE)
@@ -189,7 +198,7 @@ func state_ordering(delta):
 		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"])
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])
-
+		
 	if order_taken:
 		change_state(State.WAITING_FOR_FOOD)
 
