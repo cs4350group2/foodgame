@@ -65,8 +65,6 @@ var player_score : int
 var max_score : int
 var dish_quality : float 
 
-var chart_stream : AudioStream
-
 # booleans tracking whether minigame/audio has started
 var is_game_started : bool = false
 var is_audio_started : bool = false
