@@ -22,6 +22,7 @@ func get_state_name(state: State) -> String:
 var current_state = State.IDLE
 var assigned_sittingNode: SittingNode = null
 var order_taken = false
+var paid = false
 var order: Order
 var move_speed = 2.0
 var customer_lvl: int
@@ -44,6 +45,12 @@ func _on_interacted(_player: Player) -> void:
 	match current_state:
 		State.ORDERING:
 			take_order()
+			
+		State.WAITING_FOR_FOOD:
+			change_state(State.EATING)
+		
+		State.FINISHED:
+			take_payment()
 			
 	print("Interacted with the customer.")
 
@@ -235,9 +242,12 @@ func state_eating(delta):
 	if finish_eating:
 		change_state(State.FINISHED)
 
+func take_payment() -> float:
+	paid = true
+	return order.get_order_total_price()
+
 func state_finished(delta):
 	# Pay, finish eating, etc.
-	var paid = false
 	
 	# Go to counter/Leave money on table for collection
 	
