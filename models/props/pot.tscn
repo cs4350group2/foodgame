@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dbkwev7gdoisp" path="res://assets/individualsfiles/pot.fbx" id="1_5ro2p"]
 [ext_resource type="Script" uid="uid://bgm20sf1mprxb" path="res://src/interactables/props/pot.gd" id="2_8mpk7"]
-[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/InteractComponent.gd" id="3_8n780"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/InteractComponent.gd" id="3_8n780"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jj4q6"]
 size = Vector3(0.02, 0.035, 0.072)
