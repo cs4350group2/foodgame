@@ -153,7 +153,8 @@ func drop_food() -> void:
 	if not _can_drop_food():
 		print("Not enough space to drop the food.")
 		return
-
+		
+	print("Dropped food: ", held_food.food_name)
 	_release_held_food()
 	
 func _can_drop_food() -> bool:
