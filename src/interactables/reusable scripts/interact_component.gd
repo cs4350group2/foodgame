@@ -4,6 +4,7 @@ class_name InteractComponent
 
 signal interacted(player: Player)
 
+@export var interact_while_holding: bool = false
 @export var enabled: bool = true
 @export_node_path("Node3D") var highlight_root_path: NodePath = NodePath("../..")
 @export var highlight_color := Color(1.0, 0.85, 0.3, 0.3)

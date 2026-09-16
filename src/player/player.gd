@@ -91,9 +91,16 @@ func get_look_component() -> InteractComponent:
 	
 func try_interact() -> void:
 	if is_instance_valid(held_food):
+		interact_ray.force_raycast_update()
+		var component := get_look_component()
+
+		if component != null and component.interact_while_holding:
+			component.interact(self)
+			return
+
 		drop_food()
 		return
-	
+
 	update_focus()
 
 	if is_instance_valid(focused_component):
