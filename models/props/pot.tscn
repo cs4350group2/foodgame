@@ -1,8 +1,24 @@
 [gd_scene format=3 uid="uid://bsw6l7t53h11e"]
 
 [ext_resource type="PackedScene" uid="uid://dbkwev7gdoisp" path="res://assets/individualsfiles/pot.fbx" id="1_5ro2p"]
+[ext_resource type="Script" uid="uid://bgm20sf1mprxb" path="res://src/interactables/props/pot.gd" id="2_8mpk7"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_8n780"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jj4q6"]
+size = Vector3(0.02, 0.035, 0.072)
 
 [node name="pot" unique_id=715979015 instance=ExtResource("1_5ro2p")]
 
-[node name="Cylinder_009" parent="." index="0"]
+[node name="Cylinder_009" parent="." index="0" unique_id=1153445377]
 transform = Transform3D(25, 0, 0, 0, -1.0927847e-06, 4.594, 0, -25, -2.008101e-07, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder_009" index="0" unique_id=1885987639]
+script = ExtResource("2_8mpk7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder_009/StaticBody3D" index="0" unique_id=1376872655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.008, 0.02)
+shape = SubResource("BoxShape3D_jj4q6")
+
+[node name="InteractComponent" type="Node" parent="Cylinder_009/StaticBody3D" index="1" unique_id=1365882516]
+script = ExtResource("3_8n780")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"

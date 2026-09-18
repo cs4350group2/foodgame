@@ -4,15 +4,40 @@ class_name Player
 @onready var interact_ray: RayCast3D = $Head/Camera3D/InteractRay
 var focused_component: InteractComponent
 
+@onready var hold_point: Marker3D = $Head/Camera3D/HoldPoint
+var held_food: FoodItem
+var _interact_requested: bool = false
+
+var _saved_collision_layer: int
+var _saved_collision_mask: int
+var _saved_freeze: bool
+var _saved_interaction_enabled: bool
+var _held_scale: Vector3
+
 func _ready() -> void:
 	super._ready()
 	interact_ray.add_exception(self)
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	update_focus()
 
+	if is_instance_valid(held_food):
+		update_held_food_transform()
+	else:
+		held_food = null
+
+	if _interact_requested:
+		_interact_requested = false
+		try_interact()
+
+	if not is_instance_valid(held_food):
+		update_focus()
+
+# Interaction funcs
 func update_focus() -> void:
+	if is_instance_valid(held_food):
+		return
+	
 	interact_ray.force_raycast_update()
 	var next_component := get_look_component()
 
@@ -31,14 +56,18 @@ func update_focus() -> void:
 		focused_component.set_highlighted(true)
 
 func _exit_tree() -> void:
+	_release_held_food()
+
 	if is_instance_valid(focused_component):
 		focused_component.set_highlighted(false)
+
+	focused_component = null
 
 func _unhandled_input(event: InputEvent) -> void:
 	super._unhandled_input(event)
 
-	if event.is_action_pressed("interact"):
-		try_interact()
+	if event.is_action_pressed("interact") and not event.is_echo():
+		_interact_requested = true
 
 func get_look_component() -> InteractComponent:
 	if not interact_ray.is_colliding():
@@ -61,7 +90,119 @@ func get_look_component() -> InteractComponent:
 	return null
 	
 func try_interact() -> void:
+	if is_instance_valid(held_food):
+		interact_ray.force_raycast_update()
+		var component := get_look_component()
+
+		if component != null and component.interact_while_holding:
+			component.interact(self)
+			return
+
+		drop_food()
+		return
+
 	update_focus()
 
 	if is_instance_valid(focused_component):
 		focused_component.interact(self)
+
+# Pickup funcs
+func pick_up_food(food: FoodItem) -> void:
+	if is_instance_valid(held_food):
+		return
+
+	if not is_instance_valid(food):
+		return
+
+	# Remember the item's settings before changing them
+	_saved_collision_layer = food.collision_layer
+	_saved_collision_mask = food.collision_mask
+	_saved_freeze = food.freeze
+	_saved_interaction_enabled = food.interaction.enabled
+	_held_scale = food.global_basis.get_scale()
+
+	# Remove the highlight before entering the holding state
+	if is_instance_valid(focused_component):
+		focused_component.set_highlighted(false)
+
+	focused_component = null
+	food.interaction.set_highlighted(false)
+	food.interaction.enabled = false
+
+	# Stop physics from moving or colliding with the held item
+	food.freeze = true
+	food.linear_velocity = Vector3.ZERO
+	food.angular_velocity = Vector3.ZERO
+	food.collision_layer = 0
+	food.collision_mask = 0
+
+	held_food = food
+	update_held_food_transform()
+	food.reset_physics_interpolation()
+	
+func update_held_food_transform() -> void:
+	if not is_instance_valid(held_food):
+		return
+
+	var held_basis := hold_point.global_basis.orthonormalized() \
+		* Basis.from_scale(_held_scale)
+
+	held_food.global_transform = Transform3D(
+		held_basis,
+		hold_point.global_position
+	)
+	
+func drop_food() -> void:
+	if not is_instance_valid(held_food):
+		held_food = null
+		return
+
+	if not _can_drop_food():
+		print("Not enough space to drop the food.")
+		return
+		
+	print("Dropped food: ", held_food.food_name)
+	_release_held_food()
+	
+func _can_drop_food() -> bool:
+	var space := get_world_3d().direct_space_state
+
+	for child in held_food.get_children():
+		var collider := child as CollisionShape3D
+
+		if collider == null:
+			continue
+		if collider.disabled or collider.shape == null:
+			continue
+
+		var query := PhysicsShapeQueryParameters3D.new()
+		query.shape = collider.shape
+		query.transform = collider.global_transform
+		query.collision_mask = _saved_collision_mask
+		query.exclude = [held_food.get_rid()]
+		query.margin = 0.01
+
+		if not space.intersect_shape(query, 1).is_empty():
+			return false
+
+	return true
+
+func _release_held_food() -> void:
+	var food := held_food
+	held_food = null
+
+	# The food may already have been deleted.
+	if not is_instance_valid(food):
+		return
+
+	food.collision_layer = _saved_collision_layer
+	food.collision_mask = _saved_collision_mask
+
+	food.linear_velocity = Vector3.ZERO
+	food.angular_velocity = Vector3.ZERO
+	food.freeze = _saved_freeze
+	food.sleeping = false
+
+	if is_instance_valid(food.interaction):
+		food.interaction.set_highlighted(false)
+		food.interaction.enabled = _saved_interaction_enabled

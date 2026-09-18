@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://c4iascsgu3xbp" path="res://models/props/woodenbox.tscn" id="1_e1ddy"]
 [ext_resource type="Texture2D" uid="uid://be8gqt7it3txb" path="res://models/physics/food/burger/Screenshot 2026-09-07 230653.png" id="2_b1xis"]
+[ext_resource type="Script" uid="uid://tjdbhj4kmuu0" path="res://src/interactables/spawners/bun_box.gd" id="3_vgq1p"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="4_e4tav"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vgq1p"]
 
@@ -27,6 +29,12 @@ visible = false
 mesh = SubResource("BoxMesh_qf7sd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=628357465]
+script = ExtResource("3_vgq1p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=133775841]
 shape = SubResource("BoxShape3D_e1ddy")
+
+[node name="InteractComponent" type="Node" parent="MeshInstance3D2/StaticBody3D" unique_id=452840256]
+script = ExtResource("4_e4tav")
+highlight_root_path = NodePath("../../../woodenbox")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"
