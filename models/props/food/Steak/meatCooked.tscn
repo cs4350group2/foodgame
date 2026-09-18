@@ -4,5 +4,5 @@
 
 [node name="meatcooked2" unique_id=1180245686 instance=ExtResource("1_ptr0s")]
 
-[node name="meatcooked" parent="." index="0" unique_id=476960461]
+[node name="meatcooked" parent="." index="0" unique_id=2017777752]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
