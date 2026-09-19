@@ -14,6 +14,8 @@ var _saved_freeze: bool
 var _saved_interaction_enabled: bool
 var _held_scale: Vector3
 
+@onready var crosshair: Control = $CanvasLayer/Crosshair # added reticle reference for easy access
+
 func _ready() -> void:
 	super._ready()
 	interact_ray.add_exception(self)

@@ -52,6 +52,7 @@ signal miss(input_judgment : String)
 signal cooking_start
 signal cooking_end
 signal results_display
+signal return_to_restaurant(dish_quality: float)
 signal hide_lane(lane_name : String)
 
 # variables to display on results screen
