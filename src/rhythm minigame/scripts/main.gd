@@ -1,8 +1,5 @@
 extends Node2D
 
-# song to be played in the minigame
-var chart_song: String = ""
-
 # unspawned notes from chart JSON data
 var chart_notes: Array = []
 
@@ -74,19 +71,44 @@ const HARLEM_HEAT_DAGORED_TRIMMED_ = preload("uid://drtgu1sgw60te") # rhythm min
 const PIRATE_TAVERN_MAGIKSOLO_TRIMMED_ = preload("uid://3tm476mhsfm7") # rhythm minigame stew track
 const MUD_DAGORED = preload("uid://dibhfexgjqvj") # BGM 
 
+# more variables to make code look a bit cleaner for now
+var bgm : AudioData = MUD_DAGORED
+var chart_song : AudioData
+var chart_path : String
+var dish_string: String
+
 func _ready() -> void:
+	match dish_string:
+		"burger":
+			chart_song = ALL_NIGHT_BURGUNDY_TRIMMED_
+			chart_path = "res://assets/rhythm minigame/charts/all_night.fsc"
+			
+		"steak":
+			chart_song = HARLEM_HEAT_DAGORED_TRIMMED_
+			chart_path = "res://assets/rhythm minigame/charts/harlem_heat(2lane).fsc" # can change to the modified 4-lane if needed
+		"stew":
+			chart_song = PIRATE_TAVERN_MAGIKSOLO_TRIMMED_
+			chart_path = "res://assets/rhythm minigame/charts/pirate_tavern.fsc"
+		_:
+			# fallback when doing standalone testing
+			chart_song = PIRATE_TAVERN_MAGIKSOLO_TRIMMED_
+			chart_path = "res://assets/rhythm minigame/charts/pirate_tavern.fsc"
+			
 	rhythm_result_screen.visible = false
 	
-	var speed_mult : float = MUD_DAGORED.bpm / PIRATE_TAVERN_MAGIKSOLO_TRIMMED_.bpm # since this happens before audio starts playing and the values are set
+	var speed_mult : float = bgm.bpm / chart_song.bpm # since this happens before audio starts playing and the values are set
 	
-	var chart_path: String = "res://assets/rhythm minigame/charts/pirate_tavern.fsc"
-	
-	chart_notes = load_rhythm_chart(chart_path, speed_mult) # for testing purposes, will have to hardcode specific cases in the future
+	chart_notes = load_rhythm_chart(chart_path, speed_mult) 
 	
 	# include a slight delay before the cooking start text pops up
 	await get_tree().create_timer(1.0).timeout
 	
 	cooking_start.emit()
+	
+	if dish_string == "burger" or dish_string == "steak": # hide "up" and "down" lanes for All Night and Harlem Heat charts
+		hide_lane.emit("up")
+		hide_lane.emit("down")
+		
 	
 	# wait 4 seconds before the chart begins, then starts the minigame
 	await get_tree().create_timer(4.5).timeout
@@ -121,9 +143,8 @@ func _process(delta: float) -> void:
 	
 		if current_time_ms >= 0.0:
 			is_audio_started = true
-			# AudioManager.play_rhythm_and_match_bgm(ALL_NIGHT_BURGUNDY_TRIMMED_, 0.0) 
-			AudioManager.set_rm_volume(0.5)
-			AudioManager.play_rhythm_to_target_bpm(PIRATE_TAVERN_MAGIKSOLO_TRIMMED_, MUD_DAGORED.bpm, 0.0) 
+			AudioManager.set_rm_volume(0.5) # this value can be modified between 0 and 1 inclusive, i just felt that the original volume was quite loud
+			AudioManager.play_rhythm_to_target_bpm(chart_song, bgm.bpm, 0.0) 
 			current_time_ms = 0.0
 	
 	else:
