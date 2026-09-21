@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cx1jc4rdx410q"]
+
+[ext_resource type="Script" uid="uid://ccv6o3m31u7xe" path="res://models/tools/render_scene.gd" id="1_5pedu"]
+[ext_resource type="PackedScene" uid="uid://dyay3u62ej8fu" path="res://models/props/food/Steak/meatCooked.tscn" id="2_ygwcs"]
+
+[node name="RenderScene" type="Node3D" unique_id=1821097782]
+script = ExtResource("1_5pedu")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=313842166]
+transform = Transform3D(0.9999994, 0.0008862933, -0.0005514246, -0.00067542226, 0.95217687, 0.30554688, 0.00079585775, -0.30554634, 0.952177, 0, 0.43629992, 1)
+current = true
+fov = 59.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1636676247]
+transform = Transform3D(0.99999356, 0, -0.0035839884, 0.0025077986, 0.71441436, 0.69971836, 0.0025604528, -0.6997229, 0.71440977, 0, 0, 0)
+
+[node name="meatcooked2" parent="." unique_id=1180245686 instance=ExtResource("2_ygwcs")]
