@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://im1hy1frw1nv" path="res://src/NPC/customer.gd" id="1_i2whk"]
 [ext_resource type="PackedScene" uid="uid://dbx2cox3vefj2" path="res://src/NPC/asset/Timmy.glb" id="2_xrksg"]
-[ext_resource type="Script" uid="uid://bw5vmoephj7w8" path="res://src/interactables/interactable.gd" id="3_8wj8j"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/InteractComponent.gd" id="3_8wj8j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i2whk"]
 radius = 0.3
@@ -113,8 +113,8 @@ autoplay = &"Idle"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.100000024, 0)
 shape = SubResource("CapsuleShape3D_i2whk")
 
-[node name="Interactable" type="Node3D" parent="." unique_id=293666943]
+[node name="InteractComponent" type="Node" parent="." unique_id=2068584594]
 script = ExtResource("3_8wj8j")
-metadata/_custom_type_script = "uid://bw5vmoephj7w8"
+metadata/_custom_type_script = "uid://ca7pbehy5loa"
 
 [editable path="CharacterBody3D/Timmy"]
