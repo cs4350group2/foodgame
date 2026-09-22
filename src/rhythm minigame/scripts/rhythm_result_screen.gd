@@ -22,4 +22,5 @@ func display_results_screen():
 	tween.tween_property(rhythm_result_screen, "modulate:a", 1.0, 1.5)
 
 func _on_back_to_restaurant_pressed() -> void:
+	main.return_to_restaurant.emit(main.dish_quality)
 	get_tree().change_scene_to_file("res://main.tscn")
