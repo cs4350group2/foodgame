@@ -202,7 +202,7 @@ func state_ordering(delta):
 		var menu: Dictionary = RestaurantManager.get_menu()
 		var food_data = menu["foods"].pick_random()
 		print(food_data["name"], food_data["price"], food_data["rarity"])
-		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"])
+		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], food_data["dish_quality"])
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])
 		

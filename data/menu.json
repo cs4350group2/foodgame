@@ -29,6 +29,11 @@
 			"name": "Steak",
 			"rarity": 3,
 			"price": 30.0
+		},
+		{
+			"name": "Burger",
+			"rarity": 1,
+			"price": 15.0
 		}
 	],
 	"drinks": [
