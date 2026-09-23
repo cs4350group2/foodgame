@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b6sv81i1rpylh"]
+
+[ext_resource type="PackedScene" uid="uid://ddgfrw0fvgqkf" path="res://assets/food/ingredients/tomatoslice.gltf" id="1_elpou"]
+
+[node name="tomatoslice2" unique_id=1097552908 instance=ExtResource("1_elpou")]
+
+[node name="tomatoslice" parent="." index="0" unique_id=341351126]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

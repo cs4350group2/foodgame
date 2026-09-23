@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://brkod26kk2nx8"]
+
+[ext_resource type="PackedScene" uid="uid://d2wpwbehephem" path="res://assets/food/ingredients/tomato.gltf" id="1_8k8g2"]
+
+[node name="tomato2" unique_id=1481336563 instance=ExtResource("1_8k8g2")]
+
+[node name="tomato" parent="." index="0" unique_id=420019844]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
