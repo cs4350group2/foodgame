@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b2y474swncwen"
-path="res://.godot/imported/potatowithgreen.gltf-6b4e21d2d46247ca76aeb54c81d29a27.scn"
+uid="uid://d2sjlms7gsy61"
+path="res://.godot/imported/ramenPork.gltf-f8e934b5cdc06cba1955413bcc7ecea5.scn"
 
 [deps]
 
-source_file="res://assets/food/ramen/potatowithgreen.gltf"
-dest_files=["res://.godot/imported/potatowithgreen.gltf-6b4e21d2d46247ca76aeb54c81d29a27.scn"]
+source_file="res://assets/food/stew/ramenPork.gltf"
+dest_files=["res://.godot/imported/ramenPork.gltf-f8e934b5cdc06cba1955413bcc7ecea5.scn"]
 
 [params]
 

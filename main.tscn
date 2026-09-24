@@ -19,8 +19,14 @@
 [ext_resource type="PackedScene" uid="uid://dh2vbcu4qhou4" path="res://models/interactable stations/bartableSink.tscn" id="20_getpj"]
 [ext_resource type="PackedScene" uid="uid://bptg16gjcqpb1" path="res://models/spawners/tomatoBox.tscn" id="20_ryguw"]
 [ext_resource type="PackedScene" uid="uid://trnwtn4ye4d7" path="res://models/physics/food/ingredients/tomatoWhole.tscn" id="21_getpj"]
+[ext_resource type="PackedScene" uid="uid://byqdxc8evyanr" path="res://models/physics/food/ingredients/potato.tscn" id="22_ryguw"]
+[ext_resource type="PackedScene" uid="uid://d1ccl3n4b7eae" path="res://models/spawners/potatoBox.tscn" id="23_1u8w0"]
+[ext_resource type="PackedScene" uid="uid://11ajb8vx48w0" path="res://models/physics/food/ingredients/tomatoSliced.tscn" id="24_0odxb"]
 [ext_resource type="PackedScene" uid="uid://nunteaagavmm" path="res://models/interactable stations/choppingStation.tscn" id="24_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://cwexcopcjevoa" path="res://models/spawners/burgerBunBox.tscn" id="25_0odxb"]
+[ext_resource type="PackedScene" uid="uid://cf7ki6prfn0kv" path="res://models/physics/food/ingredients/potatoSliced.tscn" id="25_lswn8"]
+[ext_resource type="PackedScene" uid="uid://dx1lfe4xyxhbh" path="res://models/physics/food/stew/stewPot.tscn" id="26_lswn8"]
+[ext_resource type="PackedScene" uid="uid://dnfgneyk71oyy" path="res://models/physics/food/stew/stewPlate.tscn" id="27_a6jrf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -261,3 +267,21 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14, 
 
 [node name="TomatoWhole" parent="." unique_id=1200164544 instance=ExtResource("21_getpj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2263923, 1.1333429, -1.5143758)
+
+[node name="Potato" parent="." unique_id=1936302740 instance=ExtResource("22_ryguw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9675493, 1.0774995, -0.9590359)
+
+[node name="Node3D3" parent="." unique_id=614783963 instance=ExtResource("23_1u8w0")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14, 0.5, 0)
+
+[node name="TomatoSliced" parent="." unique_id=1910771617 instance=ExtResource("24_0odxb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4053288, 1.1703717, -0.44256908)
+
+[node name="PotatoSliced" parent="." unique_id=169465648 instance=ExtResource("25_lswn8")]
+transform = Transform3D(0.9999889, 0.0045628706, -0.0011556622, -0.0045687445, 0.9999764, -0.005129952, 0.0011322183, 0.0051351767, 0.9999862, 5.8494916, 1.0661347, -0.5374258)
+
+[node name="StewPot" parent="." unique_id=1393827822 instance=ExtResource("26_lswn8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.154287, 1.0261151, -0.74467695)
+
+[node name="StewPlate" parent="." unique_id=321653761 instance=ExtResource("27_a6jrf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1284833, 1.1683636, -2.346963)

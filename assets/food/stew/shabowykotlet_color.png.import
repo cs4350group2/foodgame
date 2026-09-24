@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://envreprllt08"
-path.s3tc="res://.godot/imported/ramennoodle_color.png-c6bf12f74265ed1fae862760467f158f.s3tc.ctex"
+uid="uid://dfoe0mwm73sfu"
+path.s3tc="res://.godot/imported/shabowykotlet_color.png-47aeef3c8936c92b2dbbffc8b5b3ab38.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/food/ramen/ramennoodle_color.png"
-dest_files=["res://.godot/imported/ramennoodle_color.png-c6bf12f74265ed1fae862760467f158f.s3tc.ctex"]
+source_file="res://assets/food/stew/shabowykotlet_color.png"
+dest_files=["res://.godot/imported/shabowykotlet_color.png-47aeef3c8936c92b2dbbffc8b5b3ab38.s3tc.ctex"]
 
 [params]
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d2sjlms7gsy61"
-path="res://.godot/imported/ramenPork.gltf-eb9b4e2b206d97e8faf83fb304ead3ea.scn"
+uid="uid://bjvwuych15smf"
+path="res://.godot/imported/shabowykotlet.gltf-5313e09cfca27606b942a4484d790283.scn"
 
 [deps]
 
-source_file="res://assets/food/ramen/ramenPork.gltf"
-dest_files=["res://.godot/imported/ramenPork.gltf-eb9b4e2b206d97e8faf83fb304ead3ea.scn"]
+source_file="res://assets/food/stew/shabowykotlet.gltf"
+dest_files=["res://.godot/imported/shabowykotlet.gltf-5313e09cfca27606b942a4484d790283.scn"]
 
 [params]
 

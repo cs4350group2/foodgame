@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bjvwuych15smf"
-path="res://.godot/imported/shabowykotlet.gltf-c4b97298b9baffde82e297c588fdb10b.scn"
+uid="uid://ukbartrervqv"
+path="res://.godot/imported/ramenBouillon.gltf-bbde750cbcfcaf7beb5dee4777c528e9.scn"
 
 [deps]
 
-source_file="res://assets/food/ramen/shabowykotlet.gltf"
-dest_files=["res://.godot/imported/shabowykotlet.gltf-c4b97298b9baffde82e297c588fdb10b.scn"]
+source_file="res://assets/food/stew/ramenBouillon.gltf"
+dest_files=["res://.godot/imported/ramenBouillon.gltf-bbde750cbcfcaf7beb5dee4777c528e9.scn"]
 
 [params]
 

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cf7ki6prfn0kv"]
+
+[ext_resource type="PackedScene" uid="uid://sv76vmelok6f" path="res://models/props/food/Ingredients/potato.tscn" id="1_7pcsb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qf7sd"]
+radius = 0.16166076
+
+[node name="PotatoSliced" type="RigidBody3D" unique_id=169465648]
+
+[node name="potatowithgreen2" parent="." unique_id=1421645144 instance=ExtResource("1_7pcsb")]
+transform = Transform3D(0.26420215, -0.16983977, 0.38903943, 0.2703738, 0.42059246, -2.305482e-08, -0.3272541, 0.21037215, 0.3140833, 0.035344437, 0, 0.038675576)
+
+[node name="potatowithgreen3" parent="." unique_id=1274876060 instance=ExtResource("1_7pcsb")]
+transform = Transform3D(-0.20686439, -0.06892472, 0.4499517, 0.40764806, -0.2479798, 0.1494292, 0.20255913, 0.428667, 0.15879042, 0.065397434, 0, -0.09196199)
+
+[node name="potatowithgreen4" parent="." unique_id=997498902 instance=ExtResource("1_7pcsb")]
+transform = Transform3D(-0.25043684, 0.29682195, 0.31492555, -0.2799493, -0.38858706, 0.14362618, 0.3300148, -0.104387805, 0.3608232, -0.08698789, -0.0014597283, -0.0103998445)
+
+[node name="potatowithgreen5" parent="." unique_id=487803686 instance=ExtResource("1_7pcsb")]
+transform = Transform3D(-0.48436943, 0.10980233, 0.05770368, -0.055903792, -0.40087628, 0.2935526, 0.110729575, 0.27792406, 0.4006211, 0.0049881544, 0.09038289, -0.01639112)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1676130854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00032930262, 0.021813415, -0.010635823)
+shape = SubResource("SphereShape3D_qf7sd")
