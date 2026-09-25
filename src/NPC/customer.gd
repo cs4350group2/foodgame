@@ -26,18 +26,20 @@ var paid = false
 var order: Order
 var move_speed = 2.0
 var customer_lvl: int
+var customer_name: String
+
+func get_customer_name() -> String:
+	return customer_name
 
 func assign_sitting_node(node: SittingNode):
 	self.assigned_sittingNode = node
 
-func initialize_customer(level: int, patience: float) -> void:
+func initialize_customer(name: String, level: int, patience: float) -> void:
+	customer_name = name
 	customer_lvl = level
 	max_patience = patience
 
 func _ready():
-	var customer_lvl = randi_range(1, 3)
-	var patience_lvl = 10
-	initialize_customer(customer_lvl, patience_lvl)
 	interaction.interacted.connect(_on_interacted)
 	change_state(State.IDLE)
 
