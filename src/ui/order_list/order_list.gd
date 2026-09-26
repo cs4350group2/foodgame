@@ -120,7 +120,8 @@ func __get_random_order(order_length: int) -> Order:
 	var test_items: Array[OrderItem]
 	for i in order_length:
 		var food_data = menu["foods"].pick_random()
-		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"])
+		var food = Food.new(food_data["name"], food_data["price"], 
+			food_data["rarity"], randf_range(0, 100))
 		var order_item = OrderItem.new(food, 1)
 		test_items.append(order_item)
 	return Order.new(test_items)
@@ -137,4 +138,5 @@ func _ready() -> void:
 	# test code
 	for i in 5:
 		_on_order_added(__get_random_order(5))
+		
 	animate_selection()

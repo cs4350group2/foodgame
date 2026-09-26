@@ -205,12 +205,7 @@ func state_ordering(delta):
 		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], food_data["dish_quality"])
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])
-<<<<<<< HEAD
 		order.completed.connect(_on_order_complete)
-
-=======
-		
->>>>>>> main
 	if order_taken:
 		change_state(State.WAITING_FOR_FOOD)
 
