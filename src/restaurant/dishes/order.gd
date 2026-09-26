@@ -42,7 +42,7 @@ func get_item(index: int) -> OrderItem:
 func get_order_total_price() -> float:
 	var total: float = 0
 	for item in items:
-		total += item.get_price()
+		total += item.get_total_price()
 		
 	return total
 

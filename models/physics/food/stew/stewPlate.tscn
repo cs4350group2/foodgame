@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dnfgneyk71oyy"]
+
+[ext_resource type="PackedScene" uid="uid://nl1u2n5clfcw" path="res://models/props/plate.tscn" id="1_yo6vb"]
+[ext_resource type="PackedScene" uid="uid://n2kg3vx47viq" path="res://models/props/food/Stew/stewMeat.tscn" id="2_7yax8"]
+[ext_resource type="PackedScene" uid="uid://bas2qgf2j0wh4" path="res://models/props/food/Stew/ramenSurface.tscn" id="2_yhflk"]
+[ext_resource type="PackedScene" uid="uid://sv76vmelok6f" path="res://models/props/food/Ingredients/potato.tscn" id="3_7yax8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qf7sd"]
+height = 0.20935059
+radius = 0.4116211
+
+[node name="StewPlate" type="RigidBody3D" unique_id=321653761]
+
+[node name="potatowithgreen5" parent="." unique_id=1421645144 instance=ExtResource("3_7yax8")]
+transform = Transform3D(0.0063488428, -0.21278207, 0.2113847, 0.29986855, 0.008880521, -6.7188375e-05, -0.006209699, 0.21129349, 0.21287675, 0.12874758, 0.059131652, -0.18660279)
+
+[node name="shabowykotlet4" parent="." unique_id=750826998 instance=ExtResource("2_7yax8")]
+transform = Transform3D(0.8053267, 0.35175216, -0.47719958, -0.5355234, 0.77692014, -0.33107364, 0.25429004, 0.522174, 0.814046, -0.14503175, 0.06669977, -0.0044968054)
+
+[node name="plate" parent="." unique_id=1897826909 instance=ExtResource("1_yo6vb")]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ramenBouillon2" parent="." unique_id=198213563 instance=ExtResource("2_yhflk")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, -0.21380997, 0)
+
+[node name="potatowithgreen2" parent="." unique_id=1238643937 instance=ExtResource("3_7yax8")]
+transform = Transform3D(0.005875883, -0.39995685, 0, 0.39995685, 0.005875883, 0, 0, 0, 0.4, 0.15011597, 0.0687561, 0.061065674)
+
+[node name="potatowithgreen3" parent="." unique_id=946440995 instance=ExtResource("3_7yax8")]
+transform = Transform3D(0.32439065, 0, 0.23403142, 0, 0.4, 0, -0.23403142, 0, 0.32439065, 0.06817627, 0.03729248, -0.061157227)
+
+[node name="potatowithgreen4" parent="." unique_id=157374335 instance=ExtResource("3_7yax8")]
+transform = Transform3D(0.4, 0, 0, 0, 0.09214148, 0.3892428, 0, -0.3892428, 0.09214148, 0.064315796, 0.055404663, 0.18371582)
+
+[node name="shabowykotlet3" parent="." unique_id=1940834530 instance=ExtResource("2_7yax8")]
+transform = Transform3D(0.87230456, -0.2508533, 0.4197112, -0.38914254, -0.8758944, 0.28526714, 0.29606247, -0.41216725, -0.86166424, -0.14546204, 0.085876465, -0.09515381)
+
+[node name="shabowykotlet5" parent="." unique_id=432798056 instance=ExtResource("2_7yax8")]
+transform = Transform3D(0.8537292, 0.5057381, -0.123995595, -0.5147597, 0.7837708, -0.34745568, -0.07853743, 0.36046097, 0.9294621, -0.10401988, 0.081160724, 0.08679576)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=69552686]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07598877, 0)
+shape = SubResource("CylinderShape3D_qf7sd")

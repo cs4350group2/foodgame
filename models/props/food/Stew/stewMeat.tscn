@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://n2kg3vx47viq"]
+
+[ext_resource type="PackedScene" uid="uid://bjvwuych15smf" path="res://assets/food/stew/shabowykotlet.gltf" id="1_tmanf"]
+
+[node name="shabowykotlet2" unique_id=750826998 instance=ExtResource("1_tmanf")]
+
+[node name="shabowykotlet" parent="." index="0" unique_id=1231476974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

@@ -1,6 +1,6 @@
 extends Node3D
 
-const FOOD_SCENE = preload("res://models/physics/food/burger/buns.tscn")
+const FOOD_SCENE = preload("res://models/physics/food/ingredients/buns.tscn")
 @onready var interaction: InteractComponent = $"InteractComponent"
 
 func _ready() -> void:

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bcf6i3s0cc110"
-path="res://.godot/imported/meatraw.gltf-6e7e8f2511416a3f3efd667c2f7a8acf.scn"
+uid="uid://d2wpwbehephem"
+path="res://.godot/imported/tomato.gltf-da960df905354bc4f34e16f2ecb5a7dc.scn"
 
 [deps]
 
-source_file="res://assets/food/steak/meatraw.gltf"
-dest_files=["res://.godot/imported/meatraw.gltf-6e7e8f2511416a3f3efd667c2f7a8acf.scn"]
+source_file="res://assets/food/ingredients/tomato.gltf"
+dest_files=["res://.godot/imported/tomato.gltf-da960df905354bc4f34e16f2ecb5a7dc.scn"]
 
 [params]
 
