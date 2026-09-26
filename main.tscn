@@ -25,6 +25,10 @@
 [ext_resource type="PackedScene" uid="uid://dfu0a8864t2wq" path="res://models/physics/food/burger/burgerallPlated.tscn" id="23_lswn8"]
 [ext_resource type="PackedScene" uid="uid://nunteaagavmm" path="res://models/interactable stations/choppingStation.tscn" id="24_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://cwexcopcjevoa" path="res://models/spawners/burgerBunBox.tscn" id="25_0odxb"]
+[ext_resource type="Script" uid="uid://c08kngi0a0cac" path="res://src/restaurant/restaurant.gd" id="26_xuqvo"]
+[ext_resource type="Script" uid="uid://bleu56ats4lt1" path="res://src/NPC/npc_sitting_node.gd" id="27_qsp4k"]
+[ext_resource type="Script" uid="uid://d24c3v2gtky0m" path="res://src/NPC/customer_spawner.gd" id="28_kq58d"]
+[ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="29_qsp4k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -37,6 +41,11 @@ sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
 background_mode = 2
 sky = SubResource("Sky_0xm2m")
 tonemap_mode = 2
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_qsp4k"]
+vertices = PackedVector3Array(-4.5, 0.5, -4.5, -4.5, 0.5, 4.5, 14.5, 0.5, 4.5, 14.5, 0.5, -4.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_parsed_geometry_type = 1
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0xm2m"]
 material = ExtResource("2_2cqfq")
@@ -97,26 +106,29 @@ environment = SubResource("Environment_h2yge")
 transform = Transform3D(0.94997203, -0.2561621, 0.17870116, 0, 0.57214594, 0.82015187, -0.31233492, -0.7791214, 0.54352266, 0, 17.7, 12)
 shadow_enabled = true
 
-[node name="Floor" type="MeshInstance3D" parent="." unique_id=1567508079]
-mesh = SubResource("PlaneMesh_0xm2m")
-skeleton = NodePath("")
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1631713062]
+navigation_mesh = SubResource("NavigationMesh_qsp4k")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=1292298415]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=547599403]
-shape = SubResource("ConcavePolygonShape3D_0xm2m")
-
-[node name="Floor2" type="MeshInstance3D" parent="." unique_id=1622225128]
+[node name="Floor2" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1622225128]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 mesh = SubResource("PlaneMesh_0xm2m")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor2" unique_id=1054849496]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor2" unique_id=1054849496]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D" unique_id=1391781272]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor2/StaticBody3D" unique_id=1391781272]
 shape = SubResource("ConcavePolygonShape3D_0xm2m")
 
-[node name="Node" type="Node" parent="Floor2" unique_id=453812590]
+[node name="Node" type="Node" parent="NavigationRegion3D/Floor2" unique_id=453812590]
+
+[node name="Floor" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1567508079]
+mesh = SubResource("PlaneMesh_0xm2m")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor" unique_id=1292298415]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor/StaticBody3D" unique_id=547599403]
+shape = SubResource("ConcavePolygonShape3D_0xm2m")
 
 [node name="table" parent="." unique_id=246420275 instance=ExtResource("11_efxa6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1541164, 0.4067494, -1.2020215)
@@ -211,12 +223,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.02, -4.5)
 [node name="Ceiling" type="MeshInstance3D" parent="." unique_id=1347297459]
 transform = Transform3D(-5, 4.371139e-07, 0, -4.371139e-07, -5, 0, 0, 0, 5, 9.997745, 4.2999997, -0.0020375252)
 mesh = SubResource("PlaneMesh_qf7sd")
-skeleton = NodePath("../Floor2")
+skeleton = NodePath("../NavigationRegion3D/Floor2")
 
 [node name="Ceiling2" type="MeshInstance3D" parent="." unique_id=1060235848]
 transform = Transform3D(-5, 4.371139e-07, 0, -4.371139e-07, -5, 0, 0, 0, 5, 0, 4.3, 0)
 mesh = SubResource("PlaneMesh_qf7sd")
-skeleton = NodePath("../Floor2")
+skeleton = NodePath("../NavigationRegion3D/Floor2")
 
 [node name="lamp" parent="." unique_id=1087076002 instance=ExtResource("18_cegan")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.742, 0)
@@ -280,3 +292,25 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12, 
 
 [node name="BUNSPAWNER" parent="." unique_id=1684884210 instance=ExtResource("25_0odxb")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14, 0.5, -2)
+
+[node name="Restaurant" type="Node" parent="." unique_id=1499342571]
+script = ExtResource("26_xuqvo")
+metadata/_custom_type_script = "uid://c08kngi0a0cac"
+
+[node name="SittingNodes" type="Node2D" parent="Restaurant" unique_id=1273397510]
+
+[node name="SittingNode" type="CSGBox3D" parent="Restaurant/SittingNodes" unique_id=538473620]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0, 0.90000004)
+script = ExtResource("27_qsp4k")
+metadata/_custom_type_script = "uid://bleu56ats4lt1"
+
+[node name="CustomerSpawner" type="Node3D" parent="Restaurant" unique_id=1733515437]
+script = ExtResource("28_kq58d")
+customer_scene = ExtResource("29_qsp4k")
+metadata/_custom_type_script = "uid://d24c3v2gtky0m"
+
+[node name="SpawnPoint" type="Marker3D" parent="Restaurant/CustomerSpawner" unique_id=1467502327]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7, 1.3000001, -3.8)
+
+[node name="Exit" type="Marker3D" parent="Restaurant/CustomerSpawner" unique_id=1988332951]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.7, 3.3000002)

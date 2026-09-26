@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var animation_player: AnimationPlayer = $CharacterBody3D/Timmy/AnimationPlayer
 @onready var interaction: InteractComponent = $InteractComponent
+@onready var customer_spawner: CustomerSpawner = get_parent() as CustomerSpawner
 
 enum State {
 	IDLE,
@@ -27,6 +28,7 @@ var order: Order
 var move_speed = 2.0
 var customer_lvl: int
 var customer_name: String
+var exit_point: Marker3D
 
 func get_customer_name() -> String:
 	return customer_name
@@ -126,12 +128,14 @@ func enter_state(state: State):
 
 		State.EATING:
 			# $AnimationPlayer.play("eat")
+			start_eating()
 			pass
 
 		State.FINISHED:
 			pass
 
 		State.LEAVING:
+			update_target_location(exit_point.global_position)
 			pass
 
 func exit_state(state:State):
@@ -228,21 +232,21 @@ func state_waiting_for_food(delta):
 		patience = 0.0
 		print(self, " leaving because out of patience")
 		change_state(State.LEAVING)
+		return
 
 	if order.is_order_completed():
 		change_state(State.EATING)
 
+func start_eating(eating_time: float = 5.0) -> void:
+	await get_tree().create_timer(eating_time).timeout
+
+	# Do nothing if the customer changed state while waiting.
+	if current_state == State.EATING:
+		change_state(State.FINISHED)
+
 func state_eating(delta):
 	# Play eating animation
-	# Decrease food/eating timer
-	var finish_eating = false
-	var eating_time = 20
-	
-	await get_tree().create_timer(eating_time).timeout
-	finish_eating = true
-	
-	if finish_eating:
-		change_state(State.FINISHED)
+	pass
 
 func take_payment() -> float:
 	paid = true
@@ -267,5 +271,7 @@ func state_leaving(delta):
 		if assigned_sittingNode != null:
 			assigned_sittingNode.clear()
 		
+		customer_spawner.release_name(customer_name)
+		RestaurantManager.remove_customer(self)
 		queue_free()
 		return
