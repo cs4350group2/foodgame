@@ -2,10 +2,10 @@ extends StaticBody3D
 @onready var interaction: InteractComponent = $InteractComponent
 
 const INGREDIENT_SCENES = {
-	"res://models/physics/food/steak/meatRaw.tscn":
-		preload("res://models/physics/food/steak/meatRaw.tscn"),
-	"res://models/physics/food/burger/buns.tscn":
-		preload("res://models/physics/food/burger/buns.tscn"),
+	"res://models/physics/food/ingredients/meatRaw.tscn":
+		preload("res://models/physics/food/ingredients/meatRaw.tscn"),
+	"res://models/physics/food/ingredients/buns.tscn":
+		preload("res://models/physics/food/ingredients/buns.tscn"),
 }
 var ingredient_buffer: Array[String] = []
 

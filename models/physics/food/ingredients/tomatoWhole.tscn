@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://trnwtn4ye4d7"]
+
+[ext_resource type="PackedScene" uid="uid://brkod26kk2nx8" path="res://models/props/food/Ingredients/tomatoWhole.tscn" id="1_wa2yj"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qf7sd"]
+radius = 0.20142408
+
+[node name="TomatoWhole" type="RigidBody3D" unique_id=1200164544]
+
+[node name="tomato2" parent="." unique_id=1481336563 instance=ExtResource("1_wa2yj")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1006428242]
+shape = SubResource("SphereShape3D_qf7sd")

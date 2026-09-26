@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bwonh6kcdipcb"]
+
+[ext_resource type="PackedScene" uid="uid://i33ps6nuapur" path="res://assets/food/ingredients/tomatohalf.gltf" id="1_jkx8g"]
+[ext_resource type="PackedScene" uid="uid://b6sv81i1rpylh" path="res://models/props/food/Ingredients/tomatoSlice_1.tscn" id="2_fcuml"]
+
+[node name="tomatohalf2" unique_id=913905293 instance=ExtResource("1_jkx8g")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="tomatohalf" parent="." index="0" unique_id=988083776]
+transform = Transform3D(1, 0, 0, 0, 0.69697356, -0.7170968, 0, 0.7170968, 0.69697356, 0, 0, 0)
+
+[node name="tomatoslice2" parent="." index="1" unique_id=1097552908 instance=ExtResource("2_fcuml")]
+transform = Transform3D(1, 0, 0, 0, 0.71818006, -0.69585735, 0, 0.69585735, 0.71818006, 0, 0, 0.03656903)
+
+[node name="tomatoslice3" parent="." index="2" unique_id=1597625109 instance=ExtResource("2_fcuml")]
+transform = Transform3D(1, 0, 0, 0, -0.81627846, 0.57765883, 0, -0.57765883, -0.81627846, 0, -0.03069317, 0.081252314)

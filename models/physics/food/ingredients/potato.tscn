@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://byqdxc8evyanr"]
+
+[ext_resource type="PackedScene" uid="uid://sv76vmelok6f" path="res://models/props/food/Ingredients/potato.tscn" id="1_ulifd"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qf7sd"]
+radius = 0.19004825
+
+[node name="Potato" type="RigidBody3D" unique_id=1936302740]
+
+[node name="potatowithgreen2" parent="." unique_id=1421645144 instance=ExtResource("1_ulifd")]
+
+[node name="MeshInstance3D" type="CollisionShape3D" parent="." unique_id=1481602020]
+shape = SubResource("SphereShape3D_qf7sd")

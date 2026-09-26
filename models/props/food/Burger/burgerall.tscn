@@ -4,5 +4,5 @@
 
 [node name="burgerall2" unique_id=116500474 instance=ExtResource("1_k7eco")]
 
-[node name="burgerall" parent="." index="0" unique_id=1942498653]
+[node name="burgerall" parent="." index="0" unique_id=666505324]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
