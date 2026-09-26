@@ -1,6 +1,9 @@
 class_name Order
 extends RefCounted
 
+signal order_completed(order: Order)
+signal order_item_received(item: OrderItem, quantity: int)
+
 var items: Array[OrderItem] = []
 var items_received: Array[OrderItem] = []
 
@@ -14,6 +17,8 @@ func find_item_in_order(item_received: OrderItem) -> OrderItem:
 	return null
 
 func is_order_completed() -> bool:
+	# this check requires OrderItems to all have a unique edible
+	# maybe a dictionary then would be better?
 	for item in items:
 		var found := false
 
@@ -41,6 +46,7 @@ func get_order_total_price() -> float:
 		
 	return total
 
+# Assume that items won't be added midway. If not, we will have to create signals for this.
 func add_order_item(item: OrderItem) -> void:
 	items.append(item)
 
@@ -59,6 +65,12 @@ func receive_order_item(item: OrderItem) -> bool:
 			else:
 				received_item.quantity += item.quantity
 				items_received.append(item)
+				order_item_received.emit(item, received_item.quantity)
+				# short circuit check to determine if an order is completed
+				# this is so we don't do the O(n^2) check each time an order is received
+				if len(items) == len(items_received):
+					if is_order_completed():
+						order_completed.emit(self)
 				return true
 			
 	return false
