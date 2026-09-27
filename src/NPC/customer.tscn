@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://im1hy1frw1nv" path="res://src/NPC/customer.gd" id="1_i2whk"]
 [ext_resource type="PackedScene" uid="uid://dbx2cox3vefj2" path="res://src/NPC/asset/Timmy.glb" id="2_xrksg"]
-[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/InteractComponent.gd" id="3_8wj8j"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_8wj8j"]
+[ext_resource type="PackedScene" uid="uid://bni0uok26bsmb" path="res://src/NPC/ui/PatienceBar.tscn" id="4_ddwf0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i2whk"]
 radius = 0.3
@@ -20,7 +21,7 @@ path_height_offset = 0.1
 [node name="Timmy" parent="CharacterBody3D" unique_id=55703004 instance=ExtResource("2_xrksg")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -0.85, 0)
 
-[node name="Skeleton3D" parent="CharacterBody3D/Timmy/Armature_004" parent_id_path=PackedInt32Array(55703004, 1332547695) index="0" unique_id=988978230]
+[node name="Skeleton3D" parent="CharacterBody3D/Timmy/Armature_004" parent_id_path=PackedInt32Array(55703004, 178600144) index="0" unique_id=60174795]
 bones/0/position = Vector3(-0.062253624, 1.3214184, -62.21513)
 bones/0/rotation = Quaternion(-0.7009737, 0.0019896787, -0.031849798, 0.71247286)
 bones/1/rotation = Quaternion(0.058141377, 0.29190716, 0.9523802, -0.066195756)
@@ -106,7 +107,7 @@ bones/62/rotation = Quaternion(-0.11671503, 0.972931, 0.047903433, 0.1936185)
 bones/63/position = Vector3(-0.35885143, 4.430128, 0.024959097)
 bones/63/rotation = Quaternion(0.0028568013, -0.00070070766, 0.025075417, 0.9996813)
 
-[node name="AnimationPlayer" parent="CharacterBody3D/Timmy" index="1" unique_id=1914867397]
+[node name="AnimationPlayer" parent="CharacterBody3D/Timmy" index="1" unique_id=1114589410]
 autoplay = &"Idle"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1488200544]
@@ -116,5 +117,8 @@ shape = SubResource("CapsuleShape3D_i2whk")
 [node name="InteractComponent" type="Node" parent="." unique_id=2068584594]
 script = ExtResource("3_8wj8j")
 metadata/_custom_type_script = "uid://ca7pbehy5loa"
+
+[node name="PatienceBar" parent="." unique_id=258558182 instance=ExtResource("4_ddwf0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0273898, 0)
 
 [editable path="CharacterBody3D/Timmy"]

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bni0uok26bsmb"]
+
+[ext_resource type="Script" uid="uid://biq7oiwbgrtcs" path="res://src/NPC/ui/patience_bar.gd" id="1_f5k2t"]
+[ext_resource type="Texture2D" uid="uid://cy2fenp1yc7cj" path="res://src/NPC/ui/patience_ring.svg" id="2_ring"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f5k2t"]
+viewport_path = NodePath("SubViewport")
+
+[node name="PatienceBar" type="Node3D" unique_id=258558182 node_paths=PackedStringArray("progress_bar")]
+script = ExtResource("1_f5k2t")
+progress_bar = NodePath("SubViewport/TextureProgressBar")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=379879658]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(128, 128)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="SubViewport" unique_id=726107018]
+offset_right = 128.0
+offset_bottom = 128.0
+mouse_filter = 2
+step = 0.0
+value = 100.0
+fill_mode = 4
+texture_under = ExtResource("2_ring")
+texture_progress = ExtResource("2_ring")
+tint_under = Color(0.18, 0.055, 0.065, 0.85)
+tint_progress = Color(0.95, 0.12, 0.18, 1)
+
+[node name="Icon" type="AnimatedSprite2D" parent="SubViewport" unique_id=1690237283]
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=35970499]
+pixel_size = 0.005
+billboard = 1
+texture = SubResource("ViewportTexture_f5k2t")

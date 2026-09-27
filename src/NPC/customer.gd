@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var animation_player: AnimationPlayer = $CharacterBody3D/Timmy/AnimationPlayer
 @onready var interaction: InteractComponent = $InteractComponent
+@onready var patience_bar: PatienceBar = $PatienceBar
 
 enum State {
 	IDLE,
@@ -33,6 +34,7 @@ func assign_sitting_node(node: SittingNode):
 func initialize_customer(level: int, patience: float) -> void:
 	customer_lvl = level
 	max_patience = patience
+	patience_bar.set_patience(0.0, max_patience, max_patience / 100.0)
 
 func _ready():
 	var customer_lvl = randi_range(1, 3)
@@ -96,6 +98,7 @@ func change_state(new_state: State):
 	print("Changing state from: ", get_state_name(current_state), " to ", get_state_name(new_state))
 	exit_state(current_state)
 	current_state = new_state
+	patience_bar.set_state(new_state)
 	enter_state(new_state)
 	
 func enter_state(state: State):
@@ -218,10 +221,12 @@ func get_current_patience() -> float:
 
 func start_waiting_for_food() -> void:
 	patience = max_patience
+	patience_bar.update_patience(max_patience)
 
 func state_waiting_for_food(delta):
 	# Wait until restaurant tells us the food is ready
 	patience -= delta
+	patience_bar.update_patience(patience)
 	if patience <= 0.0:
 		patience = 0.0
 		print(self, " leaving because out of patience")
