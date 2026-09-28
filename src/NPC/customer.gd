@@ -211,7 +211,8 @@ func start_ordering() -> void:
 		var menu: Dictionary = RestaurantManager.get_menu()
 		var food_data = menu["foods"].pick_random()
 		print(food_data["name"], food_data["price"], food_data["rarity"])
-		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 0)
+		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 
+			100.0)
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])
 
@@ -267,12 +268,10 @@ func receive_order_item(item: OrderItem) -> bool:
 	
 	# if the order is finished, we let the signal tell us
 	return order.receive_order_item(item)
-	
+
 func state_eating(delta):
 	# Play eating animation
-	# Decrease food/eating timer
-	var finish_eating = false
-	var eating_time = 20
+	pass
 
 func take_payment() -> float:
 	paid = true
