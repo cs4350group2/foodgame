@@ -9,6 +9,9 @@ const waiting_overlay := preload("res://assets/ui/circle bars/32x32/32x32 circle
 @export var warning_progress_tint: Color
 @export var animation_duration: float
 
+@export var sitting_icon: Texture2D
+@export var sitting_tint: Color
+
 @export var ordering_icon: Texture2D
 @export var ordering_tint: Color
 
@@ -73,19 +76,24 @@ func set_state(state: Customer.State):
 			visible = true
 			set_ordering()
 		Customer.State.SITTING:
-			return
+			visible = true
+			set_sitting()			
 		_:
 			visible = false
 
 func set_sitting() -> void:
-	pass
+	progress_bar.visible = false
+	icon.texture = sitting_icon
+	_set_icon_color(sitting_tint)
 
 func set_waiting_for_food() -> void:
+	progress_bar.visible = true
 	progress_bar.texture_progress = waiting_overlay
 	icon.texture = waiting_icon
 	_set_icon_color(waiting_tint)
 
 func set_ordering() -> void:
+	progress_bar.visible = true
 	progress_bar.texture_progress = ordering_overlay
 	icon.texture = ordering_icon
 	_set_icon_color(ordering_tint)
