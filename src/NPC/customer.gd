@@ -54,7 +54,7 @@ func _on_interacted(_player: Player) -> void:
 			change_state(State.EATING)
 		
 		State.FINISHED:
-			take_payment()
+			RestaurantManager.receive_payment(take_payment())
 			
 	print("Interacted with the customer.")
 
