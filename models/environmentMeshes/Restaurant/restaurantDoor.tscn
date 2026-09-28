@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://drvgq5wpa1odo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1cj3"]
+albedo_color = Color(0.81292856, 0.8141183, 0.7605007, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r1bx6"]
+size = Vector3(4.2476807, 9.973389, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c5iw7"]
+size = Vector3(4.2487793, 9.986877, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p8jei"]
+size = Vector3(1.5316162, 2.5042725, 1)
+
+[node name="RestaurantDoor" type="Node3D" unique_id=43606955]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=452153357]
+cast_shadow = 0
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1430534233]
+size = Vector3(10, 10, 0.5)
+material = SubResource("StandardMaterial3D_h1cj3")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=2130752312]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+operation = 2
+size = Vector3(1.5, 3, 3)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1176077292]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1061005700]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8771362, -0.013549805, 0)
+shape = SubResource("BoxShape3D_r1bx6")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=175690214]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8780518, 0.0066833496, 0)
+shape = SubResource("BoxShape3D_c5iw7")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" unique_id=1005066148]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008972168, 3.7476196, 0)
+shape = SubResource("BoxShape3D_p8jei")
