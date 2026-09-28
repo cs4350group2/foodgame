@@ -1,7 +1,7 @@
 extends Node3D
 
-const MEAT_PATH = "res://models/physics/food/steak/meatRaw.tscn"
-const BUNS_PATH = "res://models/physics/food/burger/buns.tscn"
+const MEAT_PATH = "res://models/physics/food/ingredients/meatRaw.tscn"
+const BUNS_PATH = "res://models/physics/food/ingredients/buns.tscn"
 
 @onready var interaction: InteractComponent = $InteractComponent
 @onready var pot = $"../../pot/Cylinder_009/StaticBody3D"
