@@ -4,6 +4,7 @@ var sitting_nodes: Array[Node] = []
 var customers: Array[Customer] = []
 var orders: Array[Order] = []
 var menu_data: Dictionary
+var coins: float = 0
 
 # Signals to the UI to update order changes
 # there might be drift between UI and Manager cause UI has to mantain its own state too
@@ -70,3 +71,10 @@ func assign_sittingNode(customer: Customer):
 	sittingNode.assign_customer(customer)
 	
 	print("Assigned sittingNode: ", sittingNode.name)
+
+func receive_payment(amount: float) -> void:
+	print("Coins: ", coins, " + ", amount)
+	coins += amount
+
+func get_current_coins() -> float:
+	return coins
