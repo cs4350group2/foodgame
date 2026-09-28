@@ -1,13 +1,21 @@
 [gd_scene format=3 uid="uid://trnwtn4ye4d7"]
 
 [ext_resource type="PackedScene" uid="uid://brkod26kk2nx8" path="res://models/props/food/Ingredients/tomatoWhole.tscn" id="1_wa2yj"]
+[ext_resource type="Script" uid="uid://caqi7kx4ccnu5" path="res://src/interactables/reusable scripts/food_item.gd" id="1_wx87i"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_4k80g"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qf7sd"]
 radius = 0.20142408
 
 [node name="TomatoWhole" type="RigidBody3D" unique_id=1200164544]
+script = ExtResource("1_wx87i")
+food_name = "tomato"
 
 [node name="tomato2" parent="." unique_id=1481336563 instance=ExtResource("1_wa2yj")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1006428242]
 shape = SubResource("SphereShape3D_qf7sd")
+
+[node name="InteractComponent" type="Node" parent="." unique_id=1637159552]
+script = ExtResource("3_4k80g")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"
