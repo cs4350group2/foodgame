@@ -24,14 +24,14 @@
 [ext_resource type="PackedScene" uid="uid://11ajb8vx48w0" path="res://models/physics/food/ingredients/tomatoSliced.tscn" id="24_0odxb"]
 [ext_resource type="PackedScene" uid="uid://nunteaagavmm" path="res://models/interactable stations/choppingStation.tscn" id="24_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://cwexcopcjevoa" path="res://models/spawners/burgerBunBox.tscn" id="25_0odxb"]
-[ext_resource type="Script" uid="uid://c08kngi0a0cac" path="res://src/restaurant/restaurant.gd" id="26_xuqvo"]
-[ext_resource type="Script" uid="uid://bleu56ats4lt1" path="res://src/NPC/npc_sitting_node.gd" id="27_qsp4k"]
-[ext_resource type="Script" uid="uid://d24c3v2gtky0m" path="res://src/NPC/customer_spawner.gd" id="28_kq58d"]
-[ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="29_qsp4k"]
 [ext_resource type="PackedScene" uid="uid://cf7ki6prfn0kv" path="res://models/physics/food/ingredients/potatoSliced.tscn" id="25_lswn8"]
 [ext_resource type="PackedScene" uid="uid://dx1lfe4xyxhbh" path="res://models/physics/food/stew/stewPot.tscn" id="26_lswn8"]
+[ext_resource type="Script" uid="uid://c08kngi0a0cac" path="res://src/restaurant/restaurant.gd" id="26_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://dnfgneyk71oyy" path="res://models/physics/food/stew/stewPlate.tscn" id="27_a6jrf"]
+[ext_resource type="Script" uid="uid://bleu56ats4lt1" path="res://src/NPC/npc_sitting_node.gd" id="27_qsp4k"]
+[ext_resource type="Script" uid="uid://d24c3v2gtky0m" path="res://src/NPC/customer_spawner.gd" id="28_kq58d"]
 [ext_resource type="PackedScene" uid="uid://b0fbt4od6fufi" path="res://src/ui/order_list/OrderList.tscn" id="28_xuqvo"]
+[ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="29_qsp4k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -50,12 +50,20 @@ vertices = PackedVector3Array(-3.25, 0.49924937, -3.25, -1.25, 0.49924937, -3.25
 polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(0, 4, 3), PackedInt32Array(3, 4, 5), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5), PackedInt32Array(8, 10, 9), PackedInt32Array(12, 11, 13), PackedInt32Array(13, 11, 2), PackedInt32Array(2, 11, 1), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 7), PackedInt32Array(7, 14, 6), PackedInt32Array(8, 16, 7), PackedInt32Array(10, 1, 17), PackedInt32Array(1, 11, 17), PackedInt32Array(8, 7, 10), PackedInt32Array(10, 7, 1), PackedInt32Array(12, 13, 18), PackedInt32Array(18, 13, 19), PackedInt32Array(15, 20, 14), PackedInt32Array(14, 20, 21), PackedInt32Array(18, 19, 20), PackedInt32Array(20, 19, 21)]
 filter_walkable_low_height_spans = true
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_0xm2m"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_htxhm"]
 material = ExtResource("2_2cqfq")
 size = Vector2(10, 10)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0xm2m"]
 data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jq2sk"]
+material = ExtResource("2_2cqfq")
+size = Vector2(10, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0xm2m"]
+material = ExtResource("2_2cqfq")
+size = Vector2(10, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qf7sd"]
 size = Vector3(1, 1, 0.099926755)
@@ -114,7 +122,7 @@ navigation_mesh = SubResource("NavigationMesh_qsp4k")
 
 [node name="Floor2" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1622225128]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
-mesh = SubResource("PlaneMesh_0xm2m")
+mesh = SubResource("PlaneMesh_htxhm")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor2" unique_id=1054849496]
@@ -125,10 +133,7 @@ shape = SubResource("ConcavePolygonShape3D_0xm2m")
 [node name="Node" type="Node" parent="NavigationRegion3D/Floor2" unique_id=453812590]
 
 [node name="Floor" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1567508079]
-[node name="Floor2" type="MeshInstance3D" parent="." unique_id=1622225128]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.925679, 0.014371157, -0.097962976)
-mesh = SubResource("PlaneMesh_0xm2m")
-skeleton = NodePath("")
+mesh = SubResource("PlaneMesh_jq2sk")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor" unique_id=1292298415]
 
@@ -158,6 +163,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8000002, 0.2, -2.6999998)
 
 [node name="chair4" parent="NavigationRegion3D" unique_id=1937208401 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.2, -2.6999998)
+
+[node name="Floor2" type="MeshInstance3D" parent="." unique_id=1453751799]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.925679, 0.014371157, -0.097962976)
+mesh = SubResource("PlaneMesh_0xm2m")
+skeleton = NodePath("")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=485924026]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, -5.5)
@@ -295,9 +305,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4053288, 1.1703717, -0.4425
 [node name="PotatoSliced" parent="." unique_id=169465648 instance=ExtResource("25_lswn8")]
 transform = Transform3D(0.9999889, 0.0045628706, -0.0011556622, -0.0045687445, 0.9999764, -0.005129952, 0.0011322183, 0.0051351767, 0.9999862, 5.8494916, 1.0661347, -0.5374258)
 
-[node name="BUNSPAWNER" parent="." unique_id=1684884210 instance=ExtResource("25_0odxb")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14, 0.5, -2)
-
 [node name="Restaurant" type="Node" parent="." unique_id=1499342571]
 script = ExtResource("26_xuqvo")
 metadata/_custom_type_script = "uid://c08kngi0a0cac"
@@ -319,6 +326,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7, 1.3000001, -3.8)
 
 [node name="Exit" type="Marker3D" parent="Restaurant/CustomerSpawner" unique_id=1988332951]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.7, 3.3000002)
+
 [node name="StewPot" parent="." unique_id=1393827822 instance=ExtResource("26_lswn8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.154287, 1.0261151, -0.74467695)
 

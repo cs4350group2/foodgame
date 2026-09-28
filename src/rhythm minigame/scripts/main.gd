@@ -76,7 +76,7 @@ const MUD_DAGORED = preload("uid://dibhfexgjqvj") # BGM
 var bgm : AudioData = MUD_DAGORED
 var chart_song : AudioData
 var chart_path : String
-var dish_string: String
+var dish_string: String = "burger"
 
 func _ready() -> void:
 	match dish_string:
@@ -171,16 +171,16 @@ func _process(delta: float) -> void:
 	check_missed_notes(current_time_ms)
 	
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_left"):
+	if event.is_action_pressed("rhythm_left"):
 		check_hit("Left", judgment_arrow_left)
 		
-	if event.is_action_pressed("ui_right"):
+	if event.is_action_pressed("rhythm_right"):
 		check_hit("Right", judgment_arrow_right)
 	
-	if event.is_action_pressed("ui_up"):
+	if event.is_action_pressed("rhythm_up"):
 		check_hit("Up", judgment_arrow_up)
 	
-	if event.is_action_pressed("ui_down"):
+	if event.is_action_pressed("rhythm_down"):
 		check_hit("Down", judgment_arrow_down)
 
 func check_missed_notes(current_ms: float) -> void:
