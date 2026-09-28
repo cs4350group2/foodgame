@@ -4,7 +4,7 @@
 
 [node name="lamp" unique_id=1087076002 instance=ExtResource("1_yhqua")]
 
-[node name="lamp" parent="." index="0"]
+[node name="lamp" parent="." index="0" unique_id=965163178]
 transform = Transform3D(3, 0, 0, 0, -1.3113416e-07, 3, 0, -3, -1.3113416e-07, 0, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lamp" index="0" unique_id=1426991695]

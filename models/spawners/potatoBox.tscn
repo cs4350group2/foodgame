@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://d1ccl3n4b7eae"]
+
+[ext_resource type="Texture2D" uid="uid://co8fdme5mer5r" path="res://models/props/food/Ingredients/Screenshot 2026-09-24 171914.png" id="1_neoxv"]
+[ext_resource type="PackedScene" uid="uid://c4iascsgu3xbp" path="res://models/props/woodenbox.tscn" id="2_e130a"]
+[ext_resource type="Script" uid="uid://dcto3uhvv54ym" path="res://src/interactables/reusable scripts/food_spawner.gd" id="3_e130a"]
+[ext_resource type="PackedScene" uid="uid://byqdxc8evyanr" path="res://models/physics/food/ingredients/potato.tscn" id="4_b1wmc"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="4_jnoh5"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vgq1p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e4tav"]
+albedo_texture = ExtResource("1_neoxv")
+
+[sub_resource type="BoxMesh" id="BoxMesh_qf7sd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e1ddy"]
+
+[node name="Node3D" type="Node3D" unique_id=1684884210]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1718466456]
+transform = Transform3D(0.4, 0, 0, 0, -1.7484556e-08, -0.4, 0, 0.4, -1.7484556e-08, 0, 0, 0.5006093)
+mesh = SubResource("PlaneMesh_vgq1p")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_e4tav")
+
+[node name="woodenbox" parent="." unique_id=1654059166 instance=ExtResource("2_e130a")]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=295517422]
+visible = false
+mesh = SubResource("BoxMesh_qf7sd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=628357465]
+script = ExtResource("3_e130a")
+food_scene = ExtResource("4_b1wmc")
+spawner_name = "potato box"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=133775841]
+shape = SubResource("BoxShape3D_e1ddy")
+
+[node name="InteractComponent" type="Node" parent="MeshInstance3D2/StaticBody3D" unique_id=452840256]
+script = ExtResource("4_jnoh5")
+highlight_root_path = NodePath("../../../woodenbox")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"

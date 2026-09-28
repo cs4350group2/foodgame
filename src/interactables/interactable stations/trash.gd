@@ -10,7 +10,7 @@ func _on_interacted(player: Player) -> void:
 	if not is_instance_valid(player.held_food):
 		return
 
-	var food := player.held_food
+	var food := player.held_edible
 	player.held_food = null
 	food.queue_free()
 	print("Threw out ", food.food_name, ".")

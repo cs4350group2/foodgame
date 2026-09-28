@@ -9,7 +9,7 @@ size = Vector3(0.02, 0.035, 0.072)
 
 [node name="pot" unique_id=715979015 instance=ExtResource("1_5ro2p")]
 
-[node name="Cylinder_009" parent="." index="0" unique_id=1153445377]
+[node name="Cylinder_009" parent="." index="0" unique_id=1722537478]
 transform = Transform3D(25, 0, 0, 0, -1.0927847e-06, 4.594, 0, -25, -2.008101e-07, 0, 0, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cylinder_009" index="0" unique_id=1885987639]

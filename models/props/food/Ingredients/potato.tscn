@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://sv76vmelok6f"]
+
+[ext_resource type="PackedScene" uid="uid://b2y474swncwen" path="res://assets/food/stew/potatowithgreen.gltf" id="1_doavt"]
+
+[node name="potatowithgreen2" unique_id=1421645144 instance=ExtResource("1_doavt")]
+
+[node name="potatowithgreen" parent="." index="0" unique_id=2032004078]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)

@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://b0fbt4od6fufi"]
+
+[ext_resource type="Script" uid="uid://d2kpklqldr57l" path="res://src/ui/order_list/order_list.gd" id="1_um566"]
+
+[node name="OrderList" type="Control" unique_id=257962796 node_paths=PackedStringArray("left_slot", "center_slot", "right_slot")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_um566")
+animation_duration = 0.1
+left_slot = NodePath("LeftSlot")
+center_slot = NodePath("CenterSlot")
+right_slot = NodePath("RightSlot")
+
+[node name="LeftSlot" type="Control" parent="." unique_id=1138306548]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterSlot" type="Control" parent="." unique_id=138520656]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="RightSlot" type="Control" parent="." unique_id=1089379726]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2

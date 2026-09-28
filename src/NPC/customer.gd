@@ -211,7 +211,7 @@ func start_ordering() -> void:
 		var menu: Dictionary = RestaurantManager.get_menu()
 		var food_data = menu["foods"].pick_random()
 		print(food_data["name"], food_data["price"], food_data["rarity"])
-		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"])
+		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], food_data["dish_quality"])
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])
 
@@ -224,6 +224,7 @@ func state_ordering(delta):
 		change_state(State.LEAVING)
 		return
 		
+		order.completed.connect(_on_order_complete)
 	if order_taken:
 		change_state(State.WAITING_FOR_FOOD)
 
@@ -255,6 +256,23 @@ func start_eating(eating_time: float = 5.0) -> void:
 	# Do nothing if the customer changed state while waiting.
 	if current_state == State.EATING:
 		change_state(State.FINISHED)
+    
+func _on_order_complete(order: Order):
+	# might need more checks here lowk
+	change_state(State.EATING)
+
+func receive_order_item(item: OrderItem) -> bool:
+	if current_state != State.WAITING_FOR_FOOD:
+		return false
+	
+	# if the order is finished, we let the signal tell us
+	return order.receive_order_item(item)
+	
+func state_eating(delta):
+	# Play eating animation
+	# Decrease food/eating timer
+	var finish_eating = false
+	var eating_time = 20
 
 func state_eating(delta):
 	# Play eating animation
