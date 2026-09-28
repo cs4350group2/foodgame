@@ -119,6 +119,6 @@ script = ExtResource("3_8wj8j")
 metadata/_custom_type_script = "uid://ca7pbehy5loa"
 
 [node name="PatienceBar" parent="." unique_id=258558182 instance=ExtResource("4_ddwf0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0273898, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1876957, 0)
 
 [editable path="CharacterBody3D/Timmy"]

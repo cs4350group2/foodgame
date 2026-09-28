@@ -205,9 +205,14 @@ func state_ordering(delta):
 		var menu: Dictionary = RestaurantManager.get_menu()
 		var food_data = menu["foods"].pick_random()
 		print(food_data["name"], food_data["price"], food_data["rarity"])
-		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], food_data["dish_quality"])
+		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 1.0)
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])
+		""" code for when the ordering patience is implemented
+		patience_bar.set_patience(min, max)
+		patience_bar.update_patience(_something)
+		"""
+		
 		
 	if order_taken:
 		change_state(State.WAITING_FOR_FOOD)
