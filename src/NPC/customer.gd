@@ -256,7 +256,7 @@ func start_eating(eating_time: float = 5.0) -> void:
 	# Do nothing if the customer changed state while waiting.
 	if current_state == State.EATING:
 		change_state(State.FINISHED)
-    
+	
 func _on_order_complete(order: Order):
 	# might need more checks here lowk
 	change_state(State.EATING)
@@ -267,12 +267,6 @@ func receive_order_item(item: OrderItem) -> bool:
 	
 	# if the order is finished, we let the signal tell us
 	return order.receive_order_item(item)
-	
-func state_eating(delta):
-	# Play eating animation
-	# Decrease food/eating timer
-	var finish_eating = false
-	var eating_time = 20
 
 func state_eating(delta):
 	# Play eating animation
