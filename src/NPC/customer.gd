@@ -42,6 +42,7 @@ func initialize_customer(name: String, level: int, patience: float) -> void:
 	max_patience = patience
 
 func _ready():
+	interaction.interact_while_holding = true
 	interaction.interacted.connect(_on_interacted)
 	change_state(State.IDLE)
 
@@ -120,6 +121,7 @@ func enter_state(state: State):
 
 		State.ORDERING:
 			# Tell waiter/customer system that we're ordering
+			start_ordering()
 			pass
 
 		State.WAITING_FOR_FOOD:
@@ -202,7 +204,8 @@ func take_order() -> void:
 	RestaurantManager.add_order(order)
 	order_taken = true
 
-func state_ordering(delta):
+func start_ordering() -> void:
+	patience = max_patience
 	# Decide order
 	if order == null:
 		var menu: Dictionary = RestaurantManager.get_menu()
@@ -211,6 +214,15 @@ func state_ordering(delta):
 		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"])
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])
+
+func state_ordering(delta):
+	# Wait until player takes order
+	patience -= delta
+	if patience <= 0.0:
+		patience = 0.0
+		print(self, " leaving because out of patience")
+		change_state(State.LEAVING)
+		return
 		
 	if order_taken:
 		change_state(State.WAITING_FOR_FOOD)
