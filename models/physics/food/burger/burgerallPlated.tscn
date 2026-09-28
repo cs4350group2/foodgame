@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://dfu0a8864t2wq"]
 
 [ext_resource type="PackedScene" uid="uid://da3uo20xndj24" path="res://models/props/food/Burger/burgerall.tscn" id="1_1p4ms"]
+[ext_resource type="Script" uid="uid://caqi7kx4ccnu5" path="res://src/interactables/reusable scripts/edible_item.gd" id="1_y7vqo"]
 [ext_resource type="PackedScene" uid="uid://nl1u2n5clfcw" path="res://models/props/plate.tscn" id="2_y7vqo"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="4_cvr3d"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qf7sd"]
 height = 0.58251953
 radius = 0.42382813
 
 [node name="RigidBody3D" type="RigidBody3D" unique_id=2101027367]
+script = ExtResource("1_y7vqo")
 
 [node name="burgerall2" parent="." unique_id=116500474 instance=ExtResource("1_1p4ms")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10609541, 0)
@@ -17,3 +20,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10609541, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1980089277]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26586914, 0)
 shape = SubResource("CylinderShape3D_qf7sd")
+
+[node name="InteractComponent" type="Node" parent="." unique_id=245763223]
+script = ExtResource("4_cvr3d")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"
