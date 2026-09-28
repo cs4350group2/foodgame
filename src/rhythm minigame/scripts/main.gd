@@ -76,7 +76,7 @@ const MUD_DAGORED = preload("uid://dibhfexgjqvj") # BGM
 var bgm : AudioData = MUD_DAGORED
 var chart_song : AudioData
 var chart_path : String
-var dish_string: String = "steak"
+var dish_string: String = "burger"
 
 func _ready() -> void:
 	match dish_string:
