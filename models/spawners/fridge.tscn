@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://8pmn7ri3q83k"]
 
 [ext_resource type="PackedScene" uid="uid://bbkcqtgcewgv5" path="res://assets/individualsfiles/fridge.fbx" id="1_4k88k"]
-[ext_resource type="Script" uid="uid://cw5ynp8mw8bke" path="res://src/interactables/spawners/fridge.gd" id="2_w21r6"]
+[ext_resource type="Script" uid="uid://dcto3uhvv54ym" path="res://src/interactables/reusable scripts/food_spawner.gd" id="2_2cla1"]
+[ext_resource type="PackedScene" uid="uid://k8gtv0ur6iqb" path="res://models/physics/food/ingredients/meatRaw.tscn" id="3_ykk66"]
 [ext_resource type="Texture2D" uid="uid://cotpbx3nt4xan" path="res://pictures/rendered_meat.png" id="4_2cla1"]
 [ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="4_jxrpk"]
 
@@ -17,11 +18,13 @@ albedo_texture = ExtResource("4_2cla1")
 
 [node name="fridge" unique_id=353694021 instance=ExtResource("1_4k88k")]
 
-[node name="fridge" parent="." index="0" unique_id=1183728649]
+[node name="fridge" parent="." index="0" unique_id=1520344868]
 transform = Transform3D(25, 0, 0, 0, -1.0927847e-06, 25, 0, -25, -1.0927847e-06, 0, 1.12, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="fridge" index="0" unique_id=1808877682]
-script = ExtResource("2_w21r6")
+script = ExtResource("2_2cla1")
+food_scene = ExtResource("3_ykk66")
+spawner_name = "fridge"
 
 [node name="InteractComponent" type="Node" parent="fridge/StaticBody3D" index="0" unique_id=1243036389]
 script = ExtResource("4_jxrpk")
