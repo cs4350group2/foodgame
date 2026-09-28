@@ -21,7 +21,7 @@ const LANE_MAP: Dictionary = {
 
 var current_time_ms: float = 0.0
 
-@export var note_lead_time_ms: float = 1000.0 # each note takes 1 full second to fall from top of screen to judgment line (if arrow_speed in parent_arrow.gd is changed, this should be changed too)
+@export var note_lead_time_ms: float = 1200.0 # each note takes 1 full second to fall from top of screen to judgment line (if arrow_speed in parent_arrow.gd is changed, this should be changed too)
 
 @export var perfect_time_window_ms = 50
 @export var good_time_window_ms = 150
@@ -76,7 +76,7 @@ const MUD_DAGORED = preload("uid://dibhfexgjqvj") # BGM
 var bgm : AudioData = MUD_DAGORED
 var chart_song : AudioData
 var chart_path : String
-var dish_string: String
+var dish_string: String = "steak"
 
 func _ready() -> void:
 	match dish_string:
