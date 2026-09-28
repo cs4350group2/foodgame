@@ -4,6 +4,13 @@ var sitting_nodes: Array[Node] = []
 var customers: Array[Customer] = []
 var orders: Array[Order] = []
 var menu_data: Dictionary
+var coins: float = 0
+
+# Signals to the UI to update order changes
+# there might be drift between UI and Manager cause UI has to mantain its own state too
+# if this is a problem we can add the entire orders array as part of the signal
+signal order_added(order: Order)
+signal order_removed(order: Order)
 
 func load_menu():
 	var file = FileAccess.open("res://data/menu.json", FileAccess.READ)
@@ -31,9 +38,15 @@ func remove_customer(customer: Customer):
 	
 func add_order(order: Order):
 	orders.append(order)
+	order_added.emit(order)
+	order.order_completed.connect(_on_order_complete)
 
 func remove_order(order: Order):
 	orders.erase(order)
+	order_removed.emit(order)
+
+func _on_order_complete(order: Order):
+	remove_order(order)
 
 func complete_order(order: Order):
 	order.complete_order()
@@ -58,3 +71,10 @@ func assign_sittingNode(customer: Customer):
 	sittingNode.assign_customer(customer)
 	
 	print("Assigned sittingNode: ", sittingNode.name)
+
+func receive_payment(amount: float) -> void:
+	print("Coins: ", coins, " + ", amount)
+	coins += amount
+
+func get_current_coins() -> float:
+	return coins

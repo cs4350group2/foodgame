@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://ubv0sb3volmr"]
+
+[ext_resource type="Script" uid="uid://bf2vyu30rj2pj" path="res://src/ui/restaurant_ui.gd" id="1_pux36"]
+[ext_resource type="FontFile" uid="uid://75iqctai1dbj" path="res://assets/rhythm minigame/fonts/SharkSoftBites.ttf" id="2_fd8f8"]
+[ext_resource type="Texture2D" uid="uid://bur4d35ouyht6" path="res://assets/ui/coin_placeholder.png" id="2_pa56n"]
+
+[node name="RestaurantUi" type="CanvasLayer" unique_id=1022008651]
+script = ExtResource("1_pux36")
+
+[node name="ViewportContainer" type="Control" parent="." unique_id=1776253913]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MoneyMarginContainer" type="MarginContainer" parent="ViewportContainer" unique_id=2009976658]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ViewportContainer/MoneyMarginContainer" unique_id=1018715154]
+layout_mode = 2
+
+[node name="MoneyIcon" type="TextureRect" parent="ViewportContainer/MoneyMarginContainer/HBoxContainer" unique_id=769453040]
+layout_mode = 2
+texture = ExtResource("2_pa56n")
+expand_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="ViewportContainer/MoneyMarginContainer/HBoxContainer" unique_id=406715077]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fd8f8")
+theme_override_font_sizes/font_size = 40
+text = "403"
+
+[node name="TimerMarginContainer" type="MarginContainer" parent="ViewportContainer" unique_id=1353131518]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 7
+
+[node name="ProgressBar" type="ProgressBar" parent="ViewportContainer/TimerMarginContainer" unique_id=50386483]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fd8f8")
+theme_override_font_sizes/font_size = 40

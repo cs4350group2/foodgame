@@ -2,7 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://co8fdme5mer5r" path="res://models/props/food/Ingredients/Screenshot 2026-09-24 171914.png" id="1_neoxv"]
 [ext_resource type="PackedScene" uid="uid://c4iascsgu3xbp" path="res://models/props/woodenbox.tscn" id="2_e130a"]
-[ext_resource type="Script" uid="uid://tjdbhj4kmuu0" path="res://src/interactables/spawners/bun_box.gd" id="3_b1wmc"]
+[ext_resource type="Script" uid="uid://dcto3uhvv54ym" path="res://src/interactables/reusable scripts/food_spawner.gd" id="3_e130a"]
+[ext_resource type="PackedScene" uid="uid://byqdxc8evyanr" path="res://models/physics/food/ingredients/potato.tscn" id="4_b1wmc"]
 [ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="4_jnoh5"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vgq1p"]
@@ -29,7 +30,9 @@ visible = false
 mesh = SubResource("BoxMesh_qf7sd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=628357465]
-script = ExtResource("3_b1wmc")
+script = ExtResource("3_e130a")
+food_scene = ExtResource("4_b1wmc")
+spawner_name = "potato box"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=133775841]
 shape = SubResource("BoxShape3D_e1ddy")

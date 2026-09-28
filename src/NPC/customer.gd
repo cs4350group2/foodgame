@@ -5,6 +5,7 @@ extends CharacterBody3D
 @onready var animation_player: AnimationPlayer = $CharacterBody3D/Timmy/AnimationPlayer
 @onready var interaction: InteractComponent = $InteractComponent
 @onready var patience_bar: PatienceBar = $PatienceBar
+@onready var customer_spawner: CustomerSpawner = get_parent() as CustomerSpawner
 
 enum State {
 	IDLE,
@@ -27,19 +28,23 @@ var paid = false
 var order: Order
 var move_speed = 2.0
 var customer_lvl: int
+var customer_name: String
+var exit_point: Marker3D
+
+func get_customer_name() -> String:
+	return customer_name
 
 func assign_sitting_node(node: SittingNode):
 	self.assigned_sittingNode = node
 
-func initialize_customer(level: int, patience: float) -> void:
+func initialize_customer(name: String, level: int, patience: float) -> void:
+	customer_name = name
 	customer_lvl = level
 	max_patience = patience
 	patience_bar.set_patience(0.0, max_patience, max_patience / 100.0)
 
 func _ready():
-	var customer_lvl = randi_range(1, 3)
-	var patience_lvl = 10
-	initialize_customer(customer_lvl, patience_lvl)
+	interaction.interact_while_holding = true
 	interaction.interacted.connect(_on_interacted)
 	change_state(State.IDLE)
 
@@ -52,7 +57,7 @@ func _on_interacted(_player: Player) -> void:
 			change_state(State.EATING)
 		
 		State.FINISHED:
-			take_payment()
+			RestaurantManager.receive_payment(take_payment())
 			
 	print("Interacted with the customer.")
 
@@ -119,6 +124,7 @@ func enter_state(state: State):
 
 		State.ORDERING:
 			# Tell waiter/customer system that we're ordering
+			start_ordering()
 			pass
 
 		State.WAITING_FOR_FOOD:
@@ -127,12 +133,14 @@ func enter_state(state: State):
 
 		State.EATING:
 			# $AnimationPlayer.play("eat")
+			start_eating()
 			pass
 
 		State.FINISHED:
 			pass
 
 		State.LEAVING:
+			update_target_location(exit_point.global_position)
 			pass
 
 func exit_state(state:State):
@@ -199,7 +207,9 @@ func take_order() -> void:
 	RestaurantManager.add_order(order)
 	order_taken = true
 
-func state_ordering(delta):
+func start_ordering() -> void:
+	patience = max_patience
+	patience_bar.update_patience(max_patience)
 	# Decide order
 	if order == null:
 		var menu: Dictionary = RestaurantManager.get_menu()
@@ -208,12 +218,19 @@ func state_ordering(delta):
 		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 1.0)
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])
-		""" code for when the ordering patience is implemented
-		patience_bar.set_patience(min, max)
-		patience_bar.update_patience(_something)
-		"""
 		
+
+func state_ordering(delta):
+	# Wait until player takes order
+	patience -= delta
+	patience_bar.update_patience(patience)
+	if patience <= 0.0:
+		patience = 0.0
+		print(self, " leaving because out of patience")
+		change_state(State.LEAVING)
+		return
 		
+		order.completed.connect(_on_order_complete)
 	if order_taken:
 		change_state(State.WAITING_FOR_FOOD)
 
@@ -236,21 +253,38 @@ func state_waiting_for_food(delta):
 		patience = 0.0
 		print(self, " leaving because out of patience")
 		change_state(State.LEAVING)
+		return
 
 	if order.is_order_completed():
 		change_state(State.EATING)
 
+func start_eating(eating_time: float = 5.0) -> void:
+	await get_tree().create_timer(eating_time).timeout
+
+	# Do nothing if the customer changed state while waiting.
+	if current_state == State.EATING:
+		change_state(State.FINISHED)
+    
+func _on_order_complete(order: Order):
+	# might need more checks here lowk
+	change_state(State.EATING)
+
+func receive_order_item(item: OrderItem) -> bool:
+	if current_state != State.WAITING_FOR_FOOD:
+		return false
+	
+	# if the order is finished, we let the signal tell us
+	return order.receive_order_item(item)
+	
 func state_eating(delta):
 	# Play eating animation
 	# Decrease food/eating timer
 	var finish_eating = false
 	var eating_time = 20
-	
-	await get_tree().create_timer(eating_time).timeout
-	finish_eating = true
-	
-	if finish_eating:
-		change_state(State.FINISHED)
+
+func state_eating(delta):
+	# Play eating animation
+	pass
 
 func take_payment() -> float:
 	paid = true
@@ -275,5 +309,7 @@ func state_leaving(delta):
 		if assigned_sittingNode != null:
 			assigned_sittingNode.clear()
 		
+		customer_spawner.release_name(customer_name)
+		RestaurantManager.remove_customer(self)
 		queue_free()
 		return
