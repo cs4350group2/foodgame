@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cpcbxu1opppol"]
 
-[ext_resource type="PackedScene" uid="uid://bcf6i3s0cc110" path="res://assets/food/ingredients/meatraw.gltf" id="1_kp5ol"]
+[ext_resource type="PackedScene" uid="uid://dogdc4fi3233a" path="res://assets/food/ingredients/meatraw.gltf" id="1_kp5ol"]
 
 [node name="meatraw2" unique_id=381339205 instance=ExtResource("1_kp5ol")]
 
-[node name="meatraw" parent="." index="0" unique_id=762923949]
+[node name="meatraw" parent="." index="0" unique_id=460306239]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

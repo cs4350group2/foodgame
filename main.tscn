@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://cf7ki6prfn0kv" path="res://models/physics/food/ingredients/potatoSliced.tscn" id="25_lswn8"]
 [ext_resource type="PackedScene" uid="uid://dx1lfe4xyxhbh" path="res://models/physics/food/stew/stewPot.tscn" id="26_lswn8"]
 [ext_resource type="PackedScene" uid="uid://dnfgneyk71oyy" path="res://models/physics/food/stew/stewPlate.tscn" id="27_a6jrf"]
+[ext_resource type="PackedScene" uid="uid://b0fbt4od6fufi" path="res://src/ui/order_list/OrderList.tscn" id="28_xuqvo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -285,3 +286,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.154287, 1.0261151, -0.74467
 
 [node name="StewPlate" parent="." unique_id=321653761 instance=ExtResource("27_a6jrf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1284833, 1.1683636, -2.346963)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1288704786]
+layer = 2
+
+[node name="OrderList" parent="CanvasLayer" unique_id=257962796 instance=ExtResource("28_xuqvo")]

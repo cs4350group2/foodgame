@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://cxk1y2vfdnu75"]
+
+[ext_resource type="Script" uid="uid://dwjmctufsei5s" path="res://src/ui/order_list/order_item_ui.gd" id="1_wvj3k"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="2_nie3q"]
+
+[node name="OrderItemUI" type="MarginContainer" unique_id=1347782805 node_paths=PackedStringArray("grid_container", "total_text", "total_value", "name_template", "per_item_template", "total_template")]
+anchors_preset = -1
+anchor_right = 0.263
+anchor_bottom = 0.101
+offset_right = -177.97601
+offset_bottom = -45.448006
+script = ExtResource("1_wvj3k")
+grid_container = NodePath("VBoxContainer/GridContainer")
+total_text = NodePath("VBoxContainer/HBoxContainer/TotalText")
+total_value = NodePath("VBoxContainer/HBoxContainer/TotalValue")
+name_template = NodePath("VBoxContainer/GridContainer/Name")
+per_item_template = NodePath("VBoxContainer/GridContainer/Per Item")
+total_template = NodePath("VBoxContainer/GridContainer/Total")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=828563891]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer" unique_id=977169273]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+columns = 3
+
+[node name="Name" type="Label" parent="VBoxContainer/GridContainer" unique_id=1570635791]
+visible = false
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme = ExtResource("2_nie3q")
+text = "Steak"
+
+[node name="Per Item" type="Label" parent="VBoxContainer/GridContainer" unique_id=84470945]
+visible = false
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_nie3q")
+text = "$4.50"
+
+[node name="Total" type="Label" parent="VBoxContainer/GridContainer" unique_id=408695851]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("2_nie3q")
+text = "$12"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=396435481]
+layout_mode = 2
+
+[node name="TotalText" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1610321266]
+layout_mode = 2
+theme = ExtResource("2_nie3q")
+text = "TOTAL:"
+
+[node name="TotalValue" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=508547881]
+layout_mode = 2
+size_flags_horizontal = 10
