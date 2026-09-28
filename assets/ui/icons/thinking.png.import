@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://5aa3b4bhf1sv"
-path="res://.godot/imported/thinking.png-27eb4f2cd1f00dcc12435eb1cceb85bb.ctex"
+path="res://.godot/imported/thinking.png-cb921913600932b840230a82d5915125.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/thinking.png"
-dest_files=["res://.godot/imported/thinking.png-27eb4f2cd1f00dcc12435eb1cceb85bb.ctex"]
+source_file="res://assets/ui/icons/thinking.png"
+dest_files=["res://.godot/imported/thinking.png-cb921913600932b840230a82d5915125.ctex"]
 
 [params]
 
