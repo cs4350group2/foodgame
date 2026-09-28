@@ -21,7 +21,7 @@ const LANE_MAP: Dictionary = {
 
 var current_time_ms: float = 0.0
 
-@export var note_lead_time_ms: float = 1200.0 # each note takes 1 full second to fall from top of screen to judgment line (if arrow_speed in parent_arrow.gd is changed, this should be changed too)
+@export var note_lead_time_ms: float = 1000.0 # each note takes 1 full second to fall from top of screen to judgment line (if arrow_speed in parent_arrow.gd is changed, this should be changed too)
 
 @export var perfect_time_window_ms = 50
 @export var good_time_window_ms = 150
@@ -171,16 +171,16 @@ func _process(delta: float) -> void:
 	check_missed_notes(current_time_ms)
 	
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_left"):
+	if event.is_action_pressed("rhythm_left"):
 		check_hit("Left", judgment_arrow_left)
 		
-	if event.is_action_pressed("ui_right"):
+	if event.is_action_pressed("rhythm_right"):
 		check_hit("Right", judgment_arrow_right)
 	
-	if event.is_action_pressed("ui_up"):
+	if event.is_action_pressed("rhythm_up"):
 		check_hit("Up", judgment_arrow_up)
 	
-	if event.is_action_pressed("ui_down"):
+	if event.is_action_pressed("rhythm_down"):
 		check_hit("Down", judgment_arrow_down)
 
 func check_missed_notes(current_ms: float) -> void:
