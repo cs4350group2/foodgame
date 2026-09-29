@@ -52,7 +52,7 @@ func _on_interacted(_player: Player) -> void:
 			take_order()
 			
 		State.WAITING_FOR_FOOD:
-			change_state(State.EATING)
+			_deliver_held_food(_player)
 		
 		State.FINISHED:
 			RestaurantManager.receive_payment(take_payment())
@@ -210,7 +210,9 @@ func start_ordering() -> void:
 	if order == null:
 		var menu: Dictionary = RestaurantManager.get_menu()
 		var food_data = menu["foods"].pick_random()
-		print(food_data["name"], food_data["price"], food_data["rarity"])
+		print("Name: ", food_data["name"])
+		print("Price: ", food_data["price"])
+		print("Rarity: ", food_data["rarity"])
 		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 
 			100.0)
 		var order_item = OrderItem.new(food, customer_lvl)
@@ -248,9 +250,6 @@ func state_waiting_for_food(delta):
 		change_state(State.LEAVING)
 		return
 
-	if order.is_order_completed():
-		change_state(State.EATING)
-
 func start_eating(eating_time: float = 5.0) -> void:
 	await get_tree().create_timer(eating_time).timeout
 
@@ -268,6 +267,26 @@ func receive_order_item(item: OrderItem) -> bool:
 	
 	# if the order is finished, we let the signal tell us
 	return order.receive_order_item(item)
+
+func _deliver_held_food(player: Player) -> void:
+	if not is_instance_valid(player.held_edible):
+		print("You need to be holding a cooked dish to deliver it.")
+		return
+
+	var food_data: Food = player.held_edible.get_data()
+	if food_data == null:
+		print("Ingredients cannot be delivered. Cook them first.")
+		return
+
+	var delivered_item := OrderItem.new(food_data, 1)
+	if not receive_order_item(delivered_item):
+		print("That dish does not match the customer's order.")
+		return
+
+	var delivered_edible := player.held_edible
+	player.held_edible = null
+	delivered_edible.queue_free()
+	print("Delivered %s." % food_data.edible_name)
 
 func state_eating(delta):
 	# Play eating animation

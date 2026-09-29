@@ -163,10 +163,7 @@ func drop_edible() -> void:
 		print("Not enough space to drop the food.")
 		return
 	
-	if held_edible.food_name == "": # cooked dish
-		print("Dropped edible/ingredient: ", held_edible.food_data.edible_name)
-	else: # ingredient 
-		print("Dropped edible/ingredient: ", held_edible.food_name)
+	print("Dropped edible/ingredient: ", held_edible.get_food_name())
 	_release_held_edible()
 	
 func _can_drop_food() -> bool:

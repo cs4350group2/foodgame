@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dfu0a8864t2wq"]
 
 [ext_resource type="PackedScene" uid="uid://da3uo20xndj24" path="res://models/props/food/Burger/burgerall.tscn" id="1_1p4ms"]
-[ext_resource type="Script" uid="uid://caqi7kx4ccnu5" path="res://src/interactables/reusable scripts/edible_item.gd" id="1_y7vqo"]
+[ext_resource type="Script" uid="uid://dbfxyvg1jgclp" path="res://src/restaurant/dishes/food/burger_item.gd" id="1_cvr3d"]
 [ext_resource type="PackedScene" uid="uid://nl1u2n5clfcw" path="res://models/props/plate.tscn" id="2_y7vqo"]
 [ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="4_cvr3d"]
 
@@ -10,7 +10,8 @@ height = 0.58251953
 radius = 0.42382813
 
 [node name="RigidBody3D" type="RigidBody3D" unique_id=2101027367]
-script = ExtResource("1_y7vqo")
+script = ExtResource("1_cvr3d")
+food_name = null
 
 [node name="burgerall2" parent="." unique_id=116500474 instance=ExtResource("1_1p4ms")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10609541, 0)
