@@ -54,7 +54,7 @@ func add_order_item(item: OrderItem) -> void:
 func receive_order_item(item: OrderItem) -> bool:
 	# Reject invalid item
 	var order_item = find_item_in_order(item)
-	if order_item == null :
+	if order_item == null:
 		return false
 
 	for received_item in items_received:
@@ -62,15 +62,16 @@ func receive_order_item(item: OrderItem) -> bool:
 			var remaining_quantity_required = order_item.quantity - received_item.quantity
 			if item.quantity > remaining_quantity_required:
 				return false
-			else:
-				received_item.quantity += item.quantity
-				items_received.append(item)
-				order_item_received.emit(item, received_item.quantity)
-				# short circuit check to determine if an order is completed
-				# this is so we don't do the O(n^2) check each time an order is received
-				if len(items) == len(items_received):
-					if is_order_completed():
-						order_completed.emit(self)
-				return true
-			
-	return false
+			received_item.quantity += item.quantity
+			order_item_received.emit(item, received_item.quantity)
+			if is_order_completed():
+				order_completed.emit(self)
+			return true
+
+	if item.quantity > order_item.quantity:
+		return false
+	items_received.append(item)
+	order_item_received.emit(item, item.quantity)
+	if is_order_completed():
+		order_completed.emit(self)
+	return true

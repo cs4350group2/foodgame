@@ -19,3 +19,12 @@ func _on_interacted(player: Player) -> void:
 		print("Picked up edible: ", food_data.edible_name)
 	# Add shared food pickup behavior here later.
 	player.pick_up_edible(self)
+
+func get_data() -> Food:
+	return food_data
+
+func get_food_name() -> String:
+	if not food_data == null:
+		return food_data.get_edible_name()
+	else:
+		return food_name
