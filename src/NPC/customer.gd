@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var animation_player: AnimationPlayer = $CharacterBody3D/Timmy/AnimationPlayer
 @onready var interaction: InteractComponent = $InteractComponent
+@onready var patience_bar: PatienceBar = $PatienceBar
 @onready var customer_spawner: CustomerSpawner = get_parent() as CustomerSpawner
 
 enum State {
@@ -40,6 +41,7 @@ func initialize_customer(name: String, level: int, patience: float) -> void:
 	customer_name = name
 	customer_lvl = level
 	max_patience = patience
+	patience_bar.set_patience(0.0, max_patience, max_patience / 100.0)
 
 func _ready():
 	interaction.interact_while_holding = true
@@ -101,6 +103,7 @@ func change_state(new_state: State):
 	print("Changing state from: ", get_state_name(current_state), " to ", get_state_name(new_state))
 	exit_state(current_state)
 	current_state = new_state
+	patience_bar.set_state(new_state)
 	enter_state(new_state)
 	
 func enter_state(state: State):
@@ -206,21 +209,21 @@ func take_order() -> void:
 
 func start_ordering() -> void:
 	patience = max_patience
+	patience_bar.update_patience(max_patience)
 	# Decide order
 	if order == null:
 		var menu: Dictionary = RestaurantManager.get_menu()
 		var food_data = menu["foods"].pick_random()
-		print("Name: ", food_data["name"])
-		print("Price: ", food_data["price"])
-		print("Rarity: ", food_data["rarity"])
-		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 
-			100.0)
+		print(food_data["name"], food_data["price"], food_data["rarity"])
+		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 1.0)
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])
+		
 
 func state_ordering(delta):
 	# Wait until player takes order
 	patience -= delta
+	patience_bar.update_patience(patience)
 	if patience <= 0.0:
 		patience = 0.0
 		print(self, " leaving because out of patience")
@@ -240,10 +243,12 @@ func get_current_patience() -> float:
 
 func start_waiting_for_food() -> void:
 	patience = max_patience
+	patience_bar.update_patience(max_patience)
 
 func state_waiting_for_food(delta):
 	# Wait until restaurant tells us the food is ready
 	patience -= delta
+	patience_bar.update_patience(patience)
 	if patience <= 0.0:
 		patience = 0.0
 		print(self, " leaving because out of patience")

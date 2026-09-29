@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bni0uok26bsmb"]
+
+[ext_resource type="Script" uid="uid://biq7oiwbgrtcs" path="res://src/NPC/ui/patience_bar.gd" id="1_f5k2t"]
+[ext_resource type="Texture2D" uid="uid://bu8hrvamesiyr" path="res://assets/ui/circle bars/32x32/32x32 circle bar under.png" id="2_4mdii"]
+[ext_resource type="Texture2D" uid="uid://i821me35cjrc" path="res://assets/ui/icons/face-thinking-solid.svg" id="2_chsmf"]
+[ext_resource type="Texture2D" uid="uid://qran5mb0sg5e" path="res://assets/ui/icons/bell-exclaimation-solid.svg" id="2_v5tk4"]
+[ext_resource type="Texture2D" uid="uid://gtunb2w2wvwi" path="res://assets/ui/circle bars/32x32/32x32 circle bar progress red.png" id="3_8pb1a"]
+[ext_resource type="Texture2D" uid="uid://diu55q1bup2a0" path="res://assets/ui/icons/clock-solid.svg" id="3_v5tk4"]
+[ext_resource type="Shader" uid="uid://bkuoxh7d003ai" path="res://src/NPC/ui/patience_icon.gdshader" id="4_s8p1d"]
+[ext_resource type="Texture2D" uid="uid://5aa3b4bhf1sv" path="res://assets/ui/icons/thinking.png" id="7_v5tk4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s8p1d"]
+shader = ExtResource("4_s8p1d")
+shader_parameter/icon_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f5k2t"]
+viewport_path = NodePath("SubViewport")
+
+[node name="PatienceBar" type="Node3D" unique_id=258558182 node_paths=PackedStringArray("progress_bar", "icon")]
+script = ExtResource("1_f5k2t")
+progress_bar = NodePath("SubViewport/TextureProgressBar")
+warning_progress_tint = Color(1, 0, 0, 1)
+sitting_icon = ExtResource("2_chsmf")
+sitting_tint = Color(0.89413613, 0.9677678, 2.3102762e-06, 1)
+ordering_icon = ExtResource("2_v5tk4")
+ordering_tint = Color(0.95249325, 0.7408483, 0.22017366, 1)
+waiting_icon = ExtResource("3_v5tk4")
+waiting_tint = Color(0.99999994, 0.174173, 0.12721539, 1)
+icon = NodePath("SubViewport/TextureRect")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=379879658]
+disable_3d = true
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(128, 128)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="SubViewport" unique_id=726107018]
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(4, 4)
+mouse_filter = 2
+step = 0.0
+fill_mode = 4
+texture_under = ExtResource("2_4mdii")
+texture_progress = ExtResource("3_8pb1a")
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport" unique_id=1810952339]
+material = SubResource("ShaderMaterial_s8p1d")
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 96.0
+texture = ExtResource("7_v5tk4")
+expand_mode = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=35970499]
+pixel_size = 0.005
+billboard = 1
+texture_filter = 0
+texture = SubResource("ViewportTexture_f5k2t")
