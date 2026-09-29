@@ -1,31 +1,6 @@
 {
 	"foods": [
 		{
-			"name": "Toast",
-			"rarity": 1,
-			"price": 10.0
-		},
-		{
-			"name": "Eggs",
-			"rarity": 1,
-			"price": 10.0
-		},
-		{
-			"name": "Chicken Wings",
-			"rarity": 2,
-			"price": 20.0
-		},
-		{
-			"name": "Pasta",
-			"rarity": 2,
-			"price": 20.0
-		},
-		{
-			"name": "Stew",
-			"rarity": 3,
-			"price": 30.0
-		},
-		{
 			"name": "Steak",
 			"rarity": 3,
 			"price": 30.0
@@ -34,6 +9,11 @@
 			"name": "Burger",
 			"rarity": 1,
 			"price": 15.0
+		},
+		{
+			"name": "Stew",
+			"rarity": 2,
+			"price": 25.0
 		}
 	],
 	"drinks": [

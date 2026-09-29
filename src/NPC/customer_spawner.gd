@@ -32,14 +32,14 @@ func spawn_customer() -> void:
 	available_names.erase(customer_name) # Prevents duplicate names.
 	
 	var customer_level := randi_range(1, 3)
-	var patience := randf_range(10.0, 15.0)
+	var patience := randf_range(20.0, 30.0)
 	
 	var customer: Customer = customer_scene.instantiate()
 	customer.initialize_customer(customer_name, customer_level, patience)
 	customer.exit_point = exit_point
 	customer.global_position = spawn_point.global_position
 	add_child(customer)
-	print("Spawned ", customer.customer_name)
+	print("Spawned ", customer.customer_name, " Level: ", customer.customer_lvl)
 
 func release_name(name: String) -> void:
 	if !available_names.has(name):

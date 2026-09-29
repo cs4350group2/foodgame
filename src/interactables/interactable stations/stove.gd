@@ -4,11 +4,13 @@ extends Node3D
 const MEAT_PATH = "res://models/physics/food/ingredients/meatRaw.tscn" 
 const CHOPPED_MEAT_PATH = "res://models/physics/food/ingredients/pattyRaw.tscn" 
 const BUNS_PATH = "res://models/physics/food/ingredients/buns.tscn"
-const CHOPPED_TOMATOES_PATH = "res://models/physics/food/ingredients.tomatoSliced.tscn" 
+const CHOPPED_TOMATOES_PATH = "res://models/physics/food/ingredients/tomatoSliced.tscn"
+const CHOPPED_POTATOES_PATH = "res://models/physics/food/ingredients/potatoSliced.tscn"
 
 # dish scene files 
 const BURGER_PATH = preload("res://models/physics/food/burger/burgerallPlated.tscn")
 const STEAK_PATH = preload("res://models/physics/food/steak/meatCookedPlated.tscn")
+const STEW_PATH = preload("res://models/physics/food/stew/stewPlate.tscn")
 
 @onready var interaction: InteractComponent = $InteractComponent
 @onready var pot = $"../../pot/Cylinder_009/StaticBody3D"
@@ -36,10 +38,15 @@ func _on_interacted(_player: Player) -> void:
 	var steak_recipe: Array = [MEAT_PATH]
 	steak_recipe.sort()
 	
+	var stew_recipe: Array = [CHOPPED_MEAT_PATH, CHOPPED_TOMATOES_PATH, CHOPPED_POTATOES_PATH]
+	stew_recipe.sort()
+	
 	if current_ingredients == burger_recipe:
 		selected_dish = "burger"
 	elif current_ingredients == steak_recipe:
 		selected_dish = "steak"
+	elif current_ingredients == stew_recipe:
+		selected_dish = "stew"
 	else:
 		print(
 			"Current ingredients in stove: " 
@@ -52,6 +59,7 @@ func _on_interacted(_player: Player) -> void:
 func start_cooking(dish_string: String) -> void:
 	restaurant_main.visible = false
 	active_player.crosshair.visible = false
+	restaurant_main.process_mode = Node.PROCESS_MODE_DISABLED # freeze restaurant scene during minigame
 	active_player.process_mode = Node.PROCESS_MODE_DISABLED # disable camera movement during minigame
 	
 	var minigame_instance = RHYTHM_MINIGAME_SCENE.instantiate()
@@ -79,7 +87,7 @@ func get_food_data(dish_name: String) -> Dictionary:
 func _on_cooking_end() -> void: # when results screen appears in minigame
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> Food:
+func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
 	# clear ingredients in pot
 	pot.ingredient_buffer.clear()
 	
@@ -87,15 +95,8 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> Food:
 	
 	restaurant_main.visible = true
 	active_player.crosshair.visible = true
+	restaurant_main.process_mode = Node.PROCESS_MODE_INHERIT # re-enable restaurant scene
 	active_player.process_mode = Node.PROCESS_MODE_INHERIT # re-enable player controls
-	
-	var dish_data = get_food_data(selected_dish)
-	
-	var price: float = dish_data.get("price") 
-	var rarity: int = dish_data.get("rarity")
-	var name: String = dish_data.get("name")
-	
-	completed_dish = Food.new(name, price, rarity, dish_quality)
 	
 	var target_scene: PackedScene = null
 	
@@ -104,15 +105,17 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> Food:
 			target_scene = BURGER_PATH
 		"steak":
 			target_scene = STEAK_PATH
-		
+		"stew":
+			target_scene = STEW_PATH
+	
 	var completed_edible_item := target_scene.instantiate() as EdibleItem
-	
-	completed_edible_item.food_data = completed_dish
-	
 	get_tree().root.add_child(completed_edible_item)
 	
+	# each cooked item is already instantiated with correct name, price, rarity. only need to update dish quality
+	completed_edible_item.food_data.dish_quality = dish_quality
+	
 	if active_player:
-			active_player.pick_up_edible(completed_edible_item)
+		active_player.pick_up_edible(completed_edible_item)
 		
 	# check that all variables are initialised correctly after calling pick_up_edible()
 	print("Finished cooking %s (Price %s, Rarity %s, Dish Quality %s%%)." % [
@@ -121,8 +124,6 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> Food:
 		str(active_player.held_edible.food_data.rarity_level),
 		str(active_player.held_edible.food_data.dish_quality)
 	]) 
-	
-	return completed_dish
 
 func convert_ingredients_array_to_string(arr : Array) -> String:
 	# helper function for debugging that converts the current_ingredients array into a clean string with the actual ingredient names
@@ -149,8 +150,3 @@ func convert_ingredients_array_to_string(arr : Array) -> String:
 				names.append("Unchopped potatoes")
 	
 	return ", ".join(names)
-			
-			
-				
-			
-	

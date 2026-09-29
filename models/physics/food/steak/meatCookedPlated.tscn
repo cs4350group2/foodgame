@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bfnug1l751b1l"]
 
+[ext_resource type="Script" uid="uid://dlthjvyekb8hl" path="res://src/restaurant/dishes/food/steak_item.gd" id="1_2bbsq"]
 [ext_resource type="PackedScene" uid="uid://dyay3u62ej8fu" path="res://models/props/food/Steak/meatCooked.tscn" id="1_5loxn"]
-[ext_resource type="Script" uid="uid://caqi7kx4ccnu5" path="res://src/interactables/reusable scripts/edible_item.gd" id="1_dn2i7"]
 [ext_resource type="PackedScene" uid="uid://nl1u2n5clfcw" path="res://models/props/plate.tscn" id="2_dn2i7"]
 [ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="4_2bbsq"]
 
@@ -11,7 +11,7 @@ radius = 0.42138672
 
 [node name="Node3D" type="RigidBody3D" unique_id=752523792]
 mass = 0.2
-script = ExtResource("1_dn2i7")
+script = ExtResource("1_2bbsq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=502658801]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05064392, 0)

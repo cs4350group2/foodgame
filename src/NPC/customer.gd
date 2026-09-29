@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var animation_player: AnimationPlayer = $CharacterBody3D/Timmy/AnimationPlayer
 @onready var interaction: InteractComponent = $InteractComponent
+@onready var patience_bar: PatienceBar = $PatienceBar
 @onready var customer_spawner: CustomerSpawner = get_parent() as CustomerSpawner
 
 enum State {
@@ -45,6 +46,7 @@ func _ready():
 	interaction.interact_while_holding = true
 	interaction.interacted.connect(_on_interacted)
 	change_state(State.IDLE)
+	patience_bar.set_patience(0.0, max_patience, max_patience / 100.0)
 
 func _on_interacted(_player: Player) -> void:
 	match current_state:
@@ -52,7 +54,7 @@ func _on_interacted(_player: Player) -> void:
 			take_order()
 			
 		State.WAITING_FOR_FOOD:
-			change_state(State.EATING)
+			_deliver_held_food(_player)
 		
 		State.FINISHED:
 			RestaurantManager.receive_payment(take_payment())
@@ -101,6 +103,7 @@ func change_state(new_state: State):
 	print("Changing state from: ", get_state_name(current_state), " to ", get_state_name(new_state))
 	exit_state(current_state)
 	current_state = new_state
+	patience_bar.set_state(new_state)
 	enter_state(new_state)
 	
 func enter_state(state: State):
@@ -206,19 +209,21 @@ func take_order() -> void:
 
 func start_ordering() -> void:
 	patience = max_patience
+	patience_bar.update_patience(max_patience)
 	# Decide order
 	if order == null:
 		var menu: Dictionary = RestaurantManager.get_menu()
 		var food_data = menu["foods"].pick_random()
 		print(food_data["name"], food_data["price"], food_data["rarity"])
-		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 
-			100.0)
+		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 1.0)
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])
+		
 
 func state_ordering(delta):
 	# Wait until player takes order
 	patience -= delta
+	patience_bar.update_patience(patience)
 	if patience <= 0.0:
 		patience = 0.0
 		print(self, " leaving because out of patience")
@@ -238,18 +243,17 @@ func get_current_patience() -> float:
 
 func start_waiting_for_food() -> void:
 	patience = max_patience
+	patience_bar.update_patience(max_patience)
 
 func state_waiting_for_food(delta):
 	# Wait until restaurant tells us the food is ready
 	patience -= delta
+	patience_bar.update_patience(patience)
 	if patience <= 0.0:
 		patience = 0.0
 		print(self, " leaving because out of patience")
 		change_state(State.LEAVING)
 		return
-
-	if order.is_order_completed():
-		change_state(State.EATING)
 
 func start_eating(eating_time: float = 5.0) -> void:
 	await get_tree().create_timer(eating_time).timeout
@@ -268,6 +272,26 @@ func receive_order_item(item: OrderItem) -> bool:
 	
 	# if the order is finished, we let the signal tell us
 	return order.receive_order_item(item)
+
+func _deliver_held_food(player: Player) -> void:
+	if not is_instance_valid(player.held_edible):
+		print("You need to be holding a cooked dish to deliver it.")
+		return
+
+	var food_data: Food = player.held_edible.get_data()
+	if food_data == null:
+		print("Ingredients cannot be delivered. Cook them first.")
+		return
+
+	var delivered_item := OrderItem.new(food_data, 1)
+	if not receive_order_item(delivered_item):
+		print("That dish does not match the customer's order.")
+		return
+
+	var delivered_edible := player.held_edible
+	player.held_edible = null
+	delivered_edible.queue_free()
+	print("Delivered %s." % food_data.edible_name)
 
 func state_eating(delta):
 	# Play eating animation

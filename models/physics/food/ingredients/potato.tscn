@@ -18,4 +18,5 @@ shape = SubResource("SphereShape3D_qf7sd")
 
 [node name="InteractComponent" type="Node" parent="." unique_id=226816706]
 script = ExtResource("3_udw4l")
+highlight_root_path = NodePath("..")
 metadata/_custom_type_script = "uid://ca7pbehy5loa"

@@ -24,7 +24,19 @@ var bgm_playback_position: float
 
 @export var note_lead_time_ms: float = 1000.0 # each note takes 1 full second to fall from top of screen to judgment line (if arrow_speed in parent_arrow.gd is changed, this should be changed too)
 
-@export var perfect_time_window_ms = 50
+# offset is negative -> notes arrive EARLIER than audio
+# offset is positive -> notes arrive LATER than audio
+# limit offset between -150ms and +150ms to protect hit windows
+@export_range(-150.0, 150.0, 1.0) var audio_offset_ms: float = 0.0:
+	set(value):
+		audio_offset_ms = clampf(value, -150.0, 150.0)
+
+# adjusted time taken from adding offset to current time
+var adjusted_time_ms: float:
+	get:
+		return current_time_ms + audio_offset_ms
+
+@export var perfect_time_window_ms = 75
 @export var good_time_window_ms = 150
 
 # arrow generators
@@ -84,7 +96,6 @@ func _ready() -> void:
 		"burger":
 			chart_song = ALL_NIGHT_BURGUNDY_TRIMMED_
 			chart_path = "res://assets/rhythm minigame/charts/all_night.fsc"
-			
 		"steak":
 			chart_song = HARLEM_HEAT_DAGORED_TRIMMED_
 			chart_path = "res://assets/rhythm minigame/charts/harlem_heat(2lane).fsc" # can change to the modified 4-lane if needed
@@ -157,11 +168,11 @@ func _process(delta: float) -> void:
 		var pitch: float = AudioManager.rm_player.pitch_scale
 		current_time_ms = (AudioManager.get_rhythm_playback_position() / pitch) * 1000.0
 		
-	while not chart_notes.is_empty() and (chart_notes[0]["time"] <= current_time_ms + note_lead_time_ms):
-		var is_chord: bool = chart_notes.size() >= 2 and abs(chart_notes[0]["time"] - chart_notes[1]["time"]) < 0.1
+	while not chart_notes.is_empty() and (chart_notes[0]["time"] <= adjusted_time_ms + note_lead_time_ms):
+		var is_chord: bool = chart_notes.size() >= 2 and chart_notes[0]["time"] == chart_notes[1]["time"]
 		
 		if is_chord:
-			# pop both notes together and connect them
+			# pop both notes together and connect them with line
 			var note_a_data: Dictionary = chart_notes.pop_front()
 			var note_b_data: Dictionary = chart_notes.pop_front()
 		
@@ -173,7 +184,7 @@ func _process(delta: float) -> void:
 			var note_data: Dictionary = chart_notes.pop_front()
 			spawn_note_from_data(note_data)
 			
-	check_missed_notes(current_time_ms)
+	check_missed_notes(adjusted_time_ms)
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("rhythm_left"):
@@ -188,7 +199,40 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("rhythm_down"):
 		check_hit("Down", judgment_arrow_down)
 
-func check_missed_notes(current_ms: float) -> void:
+func check_hit(lane_name: String, judgment_arrow: Node2D) -> void:
+	var lane_array: Array = active_notes[lane_name]
+	
+	if lane_array.is_empty():
+		return
+		
+	var closest_arrow: Node2D = lane_array[0] # this is the oldest live arrow
+
+	var time_diff: float = abs(adjusted_time_ms - closest_arrow.target_hit_time_ms)
+	
+	if time_diff > good_time_window_ms:
+		return
+	
+	# successful hit (good/perfect)
+	judgment_arrow.animation_player.stop()
+	judgment_arrow.animation_player.play("successful_hit")
+	hit_effect_player.play()
+	
+	# input judgments (timings can still be tweaked in the future if needed)
+	if time_diff <= perfect_time_window_ms:
+		hit.emit("PERFECT")
+		num_perfects += 1
+	
+	else:
+		hit.emit("GOOD")
+		num_goods += 1
+	
+	remove_arrow(closest_arrow, lane_name)
+
+func check_missed_notes(adjusted_ms: float) -> void:
+	# don't check notes too early
+	if not is_audio_started or current_time_ms < 0.0:
+		return
+		
 	for lane_name in active_notes.keys():
 		var lane_array: Array = active_notes[lane_name]
 		if lane_array.is_empty():
@@ -196,7 +240,7 @@ func check_missed_notes(current_ms: float) -> void:
 			
 		var oldest_arrow: Node2D = lane_array[0]
 		
-		if current_ms > (oldest_arrow.target_hit_time_ms + good_time_window_ms):
+		if adjusted_ms > (oldest_arrow.target_hit_time_ms + good_time_window_ms):
 			miss.emit("MISS")
 			num_misses += 1
 			remove_arrow(oldest_arrow, lane_name)
@@ -227,35 +271,6 @@ func spawn_note_from_data(note_data: Dictionary) -> Arrow:
 	
 	return new_arrow
 				
-func check_hit(lane_name: String, judgment_arrow: Node2D) -> void:
-	var lane_array: Array = active_notes[lane_name]
-	
-	if lane_array.is_empty():
-		return
-		
-	var closest_arrow: Node2D = lane_array[0] # this is the oldest live arrow
-
-	var time_diff: float = abs(current_time_ms - closest_arrow.target_hit_time_ms)
-	
-	if time_diff > good_time_window_ms:
-		return
-	
-	# successful hit (good/perfect)
-	judgment_arrow.animation_player.stop()
-	judgment_arrow.animation_player.play("successful_hit")
-	hit_effect_player.play()
-	
-	# input judgments (timings can still be tweaked in the future if needed)
-	if time_diff <= perfect_time_window_ms:
-		hit.emit("PERFECT")
-		num_perfects += 1
-	
-	else:
-		hit.emit("GOOD")
-		num_goods += 1
-	
-	remove_arrow(closest_arrow, lane_name)
-
 func remove_arrow(arrow: Arrow, lane_name: String) -> void:
 	active_notes[lane_name].erase(arrow)
 	arrow.free()
