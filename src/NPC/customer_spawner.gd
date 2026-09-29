@@ -39,7 +39,7 @@ func spawn_customer() -> void:
 	customer.exit_point = exit_point
 	customer.global_position = spawn_point.global_position
 	add_child(customer)
-	print("Spawned ", customer.customer_name)
+	print("Spawned ", customer.customer_name, " Level: ", customer.customer_lvl)
 
 func release_name(name: String) -> void:
 	if !available_names.has(name):

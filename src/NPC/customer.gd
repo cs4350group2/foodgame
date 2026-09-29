@@ -210,7 +210,9 @@ func start_ordering() -> void:
 	if order == null:
 		var menu: Dictionary = RestaurantManager.get_menu()
 		var food_data = menu["foods"].pick_random()
-		print(food_data["name"], food_data["price"], food_data["rarity"])
+		print("Name: ", food_data["name"])
+		print("Price: ", food_data["price"])
+		print("Rarity: ", food_data["rarity"])
 		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 
 			100.0)
 		var order_item = OrderItem.new(food, customer_lvl)
@@ -247,9 +249,6 @@ func state_waiting_for_food(delta):
 		print(self, " leaving because out of patience")
 		change_state(State.LEAVING)
 		return
-
-	if order.is_order_completed():
-		change_state(State.EATING)
 
 func start_eating(eating_time: float = 5.0) -> void:
 	await get_tree().create_timer(eating_time).timeout

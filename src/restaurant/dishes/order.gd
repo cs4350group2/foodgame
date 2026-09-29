@@ -24,6 +24,8 @@ func is_order_completed() -> bool:
 
 		for item_received in items_received:
 			if item.edible.is_equal(item_received.edible):
+				print("Required quantity: ", item.quantity)
+				print("Received quantity: ", item_received.quantity)
 				if item_received.quantity >= item.quantity:
 					found = true
 					break
