@@ -19,4 +19,5 @@ shape = SubResource("BoxShape3D_ikrja")
 
 [node name="InteractComponent" type="Node" parent="." unique_id=1125569317]
 script = ExtResource("3_ud4n3")
+highlight_root_path = NodePath("..")
 metadata/_custom_type_script = "uid://ca7pbehy5loa"
