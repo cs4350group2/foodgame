@@ -218,7 +218,9 @@ func start_ordering() -> void:
 		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 1.0)
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])
-		
+	# Connect once when the order is prepared, before any food can arrive.
+	if not order.order_completed.is_connected(_on_order_complete):
+		order.order_completed.connect(_on_order_complete)
 
 func state_ordering(delta):
 	# Wait until player takes order
@@ -230,7 +232,6 @@ func state_ordering(delta):
 		change_state(State.LEAVING)
 		return
 		
-		order.completed.connect(_on_order_complete)
 	if order_taken:
 		change_state(State.WAITING_FOR_FOOD)
 
@@ -262,9 +263,9 @@ func start_eating(eating_time: float = 5.0) -> void:
 	if current_state == State.EATING:
 		change_state(State.FINISHED)
 	
-func _on_order_complete(order: Order):
-	# might need more checks here lowk
-	change_state(State.EATING)
+func _on_order_complete(completed_order: Order):
+	if completed_order == order and current_state == State.WAITING_FOR_FOOD:
+		change_state(State.EATING)
 
 func receive_order_item(item: OrderItem) -> bool:
 	if current_state != State.WAITING_FOR_FOOD:

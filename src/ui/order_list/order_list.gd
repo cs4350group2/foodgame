@@ -26,10 +26,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
 	var handled := false
-	if event.is_action_pressed("ui_left"):
+	if event.is_action_pressed("menu_left"):
 		selected = wrapi(selected - 1, 0, orders.size())
 		handled = true
-	elif event.is_action_pressed("ui_right"):
+	elif event.is_action_pressed("menu_right"):
 		selected = wrapi(selected + 1, 0, orders.size())
 		handled = true
 	if handled:
