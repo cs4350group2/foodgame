@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://bta3mj4pbg36v"]
 
-[ext_resource type="Script" uid="uid://dlthjvyekb8hl" path="res://src/restaurant/dishes/food/steak_item.gd" id="1_mipvu"]
 [ext_resource type="PackedScene" uid="uid://dyay3u62ej8fu" path="res://models/props/food/Steak/meatCooked.tscn" id="1_vrxuu"]
 [ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_bth2p"]
 
@@ -14,7 +13,6 @@ size = Vector3(0.589298, 0.097104356, 0.39351687)
 [node name="RigidBody3D" type="RigidBody3D" unique_id=1600686416]
 mass = 0.2
 physics_material_override = SubResource("PhysicsMaterial_vrxuu")
-script = ExtResource("1_mipvu")
 
 [node name="meatcooked2" parent="." unique_id=1180245686 instance=ExtResource("1_vrxuu")]
 
