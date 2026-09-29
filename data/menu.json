@@ -9,6 +9,11 @@
 			"name": "Burger",
 			"rarity": 1,
 			"price": 15.0
+		},
+		{
+			"name": "Stew",
+			"rarity": 2,
+			"price": 25.0
 		}
 	],
 	"drinks": [

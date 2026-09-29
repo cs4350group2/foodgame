@@ -41,12 +41,12 @@ func initialize_customer(name: String, level: int, patience: float) -> void:
 	customer_name = name
 	customer_lvl = level
 	max_patience = patience
-	patience_bar.set_patience(0.0, max_patience, max_patience / 100.0)
 
 func _ready():
 	interaction.interact_while_holding = true
 	interaction.interacted.connect(_on_interacted)
 	change_state(State.IDLE)
+	patience_bar.set_patience(0.0, max_patience, max_patience / 100.0)
 
 func _on_interacted(_player: Player) -> void:
 	match current_state:
