@@ -4,6 +4,8 @@ extends StaticBody3D
 const INGREDIENT_SCENES = {
 	"res://models/physics/food/ingredients/meatRaw.tscn":
 		preload("res://models/physics/food/ingredients/meatRaw.tscn"),
+	"res://models/physics/food/ingredients/pattyRaw.tscn":
+		preload("res://models/physics/food/ingredients/pattyRaw.tscn"),
 	"res://models/physics/food/ingredients/buns.tscn":
 		preload("res://models/physics/food/ingredients/buns.tscn"),
 	"res://models/physics/food/ingredients/potato.tscn":
@@ -13,7 +15,7 @@ const INGREDIENT_SCENES = {
 	"res://models/physics/food/ingredients/tomatoWhole.tscn":
 		preload("res://models/physics/food/ingredients/tomatoWhole.tscn"),
 	"res://models/physics/food/ingredients/tomatoSliced.tscn":
-		preload("res://models/physics/food/ingredients/tomatoWhole.tscn")
+		preload("res://models/physics/food/ingredients/tomatoSliced.tscn")
 }
 var ingredient_buffer: Array[String] = []
 
