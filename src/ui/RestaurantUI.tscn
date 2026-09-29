@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ubv0sb3volmr"]
 
 [ext_resource type="Script" uid="uid://bf2vyu30rj2pj" path="res://src/ui/restaurant_ui.gd" id="1_pux36"]
-[ext_resource type="FontFile" uid="uid://75iqctai1dbj" path="res://assets/rhythm minigame/fonts/SharkSoftBites.ttf" id="2_fd8f8"]
 [ext_resource type="Texture2D" uid="uid://bur4d35ouyht6" path="res://assets/ui/coin_placeholder.png" id="2_pa56n"]
+[ext_resource type="FontFile" uid="uid://8vl643wgamfq" path="res://assets/fonts/upheavtt.ttf" id="3_pa56n"]
 
 [node name="RestaurantUi" type="CanvasLayer" unique_id=1022008651]
 script = ExtResource("1_pux36")
@@ -32,7 +32,7 @@ expand_mode = 2
 
 [node name="MoneyLabel" type="Label" parent="ViewportContainer/MoneyMarginContainer/HBoxContainer" unique_id=406715077]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_fd8f8")
+theme_override_fonts/font = ExtResource("3_pa56n")
 theme_override_font_sizes/font_size = 40
 text = "403"
 
@@ -50,5 +50,5 @@ theme_override_constants/margin_top = 7
 [node name="ProgressBar" type="ProgressBar" parent="ViewportContainer/TimerMarginContainer" unique_id=50386483]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_fd8f8")
+theme_override_fonts/font = ExtResource("3_pa56n")
 theme_override_font_sizes/font_size = 40

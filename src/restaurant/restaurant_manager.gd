@@ -6,6 +6,9 @@ var orders: Array[Order] = []
 var menu_data: Dictionary
 var coins: float = 0
 
+signal coins_updated(amount)
+const MUD_DAGORED = preload("uid://dibhfexgjqvj")
+
 # Signals to the UI to update order changes
 # there might be drift between UI and Manager cause UI has to mantain its own state too
 # if this is a problem we can add the entire orders array as part of the signal
@@ -22,6 +25,7 @@ func get_menu() -> Dictionary:
 
 func _ready() -> void:
 	load_menu()
+	AudioManager.play_bgm(MUD_DAGORED)
 
 func _physics_process(delta: float) -> void:
 	pass
@@ -75,6 +79,7 @@ func assign_sittingNode(customer: Customer):
 func receive_payment(amount: float) -> void:
 	print("Coins: ", coins, " + ", amount)
 	coins += amount
+	coins_updated.emit(coins)
 
 func get_current_coins() -> float:
 	return coins

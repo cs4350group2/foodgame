@@ -11,6 +11,7 @@ var order_num: int = 1
 @export var left_slot: Control
 @export var center_slot: Control
 @export var right_slot: Control
+@onready var no_order_label: Label = $CenterSlot/Label
 
 # ideally maybe this should be moved to another handler? not sure
 func _input(event: InputEvent) -> void:
@@ -37,7 +38,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func animate_selection() -> void:
 	if orders.is_empty():
+		no_order_label.visible = true
 		return
+	
+	no_order_label.visible = false
 	if animation:
 		animation.kill()
 	
@@ -101,6 +105,7 @@ func _on_order_added(order: Order):
 	orders.append(order_ui)
 	order_ui.set_order(order, order_num)
 	order_num += 1
+	animate_selection()
 
 func _on_order_removed(order: Order):
 	var to_remove: OrderUI = null
@@ -133,10 +138,3 @@ func register(rm: RestaurantManager):
 func _ready() -> void:
 	order_num = 1
 	register(RestaurantManager)
-	hide()
-	
-	# test code
-	for i in 5:
-		_on_order_added(__get_random_order(5))
-		
-	animate_selection()

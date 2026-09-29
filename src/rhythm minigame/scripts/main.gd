@@ -20,6 +20,7 @@ const LANE_MAP: Dictionary = {
 }
 
 var current_time_ms: float = 0.0
+var bgm_playback_position: float
 
 @export var note_lead_time_ms: float = 1000.0 # each note takes 1 full second to fall from top of screen to judgment line (if arrow_speed in parent_arrow.gd is changed, this should be changed too)
 
@@ -110,6 +111,8 @@ func _ready() -> void:
 		hide_lane.emit("up")
 		hide_lane.emit("down")
 		
+	bgm_playback_position = AudioManager.get_bgm_playback_position()
+	AudioManager.fade_out_bgm(4.5)
 	
 	# wait 4 seconds before the chart begins, then starts the minigame
 	await get_tree().create_timer(4.5).timeout
@@ -123,6 +126,7 @@ func _ready() -> void:
 	
 	# wait for the COOKING END! text to fade out fully
 	await get_tree().create_timer(4.0).timeout 
+	AudioManager.play_bgm(MUD_DAGORED, bgm_playback_position)
 	
 	rhythm_result_screen.perfect_label.text += str(num_perfects) + "\n"
 	rhythm_result_screen.good_label.text += str(num_goods) + "\n"
@@ -145,6 +149,7 @@ func _process(delta: float) -> void:
 		if current_time_ms >= 0.0:
 			is_audio_started = true
 			AudioManager.set_rm_volume(0.5) # this value can be modified between 0 and 1 inclusive, i just felt that the original volume was quite loud
+			
 			AudioManager.play_rhythm_to_target_bpm(chart_song, bgm.bpm, 0.0) 
 			current_time_ms = 0.0
 	
