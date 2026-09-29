@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://cf7ki6prfn0kv"]
 
 [ext_resource type="PackedScene" uid="uid://sv76vmelok6f" path="res://models/props/food/Ingredients/potato.tscn" id="1_7pcsb"]
+[ext_resource type="Script" uid="uid://caqi7kx4ccnu5" path="res://src/interactables/reusable scripts/edible_item.gd" id="1_jd5rp"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_5d5ve"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qf7sd"]
 radius = 0.16166076
 
 [node name="PotatoSliced" type="RigidBody3D" unique_id=169465648]
+script = ExtResource("1_jd5rp")
+food_name = "chopped potato"
 
 [node name="potatowithgreen2" parent="." unique_id=1421645144 instance=ExtResource("1_7pcsb")]
 transform = Transform3D(0.26420215, -0.16983977, 0.38903943, 0.2703738, 0.42059246, -2.305482e-08, -0.3272541, 0.21037215, 0.3140833, 0.035344437, 0, 0.038675576)
@@ -22,3 +26,7 @@ transform = Transform3D(-0.48436943, 0.10980233, 0.05770368, -0.055903792, -0.40
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1676130854]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00032930262, 0.021813415, -0.010635823)
 shape = SubResource("SphereShape3D_qf7sd")
+
+[node name="InteractComponent" type="Node" parent="." unique_id=542021867]
+script = ExtResource("3_5d5ve")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"

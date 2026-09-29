@@ -1,14 +1,22 @@
 [gd_scene format=3 uid="uid://11ajb8vx48w0"]
 
 [ext_resource type="PackedScene" uid="uid://bwonh6kcdipcb" path="res://models/props/food/Ingredients/tomatoHalf.tscn" id="1_slc4l"]
+[ext_resource type="Script" uid="uid://caqi7kx4ccnu5" path="res://src/interactables/reusable scripts/edible_item.gd" id="1_vgy2f"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_ud4n3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ikrja"]
 size = Vector3(0.30419922, 0.31100464, 0.50512695)
 
 [node name="TomatoSliced" type="RigidBody3D" unique_id=1910771617]
+script = ExtResource("1_vgy2f")
+food_name = "chopped tomato"
 
 [node name="tomatohalf2" parent="." unique_id=913905293 instance=ExtResource("1_slc4l")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1979571840]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011474609, -0.02519226, 0.079956055)
 shape = SubResource("BoxShape3D_ikrja")
+
+[node name="InteractComponent" type="Node" parent="." unique_id=1125569317]
+script = ExtResource("3_ud4n3")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"
