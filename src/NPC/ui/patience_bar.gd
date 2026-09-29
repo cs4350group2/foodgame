@@ -6,8 +6,12 @@ const waiting_overlay := preload("res://assets/ui/circle bars/32x32/32x32 circle
 
 @export var progress_bar: TextureProgressBar
 @export_range(0.0, 1.0) var warning_percentage: float = 0.25
+
 @export var warning_progress_tint: Color
 @export var animation_duration: float
+
+@export var eating_icon: Texture2D
+@export var eating_tint: Color
 
 @export var sitting_icon: Texture2D
 @export var sitting_tint: Color
@@ -78,8 +82,20 @@ func set_state(state: Customer.State):
 		Customer.State.SITTING:
 			visible = true
 			set_sitting()			
+		Customer.State.EATING:
+			visible = true
+			set_eating()
 		_:
 			visible = false
+			warning_active = false
+			_stop_warning()
+
+func set_eating() -> void:
+	warning_active = false
+	_stop_warning()
+	progress_bar.visible = false
+	icon.texture = eating_icon
+	_set_icon_color(eating_tint)
 
 func set_sitting() -> void:
 	progress_bar.visible = false
