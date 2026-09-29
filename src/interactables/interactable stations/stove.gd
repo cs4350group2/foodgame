@@ -48,8 +48,6 @@ func _on_interacted(_player: Player) -> void:
 	elif current_ingredients == stew_recipe:
 		selected_dish = "stew"
 	else:
-		print(current_ingredients)
-		print(burger_recipe)
 		print(
 			"Current ingredients in stove: " 
 			+ convert_ingredients_array_to_string(current_ingredients) 
@@ -117,7 +115,7 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
 	completed_edible_item.food_data.dish_quality = dish_quality
 	
 	if active_player:
-			active_player.pick_up_edible(completed_edible_item)
+		active_player.pick_up_edible(completed_edible_item)
 		
 	# check that all variables are initialised correctly after calling pick_up_edible()
 	print("Finished cooking %s (Price %s, Rarity %s, Dish Quality %s%%)." % [
