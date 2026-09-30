@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dbx2cox3vefj2"
+uid="uid://bv4ujjqpdbksg"
 path="res://.godot/imported/Timmy.glb-fc87ca558975a4d4c1f91dc4bac890d4.scn"
 
 [deps]
@@ -2097,7 +2097,7 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 },
-"Sitting": {
+"Sitting_Idle": {
 "save_to_file/enabled": false,
 "save_to_file/fallback_path": "",
 "save_to_file/keep_custom_tracks": "",

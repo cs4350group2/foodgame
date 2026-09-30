@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://m1q0ywvqfq1n"]
 
 [ext_resource type="Script" uid="uid://im1hy1frw1nv" path="res://src/NPC/customer.gd" id="1_i2whk"]
-[ext_resource type="PackedScene" uid="uid://dbx2cox3vefj2" path="res://src/NPC/asset/Timmy.glb" id="2_xrksg"]
+[ext_resource type="PackedScene" uid="uid://bv4ujjqpdbksg" path="res://src/NPC/asset/Timmy.glb" id="2_xrksg"]
 [ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_8wj8j"]
 [ext_resource type="PackedScene" uid="uid://bni0uok26bsmb" path="res://src/NPC/ui/PatienceBar.tscn" id="4_ddwf0"]
 
@@ -21,18 +21,15 @@ path_height_offset = 0.1
 [node name="Timmy" parent="CharacterBody3D" unique_id=55703004 instance=ExtResource("2_xrksg")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -0.85, 0)
 
-[node name="Skeleton3D" parent="CharacterBody3D/Timmy/Armature_004" parent_id_path=PackedInt32Array(55703004, 1092598500) index="0" unique_id=1831807647]
+[node name="Skeleton3D" parent="CharacterBody3D/Timmy/Armature" parent_id_path=PackedInt32Array(55703004, 324333252) index="0" unique_id=1893008967]
 bones/0/position = Vector3(-0.15906748, 0.99848604, -63.50592)
 bones/0/rotation = Quaternion(-0.72789824, -0.052592758, 0.013197046, 0.68353784)
 bones/1/rotation = Quaternion(0.1360092, 0.0966866, 0.9820107, -0.08836472)
 bones/2/rotation = Quaternion(-0.16873732, -0.011259848, 0.024963306, 0.9852806)
 bones/3/rotation = Quaternion(0.45569837, -0.047152773, -0.03252697, 0.8882893)
-bones/4/position = Vector3(-3.8679917e-07, 19.754778, 1.03201614e-07)
 bones/4/rotation = Quaternion(0.38614768, 0.028156864, -0.009423726, 0.921959)
 bones/6/rotation = Quaternion(-0.0911066, -0.026119644, 0.9951993, -0.024408257)
-bones/7/position = Vector3(0.0483486, 22.789799, 0.10037804)
 bones/7/rotation = Quaternion(-0.07726611, 0.08297153, -0.018039545, 0.9933883)
-bones/8/position = Vector3(-0.022643488, 24.54008, -0.04231063)
 bones/8/rotation = Quaternion(0.48046467, 0.039854486, -0.0068473974, 0.8760814)
 bones/9/rotation = Quaternion(0.4107704, -0.027766068, 0.009101483, 0.91127044)
 bones/11/rotation = Quaternion(0.036323566, 0.012898006, 0.020716015, 0.99904215)
@@ -43,7 +40,6 @@ bones/15/position = Vector3(1.0267555e-06, 6.4353614, 1.0545995e-05)
 bones/15/rotation = Quaternion(0.40664047, 0.15078215, 0.10414578, 0.89502066)
 bones/16/position = Vector3(-1.7871558e-07, 23.597979, -8.3800296e-07)
 bones/16/rotation = Quaternion(-0.0003273046, -0.0017302788, 0.012730718, 0.9999174)
-bones/17/position = Vector3(6.4010595e-07, 21.444204, -6.7265278e-06)
 bones/17/rotation = Quaternion(0.9755396, 0.07343116, 0.15083347, -0.14205468)
 bones/18/rotation = Quaternion(-0.008756759, 0.05227659, -0.018362511, 0.9984254)
 bones/19/position = Vector3(0.08884066, -4.0227504, 0.2794737)
@@ -51,7 +47,6 @@ bones/19/rotation = Quaternion(0.11691778, 0.0013232791, 6.6341476e-05, 0.993140
 bones/20/position = Vector3(-0.008058578, -3.114271, -6.385679e-05)
 bones/20/rotation = Quaternion(0.07025827, -0.00033173035, -0.0035500124, 0.99752253)
 bones/22/rotation = Quaternion(0.024058856, 0.070606835, 0.0051317518, 0.9972009)
-bones/23/position = Vector3(0.033900112, -4.7399144, -0.08366624)
 bones/23/rotation = Quaternion(0.12726033, 0.00077716465, -0.0059306184, 0.9918514)
 bones/24/rotation = Quaternion(0.19351678, -0.00014652619, -0.0066945716, 0.9810742)
 bones/25/position = Vector3(-0.014259815, -2.7825415, -6.0351565e-05)
@@ -59,7 +54,6 @@ bones/26/position = Vector3(4.6359863, -8.44642, -0.093654454)
 bones/26/rotation = Quaternion(0.13092838, 0.045114048, 0.015754595, 0.99023956)
 bones/27/rotation = Quaternion(0.15561402, -0.0021241948, -0.015215225, 0.98769844)
 bones/28/rotation = Quaternion(0.14367802, -0.0062888567, -0.026048176, 0.9892616)
-bones/29/position = Vector3(0.00018972158, -1.9524766, 3.900379e-05)
 bones/30/rotation = Quaternion(0.057338994, 0.05296215, 0.016584449, 0.9968111)
 bones/31/rotation = Quaternion(0.20916699, -0.0030813022, -0.02031851, 0.977664)
 bones/32/position = Vector3(-0.05234486, -3.2270348, 0.023928834)
@@ -81,17 +75,13 @@ bones/44/rotation = Quaternion(0.15978117, 0.03874912, -0.042766534, 0.9854641)
 bones/45/rotation = Quaternion(-0.015880236, 0.051670965, -0.019201923, 0.9983533)
 bones/46/rotation = Quaternion(0.11665334, 0.0012135849, -0.0031020055, 0.9931671)
 bones/47/rotation = Quaternion(0.07009196, -0.00032998616, -0.0049992134, 0.997528)
-bones/49/position = Vector3(-0.46558365, 9.6058035, -2.0310678)
 bones/49/rotation = Quaternion(0.01723204, 0.07008895, 0.0025957234, 0.9973886)
 bones/50/position = Vector3(-0.033910275, 4.740738, 0.08370525)
 bones/50/rotation = Quaternion(0.12702955, 0.0009104181, -0.009095189, 0.9918569)
-bones/51/position = Vector3(-0.00319466, 3.8997805, 0.26236746)
 bones/51/rotation = Quaternion(0.19330464, -3.3585355e-05, -0.010041374, 0.98108745)
-bones/52/position = Vector3(0.014261663, 2.7829466, 5.519018e-06)
 bones/53/position = Vector3(-4.6359377, 8.445932, 0.09366167)
 bones/53/rotation = Quaternion(0.12408085, 0.044520743, 0.011339124, 0.991208)
 bones/54/rotation = Quaternion(0.15522756, -0.0020995557, -0.01839752, 0.9877052)
-bones/55/position = Vector3(0.049013097, 2.5851579, 0.002288063)
 bones/55/rotation = Quaternion(0.14330016, -0.006281411, -0.029017808, 0.98923385)
 bones/56/position = Vector3(-0.00020009279, 1.9524062, 3.3155084e-06)
 bones/57/position = Vector3(-2.6829321, 8.852693, -1.458171)
@@ -102,12 +92,10 @@ bones/59/position = Vector3(0.052299023, 3.2264295, -0.023934148)
 bones/59/rotation = Quaternion(0.15131444, -0.0013496003, -0.027016897, 0.9881155)
 bones/60/position = Vector3(-0.0046818256, 2.3832836, 8.526258e-06)
 bones/61/rotation = Quaternion(0.09337921, 0.13246067, -0.18686797, 0.96892464)
-bones/62/position = Vector3(0.553658, 3.7610216, -0.13410766)
 bones/62/rotation = Quaternion(-0.25786906, 0.95386904, -0.14367488, 0.05472692)
-bones/63/position = Vector3(-0.35884976, 4.4301233, 0.02495968)
 bones/63/rotation = Quaternion(0.15516348, 0.082565255, 0.03882433, 0.9836666)
 
-[node name="AnimationPlayer" parent="CharacterBody3D/Timmy" index="1" unique_id=1645751902]
+[node name="AnimationPlayer" parent="CharacterBody3D/Timmy" index="1" unique_id=1879354813]
 autoplay = &"Idle"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1488200544]

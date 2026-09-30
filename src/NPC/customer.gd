@@ -121,7 +121,7 @@ func enter_state(state: State):
 		State.SITTING:
 			# Start sitting animation
 			# Play reading menu animation for random seconds
-			animation_player.play("Sitting")
+			animation_player.play("Sitting_Idle")
 			var view_menu_time = randf_range(5.0, 10.0)
 			wait_at_table(view_menu_time)
 			pass
