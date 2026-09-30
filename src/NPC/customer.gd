@@ -15,7 +15,8 @@ enum State {
 	WAITING_FOR_FOOD,
 	EATING,
 	FINISHED,
-	LEAVING
+	LEAVING,
+	LEAVING_ANGRY
 }
 
 func get_state_name(state: State) -> String:
@@ -79,6 +80,8 @@ func _physics_process(delta):
 			state_finished(delta)
 		State.LEAVING:
 			state_leaving(delta)
+		State.LEAVING_ANGRY:
+			state_leaving_angry(delta)
 
 func move_toward_navigation_target() -> void:
 	var next_position := nav_agent.get_next_path_position()
@@ -142,6 +145,9 @@ func enter_state(state: State):
 		State.LEAVING:
 			update_target_location(exit_point.global_position)
 			pass
+		State.LEAVING_ANGRY:
+			update_target_location(exit_point.global_position)
+			pass
 
 func exit_state(state:State):
 	match state:
@@ -167,6 +173,8 @@ func exit_state(state:State):
 			pass
 
 		State.LEAVING:
+			pass
+		_:
 			pass
 
 # States
@@ -227,7 +235,7 @@ func state_ordering(delta):
 	if patience <= 0.0:
 		patience = 0.0
 		print(self, " leaving because out of patience")
-		change_state(State.LEAVING)
+		change_state(State.LEAVING_ANGRY)
 		return
 		
 	if order_taken:
@@ -251,7 +259,8 @@ func state_waiting_for_food(delta):
 	if patience <= 0.0:
 		patience = 0.0
 		print(self, " leaving because out of patience")
-		change_state(State.LEAVING)
+		change_state(State.LEAVING_ANGRY)
+		
 		return
 
 func start_eating(eating_time: float = 5.0) -> void:
@@ -322,5 +331,15 @@ func state_leaving(delta):
 		
 		customer_spawner.release_name(customer_name)
 		RestaurantManager.remove_customer(self)
+		queue_free()
+		return
+
+func state_leaving_angry(delta):
+	move_toward_navigation_target()
+	if nav_agent.is_navigation_finished():
+		if assigned_sittingNode != null:
+			assigned_sittingNode.clear()
+		customer_spawner.release_name(customer_name)
+		RestaurantManager.remove_angry_customer(self)
 		queue_free()
 		return

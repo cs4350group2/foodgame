@@ -14,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="MoneyMarginContainer" type="MarginContainer" parent="ViewportContainer" unique_id=2009976658]
 layout_mode = 1
@@ -45,6 +46,7 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_constants/margin_top = 7
 
 [node name="ProgressBar" type="ProgressBar" parent="ViewportContainer/TimerMarginContainer" unique_id=50386483]

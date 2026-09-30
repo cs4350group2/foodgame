@@ -32,6 +32,8 @@
 [ext_resource type="Script" uid="uid://d24c3v2gtky0m" path="res://src/NPC/customer_spawner.gd" id="28_kq58d"]
 [ext_resource type="PackedScene" uid="uid://b0fbt4od6fufi" path="res://src/ui/order_list/OrderList.tscn" id="28_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="29_qsp4k"]
+[ext_resource type="PackedScene" uid="uid://ubv0sb3volmr" path="res://src/ui/RestaurantUI.tscn" id="33_jq2sk"]
+[ext_resource type="PackedScene" uid="uid://bncnlon6uyptf" path="res://src/restaurant/DayManager.tscn" id="34_4k2k6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -327,6 +329,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7, 1.3000001, -3.8)
 [node name="Exit" type="Marker3D" parent="Restaurant/CustomerSpawner" unique_id=1988332951]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.7, 3.3000002)
 
+[node name="DayManager" parent="Restaurant" unique_id=423942808 instance=ExtResource("34_4k2k6")]
+
 [node name="StewPot" parent="." unique_id=1393827822 instance=ExtResource("26_lswn8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.154287, 1.0261151, -0.74467695)
 
@@ -337,3 +341,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1284833, 1.1683636, -2.3469
 layer = 2
 
 [node name="OrderList" parent="CanvasLayer" unique_id=257962796 instance=ExtResource("28_xuqvo")]
+
+[node name="RestaurantUi" parent="." unique_id=1022008651 node_paths=PackedStringArray("day_manager") instance=ExtResource("33_jq2sk")]
+day_manager = NodePath("../Restaurant/DayManager")
