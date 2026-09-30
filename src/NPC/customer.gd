@@ -30,6 +30,7 @@ var move_speed = 2.0
 var customer_lvl: int
 var customer_name: String
 var exit_point: Marker3D
+var prev_transform: Transform3D
 
 func get_customer_name() -> String:
 	return customer_name
@@ -116,11 +117,14 @@ func enter_state(state: State):
 		
 		State.WALKING_TO_TABLE:
 			animation_player.play("Walk")
+			update_target_location(assigned_sittingNode.global_position)
 			pass
 
 		State.SITTING:
 			# Start sitting animation
 			# Play reading menu animation for random seconds
+			prev_transform = global_transform
+			global_transform = assigned_sittingNode.get_seating_transform()
 			animation_player.play("Sitting_Idle")
 			var view_menu_time = randf_range(5.0, 10.0)
 			wait_at_table(view_menu_time)
@@ -144,6 +148,7 @@ func enter_state(state: State):
 			pass
 
 		State.LEAVING:
+			global_transform = prev_transform
 			animation_player.play("Walk")
 			update_target_location(exit_point.global_position)
 			pass
@@ -184,11 +189,6 @@ func state_idle(delta):
 		change_state(State.WALKING_TO_TABLE)
 
 func state_walking_to_table(delta):
-	# Set navigation target somewhere else
-	# navigation_agent.target_position = table_position
-	update_target_location(assigned_sittingNode.global_position)
-	#animation_player.play("Walk")
-
 	if nav_agent.is_navigation_finished():
 		change_state(State.SITTING)
 		return
@@ -316,9 +316,7 @@ func state_finished(delta):
 
 
 func state_leaving(delta):
-	# Walk toward the restaurant exit
-	# update_target_location(exit)
-	
+	# Walk toward the restaurant exit	
 	move_toward_navigation_target(delta)
 	
 	if nav_agent.is_navigation_finished():

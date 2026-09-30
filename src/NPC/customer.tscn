@@ -21,7 +21,7 @@ path_height_offset = 0.1
 [node name="Timmy" parent="CharacterBody3D" unique_id=55703004 instance=ExtResource("2_xrksg")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -0.85, 0)
 
-[node name="Skeleton3D" parent="CharacterBody3D/Timmy/Armature" parent_id_path=PackedInt32Array(55703004, 324333252) index="0" unique_id=1893008967]
+[node name="Skeleton3D" parent="CharacterBody3D/Timmy/Armature" parent_id_path=PackedInt32Array(55703004, 947954898) index="0" unique_id=1589189327]
 bones/0/position = Vector3(-0.15906748, 0.99848604, -63.50592)
 bones/0/rotation = Quaternion(-0.72789824, -0.052592758, 0.013197046, 0.68353784)
 bones/1/rotation = Quaternion(0.1360092, 0.0966866, 0.9820107, -0.08836472)
@@ -95,7 +95,7 @@ bones/61/rotation = Quaternion(0.09337921, 0.13246067, -0.18686797, 0.96892464)
 bones/62/rotation = Quaternion(-0.25786906, 0.95386904, -0.14367488, 0.05472692)
 bones/63/rotation = Quaternion(0.15516348, 0.082565255, 0.03882433, 0.9836666)
 
-[node name="AnimationPlayer" parent="CharacterBody3D/Timmy" index="1" unique_id=1879354813]
+[node name="AnimationPlayer" parent="CharacterBody3D/Timmy" index="1" unique_id=1352674055]
 autoplay = &"Idle"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1488200544]
