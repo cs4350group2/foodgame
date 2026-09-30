@@ -10,7 +10,6 @@ var used_names: Dictionary = {}
 
 func _ready() -> void:
 	load_names()
-	spawn_customer()
 
 func load_names() -> void:
 	var file := FileAccess.open("res://data/customer_names.txt", FileAccess.READ)
@@ -32,7 +31,7 @@ func spawn_customer() -> void:
 	available_names.erase(customer_name) # Prevents duplicate names.
 	
 	var customer_level := randi_range(1, 3)
-	var patience := randf_range(20.0, 30.0)
+	var patience := randf_range(5.0, 6.0)
 	
 	var customer: Customer = customer_scene.instantiate()
 	customer.initialize_customer(customer_name, customer_level, patience)
