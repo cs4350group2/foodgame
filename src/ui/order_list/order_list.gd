@@ -138,3 +138,4 @@ func register(rm: RestaurantManager):
 func _ready() -> void:
 	order_num = 1
 	register(RestaurantManager)
+	hide()

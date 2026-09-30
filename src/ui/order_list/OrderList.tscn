@@ -41,7 +41,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="CenterSlot" unique_id=99534325]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
