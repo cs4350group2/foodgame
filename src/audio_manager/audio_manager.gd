@@ -47,6 +47,14 @@ func get_rhythm_playback_position() -> float:
 func get_bgm_playback_position() -> float:
 	return bgm_player.get_playback_position()
 
+func fade_out_bgm(duration: float):
+	var tween := create_tween()
+	var original_volume := bgm_player.volume_linear
+	tween.tween_property(bgm_player, "volume_linear", 0.0, duration)
+	await tween.finished
+	stop_bgm()
+	bgm_player.volume_linear = original_volume
+
 func stop_bgm():
 	bgm_player.stop()
 

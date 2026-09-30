@@ -70,7 +70,7 @@ theme = ExtResource("2_w7ndc")
 theme_type_variation = &"HeaderSmall"
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
-text = "{NAME}"
+text = "ORDER"
 horizontal_alignment = 1
 vertical_alignment = 1
 

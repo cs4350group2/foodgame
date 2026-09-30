@@ -2,29 +2,29 @@
 	"foods": [
 		{
 			"name": "Steak",
-			"rarity": 3,
+			"rarity": 3.0,
 			"price": 30.0
 		},
 		{
 			"name": "Burger",
-			"rarity": 1,
+			"rarity": 1.0,
 			"price": 15.0
 		},
 		{
 			"name": "Stew",
-			"rarity": 2,
+			"rarity": 2.0,
 			"price": 25.0
 		}
 	],
 	"drinks": [
 		{
 			"name": "Cola",
-			"rarity": 1,
+			"rarity": 1.0,
 			"price": 4.0
 		},
 		{
 			"name": "Coffee",
-			"rarity": 2,
+			"rarity": 2.0,
 			"price": 5.0
 		}
 	]

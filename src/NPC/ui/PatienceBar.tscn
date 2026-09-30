@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bni0uok26bsmb"]
 
-[ext_resource type="Script" uid="uid://biq7oiwbgrtcs" path="res://src/NPC/ui/patience_bar.gd" id="1_f5k2t"]
+[ext_resource type="Script" uid="uid://dy7kx8520skg2" path="res://src/NPC/ui/patience_bar.gd" id="1_f5k2t"]
 [ext_resource type="Texture2D" uid="uid://bu8hrvamesiyr" path="res://assets/ui/circle bars/32x32/32x32 circle bar under.png" id="2_4mdii"]
 [ext_resource type="Texture2D" uid="uid://m6iw4u248rsy" path="res://assets/ui/icons/face-grin-solid.svg" id="2_6lyls"]
 [ext_resource type="Texture2D" uid="uid://i821me35cjrc" path="res://assets/ui/icons/face-thinking-solid.svg" id="2_chsmf"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://5aa3b4bhf1sv" path="res://assets/ui/icons/thinking.png" id="7_v5tk4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s8p1d"]
+resource_local_to_scene = true
 shader = ExtResource("4_s8p1d")
 shader_parameter/icon_color = Color(1, 1, 1, 1)
 
@@ -21,6 +22,7 @@ viewport_path = NodePath("SubViewport")
 script = ExtResource("1_f5k2t")
 progress_bar = NodePath("SubViewport/TextureProgressBar")
 warning_progress_tint = Color(1, 0, 0, 1)
+animation_duration = 0.4
 eating_icon = ExtResource("2_6lyls")
 eating_tint = Color(0.24705882, 0.827451, 0.06666667, 1)
 sitting_icon = ExtResource("2_chsmf")
