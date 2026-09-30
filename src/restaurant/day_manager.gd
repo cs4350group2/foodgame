@@ -6,7 +6,9 @@ const THANKS_FOR_PLAYING = preload("res://src/ui/ThanksForPlaying.tscn")
 
 const MUD_DAGORED = preload("uid://dibhfexgjqvj")
 
-var fade_duration := 2.0
+@export var last_customer_offset := 5.0
+@export var early_finish_delay := 2.0
+@export var fade_duration := 2.0
 var num_lives: int = 1
 var current_time: float = 0
 var total_duration: float
@@ -26,13 +28,13 @@ func setup_with_uniform_arrival(time_to_first_customer: float,
 	assert(num_customers > 0)
 	self.num_customers = num_customers
 	timings.clear()
-	var spacing := day_duration / num_customers
+	var spacing: float = day_duration / max(1, num_customers - 1)
 	for i in range(num_customers):
 		timings.append(time_to_first_customer + (i * spacing))
 	current_time = 0
 	current_customers = 0
 	# use the last timing in case of any FP issues
-	total_duration = timings.back()
+	total_duration = timings.back() + last_customer_offset
 	customers_to_serve = num_customers
 	print("total_duration: ", total_duration)
 	print("time_to_first: ", time_to_first_customer)
@@ -59,6 +61,8 @@ func _on_customer_removed():
 	customers_to_serve -= 1
 	if customers_to_serve <= 0:
 		if num_lives > 0:
+			if current_time < total_duration:
+				await get_tree().create_timer(early_finish_delay).timeout
 			trigger_level_complete()
 
 func _on_angry_customer_left():
