@@ -30,8 +30,9 @@ func spawn_customer() -> void:
 	var customer_name: String = available_names.pick_random()
 	available_names.erase(customer_name) # Prevents duplicate names.
 	
-	var customer_level := randi_range(1, 3)
-	var patience := randf_range(5.0, 6.0)
+	# var customer_level := randi_range(1, 3)
+	var customer_level := 1
+	var patience := randf_range(20.0, 30.0)
 	
 	var customer: Customer = customer_scene.instantiate()
 	customer.initialize_customer(customer_name, customer_level, patience)
