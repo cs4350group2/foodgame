@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dy7kx8520skg2" path="res://src/NPC/ui/patience_bar.gd" id="1_f5k2t"]
 [ext_resource type="Texture2D" uid="uid://bu8hrvamesiyr" path="res://assets/ui/circle bars/32x32/32x32 circle bar under.png" id="2_4mdii"]
-[ext_resource type="Texture2D" path="res://assets/ui/icons/face-grin-solid.svg" id="2_6lyls"]
+[ext_resource type="Texture2D" uid="uid://m6iw4u248rsy" path="res://assets/ui/icons/face-grin-solid.svg" id="2_6lyls"]
 [ext_resource type="Texture2D" uid="uid://i821me35cjrc" path="res://assets/ui/icons/face-thinking-solid.svg" id="2_chsmf"]
 [ext_resource type="Texture2D" uid="uid://qran5mb0sg5e" path="res://assets/ui/icons/bell-exclaimation-solid.svg" id="2_v5tk4"]
 [ext_resource type="Texture2D" uid="uid://gtunb2w2wvwi" path="res://assets/ui/circle bars/32x32/32x32 circle bar progress red.png" id="3_8pb1a"]
