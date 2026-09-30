@@ -80,11 +80,13 @@ func _physics_process(delta):
 		State.LEAVING:
 			state_leaving(delta)
 
-func move_toward_navigation_target() -> void:
+func move_toward_navigation_target(delta) -> void:
 	var next_position := nav_agent.get_next_path_position()
 	var direction := global_position.direction_to(next_position)
+	var target_rotation = atan2(direction.x, direction.z) + PI / 2
 
 	velocity = direction * move_speed
+	rotation.y = lerp_angle(rotation.y, target_rotation, 10.0 * delta)
 	move_and_slide()
 
 func update_target_location(target_location):
@@ -109,15 +111,17 @@ func change_state(new_state: State):
 func enter_state(state: State):
 	match state:
 		State.IDLE:
+			animation_player.play("Idle")
 			pass
 		
 		State.WALKING_TO_TABLE:
+			animation_player.play("Walk")
 			pass
 
 		State.SITTING:
 			# Start sitting animation
 			# Play reading menu animation for random seconds
-			# $AnimationPlayer.play("sit")
+			animation_player.play("Sitting")
 			var view_menu_time = randf_range(5.0, 10.0)
 			wait_at_table(view_menu_time)
 			pass
@@ -140,6 +144,7 @@ func enter_state(state: State):
 			pass
 
 		State.LEAVING:
+			animation_player.play("Walk")
 			update_target_location(exit_point.global_position)
 			pass
 
@@ -188,7 +193,7 @@ func state_walking_to_table(delta):
 		change_state(State.SITTING)
 		return
 	
-	move_toward_navigation_target()
+	move_toward_navigation_target(delta)
 
 var done_waiting_at_table: bool
 func wait_at_table(view_menu_time: float) -> void:
@@ -314,7 +319,7 @@ func state_leaving(delta):
 	# Walk toward the restaurant exit
 	# update_target_location(exit)
 	
-	move_toward_navigation_target()
+	move_toward_navigation_target(delta)
 	
 	if nav_agent.is_navigation_finished():
 		if assigned_sittingNode != null:
