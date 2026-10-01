@@ -4,8 +4,8 @@ var total_duration: float
 
 @export var day_manager: DayManager
 
-@onready var coins_label: Label = $ViewportContainer/MoneyMarginContainer/HBoxContainer/MoneyLabel
-@onready var timer_progress_bar: ProgressBar = $ViewportContainer/TimerMarginContainer/ProgressBar
+@onready var coins_label: Label = %MoneyLabel
+@onready var timer_progress_bar: ProgressBar = %ProgressBar
 
 func _ready() -> void:
 	RestaurantManager.coins_updated.connect(_on_coins_updated)

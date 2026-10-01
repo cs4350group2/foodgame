@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="29_qsp4k"]
 [ext_resource type="PackedScene" uid="uid://ubv0sb3volmr" path="res://src/ui/RestaurantUI.tscn" id="33_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://bncnlon6uyptf" path="res://src/restaurant/DayManager.tscn" id="34_4k2k6"]
+[ext_resource type="PackedScene" uid="uid://dgh6jtkk62vuk" path="res://src/ui/PauseMenu.tscn" id="36_ok6jj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -355,5 +356,7 @@ layer = 2
 
 [node name="RestaurantUi" parent="." unique_id=1022008651 node_paths=PackedStringArray("day_manager") instance=ExtResource("33_jq2sk")]
 day_manager = NodePath("../Restaurant/DayManager")
+
+[node name="PauseMenu" parent="." unique_id=902983238 instance=ExtResource("36_ok6jj")]
 
 [connection signal="timeout" from="Restaurant/CustomerSpawner/SpawnTimer" to="Restaurant/CustomerSpawner" method="_on_spawn_timer_timeout"]
