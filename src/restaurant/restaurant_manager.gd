@@ -7,7 +7,11 @@ var menu_data: Dictionary
 var coins: float = 0
 
 signal coins_updated(amount)
-const MUD_DAGORED = preload("uid://dibhfexgjqvj")
+
+signal angry_customer_left()
+# parameterless for now, might need to pass in the exact customers
+signal customer_added()
+signal customer_removed()
 
 # Signals to the UI to update order changes
 # there might be drift between UI and Manager cause UI has to mantain its own state too
@@ -25,7 +29,6 @@ func get_menu() -> Dictionary:
 
 func _ready() -> void:
 	load_menu()
-	AudioManager.play_bgm(MUD_DAGORED)
 
 func _physics_process(delta: float) -> void:
 	pass
@@ -34,13 +37,20 @@ func register_sitting_nodes(nodes):
 	sitting_nodes = nodes
 
 func add_customer(customer: Customer):
-	if customer not in customers:
+	if customer not in customers && assign_sittingNode(customer):
 		customers.append(customer)
-		assign_sittingNode(customer)
+		customer_added.emit()
 
 func remove_customer(customer: Customer):
 	customers.erase(customer)
-	
+	customer_removed.emit()
+
+func remove_angry_customer(customer: Customer):
+	# i hope this kills the player if it's last customer
+	# last life
+	angry_customer_left.emit()
+	remove_customer(customer)
+
 func add_order(order: Order):
 	orders.append(order)
 	order_added.emit(order)
@@ -72,17 +82,18 @@ func find_vacant_sittingNode() -> SittingNode:
 		
 	return null
 
-func assign_sittingNode(customer: Customer):
+func assign_sittingNode(customer: Customer) -> bool:
 	var sittingNode: SittingNode = find_vacant_sittingNode()
 	
 	if sittingNode == null:
-		return
+		return false
 	
 	# Assign sitting node for customer and customer for sitting node
 	customer.assign_sitting_node(sittingNode)
 	sittingNode.assign_customer(customer)
 	
 	print("Assigned sittingNode: ", sittingNode.name)
+	return true
 
 func receive_payment(amount: float) -> void:
 	print("Coins: ", coins, " + ", amount)

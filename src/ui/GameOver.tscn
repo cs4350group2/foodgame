@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://c3rpp6ixwyi0a"]
+
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="1_h3bhr"]
+[ext_resource type="Script" uid="uid://tv4hweci8c06" path="res://src/ui/game_over.gd" id="2_game_over"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5x3br"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="GameOver" type="Node3D" unique_id=1947856973]
+script = ExtResource("2_game_over")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=7761932]
+
+[node name="Control" type="PanelContainer" parent="CanvasLayer" unique_id=1810393163]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5x3br")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=2131405143]
+layout_mode = 2
+theme = ExtResource("1_h3bhr")
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "YOU DIED"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer" unique_id=2125815754]
+z_index = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -23.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "click anywhere to retry"
+horizontal_alignment = 1

@@ -10,7 +10,6 @@ var used_names: Dictionary = {}
 
 func _ready() -> void:
 	load_names()
-	spawn_customer()
 
 func _on_spawn_timer_timeout() -> void:
 	if RestaurantManager.has_vacant_sittingNode():
@@ -37,7 +36,8 @@ func spawn_customer() -> void:
 	var customer_name: String = available_names.pick_random()
 	available_names.erase(customer_name) # Prevents duplicate names.
 	
-	var customer_level := randi_range(1, 3)
+	# var customer_level := randi_range(1, 3)
+	var customer_level := 1
 	var patience := randf_range(20.0, 30.0)
 	
 	var customer: Customer = customer_scene.instantiate()
