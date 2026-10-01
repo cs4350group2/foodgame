@@ -59,6 +59,9 @@ func _on_interacted(_player: Player) -> void:
 func start_cooking(dish_string: String) -> void:
 	restaurant_main.visible = false
 	active_player.crosshair.visible = false
+	if restaurant_main.ui_nodes:
+		for ui: Node in restaurant_main.ui_nodes as Array[Node]:
+			ui.visible = false
 	restaurant_main.process_mode = Node.PROCESS_MODE_DISABLED # freeze restaurant scene during minigame
 	active_player.process_mode = Node.PROCESS_MODE_DISABLED # disable camera movement during minigame
 	
@@ -94,6 +97,9 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
 	minigame_node.queue_free()
 	
 	restaurant_main.visible = true
+	if restaurant_main.ui_nodes:
+		for ui: Node in restaurant_main.ui_nodes as Array[Node]:
+			ui.visible = true
 	active_player.crosshair.visible = true
 	restaurant_main.process_mode = Node.PROCESS_MODE_INHERIT # re-enable restaurant scene
 	active_player.process_mode = Node.PROCESS_MODE_INHERIT # re-enable player controls

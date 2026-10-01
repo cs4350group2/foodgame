@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b63kdoyscljg4"]
 
+[ext_resource type="Script" uid="uid://bbuv51hciwxqk" path="res://main.gd" id="1_0rl1p"]
 [ext_resource type="PackedScene" uid="uid://bgoqkn2518vol" path="res://src/player/player.tscn" id="1_074og"]
 [ext_resource type="PackedScene" uid="uid://bflinwj3lf3lo" path="res://models/counters/bartable.tscn" id="2_0xm2m"]
 [ext_resource type="Material" uid="uid://dqgd4cvquio3c" path="res://Textures/Wall_KitchenTiles_01/UglyKitchenTiles.tres" id="2_2cqfq"]
@@ -105,7 +106,9 @@ data = PackedVector3Array(-0.5, 0.5, 0.0158, 0.5, 0.5, 0.0158, -0.5, -0.5, 0.015
 [sub_resource type="PlaneMesh" id="PlaneMesh_qf7sd"]
 material = ExtResource("17_yaehf")
 
-[node name="Main" type="Node3D" unique_id=579835186]
+[node name="Main" type="Node3D" unique_id=579835186 node_paths=PackedStringArray("ui_nodes")]
+script = ExtResource("1_0rl1p")
+ui_nodes = [NodePath("CanvasLayer"), NodePath("RestaurantUi")]
 
 [node name="Player" parent="." unique_id=1842546302 instance=ExtResource("1_074og")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
