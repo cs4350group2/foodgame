@@ -350,6 +350,7 @@ layer = 2
 
 [node name="OrderList" parent="CanvasLayer" unique_id=257962796 instance=ExtResource("28_xuqvo")]
 
-[connection signal="timeout" from="Restaurant/CustomerSpawner/SpawnTimer" to="Restaurant/CustomerSpawner" method="_on_spawn_timer_timeout"]
 [node name="RestaurantUi" parent="." unique_id=1022008651 node_paths=PackedStringArray("day_manager") instance=ExtResource("33_jq2sk")]
 day_manager = NodePath("../Restaurant/DayManager")
+
+[connection signal="timeout" from="Restaurant/CustomerSpawner/SpawnTimer" to="Restaurant/CustomerSpawner" method="_on_spawn_timer_timeout"]

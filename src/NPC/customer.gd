@@ -143,7 +143,6 @@ func enter_state(state: State):
 			pass
 
 		State.EATING:
-			# $AnimationPlayer.play("eat")
 			start_eating()
 			pass
 
@@ -156,6 +155,8 @@ func enter_state(state: State):
 			update_target_location(exit_point.global_position)
 			pass
 		State.LEAVING_ANGRY:
+			global_transform = prev_transform
+			animation_player.play("Walk")
 			update_target_location(exit_point.global_position)
 			pass
 
@@ -184,7 +185,8 @@ func exit_state(state:State):
 
 		State.LEAVING:
 			pass
-		_:
+
+		State.LEAVING_ANGRY:
 			pass
 
 # States
@@ -338,7 +340,7 @@ func state_leaving(delta):
 		return
 
 func state_leaving_angry(delta):
-	move_toward_navigation_target()
+	move_toward_navigation_target(delta)
 	if nav_agent.is_navigation_finished():
 		if assigned_sittingNode != null:
 			assigned_sittingNode.clear()
