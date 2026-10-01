@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cjkjcp6m3npy1"]
 
-[ext_resource type="Script" uid="uid://caqi7kx4ccnu5" path="res://src/interactables/reusable scripts/food_item.gd" id="1_4vdxd"]
+[ext_resource type="Script" uid="uid://caqi7kx4ccnu5" path="res://src/interactables/reusable scripts/edible_item.gd" id="1_4vdxd"]
 [ext_resource type="PackedScene" uid="uid://da3uo20xndj24" path="res://models/props/food/Burger/burgerall.tscn" id="1_jkk1f"]
 [ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_eykw2"]
 

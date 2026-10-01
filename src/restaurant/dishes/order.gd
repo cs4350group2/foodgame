@@ -1,6 +1,9 @@
 class_name Order
 extends RefCounted
 
+signal order_completed(order: Order)
+signal order_item_received(item: OrderItem, quantity: int)
+
 var items: Array[OrderItem] = []
 var items_received: Array[OrderItem] = []
 
@@ -14,11 +17,15 @@ func find_item_in_order(item_received: OrderItem) -> OrderItem:
 	return null
 
 func is_order_completed() -> bool:
+	# this check requires OrderItems to all have a unique edible
+	# maybe a dictionary then would be better?
 	for item in items:
 		var found := false
 
 		for item_received in items_received:
 			if item.edible.is_equal(item_received.edible):
+				print("Required quantity: ", item.quantity)
+				print("Received quantity: ", item_received.quantity)
 				if item_received.quantity >= item.quantity:
 					found = true
 					break
@@ -41,6 +48,7 @@ func get_order_total_price() -> float:
 		
 	return total
 
+# Assume that items won't be added midway. If not, we will have to create signals for this.
 func add_order_item(item: OrderItem) -> void:
 	items.append(item)
 
@@ -48,7 +56,7 @@ func add_order_item(item: OrderItem) -> void:
 func receive_order_item(item: OrderItem) -> bool:
 	# Reject invalid item
 	var order_item = find_item_in_order(item)
-	if order_item == null :
+	if order_item == null:
 		return false
 
 	for received_item in items_received:
@@ -56,9 +64,16 @@ func receive_order_item(item: OrderItem) -> bool:
 			var remaining_quantity_required = order_item.quantity - received_item.quantity
 			if item.quantity > remaining_quantity_required:
 				return false
-			else:
-				received_item.quantity += item.quantity
-				items_received.append(item)
-				return true
-			
-	return false
+			received_item.quantity += item.quantity
+			order_item_received.emit(item, received_item.quantity)
+			if is_order_completed():
+				order_completed.emit(self)
+			return true
+
+	if item.quantity > order_item.quantity:
+		return false
+	items_received.append(item)
+	order_item_received.emit(item, item.quantity)
+	if is_order_completed():
+		order_completed.emit(self)
+	return true

@@ -1,7 +1,16 @@
 extends Node3D
 
-const MEAT_PATH = "res://models/physics/food/ingredients/meatRaw.tscn"
+# ingredient scene files
+const MEAT_PATH = "res://models/physics/food/ingredients/meatRaw.tscn" 
+const CHOPPED_MEAT_PATH = "res://models/physics/food/ingredients/pattyRaw.tscn" 
 const BUNS_PATH = "res://models/physics/food/ingredients/buns.tscn"
+const CHOPPED_TOMATOES_PATH = "res://models/physics/food/ingredients/tomatoSliced.tscn"
+const CHOPPED_POTATOES_PATH = "res://models/physics/food/ingredients/potatoSliced.tscn"
+
+# dish scene files 
+const BURGER_PATH = preload("res://models/physics/food/burger/burgerallPlated.tscn")
+const STEAK_PATH = preload("res://models/physics/food/steak/meatCookedPlated.tscn")
+const STEW_PATH = preload("res://models/physics/food/stew/stewPlate.tscn")
 
 @onready var interaction: InteractComponent = $InteractComponent
 @onready var pot = $"../../pot/Cylinder_009/StaticBody3D"
@@ -11,7 +20,7 @@ const BUNS_PATH = "res://models/physics/food/ingredients/buns.tscn"
 const RHYTHM_MINIGAME_SCENE = preload("uid://bx7cw268w4v8j")
 
 var active_player : Player = null
-var selected_dish = "" # selected dish to cook
+var selected_dish : String = "" # selected dish to cook
 var completed_dish : Food # dish to be returned after player returns to restaurant 
 
 func _ready() -> void:
@@ -20,22 +29,37 @@ func _ready() -> void:
 
 func _on_interacted(_player: Player) -> void:
 	active_player = _player
-	var has_meat: bool = pot.ingredient_buffer.has(MEAT_PATH)
-	var has_buns: bool = pot.ingredient_buffer.has(BUNS_PATH)
-
-	if not has_meat:
-		print("invalid recipe")
-		return
-	elif has_buns:
+	var current_ingredients: Array = pot.ingredient_buffer.duplicate()
+	current_ingredients.sort()
+	
+	var burger_recipe: Array = [BUNS_PATH, CHOPPED_MEAT_PATH, CHOPPED_TOMATOES_PATH]
+	burger_recipe.sort()
+	
+	var steak_recipe: Array = [MEAT_PATH]
+	steak_recipe.sort()
+	
+	var stew_recipe: Array = [CHOPPED_MEAT_PATH, CHOPPED_TOMATOES_PATH, CHOPPED_POTATOES_PATH]
+	stew_recipe.sort()
+	
+	if current_ingredients == burger_recipe:
 		selected_dish = "burger"
-	else:
+	elif current_ingredients == steak_recipe:
 		selected_dish = "steak"
+	elif current_ingredients == stew_recipe:
+		selected_dish = "stew"
+	else:
+		print(
+			"Current ingredients in stove: " 
+			+ convert_ingredients_array_to_string(current_ingredients) 
+			+ ". " + "Invalid recipe!")
+		return
 	
 	start_cooking(selected_dish)
 
 func start_cooking(dish_string: String) -> void:
 	restaurant_main.visible = false
 	active_player.crosshair.visible = false
+	restaurant_main.process_mode = Node.PROCESS_MODE_DISABLED # freeze restaurant scene during minigame
 	active_player.process_mode = Node.PROCESS_MODE_DISABLED # disable camera movement during minigame
 	
 	var minigame_instance = RHYTHM_MINIGAME_SCENE.instantiate()
@@ -63,28 +87,66 @@ func get_food_data(dish_name: String) -> Dictionary:
 func _on_cooking_end() -> void: # when results screen appears in minigame
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> Food:
+func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
+	# clear ingredients in pot
+	pot.ingredient_buffer.clear()
+	
 	minigame_node.queue_free()
 	
 	restaurant_main.visible = true
 	active_player.crosshair.visible = true
+	restaurant_main.process_mode = Node.PROCESS_MODE_INHERIT # re-enable restaurant scene
 	active_player.process_mode = Node.PROCESS_MODE_INHERIT # re-enable player controls
 	
-	var dish_data = get_food_data(selected_dish)
+	var target_scene: PackedScene = null
 	
-	var price: float = dish_data.get("price") 
-	var rarity: int = dish_data.get("rarity")
-	var name: String = dish_data.get("name")
+	match selected_dish:
+		"burger":
+			target_scene = BURGER_PATH
+		"steak":
+			target_scene = STEAK_PATH
+		"stew":
+			target_scene = STEW_PATH
 	
-	completed_dish = Food.new(name, price, rarity, dish_quality)
+	var completed_edible_item := target_scene.instantiate() as EdibleItem
+	get_tree().root.add_child(completed_edible_item)
 	
-	# check that all variables are initialised correctly
-	print("Finished cooking %s (Price %s, Rarity %s, Dish Quality %s%%." % [
-		completed_dish.edible_name,
-		str(completed_dish.price),
-		str(completed_dish.rarity_level),
-		str(completed_dish.dish_quality)
+	# each cooked item is already instantiated with correct name, price, rarity. only need to update dish quality
+	completed_edible_item.food_data.dish_quality = dish_quality
+	
+	if active_player:
+		active_player.pick_up_edible(completed_edible_item)
+		
+	# check that all variables are initialised correctly after calling pick_up_edible()
+	print("Finished cooking %s (Price %s, Rarity %s, Dish Quality %s%%)." % [
+		active_player.held_edible.food_data.edible_name,
+		str(active_player.held_edible.food_data.price),
+		str(active_player.held_edible.food_data.rarity_level),
+		str(active_player.held_edible.food_data.dish_quality)
 	]) 
+
+func convert_ingredients_array_to_string(arr : Array) -> String:
+	# helper function for debugging that converts the current_ingredients array into a clean string with the actual ingredient names
+	if arr.size() == 0:
+		return "Nothing"
+		
+	var names = []
+	for ingredient in arr:
+		var ingredient_string = ""
+		match ingredient:
+			"res://models/physics/food/ingredients/buns.tscn":
+				names.append("Burger buns")
+			"res://models/physics/food/ingredients/meatRaw.tscn":
+				names.append("Unchopped meat")
+			"res://models/physics/food/ingredients/pattyRaw.tscn":
+				names.append("Chopped meat")
+			"res://models/physics/food/ingredients/tomatoSliced.tscn":
+				names.append("Chopped tomatoes")
+			"res://models/physics/food/ingredients/tomatoWhole.tscn":
+				names.append("Unchopped tomatoes")
+			"res://models/physics/food/ingredients/potatoSliced.tscn":
+				names.append("Chopped potatoes")
+			"res://models/physics/food/ingredients/potato.tscn":
+				names.append("Unchopped potatoes")
 	
-	return completed_dish
-	
+	return ", ".join(names)

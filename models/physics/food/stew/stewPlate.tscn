@@ -1,15 +1,18 @@
 [gd_scene format=3 uid="uid://dnfgneyk71oyy"]
 
+[ext_resource type="Script" uid="uid://c22alcffnjecq" path="res://src/restaurant/dishes/food/stew_item.gd" id="1_7yax8"]
 [ext_resource type="PackedScene" uid="uid://nl1u2n5clfcw" path="res://models/props/plate.tscn" id="1_yo6vb"]
 [ext_resource type="PackedScene" uid="uid://n2kg3vx47viq" path="res://models/props/food/Stew/stewMeat.tscn" id="2_7yax8"]
 [ext_resource type="PackedScene" uid="uid://bas2qgf2j0wh4" path="res://models/props/food/Stew/ramenSurface.tscn" id="2_yhflk"]
 [ext_resource type="PackedScene" uid="uid://sv76vmelok6f" path="res://models/props/food/Ingredients/potato.tscn" id="3_7yax8"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="6_wjx3d"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qf7sd"]
 height = 0.20935059
 radius = 0.4116211
 
 [node name="StewPlate" type="RigidBody3D" unique_id=321653761]
+script = ExtResource("1_7yax8")
 
 [node name="potatowithgreen5" parent="." unique_id=1421645144 instance=ExtResource("3_7yax8")]
 transform = Transform3D(0.0063488428, -0.21278207, 0.2113847, 0.29986855, 0.008880521, -6.7188375e-05, -0.006209699, 0.21129349, 0.21287675, 0.12874758, 0.059131652, -0.18660279)
@@ -41,3 +44,7 @@ transform = Transform3D(0.8537292, 0.5057381, -0.123995595, -0.5147597, 0.783770
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=69552686]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07598877, 0)
 shape = SubResource("CylinderShape3D_qf7sd")
+
+[node name="InteractComponent" type="Node" parent="." unique_id=602609158]
+script = ExtResource("6_wjx3d")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"

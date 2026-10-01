@@ -3,4 +3,8 @@
 [ext_resource type="Script" uid="uid://bleu56ats4lt1" path="res://src/NPC/npc_sitting_node.gd" id="1_t7noo"]
 
 [node name="SittingNode" type="CSGBox3D" unique_id=747953572]
+size = Vector3(0.5, 0.5, 0.5)
 script = ExtResource("1_t7noo")
+
+[node name="SeatPose" type="Marker3D" parent="." unique_id=2045694313]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.9, 0)

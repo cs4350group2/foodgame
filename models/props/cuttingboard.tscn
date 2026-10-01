@@ -1,8 +1,24 @@
 [gd_scene format=3 uid="uid://1g6wlemfk4de"]
 
 [ext_resource type="PackedScene" uid="uid://cr0f4ae136esf" path="res://assets/food/stationProps/cuttingboard.fbx" id="1_g5ao8"]
+[ext_resource type="Script" uid="uid://cgp484a604me7" path="res://src/interactables/interactable stations/cuttingboard.gd" id="2_35uxl"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_0umya"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1vivr"]
+size = Vector3(0.96, 0.05, 0.44)
 
 [node name="cuttingboard" unique_id=302539372 instance=ExtResource("1_g5ao8")]
 
-[node name="cuttingboard" parent="." index="0" unique_id=1692901982]
+[node name="cuttingboard" parent="." index="0" unique_id=30854731]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1" unique_id=382092670]
+script = ExtResource("2_35uxl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=1700516528]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.002, 0)
+shape = SubResource("BoxShape3D_1vivr")
+
+[node name="InteractComponent" type="Node" parent="StaticBody3D" index="1" unique_id=1181256562]
+script = ExtResource("3_0umya")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"

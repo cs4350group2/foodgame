@@ -9,13 +9,13 @@ func _ready() -> void:
 	interaction.interacted.connect(_on_interacted)
 
 func _on_interacted(player: Player) -> void:
-	if is_instance_valid(player.held_food):
+	if is_instance_valid(player.held_edible):
 		return
 
 	if food_scene == null:
 		return
 
-	var food := food_scene.instantiate() as FoodItem
+	var food := food_scene.instantiate() as EdibleItem
 	get_tree().current_scene.add_child(food)
-	player.pick_up_food(food)
+	player.pick_up_edible(food)
 	print("Pulled %s from the %s." % [food.food_name, spawner_name])
