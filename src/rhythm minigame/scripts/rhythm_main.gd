@@ -23,14 +23,13 @@ var current_time_ms: float = 0.0
 var bgm_playback_position: float
 
 @export var note_lead_time_ms: float = 1000.0 # each note takes 1 full second to fall from top of screen to judgment line (if arrow_speed in parent_arrow.gd is changed, this should be changed too)
-
 # offset is negative -> notes arrive EARLIER than audio
 # offset is positive -> notes arrive LATER than audio
 # limit offset between -150ms and +150ms to protect hit windows
 @export_range(-150.0, 150.0, 1.0) var audio_offset_ms: float = 0.0:
 	set(value):
 		audio_offset_ms = clampf(value, -150.0, 150.0)
-
+		
 # adjusted time taken from adding offset to current time
 var adjusted_time_ms: float:
 	get:
@@ -92,6 +91,8 @@ var chart_path : String
 var dish_string: String = "burger"
 
 func _ready() -> void:
+	audio_offset_ms = AudioManager.audio_offset_ms
+	AudioManager.audio_offset_changed.connect(_on_offset_change)
 	match dish_string:
 		"burger":
 			chart_song = ALL_NIGHT_BURGUNDY_TRIMMED_
@@ -305,3 +306,6 @@ func load_rhythm_chart(file_path: String, speed_mult : float) -> Array:
 		parsed_notes.append(note_data)
 	
 	return parsed_notes
+
+func _on_offset_change(val: float):
+	audio_offset_ms = val

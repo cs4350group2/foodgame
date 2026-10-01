@@ -3,6 +3,17 @@ extends Node
 @onready var bgm_player: AudioStreamPlayer = $BackgroundMusicPlayer
 @onready var rm_player: AudioStreamPlayer = $RhythmMusicStreamPlayer
 
+signal audio_offset_changed(value: float)
+
+@export_range(-150.0, 150.0, 1.0)
+var audio_offset_ms: float = 0.0:
+	set(value):
+		var clamped_value := clampf(value, -150.0, 150.0)
+		if is_equal_approx(audio_offset_ms, clamped_value):
+			return
+		audio_offset_ms = clamped_value
+		audio_offset_changed.emit(audio_offset_ms)
+
 # store the BPMs of what we're currently playing for matching purposes
 var bgm_bpm: float = 0.0
 var rm_bpm: float = 0.0
