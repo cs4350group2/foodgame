@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="29_qsp4k"]
 [ext_resource type="PackedScene" uid="uid://ubv0sb3volmr" path="res://src/ui/RestaurantUI.tscn" id="33_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://bncnlon6uyptf" path="res://src/restaurant/DayManager.tscn" id="34_4k2k6"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="35_0rl1p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -352,5 +353,19 @@ layer = 2
 
 [node name="RestaurantUi" parent="." unique_id=1022008651 node_paths=PackedStringArray("day_manager") instance=ExtResource("33_jq2sk")]
 day_manager = NodePath("../Restaurant/DayManager")
+
+[node name="InvalidRecipeDialog" type="AcceptDialog" parent="RestaurantUi" unique_id=951796072]
+oversampling_override = 1.0
+title = "Invalid Recipe"
+position = Vector2i(375, 300)
+size = Vector2i(700, 100)
+theme = ExtResource("35_0rl1p")
+dialog_autowrap = true
+
+[node name="DishConfirmDialog" type="ConfirmationDialog" parent="RestaurantUi" unique_id=535079429]
+title = "Dish Confirmation"
+size = Vector2i(700, 100)
+theme = ExtResource("35_0rl1p")
+ok_button_text = "OK"
 
 [connection signal="timeout" from="Restaurant/CustomerSpawner/SpawnTimer" to="Restaurant/CustomerSpawner" method="_on_spawn_timer_timeout"]
