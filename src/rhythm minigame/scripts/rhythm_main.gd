@@ -125,7 +125,7 @@ func _ready() -> void:
 	bgm_playback_position = AudioManager.get_bgm_playback_position()
 	AudioManager.fade_out_bgm(4.5)
 	
-	# wait 4 seconds before the chart begins, then starts the minigame
+	# wait 4.5 seconds before the chart begins, then starts the minigame
 	await get_tree().create_timer(4.5).timeout
 	
 	current_time_ms = -note_lead_time_ms # this is to prevent the first few notes from triggering early
@@ -200,6 +200,10 @@ func _input(event: InputEvent) -> void:
 		check_hit("Down", judgment_arrow_down)
 
 func check_hit(lane_name: String, judgment_arrow: Node2D) -> void:
+	# always play judgment arrow animation regardless of input judgment
+	judgment_arrow.animation_player.stop()
+	judgment_arrow.animation_player.play("successful_hit")
+	
 	var lane_array: Array = active_notes[lane_name]
 	
 	if lane_array.is_empty():
@@ -212,9 +216,7 @@ func check_hit(lane_name: String, judgment_arrow: Node2D) -> void:
 	if time_diff > good_time_window_ms:
 		return
 	
-	# successful hit (good/perfect)
-	judgment_arrow.animation_player.stop()
-	judgment_arrow.animation_player.play("successful_hit")
+	# hit effect only plays on successful hit (good/perfect)
 	hit_effect_player.play()
 	
 	# input judgments (timings can still be tweaked in the future if needed)
