@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://44upm2a6wdmy"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w8rqo"]
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icti8"]
+albedo_color = Color(0.25969926, 0.13772538, 0.012180714, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4eqq5"]
+data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
+
+[node name="RestaurantFloor" type="Node3D" unique_id=1057082887]
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1628849652]
+mesh = SubResource("PlaneMesh_w8rqo")
+surface_material_override/0 = SubResource("StandardMaterial3D_icti8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=981508659]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=1714991818]
+shape = SubResource("ConcavePolygonShape3D_4eqq5")
+debug_color = Color(2.9841065e-06, 0.5790954, 0.8084762, 0.41960785)
