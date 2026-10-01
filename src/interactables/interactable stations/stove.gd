@@ -16,6 +16,8 @@ const STEW_PATH = preload("res://models/physics/food/stew/stewPlate.tscn")
 @onready var pot = $"../../pot/Cylinder_009/StaticBody3D"
 
 @onready var restaurant_main: Node3D = $"../../.." # restaurant main node
+@onready var invalid_recipe_dialog: AcceptDialog = $"../../../RestaurantUi/InvalidRecipeDialog" # invalid recipe dialog in restaurant_main
+@onready var dish_confirm_dialog: ConfirmationDialog = $"../../../RestaurantUi/DishConfirmDialog" # dish confirmation dialog in restaurant_main
 
 const RHYTHM_MINIGAME_SCENE = preload("uid://bx7cw268w4v8j")
 
@@ -26,6 +28,12 @@ var completed_dish : Food # dish to be returned after player returns to restaura
 func _ready() -> void:
 	interaction.interact_while_holding = true
 	interaction.interacted.connect(_on_interacted)
+	
+	var invalid_dialog_label: Label = invalid_recipe_dialog.get_label()
+	var dish_confirm_dialog_label: Label = dish_confirm_dialog.get_label()
+	
+	invalid_dialog_label.add_theme_color_override("font_color", Color.WHITE)
+	dish_confirm_dialog_label.add_theme_color_override("font_color", Color.WHITE)
 
 func _on_interacted(_player: Player) -> void:
 	active_player = _player
@@ -47,14 +55,19 @@ func _on_interacted(_player: Player) -> void:
 		selected_dish = "steak"
 	elif current_ingredients == stew_recipe:
 		selected_dish = "stew"
-	else:
-		print(
-			"Current ingredients in stove: " 
-			+ convert_ingredients_array_to_string(current_ingredients) 
-			+ ". " + "Invalid recipe!")
+	else: # invalid recipe
+		invalid_recipe_dialog.dialog_text = \
+		"Current ingredients in stove: " \
+		+ convert_ingredients_array_to_string(current_ingredients) \
+		+ ". " + "\n" \
+		+ "Invalid recipe! Please try another combination of ingredients." + "\n" \
+		+ "(You can press the Esc key to close/cancel this window)"
+		
+		invalid_recipe_dialog.popup_centered()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE	# re-enable mouse control when dialog pops up
 		return
 	
-	start_cooking(selected_dish)
+	show_dish_confirmation(current_ingredients)
 
 func start_cooking(dish_string: String) -> void:
 	restaurant_main.visible = false
@@ -156,3 +169,23 @@ func convert_ingredients_array_to_string(arr : Array) -> String:
 				names.append("Unchopped potatoes")
 	
 	return ", ".join(names)
+	
+func show_dish_confirmation(current_ingredients: Array) -> void:
+	if not dish_confirm_dialog.confirmed.is_connected(_on_dish_confirmed):
+		dish_confirm_dialog.confirmed.connect(_on_dish_confirmed)
+	
+	var formatted_dish_name = selected_dish.capitalize()
+	
+	dish_confirm_dialog.dialog_text = \
+	"Current ingredients in stove: " \
+		+ convert_ingredients_array_to_string(current_ingredients) \
+		+ ". " + "\n" \
+		+ "Dish to cook: " + formatted_dish_name + "\n" \
+		+ "Start cooking?" + "\n" \
+		+ "(You can press the Esc key to close/cancel this window)"
+		
+	dish_confirm_dialog.popup_centered()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE	# re-enable mouse control when dialog pops up
+
+func _on_dish_confirmed() -> void:
+	start_cooking(selected_dish)

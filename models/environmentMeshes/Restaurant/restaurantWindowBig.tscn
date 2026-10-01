@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://brgthvls3m4lk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_c5iw7"]
+size = Vector3(1, 1, 0.10852051)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1bx6"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.79607844, 1, 1, 0.19607843)
+roughness = 0.1
+refraction_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yhqua"]
+albedo_color = Color(0.68235296, 0.6862745, 0.6117647, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c5iw7"]
+size = Vector3(10.074707, 10.125, 0.5002098)
+
+[node name="RestaurantWalls" type="Node3D" unique_id=886748470]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1706561544]
+transform = Transform3D(7, 0, 0, 0, 3, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("BoxMesh_c5iw7")
+surface_material_override/0 = SubResource("StandardMaterial3D_r1bx6")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=560166555]
+cast_shadow = 0
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1667270778]
+size = Vector3(10, 10, 0.5)
+material = SubResource("StandardMaterial3D_yhqua")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1862463898]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+operation = 2
+size = Vector3(7, 3, 3)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=540876326]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1271662536]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0007324219, -0.016601563, -0.0013484955)
+shape = SubResource("BoxShape3D_c5iw7")
