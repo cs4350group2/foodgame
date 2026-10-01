@@ -2,14 +2,6 @@
 
 [ext_resource type="FontFile" uid="uid://dk6aai08i16bb" path="res://assets/fonts/W95F.otf" id="1_wksio"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_facbu"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-bg_color = Color(0.25, 0.25, 0.25, 1)
-corner_detail = 1
-
 [sub_resource type="DPITexture" id="DPITexture_xm6e3"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"5.5\" fill=\"#1a1a1a\" stroke=\"#fff\" stroke-opacity=\".75\" stroke-width=\"3\"/></svg>
 "
@@ -63,10 +55,6 @@ expand_margin_bottom = 2.0
 
 [resource]
 default_font_size = 20
-AcceptDialog/colors/title_color = Color(1, 1, 1, 1)
-AcceptDialog/constants/buttons_separation = 10
-AcceptDialog/fonts/title_font = ExtResource("1_wksio")
-AcceptDialog/styles/panel = SubResource("StyleBoxFlat_facbu")
 CheckBox/colors/checkbox_checked_color = Color(1, 1, 1, 1)
 CheckBox/colors/checkbox_unchecked_color = Color(1, 1, 1, 1)
 CheckBox/colors/font_color = Color(0.875, 0.875, 0.875, 1)
