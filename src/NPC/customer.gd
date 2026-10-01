@@ -31,6 +31,7 @@ var move_speed = 2.0
 var customer_lvl: int
 var customer_name: String
 var exit_point: Marker3D
+var prev_transform: Transform3D
 
 func get_customer_name() -> String:
 	return customer_name
@@ -83,11 +84,13 @@ func _physics_process(delta):
 		State.LEAVING_ANGRY:
 			state_leaving_angry(delta)
 
-func move_toward_navigation_target() -> void:
+func move_toward_navigation_target(delta) -> void:
 	var next_position := nav_agent.get_next_path_position()
 	var direction := global_position.direction_to(next_position)
+	var target_rotation = atan2(direction.x, direction.z) + PI / 2
 
 	velocity = direction * move_speed
+	rotation.y = lerp_angle(rotation.y, target_rotation, 10.0 * delta)
 	move_and_slide()
 
 func update_target_location(target_location):
@@ -112,15 +115,20 @@ func change_state(new_state: State):
 func enter_state(state: State):
 	match state:
 		State.IDLE:
+			animation_player.play("Idle")
 			pass
 		
 		State.WALKING_TO_TABLE:
+			animation_player.play("Walk")
+			update_target_location(assigned_sittingNode.global_position)
 			pass
 
 		State.SITTING:
 			# Start sitting animation
 			# Play reading menu animation for random seconds
-			# $AnimationPlayer.play("sit")
+			prev_transform = global_transform
+			global_transform = assigned_sittingNode.get_seating_transform()
+			animation_player.play("Sitting_Idle")
 			var view_menu_time = randf_range(5.0, 10.0)
 			wait_at_table(view_menu_time)
 			pass
@@ -135,7 +143,6 @@ func enter_state(state: State):
 			pass
 
 		State.EATING:
-			# $AnimationPlayer.play("eat")
 			start_eating()
 			pass
 
@@ -143,9 +150,13 @@ func enter_state(state: State):
 			pass
 
 		State.LEAVING:
+			global_transform = prev_transform
+			animation_player.play("Walk")
 			update_target_location(exit_point.global_position)
 			pass
 		State.LEAVING_ANGRY:
+			global_transform = prev_transform
+			animation_player.play("Walk")
 			update_target_location(exit_point.global_position)
 			pass
 
@@ -174,7 +185,8 @@ func exit_state(state:State):
 
 		State.LEAVING:
 			pass
-		_:
+
+		State.LEAVING_ANGRY:
 			pass
 
 # States
@@ -187,16 +199,11 @@ func state_idle(delta):
 		change_state(State.WALKING_TO_TABLE)
 
 func state_walking_to_table(delta):
-	# Set navigation target somewhere else
-	# navigation_agent.target_position = table_position
-	update_target_location(assigned_sittingNode.global_position)
-	#animation_player.play("Walk")
-
 	if nav_agent.is_navigation_finished():
 		change_state(State.SITTING)
 		return
 	
-	move_toward_navigation_target()
+	move_toward_navigation_target(delta)
 
 var done_waiting_at_table: bool
 func wait_at_table(view_menu_time: float) -> void:
@@ -320,10 +327,8 @@ func state_finished(delta):
 
 
 func state_leaving(delta):
-	# Walk toward the restaurant exit
-	# update_target_location(exit)
-	
-	move_toward_navigation_target()
+	# Walk toward the restaurant exit	
+	move_toward_navigation_target(delta)
 	
 	if nav_agent.is_navigation_finished():
 		if assigned_sittingNode != null:
@@ -335,7 +340,7 @@ func state_leaving(delta):
 		return
 
 func state_leaving_angry(delta):
-	move_toward_navigation_target()
+	move_toward_navigation_target(delta)
 	if nav_agent.is_navigation_finished():
 		if assigned_sittingNode != null:
 			assigned_sittingNode.clear()

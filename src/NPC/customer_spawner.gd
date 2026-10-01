@@ -11,6 +11,12 @@ var used_names: Dictionary = {}
 func _ready() -> void:
 	load_names()
 
+func _on_spawn_timer_timeout() -> void:
+	if RestaurantManager.has_vacant_sittingNode():
+		spawn_customer()
+	else:
+		print("No vacant seats; not spawning a customer.")
+
 func load_names() -> void:
 	var file := FileAccess.open("res://data/customer_names.txt", FileAccess.READ)
 	if file == null:

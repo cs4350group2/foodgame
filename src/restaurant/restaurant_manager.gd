@@ -37,7 +37,7 @@ func register_sitting_nodes(nodes):
 	sitting_nodes = nodes
 
 func add_customer(customer: Customer):
-	if assign_sittingNode(customer):
+	if customer not in customers && assign_sittingNode(customer):
 		customers.append(customer)
 		customer_added.emit()
 
@@ -66,6 +66,13 @@ func _on_order_complete(order: Order):
 func complete_order(order: Order):
 	order.complete_order()
 	remove_order(order)
+
+func has_vacant_sittingNode() -> bool:
+	for node in sitting_nodes:
+		if node.is_vacant():
+			return true
+		
+	return false
 
 func find_vacant_sittingNode() -> SittingNode:
 	for node in sitting_nodes:
