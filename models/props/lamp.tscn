@@ -6,7 +6,4 @@
 
 [node name="lamp" parent="." index="0" unique_id=965163178]
 transform = Transform3D(3, 0, 0, 0, -1.3113416e-07, 3, 0, -3, -1.3113416e-07, 0, 0, 0)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="lamp" index="0" unique_id=1426991695]
-transform = Transform3D(0.33333334, 0, 0, 0, 0.33333334, 8.881784e-16, 0, -8.881784e-16, 0.33333334, 0, 1.6027508e-08, -0.36666667)
-light_color = Color(1, 1, 0.85490197, 1)
+cast_shadow = 0
