@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://ubv0sb3volmr" path="res://src/ui/RestaurantUI.tscn" id="33_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://bncnlon6uyptf" path="res://src/restaurant/DayManager.tscn" id="34_4k2k6"]
 [ext_resource type="PackedScene" uid="uid://dgh6jtkk62vuk" path="res://src/ui/PauseMenu.tscn" id="36_ok6jj"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="35_0rl1p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
