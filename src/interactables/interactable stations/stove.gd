@@ -116,6 +116,7 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
 	active_player.crosshair.visible = true
 	restaurant_main.process_mode = Node.PROCESS_MODE_INHERIT # re-enable restaurant scene
 	active_player.process_mode = Node.PROCESS_MODE_INHERIT # re-enable player controls
+	active_player.capture_mouse() # restore mouse capture and the controller's capture flag
 	
 	var target_scene: PackedScene = null
 	

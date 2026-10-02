@@ -7,15 +7,26 @@ extends Node3D
 
 var available_names: Array[String] = []
 var used_names: Dictionary = {}
+var to_spawn: int = 0
+
 
 func _ready() -> void:
 	load_names()
+	to_spawn = 0
+	RestaurantManager.customer_removed.connect(_on_customer_removed)
+
+func _on_customer_removed() -> void:
+	# check if seat is avail
+	if to_spawn > 0 and RestaurantManager.has_vacant_sittingNode():
+		spawn_customer()
+		to_spawn -= 1
 
 func _on_spawn_timer_timeout() -> void:
 	if RestaurantManager.has_vacant_sittingNode():
 		spawn_customer()
 	else:
 		print("No vacant seats; not spawning a customer.")
+		to_spawn += 1
 
 func load_names() -> void:
 	var file := FileAccess.open("res://data/customer_names.txt", FileAccess.READ)

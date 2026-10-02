@@ -13,5 +13,5 @@ func _ready():
 	if not day_manager:
 		push_error("Day manager not found!")
 		return
-	day_manager.spawn_customer.connect(customer_spawner.spawn_customer)
-	day_manager.setup_with_uniform_arrival(5.0, 300.0, 6)
+	day_manager.spawn_customer.connect(customer_spawner._on_spawn_timer_timeout)
+	day_manager.setup_with_uniform_arrival(5.0, 60.0, 8)
