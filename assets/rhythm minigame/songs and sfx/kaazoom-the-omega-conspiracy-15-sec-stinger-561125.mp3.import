@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cwbfvjfkrld37"
+path="res://.godot/imported/kaazoom-the-omega-conspiracy-15-sec-stinger-561125.mp3-4b27f20e3bd2f2a98dfa3c1e5ee82ce0.mp3str"
+
+[deps]
+
+source_file="res://assets/rhythm minigame/songs and sfx/kaazoom-the-omega-conspiracy-15-sec-stinger-561125.mp3"
+dest_files=["res://.godot/imported/kaazoom-the-omega-conspiracy-15-sec-stinger-561125.mp3-4b27f20e3bd2f2a98dfa3c1e5ee82ce0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
