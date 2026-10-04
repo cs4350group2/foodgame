@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ckd0jio1a3ndp" path="res://src/rhythm minigame/scenes/judgment_arrow_up.tscn" id="9_vvsvh"]
 [ext_resource type="PackedScene" uid="uid://bi7li6mmfwcgu" path="res://src/rhythm minigame/scenes/judgment_arrow_right.tscn" id="10_rj7w6"]
 [ext_resource type="PackedScene" uid="uid://dn5u3m4d2cn4x" path="res://src/rhythm minigame/scenes/judgment_arrow_left.tscn" id="11_kgy7m"]
-[ext_resource type="AudioStream" uid="uid://b5sehvwn7fk5l" path="res://assets/rhythm minigame/songs and sfx/mixkit-pot-hit-1810.mp3" id="12_lgoak"]
+[ext_resource type="AudioStream" uid="uid://b5sehvwn7fk5l" path="res://assets/rhythm minigame/sfx/mixkit-pot-hit-1810.mp3" id="12_lgoak"]
 [ext_resource type="Theme" uid="uid://dcj8ax4pmivsw" path="res://assets/rhythm minigame/themes/input_judgment_and_combo_count.tres" id="13_30mjv"]
 [ext_resource type="Script" uid="uid://bjrqksanscus0" path="res://src/rhythm minigame/scripts/input_margin.gd" id="14_vst8i"]
 [ext_resource type="Script" uid="uid://d3b8bawnqkgjd" path="res://src/rhythm minigame/scripts/combo_v_box.gd" id="15_d3tvo"]
