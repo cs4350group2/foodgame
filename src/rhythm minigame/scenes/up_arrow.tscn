@@ -1,17 +1,9 @@
 [gd_scene format=3 uid="uid://blfy56tpcd58t"]
 
-[ext_resource type="PackedScene" uid="uid://bdssewhawp5re" path="res://src/rhythm minigame/parent_arrow.tscn" id="1_gb8jp"]
+[ext_resource type="PackedScene" uid="uid://bdssewhawp5re" path="res://src/rhythm minigame/scenes/parent_arrow.tscn" id="1_gb8jp"]
 [ext_resource type="Texture2D" uid="uid://nhcu2n74imgi" path="res://assets/rhythm minigame/PNG/Black/2x/arrowUp.png" id="2_n5mkb"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_qgp62"]
-radius = 39.0
 
 [node name="ParentArrow" unique_id=1316662934 instance=ExtResource("1_gb8jp")]
 
 [node name="ArrowDown" parent="." index="0" unique_id=543169254]
 texture = ExtResource("2_n5mkb")
-
-[node name="Up" type="Area2D" parent="." index="1" unique_id=1178822081]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Up" index="0" unique_id=1480000587]
-shape = SubResource("CircleShape2D_qgp62")

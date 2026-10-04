@@ -203,7 +203,7 @@ func _input(event: InputEvent) -> void:
 func check_hit(lane_name: String, judgment_arrow: Node2D) -> void:
 	# always play judgment arrow animation regardless of input judgment
 	judgment_arrow.animation_player.stop()
-	judgment_arrow.animation_player.play("successful_hit")
+	judgment_arrow.animation_player.play("on_player_input")
 	
 	var lane_array: Array = active_notes[lane_name]
 	
@@ -229,7 +229,8 @@ func check_hit(lane_name: String, judgment_arrow: Node2D) -> void:
 		hit.emit("GOOD")
 		num_goods += 1
 	
-	remove_arrow(closest_arrow, lane_name)
+	active_notes[lane_name].erase(closest_arrow)
+	closest_arrow.play_hit_anim()
 
 func check_missed_notes(adjusted_ms: float) -> void:
 	# don't check notes too early
@@ -246,7 +247,8 @@ func check_missed_notes(adjusted_ms: float) -> void:
 		if adjusted_ms > (oldest_arrow.target_hit_time_ms + good_time_window_ms):
 			miss.emit("MISS")
 			num_misses += 1
-			remove_arrow(oldest_arrow, lane_name)
+			active_notes[lane_name].erase(oldest_arrow)
+			oldest_arrow.queue_free()
 
 func spawn_note_from_data(note_data: Dictionary) -> Arrow:
 	var lane_name: String = LANE_MAP[int(note_data["lane"])]
@@ -273,10 +275,6 @@ func spawn_note_from_data(note_data: Dictionary) -> Arrow:
 		new_arrow.connector_line.visible = false
 	
 	return new_arrow
-				
-func remove_arrow(arrow: Arrow, lane_name: String) -> void:
-	active_notes[lane_name].erase(arrow)
-	arrow.free()
 
 func load_rhythm_chart(file_path: String, speed_mult : float) -> Array:
 	# parses fluXis chart text data and returns the HitObjects array (array of notes)

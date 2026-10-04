@@ -2,17 +2,28 @@ extends Node2D
 class_name Arrow
 
 @export var arrow_speed : float = 1 # time taken for note to reach judgment line from top, in seconds
-@export var y_destination : float = 700
+@export var y_destination : float = 600 # judgment line y-coordinate
+@export var miss_overflow_distance : float = 100 # the y-distance travelled past the judgment line before arrow disappears
 
 var target_hit_time_ms: float 
 var pair_target_arrow: Arrow = null
+var is_hit: bool = false
+var move_tween: Tween # store reference so we can kill it on hit
 
 @onready var connector_line: Line2D = $ArrowDown/ConnectorLine # connector line for simultaneous notes/arrows
-
+@onready var animation_player: AnimationPlayer = $AnimationPlayer # animation player for popping/explosion effect
+ 
 func _ready() -> void:
 	var initial_position : Vector2 = self.position # arrow's initial position when spawned
-	var tween = create_tween()
-	tween.tween_property(self, "position", Vector2(initial_position.x, y_destination), arrow_speed)
+	
+	move_tween = create_tween()
+	
+	# main fall to judgment line
+	move_tween.tween_property(self, "position", Vector2(initial_position.x, y_destination), arrow_speed)
+	
+	# falling past judgment line at the same speed (to not mess with the initial fall's maths)
+	var overflow_time: float = arrow_speed * (miss_overflow_distance / y_destination)
+	move_tween.tween_property(self, "position", Vector2(initial_position.x, y_destination + miss_overflow_distance), overflow_time)
 
 func setup_connector(target_arrow : Arrow) -> void:
 	pair_target_arrow = target_arrow
@@ -25,6 +36,8 @@ func setup_connector(target_arrow : Arrow) -> void:
 	connector_line.visible = true
 
 func _process(_delta : float) -> void:
+	if is_hit:
+		return
 	if is_instance_valid(pair_target_arrow) and connector_line.visible:
 		var local_target_pos: Vector2 = to_local(pair_target_arrow.global_position)
 		connector_line.set_point_position(0, Vector2.ZERO)
@@ -32,3 +45,17 @@ func _process(_delta : float) -> void:
 	
 	else:
 		connector_line.visible = false
+
+func play_hit_anim() -> void:
+	is_hit = true
+	set_process(false)
+	set_physics_process(false)
+	
+	if move_tween and move_tween.is_running():
+		move_tween.kill()
+	
+	# snap arrow position to judgment line
+	global_position.y = y_destination
+	
+	# the animation handles freeing the arrow, so no other method call needed
+	animation_player.play("successful_hit")
