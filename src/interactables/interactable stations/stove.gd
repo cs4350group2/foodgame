@@ -128,7 +128,7 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
 			target_scene = STEW_PATH
 	
 	var completed_edible_item := target_scene.instantiate() as EdibleItem
-	get_tree().root.add_child(completed_edible_item)
+	restaurant_main.add_child(completed_edible_item)
 	
 	# each cooked item is already instantiated with correct name, price, rarity. only need to update dish quality
 	completed_edible_item.food_data.dish_quality = dish_quality

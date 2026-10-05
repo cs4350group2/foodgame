@@ -1,7 +1,7 @@
 extends MarginContainer
 
 @onready var input_judgment: Label = $InputJudgment
-@onready var main: Node2D = $"../.."
+@onready var main: Node2D = $"../../.."
 @onready var timer: Timer = $InputJudgment/Timer
 
 var tween : Tween

@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-@onready var main: Node2D = $"../../.."
+@onready var main: Node2D = $"../../../.."
 
 var combo_count : int = 0
 @onready var combo_label: Label = $Combo

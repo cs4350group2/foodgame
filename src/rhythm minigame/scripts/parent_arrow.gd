@@ -51,6 +51,10 @@ func play_hit_anim() -> void:
 	set_process(false)
 	set_physics_process(false)
 	
+	# prevent any wacky connector line distorting	
+	if connector_line: 
+		connector_line.visible = false
+	
 	if move_tween and move_tween.is_running():
 		move_tween.kill()
 	

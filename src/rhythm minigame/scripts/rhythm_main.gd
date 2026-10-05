@@ -39,10 +39,10 @@ var adjusted_time_ms: float:
 @export var good_time_window_ms = 150
 
 # arrow generators
-@onready var arrow_generator_left : Node2D = $ArrowGeneratorLeft
-@onready var arrow_generator_right : Node2D = $ArrowGeneratorRight
-@onready var arrow_generator_up: Node2D = $ArrowGeneratorUp
-@onready var arrow_generator_down: Node2D = $ArrowGeneratorDown
+@onready var arrow_generator_left: Node2D = $JudgmentHUD/ArrowGenerators/ArrowGeneratorLeft
+@onready var arrow_generator_down: Node2D = $JudgmentHUD/ArrowGenerators/ArrowGeneratorDown
+@onready var arrow_generator_up: Node2D = $JudgmentHUD/ArrowGenerators/ArrowGeneratorUp
+@onready var arrow_generator_right: Node2D = $JudgmentHUD/ArrowGenerators/ArrowGeneratorRight
 
 # judgment arrows (static white arrows on the judgment line)
 @onready var judgment_arrow_left: Node2D = $JudgmentHUD/JudgmentArrowLeft
@@ -50,11 +50,11 @@ var adjusted_time_ms: float:
 @onready var judgment_arrow_up: Node2D = $JudgmentHUD/JudgmentArrowUp
 @onready var judgment_arrow_down: Node2D = $JudgmentHUD/JudgmentArrowDown
 
-# plays the note hit effect
-@onready var hit_effect_player: AudioStreamPlayer = $HitEffectPlayer
+# hit effect player (plays the note hit effect)
+@onready var hit_effect_player: AudioStreamPlayer = $SFX/HitEffectPlayer
 
 # results screen that is shown after the minigame ends
-@onready var rhythm_result_screen: Control = $CanvasLayer/RhythmResultScreen
+@onready var rhythm_result_screen: Control = $RhythmUI/UIRoot/RhythmResultScreen
 
 # signals to handle hit/miss
 signal hit(input_judgment : String)

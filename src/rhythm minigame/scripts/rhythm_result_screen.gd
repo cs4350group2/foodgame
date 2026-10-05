@@ -1,6 +1,6 @@
 extends Control
 
-@onready var main: Node2D = $"../.."
+@onready var rhythm_main: Node2D = $"../../.."
 
 @onready var rhythm_result_screen: Control = $"."
 @onready var back_to_restaurant: Button = $VBoxContainer/BackToRestaurant
@@ -11,7 +11,7 @@ extends Control
 @onready var miss_label: Label = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MissContainer/Label
 
 func _ready() -> void:
-	main.results_display.connect(display_results_screen)
+	rhythm_main.results_display.connect(display_results_screen)
 
 func display_results_screen():
 	visible = true
@@ -22,4 +22,4 @@ func display_results_screen():
 	tween.tween_property(rhythm_result_screen, "modulate:a", 1.0, 1.5)
 
 func _on_back_to_restaurant_pressed() -> void:
-	main.return_to_restaurant.emit(main.dish_quality)
+	rhythm_main.return_to_restaurant.emit(rhythm_main.dish_quality)
