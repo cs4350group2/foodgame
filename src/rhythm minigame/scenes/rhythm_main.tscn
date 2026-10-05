@@ -28,16 +28,16 @@ script = ExtResource("6_gqh03")
 [node name="ArrowGenerators" type="Node2D" parent="JudgmentHUD" unique_id=1713021895]
 
 [node name="ArrowGeneratorLeft" parent="JudgmentHUD/ArrowGenerators" unique_id=1019952068 instance=ExtResource("2_c5f8g")]
-position = Vector2(-300, 0)
+position = Vector2(-200, 0)
 
 [node name="ArrowGeneratorDown" parent="JudgmentHUD/ArrowGenerators" unique_id=544932490 instance=ExtResource("5_0vqqd")]
-position = Vector2(-100, 0)
+position = Vector2(-67.6, 0)
 
 [node name="ArrowGeneratorUp" parent="JudgmentHUD/ArrowGenerators" unique_id=2075637802 instance=ExtResource("4_weiq5")]
-position = Vector2(100, 0)
+position = Vector2(67.6, 0)
 
 [node name="ArrowGeneratorRight" parent="JudgmentHUD/ArrowGenerators" unique_id=746746973 instance=ExtResource("3_rfopb")]
-position = Vector2(300, 0)
+position = Vector2(200, 0)
 
 [node name="JudgmentLine" type="Sprite2D" parent="JudgmentHUD" unique_id=59846979]
 position = Vector2(0, 600)
@@ -45,16 +45,16 @@ scale = Vector2(35.085, 1)
 texture = ExtResource("7_fpuma")
 
 [node name="JudgmentArrowLeft" parent="JudgmentHUD" unique_id=1687560457 instance=ExtResource("11_kgy7m")]
-position = Vector2(-300, 600)
+position = Vector2(-200, 600)
 
 [node name="JudgmentArrowDown" parent="JudgmentHUD" unique_id=580993992 instance=ExtResource("8_hysoo")]
-position = Vector2(-100, 600)
+position = Vector2(-67.6, 600)
 
 [node name="JudgmentArrowUp" parent="JudgmentHUD" unique_id=12563384 instance=ExtResource("9_vvsvh")]
-position = Vector2(100, 600)
+position = Vector2(67.6, 600)
 
 [node name="JudgmentArrowRight" parent="JudgmentHUD" unique_id=1886351826 instance=ExtResource("10_rj7w6")]
-position = Vector2(300, 600)
+position = Vector2(200, 600)
 
 [node name="SFX" type="Node2D" parent="." unique_id=2076666760]
 
@@ -102,10 +102,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -222.0
-offset_top = -52.0
-offset_right = -60.0
-offset_bottom = 52.0
+offset_left = -188.0
+offset_top = -173.0
+offset_right = -34.0
+offset_bottom = -69.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("13_30mjv")
@@ -148,4 +148,5 @@ text = "COOKING END!"
 horizontal_alignment = 1
 
 [node name="RhythmResultScreen" parent="RhythmUI/UIRoot" unique_id=463277192 instance=ExtResource("18_oi4dp")]
+visible = false
 layout_mode = 1
