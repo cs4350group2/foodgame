@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bwga1774je1ql"]
+
+[ext_resource type="Script" uid="uid://cmyp16t3ilv45" path="res://src/rhythm minigame/scripts/gameplay and judgment hud/arrow_generator.gd" id="1_whau4"]
+[ext_resource type="PackedScene" uid="uid://blt72ehoxf21q" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/left_arrow.tscn" id="2_m3uns"]
+
+[node name="ArrowGenerator" type="Node2D" unique_id=1019952068]
+script = ExtResource("1_whau4")
+arrow_to_generate = ExtResource("2_m3uns")

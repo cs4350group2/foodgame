@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bdssewhawp5re"]
 
-[ext_resource type="Script" uid="uid://buf4d6x0n0qfs" path="res://src/rhythm minigame/scripts/parent_arrow.gd" id="1_4hdhf"]
-[ext_resource type="Texture2D" uid="uid://c2c4xka2bjsjn" path="res://assets/rhythm minigame/PNG/Black/2x/arrowDown.png" id="1_xbmjw"]
-[ext_resource type="Texture2D" uid="uid://chrerma0h4ner" path="res://assets/rhythm minigame/PNG/black water drop.png" id="3_031kh"]
+[ext_resource type="Script" uid="uid://buf4d6x0n0qfs" path="res://src/rhythm minigame/scripts/gameplay and judgment hud/parent_arrow.gd" id="1_3lfkv"]
+[ext_resource type="Texture2D" uid="uid://c2c4xka2bjsjn" path="res://assets/rhythm minigame/PNG/Black/2x/arrowDown.png" id="2_oucc2"]
+[ext_resource type="Texture2D" uid="uid://chrerma0h4ner" path="res://assets/rhythm minigame/PNG/black water drop.png" id="3_lcdhl"]
 
 [sub_resource type="Animation" id="Animation_031kh"]
 length = 0.001
@@ -103,11 +103,11 @@ _data = {
 }
 
 [node name="ParentArrow" type="Node2D" unique_id=1316662934]
-script = ExtResource("1_4hdhf")
+script = ExtResource("1_3lfkv")
 
 [node name="ArrowDown" type="Sprite2D" parent="." unique_id=543169254]
 z_index = 10
-texture = ExtResource("1_xbmjw")
+texture = ExtResource("2_oucc2")
 
 [node name="ConnectorLine" type="Line2D" parent="ArrowDown" unique_id=1087714662]
 show_behind_parent = true
@@ -120,7 +120,7 @@ libraries/ = SubResource("AnimationLibrary_ahm44")
 z_index = 10
 emitting = false
 amount = 10
-texture = ExtResource("3_031kh")
+texture = ExtResource("3_lcdhl")
 lifetime = 0.3
 one_shot = true
 explosiveness = 1.0

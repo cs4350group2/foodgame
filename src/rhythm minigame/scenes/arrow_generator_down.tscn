@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://cmrdu3uwy8hl1"]
-
-[ext_resource type="PackedScene" uid="uid://bwga1774je1ql" path="res://src/rhythm minigame/scenes/arrow_generator.tscn" id="1_cbjw6"]
-[ext_resource type="PackedScene" uid="uid://6djpu0leink6" path="res://src/rhythm minigame/scenes/down_arrow.tscn" id="2_rmlmx"]
-
-[node name="ArrowGenerator" unique_id=1019952068 instance=ExtResource("1_cbjw6")]
-arrow_to_generate = ExtResource("2_rmlmx")
