@@ -54,7 +54,7 @@ var adjusted_time_ms: float:
 @onready var hit_effect_player: AudioStreamPlayer = $SFX/HitEffectPlayer
 
 # results screen that is shown after the minigame ends
-@onready var rhythm_result_screen: Control = $RhythmUI/UIRoot/RhythmResultScreen
+@onready var rhythm_result_screen_v2: Control = $RhythmUI/UIRoot/RhythmResultScreenV2
 
 # signals to handle hit/miss
 signal hit(input_judgment : String)
@@ -108,7 +108,7 @@ func _ready() -> void:
 			chart_song = PIRATE_TAVERN_MAGIKSOLO_TRIMMED_
 			chart_path = "res://assets/rhythm minigame/charts/pirate_tavern.fsc"
 			
-	rhythm_result_screen.visible = false
+	rhythm_result_screen_v2.visible = false
 	
 	var speed_mult : float = bgm.bpm / chart_song.bpm # since this happens before audio starts playing and the values are set
 	
@@ -140,14 +140,14 @@ func _ready() -> void:
 	await get_tree().create_timer(4.0).timeout 
 	AudioManager.play_bgm(MUD_DAGORED, bgm_playback_position)
 	
-	rhythm_result_screen.perfect_label.text += str(num_perfects) + "\n"
-	rhythm_result_screen.good_label.text += str(num_goods) + "\n"
-	rhythm_result_screen.miss_label.text += " " + str(num_misses)
+	rhythm_result_screen_v2.perfect_count_label.text = str(num_perfects)
+	rhythm_result_screen_v2.good_count_label.text = str(num_goods)
+	rhythm_result_screen_v2.miss_count_label.text = str(num_misses)
 	
-	player_score = num_perfects * 100 + num_goods * 50 
+	player_score = num_perfects * 100 + num_goods * 75 
 	max_score = (num_perfects + num_goods + num_misses) * 100
-	dish_quality = snapped(float(player_score) / float(max_score) * 100, 0.01) # we express dish quality as a percent number
-	rhythm_result_screen.dish_quality_score.text = str(dish_quality) + "%"
+	dish_quality = snapped(float(player_score) / float(max_score) * 100, 0.01) # we express dish quality as a float percentage
+	rhythm_result_screen_v2.dish_quality_score_label.text = str(dish_quality) + "%"
 	
 	results_display.emit()
 
