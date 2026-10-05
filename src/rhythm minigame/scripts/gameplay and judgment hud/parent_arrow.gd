@@ -36,8 +36,10 @@ func setup_connector(target_arrow : Arrow) -> void:
 	connector_line.visible = true
 
 func _process(_delta : float) -> void:
-	if is_hit:
-		return
+	if is_hit or not is_instance_valid(pair_target_arrow) or pair_target_arrow.is_hit:
+		if is_instance_valid(connector_line):
+			connector_line.visible = false
+			
 	if is_instance_valid(pair_target_arrow) and connector_line.visible:
 		var local_target_pos: Vector2 = to_local(pair_target_arrow.global_position)
 		connector_line.set_point_position(0, Vector2.ZERO)
@@ -54,6 +56,15 @@ func play_hit_anim() -> void:
 	# prevent any wacky connector line distorting	
 	if connector_line: 
 		connector_line.visible = false
+		connector_line.clear_points()
+		
+	if is_instance_valid(pair_target_arrow):
+		if is_instance_valid(pair_target_arrow.connector_line):
+			pair_target_arrow.connector_line.visible = false
+			pair_target_arrow.connector_line.clear_points()
+		
+		pair_target_arrow.pair_target_arrow = null
+		pair_target_arrow = null
 	
 	if move_tween and move_tween.is_running():
 		move_tween.kill()
