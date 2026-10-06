@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b5sehvwn7fk5l"
+path="res://.godot/imported/mixkit-pot-hit-1810.mp3-6830650ed78e5d5062ee5176f11eee35.mp3str"
+
+[deps]
+
+source_file="res://assets/rhythm minigame/sfx/mixkit-pot-hit-1810.mp3"
+dest_files=["res://.godot/imported/mixkit-pot-hit-1810.mp3-6830650ed78e5d5062ee5176f11eee35.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

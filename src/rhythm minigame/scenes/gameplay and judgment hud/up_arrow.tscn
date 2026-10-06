@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://blfy56tpcd58t"]
+
+[ext_resource type="PackedScene" uid="uid://bdssewhawp5re" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/parent_arrow.tscn" id="1_gb8jp"]
+[ext_resource type="Texture2D" uid="uid://nhcu2n74imgi" path="res://assets/rhythm minigame/PNG/Black/2x/arrowUp.png" id="2_n5mkb"]
+
+[node name="ParentArrow" unique_id=1316662934 instance=ExtResource("1_gb8jp")]
+
+[node name="ArrowDown" parent="." index="0" unique_id=543169254]
+texture = ExtResource("2_n5mkb")

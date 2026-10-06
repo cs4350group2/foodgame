@@ -28,6 +28,11 @@ buses/default_bus_layout="uid://2wind731ofh6"
 AudioManager="*uid://diljxx64vyoov"
 RestaurantManager="*uid://c13jwmdtv0dqf"
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [dotnet]
 
 project/assembly_name="foodgame"

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cyl1np8c6igj0"]
 
-[ext_resource type="Script" uid="uid://bp7t5k4of3r87" path="res://src/rhythm minigame/scripts/rhythm_result_screen.gd" id="1_250eg"]
-[ext_resource type="Theme" uid="uid://dcj8ax4pmivsw" path="res://assets/rhythm minigame/themes/input_judgment_and_combo_count.tres" id="1_bynuv"]
-[ext_resource type="Theme" uid="uid://1p1awuurvc8p" path="res://assets/rhythm minigame/themes/cooking_start_and_end_text.tres" id="3_f50ww"]
+[ext_resource type="Script" uid="uid://bp7t5k4of3r87" path="res://src/rhythm minigame/scripts/ui/rhythm_result_screen.gd" id="1_co8ic"]
+[ext_resource type="Theme" uid="uid://dcj8ax4pmivsw" path="res://assets/rhythm minigame/themes/input_judgment_and_combo_count.tres" id="2_6vhs5"]
+[ext_resource type="Theme" uid="uid://1p1awuurvc8p" path="res://assets/rhythm minigame/themes/cooking_start_and_end_text.tres" id="3_dlm3g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
 bg_color = Color(2.8878452e-07, 0.7266064, 0.15561643, 1)
@@ -14,22 +14,29 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -2.0
-offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_250eg")
+script = ExtResource("1_co8ic")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=602696827]
-layout_mode = 0
-offset_left = 364.7147
-offset_top = 110.70011
-offset_right = 815.7147
-offset_bottom = 635.70013
+custom_maximum_size = Vector2(-1, 700)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -264.5
+offset_right = 250.0
+offset_bottom = 264.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=149133462]
+custom_minimum_size = Vector2(500, 300)
 layout_mode = 2
-theme = ExtResource("1_bynuv")
+theme = ExtResource("2_6vhs5")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer" unique_id=1040071680]
 layout_mode = 2
@@ -44,6 +51,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=429405418]
 layout_mode = 2
 text = "COOKING COMPLETE!"
+horizontal_alignment = 1
 
 [node name="PerfectContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1924109756]
 layout_mode = 2
@@ -87,7 +95,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("3_f50ww")
+theme = ExtResource("3_dlm3g")
 theme_override_styles/normal = SubResource("StyleBoxFlat_xrivr")
 text = "<- Back to Restaurant"
 

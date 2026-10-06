@@ -1,6 +1,6 @@
 extends MarginContainer
 
-@onready var main: Node2D = $"../.."
+@onready var main: Node2D = $"../../.."
 
 @onready var cooking_start_label: Label = $CookingStart
 @onready var cooking_end_label: Label = $CookingEnd
