@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://cr4fk4rwfoft2"]
 
 [ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="1_vrk4y"]
+[ext_resource type="Script" uid="uid://3osgdehm41fr" path="res://src/ui/thanks_for_playing.gd" id="2_thanks_for_playing"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyxal"]
 bg_color = Color(0, 0, 0, 1)
 
 [node name="ThanksForPlaying" type="Node3D" unique_id=1291142083]
+script = ExtResource("2_thanks_for_playing")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=517566627]
 
@@ -25,5 +27,21 @@ theme_override_colors/font_shadow_color = Color(1, 1, 1, 0)
 theme_override_colors/font_outline_color = Color(0.415905, 0.9224538, 0, 1)
 theme_override_constants/outline_size = 50
 theme_override_font_sizes/font_size = 100
-text = "THANKS FOR PLAYING!!!"
+text = "you win!
+THANKS FOR PLAYING!!!"
+horizontal_alignment = 1
+
+[node name="RestartLabel" type="Label" parent="CanvasLayer" unique_id=1066369018]
+z_index = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -23.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "click anywhere to restart"
 horizontal_alignment = 1

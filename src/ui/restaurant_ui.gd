@@ -8,6 +8,7 @@ var total_duration: float
 @onready var timer_progress_bar: ProgressBar = %ProgressBar
 
 func _ready() -> void:
+	_on_coins_updated(RestaurantManager.coins)
 	RestaurantManager.coins_updated.connect(_on_coins_updated)
 	day_manager.setup_finished.connect(_on_dm_setup_finish)
 	# restaurant might set up before we connect, so we just call the function outright
