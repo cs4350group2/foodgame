@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://brgmty7m1iu8u"]
+
+[ext_resource type="Theme" uid="uid://h6jab57cg7sv" path="res://assets/rhythm minigame/themes/header_text_for_results_screen_v2.tres" id="1_hb3k2"]
+[ext_resource type="Script" uid="uid://cvbbmrrhmkkqi" path="res://src/rhythm minigame/scripts/ui/rhythm_result_screen_v2.gd" id="1_v16hu"]
+[ext_resource type="Theme" uid="uid://1p1awuurvc8p" path="res://assets/rhythm minigame/themes/cooking_start_and_end_text.tres" id="3_fnrmn"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_13qdw"]
+grow_end = 200.0
+thickness = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7bug"]
+bg_color = Color(0, 0.7019804, 0.22070533, 1)
+
+[node name="RhythmResultScreenV2" type="Control" unique_id=929106540]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v16hu")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1311134753]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.46415013, 0.52706033, 0.6139927, 1)
+
+[node name="MainMargin" type="MarginContainer" parent="." unique_id=1512552092]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="MainVBox" type="VBoxContainer" parent="MainMargin" unique_id=1457641183]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="CookingCompleteLabel" type="Label" parent="MainMargin/MainVBox" unique_id=225780904]
+layout_mode = 2
+theme = ExtResource("1_hb3k2")
+text = "COOKING COMPLETE! "
+horizontal_alignment = 1
+
+[node name="MainHBox" type="HBoxContainer" parent="MainMargin/MainVBox" unique_id=502657489]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="StatsSection" type="VBoxContainer" parent="MainMargin/MainVBox/MainHBox" unique_id=2132245032]
+layout_mode = 2
+theme = ExtResource("3_fnrmn")
+theme_override_constants/separation = 20
+
+[node name="HSeparator" type="HSeparator" parent="MainMargin/MainVBox/MainHBox/StatsSection" unique_id=2036432756]
+custom_maximum_size = Vector2(300, -1)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_13qdw")
+
+[node name="PerfectRow" type="HBoxContainer" parent="MainMargin/MainVBox/MainHBox/StatsSection" unique_id=598935337]
+layout_mode = 2
+
+[node name="PerfectLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/StatsSection/PerfectRow" unique_id=383938223]
+layout_mode = 2
+text = "PERFECT : "
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="MainMargin/MainVBox/MainHBox/StatsSection/PerfectRow" unique_id=2064939491]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PerfectCountLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/StatsSection/PerfectRow" unique_id=621865915]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="MainMargin/MainVBox/MainHBox/StatsSection" unique_id=632338942]
+custom_maximum_size = Vector2(300, -1)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_13qdw")
+
+[node name="GoodRow" type="HBoxContainer" parent="MainMargin/MainVBox/MainHBox/StatsSection" unique_id=93848603]
+layout_mode = 2
+
+[node name="GoodLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/StatsSection/GoodRow" unique_id=1134129272]
+layout_mode = 2
+text = "GOOD :"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="MainMargin/MainVBox/MainHBox/StatsSection/GoodRow" unique_id=2134455477]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GoodCountLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/StatsSection/GoodRow" unique_id=1788796805]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="MainMargin/MainVBox/MainHBox/StatsSection" unique_id=595369419]
+custom_maximum_size = Vector2(300, -1)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_13qdw")
+
+[node name="MissRow" type="HBoxContainer" parent="MainMargin/MainVBox/MainHBox/StatsSection" unique_id=398905000]
+layout_mode = 2
+
+[node name="MissLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/StatsSection/MissRow" unique_id=1759382897]
+layout_mode = 2
+text = "MISS :"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="MainMargin/MainVBox/MainHBox/StatsSection/MissRow" unique_id=638376953]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MissCountLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/StatsSection/MissRow" unique_id=1935686153]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="HSeparator4" type="HSeparator" parent="MainMargin/MainVBox/MainHBox/StatsSection" unique_id=2071873027]
+custom_maximum_size = Vector2(300, -1)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_13qdw")
+
+[node name="BigSpacer" type="Control" parent="MainMargin/MainVBox/MainHBox" unique_id=15335553]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DishQualityAndButtonSection" type="VBoxContainer" parent="MainMargin/MainVBox/MainHBox" unique_id=4195306]
+layout_mode = 2
+theme = ExtResource("3_fnrmn")
+theme_override_constants/separation = 0
+
+[node name="DishQualityLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=1934896529]
+layout_mode = 2
+text = "DISH QUALITY:"
+horizontal_alignment = 1
+
+[node name="DishQualityScoreLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=1668339392]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=1230706468]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ReturnToRestaurantButton" type="Button" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=2111878499]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_q7bug")
+text = "Return to Restaurant"
+
+[connection signal="pressed" from="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection/ReturnToRestaurantButton" to="." method="_on_return_to_restaurant_button_pressed"]
