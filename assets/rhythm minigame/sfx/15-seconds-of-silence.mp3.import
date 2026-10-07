@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b03bwt6mhdnnf"
+path="res://.godot/imported/15-seconds-of-silence.mp3-c6b926541a3bfe4b8ca7b091e28fd9cd.mp3str"
+
+[deps]
+
+source_file="res://assets/rhythm minigame/sfx/15-seconds-of-silence.mp3"
+dest_files=["res://.godot/imported/15-seconds-of-silence.mp3-c6b926541a3bfe4b8ca7b091e28fd9cd.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -23,6 +23,7 @@ var current_time_ms: float = 0.0
 var bgm_playback_position: float
 
 @export var note_lead_time_ms: float = 1000.0 # each note takes 1 full second to fall from top of screen to judgment line (if arrow_speed in parent_arrow.gd is changed, this should be changed too)
+
 # offset is negative -> notes arrive EARLIER than audio
 # offset is positive -> notes arrive LATER than audio
 # limit offset between -150ms and +150ms to protect hit windows
@@ -79,6 +80,8 @@ var dish_quality : float
 var is_game_started : bool = false
 var is_audio_started : bool = false
 
+const _15_SECONDS_NO_SOUND = preload("uid://cp8g3egjiix00") # 15-second soundless track for testing, can ignore
+
 const ALL_NIGHT_BURGUNDY_TRIMMED_ = preload("uid://bgx2ev5nxatk8") # rhythm minigame burger track 
 const HARLEM_HEAT_DAGORED_TRIMMED_ = preload("uid://drtgu1sgw60te") # rhythm minigame steak track
 const PIRATE_TAVERN_MAGIKSOLO_TRIMMED_ = preload("uid://3tm476mhsfm7") # rhythm minigame stew track
@@ -88,7 +91,7 @@ const MUD_DAGORED = preload("uid://dibhfexgjqvj") # BGM
 var bgm : AudioData = MUD_DAGORED
 var chart_song : AudioData
 var chart_path : String
-var dish_string: String = "burger"
+var dish_string: String = "test_gold"
 
 func _ready() -> void:
 	audio_offset_ms = AudioManager.audio_offset_ms
@@ -103,6 +106,9 @@ func _ready() -> void:
 		"stew":
 			chart_song = PIRATE_TAVERN_MAGIKSOLO_TRIMMED_
 			chart_path = "res://assets/rhythm minigame/charts/pirate_tavern.fsc"
+		"test_gold":
+			chart_song = _15_SECONDS_NO_SOUND
+			chart_path = "res://assets/rhythm minigame/charts/test_gold_notes.fsc"
 		_:
 			# fallback when doing standalone testing
 			chart_song = PIRATE_TAVERN_MAGIKSOLO_TRIMMED_
@@ -160,7 +166,7 @@ func _process(delta: float) -> void:
 	
 		if current_time_ms >= 0.0:
 			is_audio_started = true
-			AudioManager.set_rm_volume(0.5) # this value can be modified between 0 and 1 inclusive, i just felt that the original volume was quite loud
+			AudioManager.set_rm_volume(0.2) # this value can be modified between 0 and 1 inclusive, i just felt that the original volume was quite loud
 			
 			AudioManager.play_rhythm_to_target_bpm(chart_song, bgm.bpm, 0.0) 
 			current_time_ms = 0.0
@@ -218,7 +224,7 @@ func check_hit(lane_name: String, judgment_arrow: Node2D) -> void:
 		return
 	
 	# hit effect only plays on successful hit (good/perfect)
-	hit_effect_player.play()
+	closest_arrow.hit_effect_player.play()
 	
 	# input judgments (timings can still be tweaked in the future if needed)
 	if time_diff <= perfect_time_window_ms:
@@ -251,23 +257,15 @@ func check_missed_notes(adjusted_ms: float) -> void:
 			oldest_arrow.queue_free()
 
 func spawn_note_from_data(note_data: Dictionary) -> Arrow:
+	# note_data is the FIRST ELEMENT (representing the front-most note) of the HitObjects array returned from load_rhythm_chart
 	var lane_name: String = LANE_MAP[int(note_data["lane"])]
+	var generator: Node2D = get("arrow_generator_" + lane_name.to_lower())
+	
 	var hit_time_ms: float = note_data["time"]
 	
-	var new_arrow: Arrow
-	
-	match lane_name:
-		# generates a note based on the lane
-		"Left":
-			new_arrow = arrow_generator_left.make_arrow()
-		"Down":
-			new_arrow = arrow_generator_down.make_arrow()
-		"Up":
-			new_arrow = arrow_generator_up.make_arrow()
-		"Right":
-			new_arrow = arrow_generator_right.make_arrow()
-	
-	new_arrow.target_hit_time_ms = hit_time_ms
+	var new_arrow: Arrow = generator.make_note_from_data(note_data)
+				
+	new_arrow.target_hit_time_ms = note_data["time"]
 	active_notes[lane_name].append(new_arrow)
 	
 	if new_arrow.connector_line:
