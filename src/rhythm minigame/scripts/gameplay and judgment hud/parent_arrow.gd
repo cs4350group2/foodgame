@@ -12,6 +12,7 @@ var move_tween: Tween # store reference so we can kill it on hit
 
 @onready var connector_line: Line2D = $ArrowDown/ConnectorLine # connector line for simultaneous notes/arrows
 @onready var animation_player: AnimationPlayer = $AnimationPlayer # animation player for popping/explosion effect
+@onready var hit_effect_player: AudioStreamPlayer2D = $HitEffectPlayer # hit effect player to play the note SFX
  
 func _ready() -> void:
 	var initial_position : Vector2 = self.position # arrow's initial position when spawned
