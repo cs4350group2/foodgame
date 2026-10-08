@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://du8rgyetbjiun"]
+
+[ext_resource type="PackedScene" uid="uid://dtweipe8vhjkf" path="res://assets/food/ingredients/rice/flourbag_low.gltf" id="1_i60yx"]
+
+[node name="flourbag_low2" unique_id=1233302699 instance=ExtResource("1_i60yx")]
+
+[node name="flourbag_low" parent="." index="0" unique_id=3545790]
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 2.1, 0, 0, 0)

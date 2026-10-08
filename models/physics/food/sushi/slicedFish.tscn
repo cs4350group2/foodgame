@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dwbkcqf15c8td"]
+
+[ext_resource type="PackedScene" uid="uid://c3a3wske7qdhq" path="res://models/props/food/sushi/slicedFish.tscn" id="1_leluj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qf7sd"]
+size = Vector3(1, 0.14855957, 0.47406006)
+
+[node name="SlicedFish" type="RigidBody3D" unique_id=821376098]
+
+[node name="SlicedFish" parent="." unique_id=1064862032 instance=ExtResource("1_leluj")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=142637712]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015563965, -0.0008239746)
+shape = SubResource("BoxShape3D_qf7sd")

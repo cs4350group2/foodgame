@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b8va5jn0khxnr"
-path="res://.godot/imported/flourpyramid.gltf-9e5393040fa9f10bb32e016ca11efab6.scn"
+uid="uid://dtweipe8vhjkf"
+path="res://.godot/imported/flourbag_low.gltf-eccc1f7f3592088f1e11d06f604f4c21.scn"
 
 [deps]
 
-source_file="res://assets/food/ingredients/flourpyramid.gltf"
-dest_files=["res://.godot/imported/flourpyramid.gltf-9e5393040fa9f10bb32e016ca11efab6.scn"]
+source_file="res://assets/food/ingredients/rice/flourbag_low.gltf"
+dest_files=["res://.godot/imported/flourbag_low.gltf-eccc1f7f3592088f1e11d06f604f4c21.scn"]
 
 [params]
 

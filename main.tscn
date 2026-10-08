@@ -23,11 +23,18 @@
 [ext_resource type="PackedScene" uid="uid://b0fbt4od6fufi" path="res://src/ui/order_list/OrderList.tscn" id="28_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://brgthvls3m4lk" path="res://models/environmentMeshes/Restaurant/restaurantWindowBig.tscn" id="29_0rl1p"]
 [ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="29_qsp4k"]
+[ext_resource type="PackedScene" uid="uid://c152qwjlmo45k" path="res://models/physics/food/ingredients/fishRaw.tscn" id="30_kq58d"]
 [ext_resource type="PackedScene" uid="uid://drvgq5wpa1odo" path="res://models/environmentMeshes/Restaurant/restaurantDoor.tscn" id="30_ok6jj"]
 [ext_resource type="PackedScene" uid="uid://dvduy5678d5pk" path="res://models/environmentMeshes/Restaurant/restaurantCeiling.tscn" id="31_facbu"]
+[ext_resource type="PackedScene" uid="uid://blruyqi0arko3" path="res://models/physics/food/ingredients/rice.tscn" id="31_htxhm"]
+[ext_resource type="PackedScene" uid="uid://ujkr0mjx6opi" path="res://models/spawners/riceBag.tscn" id="32_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://ubv0sb3volmr" path="res://src/ui/RestaurantUI.tscn" id="33_jq2sk"]
+[ext_resource type="PackedScene" uid="uid://cqc0701wrh20w" path="res://models/physics/food/grilledFish/grilledFish.tscn" id="33_ok6jj"]
 [ext_resource type="PackedScene" uid="uid://bncnlon6uyptf" path="res://src/restaurant/DayManager.tscn" id="34_4k2k6"]
+[ext_resource type="PackedScene" uid="uid://dwbkcqf15c8td" path="res://models/physics/food/sushi/slicedFish.tscn" id="34_facbu"]
 [ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="35_0rl1p"]
+[ext_resource type="PackedScene" uid="uid://dyaq6tbs2ft02" path="res://models/physics/food/sushi/sushi.tscn" id="35_b1qrp"]
+[ext_resource type="PackedScene" uid="uid://bgjmwmkledugc" path="res://models/physics/food/riceBowl/riceBowl.tscn" id="36_come4"]
 [ext_resource type="PackedScene" uid="uid://dgh6jtkk62vuk" path="res://src/ui/PauseMenu.tscn" id="36_ok6jj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
@@ -323,5 +330,26 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 39.5
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Outdoor/StaticBody3D4" unique_id=922705785]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8758392, -2.7337341, 0)
 shape = SubResource("BoxShape3D_qf7sd")
+
+[node name="FishRaw" parent="." unique_id=1627951194 instance=ExtResource("30_kq58d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1007066, 1.0372844, -0.54264337)
+
+[node name="Rice" parent="." unique_id=392615255 instance=ExtResource("31_htxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.305527, 1.1727417, -0.45791894)
+
+[node name="RiceBag" parent="." unique_id=901272984 instance=ExtResource("32_jq2sk")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14, 0.4498691, 1)
+
+[node name="GrilledFish" parent="." unique_id=98694237 instance=ExtResource("33_ok6jj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0117617, 0.9545536, -1.5778224)
+
+[node name="SlicedFish" parent="." unique_id=821376098 instance=ExtResource("34_facbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.016007, 1.01605, -2.604529)
+
+[node name="Sushi" parent="." unique_id=1250095170 instance=ExtResource("35_b1qrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.899379, 0.9776176, -3.267767)
+
+[node name="RiceBowl" parent="." unique_id=871502674 instance=ExtResource("36_come4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.903011, 1.2818356, -4.1135907)
 
 [connection signal="timeout" from="Restaurant/CustomerSpawner/SpawnTimer" to="Restaurant/CustomerSpawner" method="_on_spawn_timer_timeout"]

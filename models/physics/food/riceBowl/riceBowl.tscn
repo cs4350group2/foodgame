@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bgjmwmkledugc"]
+
+[ext_resource type="PackedScene" uid="uid://bh5jwiooch8fl" path="res://models/props/food/riceBowl/riceBowl.tscn" id="1_m4ji3"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ikrja"]
+height = 0.6020508
+radius = 0.3173828
+
+[node name="RiceBowl" type="RigidBody3D" unique_id=871502674]
+
+[node name="RiceBowl" parent="." unique_id=1256667715 instance=ExtResource("1_m4ji3")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=547318594]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.034423828, 0)
+shape = SubResource("CylinderShape3D_ikrja")

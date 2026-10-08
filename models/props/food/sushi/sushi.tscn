@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dm0v8o2ocl357"]
+
+[ext_resource type="PackedScene" uid="uid://31m3oc381i28" path="res://assets/food/sushi/sushisSetwithSushis.fbx" id="1_h0vno"]
+
+[node name="sushisSetwithSushis" unique_id=2144792710 instance=ExtResource("1_h0vno")]
+
+[node name="sushisSetwithSushis" parent="." index="0" unique_id=2029792079]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)

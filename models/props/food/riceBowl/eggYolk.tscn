@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ck0qs03gqwdvw"]
+
+[ext_resource type="PackedScene" uid="uid://bm173v1obw4yc" path="res://assets/food/sushi/SushisEggSingle.fbx" id="1_svtxx"]
+
+[node name="SushisEggSingle" unique_id=230789976 instance=ExtResource("1_svtxx")]
+
+[node name="SushisEggSingle" parent="." index="0" unique_id=2061282116]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
