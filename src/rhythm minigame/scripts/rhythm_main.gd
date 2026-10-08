@@ -51,9 +51,6 @@ var adjusted_time_ms: float:
 @onready var judgment_arrow_up: Node2D = $JudgmentHUD/JudgmentArrowUp
 @onready var judgment_arrow_down: Node2D = $JudgmentHUD/JudgmentArrowDown
 
-# hit effect player (plays the note hit effect)
-@onready var hit_effect_player: AudioStreamPlayer = $SFX/HitEffectPlayer
-
 # results screen that is shown after the minigame ends
 @onready var rhythm_result_screen_v2: Control = $RhythmUI/UIRoot/RhythmResultScreenV2
 
@@ -91,7 +88,7 @@ const MUD_DAGORED = preload("uid://dibhfexgjqvj") # BGM
 var bgm : AudioData = MUD_DAGORED
 var chart_song : AudioData
 var chart_path : String
-var dish_string: String = "test_gold"
+var dish_string: String = "stew"
 
 func _ready() -> void:
 	audio_offset_ms = AudioManager.audio_offset_ms
@@ -102,7 +99,7 @@ func _ready() -> void:
 			chart_path = "res://assets/rhythm minigame/charts/all_night.fsc"
 		"steak":
 			chart_song = HARLEM_HEAT_DAGORED_TRIMMED_
-			chart_path = "res://assets/rhythm minigame/charts/harlem_heat(2lane).fsc" # can change to the modified 4-lane if needed
+			chart_path = "res://assets/rhythm minigame/charts/harlem_heat.fsc" # can change to the modified 4-lane if needed
 		"stew":
 			chart_song = PIRATE_TAVERN_MAGIKSOLO_TRIMMED_
 			chart_path = "res://assets/rhythm minigame/charts/pirate_tavern.fsc"
@@ -121,7 +118,7 @@ func _ready() -> void:
 	chart_notes = load_rhythm_chart(chart_path, speed_mult) 
 	
 	# include a slight delay before the cooking start text pops up
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5, false).timeout
 	
 	cooking_start.emit()
 	
@@ -130,10 +127,10 @@ func _ready() -> void:
 		hide_lane.emit("down")
 		
 	bgm_playback_position = AudioManager.get_bgm_playback_position()
-	AudioManager.fade_out_bgm(4.5)
+	AudioManager.fade_out_bgm(1.5)
 	
-	# wait 4.5 seconds before the chart begins, then starts the minigame
-	await get_tree().create_timer(4.5).timeout
+	# wait 1.5 seconds before the chart begins, then starts the minigame
+	await get_tree().create_timer(1.5, false).timeout
 	
 	current_time_ms = -note_lead_time_ms # this is to prevent the first few notes from triggering early
 	is_game_started = true
@@ -143,7 +140,7 @@ func _ready() -> void:
 	cooking_end.emit()
 	
 	# wait for the COOKING END! text to fade out fully
-	await get_tree().create_timer(4.0).timeout 
+	await get_tree().create_timer(2.5, false).timeout 
 	AudioManager.play_bgm(MUD_DAGORED, bgm_playback_position)
 	
 	rhythm_result_screen_v2.perfect_count_label.text = str(num_perfects)

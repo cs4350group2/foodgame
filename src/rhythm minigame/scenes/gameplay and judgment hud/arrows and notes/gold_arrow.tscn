@@ -14,5 +14,6 @@ texture = ExtResource("2_aunij")
 [node name="PoppingParticles" parent="." index="2" unique_id=1878868184]
 texture = ExtResource("3_0a3af")
 
-[node name="HitEffectPlayer" parent="." index="3" unique_id=733284845]
+[node name="HitEffectPlayer" parent="." index="3" unique_id=631516258]
 stream = ExtResource("4_hb2y5")
+volume_db = -4.0

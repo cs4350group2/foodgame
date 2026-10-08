@@ -20,7 +20,6 @@ func make_hold_arrow() -> Arrow:
 	return instance
 
 func make_note_from_data(data: Dictionary) -> Arrow:
-	print(data)
 	var hitsound: String = data.get("hitsound")
 	# var hold_time: float = float(data.get("holdtime", 0.0)) # for hold notes
 	
@@ -28,7 +27,6 @@ func make_note_from_data(data: Dictionary) -> Arrow:
 	#	return make_hold_arrow()
 	
 	if (hitsound == ":clap"):
-		print("Spawning gold arrow!")
 		return make_gold_arrow()
 	
 	return make_arrow()

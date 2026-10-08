@@ -16,10 +16,11 @@ const STEW_PATH = preload("res://models/physics/food/stew/stewPlate.tscn")
 @onready var pot = $"../../pot/Cylinder_009/StaticBody3D"
 
 @onready var restaurant_main: Node3D = $"../../.." # restaurant main node
+@onready var restaurant_ui: CanvasLayer = $"../../../RestaurantUi" # restaurant UI CanvasLayer node in restaurant_main
 @onready var invalid_recipe_dialog: AcceptDialog = $"../../../RestaurantUi/InvalidRecipeDialog" # invalid recipe dialog in restaurant_main
 @onready var dish_confirm_dialog: ConfirmationDialog = $"../../../RestaurantUi/DishConfirmDialog" # dish confirmation dialog in restaurant_main
 
-const RHYTHM_MINIGAME_SCENE = preload("uid://bx7cw268w4v8j")
+const RHYTHM_MINIGAME_POPUP_SCENE = preload("uid://bl5f06ugjmaiq")
 
 var active_player : Player = null
 var selected_dish : String = "" # selected dish to cook
@@ -70,22 +71,22 @@ func _on_interacted(_player: Player) -> void:
 	show_dish_confirmation(current_ingredients)
 
 func start_cooking(dish_string: String) -> void:
-	restaurant_main.visible = false
 	active_player.crosshair.visible = false
-	if restaurant_main.ui_nodes:
-		for ui: Node in restaurant_main.ui_nodes as Array[Node]:
-			ui.visible = false
-	restaurant_main.process_mode = Node.PROCESS_MODE_DISABLED # freeze restaurant scene during minigame
+	# if restaurant_main.ui_nodes:
+	#	for ui: Node in restaurant_main.ui_nodes as Array[Node]:
+	#		ui.visible = false
+	
 	active_player.process_mode = Node.PROCESS_MODE_DISABLED # disable camera movement during minigame
 	
-	var minigame_instance = RHYTHM_MINIGAME_SCENE.instantiate()
+	var minigame_popup = RHYTHM_MINIGAME_POPUP_SCENE.instantiate()
+	var minigame_instance = minigame_popup.get_node("MinigameFrame/SubViewportContainer/SubViewport/RhythmMain")
 	
 	minigame_instance.dish_string = dish_string
 	
 	minigame_instance.cooking_end.connect(_on_cooking_end)
-	minigame_instance.return_to_restaurant.connect(_on_return_to_restaurant.bind(minigame_instance))
-	
-	get_tree().root.add_child(minigame_instance)
+	minigame_instance.return_to_restaurant.connect(_on_return_to_restaurant.bind(minigame_popup))
+
+	restaurant_ui.add_child(minigame_popup)
 
 func get_food_data(dish_name: String) -> Dictionary:
 	# helper function to return info for specific dish in menu.json

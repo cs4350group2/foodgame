@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://brgmty7m1iu8u" path="res://src/rhythm minigame/scenes/ui/rhythm_result_screen_v2.tscn" id="18_lgoak"]
 
 [node name="RhythmMain" type="Node2D" unique_id=1835695707]
+process_mode = 1
 script = ExtResource("1_lgoak")
 
 [node name="JudgmentHUD" type="Node2D" parent="." unique_id=1435270143]
