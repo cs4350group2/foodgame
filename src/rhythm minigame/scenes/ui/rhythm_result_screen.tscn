@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://cyl1np8c6igj0"]
+
+[ext_resource type="Script" uid="uid://bp7t5k4of3r87" path="res://src/rhythm minigame/scripts/ui/rhythm_result_screen.gd" id="1_co8ic"]
+[ext_resource type="Theme" uid="uid://dcj8ax4pmivsw" path="res://assets/rhythm minigame/themes/input_judgment_and_combo_count.tres" id="2_6vhs5"]
+[ext_resource type="Theme" uid="uid://1p1awuurvc8p" path="res://assets/rhythm minigame/themes/cooking_start_and_end_text.tres" id="3_dlm3g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
+bg_color = Color(2.8878452e-07, 0.7266064, 0.15561643, 1)
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[node name="RhythmResultScreen" type="Control" unique_id=463277192]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_co8ic")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=602696827]
+custom_maximum_size = Vector2(-1, 700)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -264.5
+offset_right = 250.0
+offset_bottom = 264.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=149133462]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+theme = ExtResource("2_6vhs5")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer" unique_id=1040071680]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer" unique_id=107926309]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=429405418]
+layout_mode = 2
+text = "COOKING COMPLETE!"
+horizontal_alignment = 1
+
+[node name="PerfectContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1924109756]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PerfectContainer" unique_id=1918310541]
+layout_mode = 2
+text = "
+    PERFECT: "
+horizontal_alignment = 1
+
+[node name="GoodContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1010205949]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/GoodContainer" unique_id=747569923]
+layout_mode = 2
+text = "      GOOD: "
+horizontal_alignment = 1
+
+[node name="MissContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2057026487]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MissContainer" unique_id=572814208]
+layout_mode = 2
+text = "       MISS:"
+horizontal_alignment = 1
+
+[node name="DishQualityContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1464775455]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/DishQualityContainer" unique_id=1894641703]
+layout_mode = 2
+text = "
+DISH QUALITY:"
+horizontal_alignment = 1
+
+[node name="DishQualityScore" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/DishQualityContainer" unique_id=423959945]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="BackToRestaurant" type="Button" parent="VBoxContainer" unique_id=1003264440]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_dlm3g")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xrivr")
+text = "<- Back to Restaurant"
+
+[connection signal="pressed" from="VBoxContainer/BackToRestaurant" to="." method="_on_back_to_restaurant_pressed"]

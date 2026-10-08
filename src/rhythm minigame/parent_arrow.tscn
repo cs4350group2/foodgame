@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://cangf3hhe4bui"]
-
-[ext_resource type="Texture2D" uid="uid://c2c4xka2bjsjn" path="res://assets/rhythm minigame/PNG/Black/2x/arrowDown.png" id="1_xbmjw"]
-
-[node name="ParentArrow" type="Node2D" unique_id=1316662934]
-
-[node name="ArrowDown" type="Sprite2D" parent="." unique_id=543169254]
-texture = ExtResource("1_xbmjw")

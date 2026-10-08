@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AudioData" format=3 uid="uid://cp8g3egjiix00"]
+
+[ext_resource type="AudioStream" uid="uid://b03bwt6mhdnnf" path="res://assets/rhythm minigame/sfx/15-seconds-of-silence.mp3" id="1_b328w"]
+[ext_resource type="Script" uid="uid://dkblfy12lap7h" path="res://src/audio_manager/audio_data.gd" id="1_jgqye"]
+
+[resource]
+script = ExtResource("1_jgqye")
+audio_stream = ExtResource("1_b328w")
+bpm = 105.0
+metadata/_custom_type_script = "uid://dkblfy12lap7h"

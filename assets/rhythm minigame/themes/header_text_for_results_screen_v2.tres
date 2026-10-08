@@ -1,0 +1,18 @@
+[gd_resource type="Theme" format=3 uid="uid://h6jab57cg7sv"]
+
+[ext_resource type="FontFile" uid="uid://by753b80v5j7w" path="res://assets/rhythm minigame/fonts/Super Bouncer.ttf" id="1_tpk22"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13qdw"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[resource]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/font_sizes/font_size = 100
+Label/fonts/font = ExtResource("1_tpk22")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_13qdw")

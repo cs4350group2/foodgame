@@ -319,7 +319,7 @@ func take_payment() -> float:
 
 func state_finished(delta):
 	# Pay, finish eating, etc.
-	
+	_on_interacted(null)
 	# Go to counter/Leave money on table for collection
 	
 	if paid:
