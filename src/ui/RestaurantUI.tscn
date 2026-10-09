@@ -86,7 +86,7 @@ theme_override_font_sizes/font_size = 26
 layout_mode = 2
 
 [node name="ProgressIcon" type="TextureRect" parent="ViewportContainer/TimerMarginContainer/ProgressContainer" unique_id=1645649820]
-material = SubResource("ShaderMaterial_b45cv")
+material = SubResource("ShaderMaterial_wksio")
 layout_mode = 2
 texture = ExtResource("4_7iprg")
 expand_mode = 2
