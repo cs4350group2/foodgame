@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://dn5u3m4d2cn4x"]
-
-[ext_resource type="PackedScene" uid="uid://clgejlh74tqax" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/judgment_arrow.tscn" id="1_exon4"]
-[ext_resource type="Script" uid="uid://7yewbfprj66u" path="res://src/rhythm minigame/scripts/gameplay and judgment hud/judgment_arrow.gd" id="2_exon4"]
-
-[node name="JudgmentArrow" unique_id=1687560457 instance=ExtResource("1_exon4")]
-script = ExtResource("2_exon4")

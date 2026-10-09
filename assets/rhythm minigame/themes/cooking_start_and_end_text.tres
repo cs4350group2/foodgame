@@ -9,5 +9,5 @@ Button/font_sizes/font_size = 40
 Button/fonts/font = ExtResource("1_q7bug")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/colors/font_outline_color = Color(1, 1, 1, 1)
-Label/font_sizes/font_size = 75
+Label/font_sizes/font_size = 70
 Label/fonts/font = ExtResource("1_q7bug")
