@@ -15,6 +15,7 @@ const ANGRY_SFX = preload("res://assets/sfx/customer/angry_sfx.wav")
 const ENTER_SFX = preload("res://assets/sfx/customer/enter_sfx.wav")
 const ORDER_TAKEN_SFX = preload("res://assets/sfx/customer/order_taken.ogg")
 const LEAVING_SFX = preload("res://assets/sfx/customer/leaving_sfx.wav")
+const WARNING_SFX = preload("res://assets/sfx/customer/warning_sfx.mp3")
 
 enum State {
 	IDLE,
@@ -232,7 +233,8 @@ enum AudioSfx {
 	ANGRY,
 	ORDERING,
 	COMPLETE,
-	LEAVING
+	LEAVING,
+	WARNING
 }
 
 func play_audio(audio_type: AudioSfx):
@@ -258,6 +260,9 @@ func play_audio(audio_type: AudioSfx):
 		AudioSfx.LEAVING:
 			audio_player.volume_linear = 0.4
 			audio_player.stream = LEAVING_SFX
+		AudioSfx.WARNING:
+			audio_player.volume_linear = 2.0
+			audio_player.stream = WARNING_SFX
 	audio_player.play()
 
 func state_sitting(delta):
