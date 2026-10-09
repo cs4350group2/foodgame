@@ -167,7 +167,7 @@ theme_override_constants/separation = 0
 [node name="TotalEmptyPenaltyLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=279128602]
 layout_mode = 2
 theme = ExtResource("3_v16hu")
-text = "Total Empty Penalty: "
+text = "TOTAL EMPTY PENALTY: "
 horizontal_alignment = 1
 
 [node name="DishQualityLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=1934896529]
