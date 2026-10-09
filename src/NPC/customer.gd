@@ -355,3 +355,11 @@ func state_leaving_angry(delta):
 		RestaurantManager.remove_angry_customer(self)
 		queue_free()
 		return
+
+func gets_deleted() -> void: # When customer drink EXTREMELY SAFE Drink
+	# TODO Add death and sound effect when deleted
+	if assigned_sittingNode != null:
+		assigned_sittingNode.clear()
+	customer_spawner.release_name(customer_name)
+	RestaurantManager.remove_customer(self)
+	queue_free()
