@@ -28,7 +28,7 @@ func load_menu():
 	
 	# Load drinks menu
 	var drinks_file = FileAccess.open("res://data/drinks.json", FileAccess.READ)
-	var drinks_text = file.get_as_text()
+	var drinks_text = drinks_file.get_as_text()
 	drinks_menu_data = JSON.parse_string(drinks_text)
 
 func get_menu() -> Dictionary:

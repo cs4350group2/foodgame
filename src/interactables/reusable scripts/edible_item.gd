@@ -32,8 +32,11 @@ func initialize_data(item_name: String, is_drink: bool = false) -> void:
 				food_data = Food.new(food["name"], food["price"], food["rarity"], 
 				100.0)
 
+func is_ingredient() -> bool:
+	return food_data == null && drink_data == null
+
 func _on_interacted(player: Player) -> void:
-	if food_data == null && drink_data == null: # ingredient
+	if is_ingredient():
 		print("Picked up ingredient: ", ingredient_name)
 	elif is_drink:
 		print("Picked up edible: ", drink_data.get_edible_name())
@@ -49,9 +52,13 @@ func get_data() -> Edible:
 		return food_data
 
 func get_edible_item_name() -> String:
-	if food_data == null && drink_data == null:
+	if is_ingredient():
 		return ingredient_name
 	elif is_drink:
 		return drink_data.get_edible_name()
 	else:
 		return food_data.get_edible_name()
+
+# Mainly used by drinks which will affect customers
+func affect_customer(customer: Customer) -> void:
+	pass

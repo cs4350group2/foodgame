@@ -56,7 +56,7 @@ func _on_interacted(_player: Player) -> void:
 			take_order()
 			
 		State.WAITING_FOR_FOOD:
-			_deliver_held_food(_player)
+			_deliver_held_edible(_player)
 		
 		State.FINISHED:
 			RestaurantManager.receive_payment(take_payment())
@@ -255,6 +255,9 @@ var patience: float
 func get_current_patience() -> float:
 	return patience
 
+func set_patience(new_patience: float) -> void:
+	patience = min(max_patience, new_patience)
+
 func start_waiting_for_food() -> void:
 	patience = max_patience
 	patience_bar.update_patience(max_patience)
@@ -289,25 +292,29 @@ func receive_order_item(item: OrderItem) -> bool:
 	# if the order is finished, we let the signal tell us
 	return order.receive_order_item(item)
 
-func _deliver_held_food(player: Player) -> void:
-	if not is_instance_valid(player.held_edible):
-		print("You need to be holding a cooked dish to deliver it.")
+func _deliver_held_edible(player: Player) -> void:
+	var held_edible: EdibleItem = player.held_edible
+	if not is_instance_valid(held_edible):
+		print("You need to be holding a cooked dish/consumable to deliver it.")
 		return
-
-	var food_data: Food = player.held_edible.get_data()
-	if food_data == null:
+	
+	if held_edible.is_ingredient():
 		print("Ingredients cannot be delivered. Cook them first.")
 		return
+	
+	var data: Edible = held_edible.get_data()
+	if held_edible.is_drink:
+		held_edible.affect_customer(self)
+	else: # is Food
+		var delivered_item := OrderItem.new(data, 1)
+		if not receive_order_item(delivered_item):
+			print("That dish does not match the customer's order.")
+			return
 
-	var delivered_item := OrderItem.new(food_data, 1)
-	if not receive_order_item(delivered_item):
-		print("That dish does not match the customer's order.")
-		return
-
-	var delivered_edible := player.held_edible
+	var delivered_edible := held_edible
 	player.held_edible = null
 	delivered_edible.queue_free()
-	print("Delivered %s." % food_data.edible_name)
+	print("Delivered %s." % data.get_edible_name())
 
 func state_eating(delta):
 	# Play eating animation

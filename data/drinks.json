@@ -4,13 +4,13 @@
 			"name": "Soda",
 			"price": 10.0,
 			"description": "Classic soda, served the old fashion way",
-			"usage": "Increase customer's patience +20"
+			"usage": "Increase customer's patience +10sec"
 		},
 		{
 			"name": "Cooler Soda",
-			"price": 30.0,
+			"price": 25.0,
 			"description": "The cooler soda, served the new fashion way",
-			"usage": "Increase customer's patience +50"
+			"usage": "Increase customer's patience +30sec"
 		},
 		{
 			"name": "Liquid Food",
