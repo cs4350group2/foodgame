@@ -7,26 +7,26 @@ extends Node3D
 
 var available_names: Array[String] = []
 var used_names: Dictionary = {}
-var to_spawn: int = 0
+var to_spawn: Array[StringName]
 
 
 func _ready() -> void:
 	load_names()
-	to_spawn = 0
+	to_spawn = []
 	RestaurantManager.customer_removed.connect(_on_customer_removed)
 
 func _on_customer_removed() -> void:
 	# check if seat is avail
-	if to_spawn > 0 and RestaurantManager.has_vacant_sittingNode():
-		spawn_customer()
-		to_spawn -= 1
+	if len(to_spawn) > 0 and RestaurantManager.has_vacant_sittingNode():
+		spawn_customer(to_spawn[0])
+		to_spawn.pop_front()
 
-func _on_spawn_timer_timeout() -> void:
+func _on_spawn_timer_timeout(customer_type: StringName) -> void:
 	if RestaurantManager.has_vacant_sittingNode():
-		spawn_customer()
+		spawn_customer(customer_type)
 	else:
 		print("No vacant seats; not spawning a customer.")
-		to_spawn += 1
+		to_spawn.append(customer_type)
 
 func load_names() -> void:
 	var file := FileAccess.open("res://data/customer_names.txt", FileAccess.READ)
@@ -39,7 +39,7 @@ func load_names() -> void:
 		if not customer_name.is_empty() and not available_names.has(customer_name):
 			available_names.append(customer_name)
 
-func spawn_customer() -> void:
+func spawn_customer(customer_type: StringName = &"") -> void:
 	if available_names.is_empty():
 		print("No unused customer names remain.")
 		return

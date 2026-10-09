@@ -3,6 +3,30 @@
 [ext_resource type="Script" uid="uid://bf2vyu30rj2pj" path="res://src/ui/restaurant_ui.gd" id="1_pux36"]
 [ext_resource type="Texture2D" uid="uid://bur4d35ouyht6" path="res://assets/ui/coin_placeholder.png" id="2_pa56n"]
 [ext_resource type="FontFile" uid="uid://8vl643wgamfq" path="res://assets/fonts/upheavtt.ttf" id="3_pa56n"]
+[ext_resource type="Texture2D" uid="uid://diu55q1bup2a0" path="res://assets/ui/icons/clock-solid.svg" id="4_7iprg"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="4_b45cv"]
+[ext_resource type="Shader" uid="uid://bkuoxh7d003ai" path="res://src/NPC/ui/patience_icon.gdshader" id="5_1vf0p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b45cv"]
+shader = ExtResource("5_1vf0p")
+shader_parameter/icon_color = Color(1, 0.7147899, 0.19901195, 1)
+
+[sub_resource type="Gradient" id="Gradient_7iprg"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_morll"]
+gradient = SubResource("Gradient_7iprg")
+width = 300
+height = 40
+fill_from = Vector2(1, 0)
+
+[sub_resource type="Gradient" id="Gradient_pa56n"]
+colors = PackedColorArray(0.9999997, 0.78038436, 0.44063565, 1, 0.11402158, 0.11377103, 0.23101896, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1vf0p"]
+gradient = SubResource("Gradient_pa56n")
+width = 300
+height = 40
+fill_to = Vector2(0.7718447, 0)
 
 [node name="RestaurantUi" type="CanvasLayer" unique_id=1022008651]
 script = ExtResource("1_pux36")
@@ -50,9 +74,25 @@ grow_horizontal = 2
 mouse_filter = 2
 theme_override_constants/margin_top = 7
 
-[node name="ProgressBar" type="ProgressBar" parent="ViewportContainer/TimerMarginContainer" unique_id=50386483]
+[node name="StartDayPrompt" type="Label" parent="ViewportContainer/TimerMarginContainer" unique_id=1305771246]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_pa56n")
-theme_override_font_sizes/font_size = 40
+theme = ExtResource("4_b45cv")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 26
+
+[node name="ProgressContainer" type="HBoxContainer" parent="ViewportContainer/TimerMarginContainer" unique_id=2087527018]
+layout_mode = 2
+
+[node name="ProgressIcon" type="TextureRect" parent="ViewportContainer/TimerMarginContainer/ProgressContainer" unique_id=1645649820]
+material = SubResource("ShaderMaterial_b45cv")
+layout_mode = 2
+texture = ExtResource("4_7iprg")
+expand_mode = 2
+
+[node name="ProgressBar" type="TextureProgressBar" parent="ViewportContainer/TimerMarginContainer/ProgressContainer" unique_id=435629798]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+texture_under = SubResource("GradientTexture2D_morll")
+texture_progress = SubResource("GradientTexture2D_1vf0p")

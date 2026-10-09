@@ -9,8 +9,21 @@ class_name EdibleItem
 
 @onready var interaction: InteractComponent = $InteractComponent
 
+var owning_level: Level
+
 func _ready() -> void:
 	interaction.interacted.connect(_on_interacted)
+	var ancestor := get_parent()
+	while ancestor != null and not ancestor is Level:
+		ancestor = ancestor.get_parent()
+	owning_level = ancestor as Level
+	if is_instance_valid(owning_level):
+		owning_level.register_temp(self)
+
+func _exit_tree() -> void:
+	if is_instance_valid(owning_level):
+		owning_level.unregister_temp(self)
+	owning_level = null
 
 func initialize_data(item_name: String) -> void:
 	var restaurant_menu: Dictionary = RestaurantManager.get_menu()

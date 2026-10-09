@@ -12,6 +12,27 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main_menu"]
+bg_color = Color(0.65, 0.16, 0.18, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main_menu_pressed"]
+bg_color = Color(0.5, 0.11, 0.13, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main_menu_hover"]
+bg_color = Color(0.78, 0.22, 0.24, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [node name="PauseMenu" type="CanvasLayer" unique_id=902983238]
 process_mode = 3
 layer = 100
@@ -174,3 +195,14 @@ theme_override_fonts/font = ExtResource("2_fxpoi")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_fxpoi")
 text = "Resume"
+
+[node name="MainMenuButton" type="Button" parent="Center/Panel/Margin/Settings" unique_id=81174431]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fxpoi")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_main_menu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_main_menu_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_main_menu_hover")
+text = "Main Menu"

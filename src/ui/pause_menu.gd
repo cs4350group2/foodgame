@@ -23,7 +23,18 @@ func _ready() -> void:
 	sfx_slider.value_changed.connect(_on_sfx_changed)
 	offset_slider.value_changed.connect(_on_offset_changed)
 	%ResumeButton.pressed.connect(unpause_game)
+	%MainMenuButton.pressed.connect(_on_main_menu_pressed)
 	_sync_sliders()
+
+func _on_main_menu_pressed() -> void:
+	var scene_tree := get_tree()
+	var error := scene_tree.change_scene_to_file("res://src/ui/MainMenu.tscn")
+	if error != OK:
+		push_error("Could not open main menu: %s" % error_string(error))
+		return
+	scene_tree.paused = false
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	RunManager.active_level = null
 
 func _sync_sliders() -> void:
 	bgm_slider.set_value_no_signal(AudioManager.get_bgm_setting_level() * 100.0)

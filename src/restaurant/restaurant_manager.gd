@@ -4,9 +4,6 @@ var sitting_nodes: Array[Node] = []
 var customers: Array[Customer] = []
 var orders: Array[Order] = []
 var menu_data: Dictionary
-var coins: float = 0
-
-signal coins_updated(amount)
 
 signal angry_customer_left()
 # parameterless for now, might need to pass in the exact customers
@@ -96,9 +93,7 @@ func assign_sittingNode(customer: Customer) -> bool:
 	return true
 
 func receive_payment(amount: float) -> void:
-	print("Coins: ", coins, " + ", amount)
-	coins += amount
-	coins_updated.emit(coins)
+	RunManager.current_run.add_coins(amount)
 
 func get_current_coins() -> float:
-	return coins
+	return RunManager.current_run.coins

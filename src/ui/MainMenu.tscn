@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://cyois83kvg6fj"]
+
+[ext_resource type="Script" uid="uid://db3b5ivyjvyyo" path="res://src/ui/main_menu.gd" id="1_0ogta"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="1_adkca"]
+[ext_resource type="Texture2D" uid="uid://b4unt2owamg4n" path="res://assets/food/stationProps/knife2_1.png" id="3_l8p87"]
+
+[node name="MainMenu" type="Node3D" unique_id=1140286162]
+script = ExtResource("1_0ogta")
+
+[node name="Control" type="Control" parent="." unique_id=789862209]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1931818977]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = -20.0
+offset_right = 124.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Control/VBoxContainer" unique_id=1719265942]
+layout_mode = 2
+theme = ExtResource("1_adkca")
+theme_type_variation = &"HeaderLarge"
+text = "LET ME COOK"
+
+[node name="NewGameButton" type="Button" parent="Control/VBoxContainer" unique_id=770637763]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_adkca")
+text = "New Game"
+
+[node name="ContinueButton" type="Button" parent="Control/VBoxContainer" unique_id=406656767]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_adkca")
+text = "Continue
+"
+
+[node name="SettingsButton" type="Button" parent="Control/VBoxContainer" unique_id=1691446546]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_adkca")
+text = "Settings"
+
+[node name="LineEdit" type="LineEdit" parent="Control/VBoxContainer" unique_id=2120196513]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Seed"
+
+[node name="BackgroundSplash" type="TextureRect" parent="Control" unique_id=1834650563]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_l8p87")
+expand_mode = 2
