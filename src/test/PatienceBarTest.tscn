@@ -1,0 +1,224 @@
+[gd_scene format=3 uid="uid://bsjymmckksfwd"]
+
+[ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="2_customer"]
+
+[sub_resource type="GDScript" id="GDScript_kwii6"]
+script/source = "extends Node3D
+
+@export_range(1.0, 120.0) var duration: float = 10.0
+@export_range(1, 5) var order_quantity: int = 2
+
+@onready var customer: Customer = $Customer
+@onready var patience_bar: PatienceBar = $Customer/PatienceBar
+@onready var readout: Label = $CanvasLayer/Panel/VBox/Readout
+var selected_state: Customer.State = Customer.State.WAITING_FOR_FOOD
+
+func _ready() -> void:
+	# The harness steps the real customer dispatcher only in the tested states.
+	# Other states stay still, so LEAVING cannot remove the test customer.
+	customer.set_process(false)
+	customer.set_physics_process(false)
+	customer.exit_point = $Exit
+	$CanvasLayer/Panel/VBox/Styles/Sitting.pressed.connect(_select_state.bind(Customer.State.SITTING))
+	$CanvasLayer/Panel/VBox/Styles/Waiting.pressed.connect(_select_state.bind(Customer.State.WAITING_FOR_FOOD))
+	$CanvasLayer/Panel/VBox/Styles/Ordering.pressed.connect(_select_state.bind(Customer.State.ORDERING))
+	$CanvasLayer/Panel/VBox/Restart.pressed.connect(_restart)
+	$CanvasLayer/Panel/VBox/Warning.pressed.connect(_jump_to_warning)
+	$CanvasLayer/Panel/VBox/Delivery/Deliver.pressed.connect(_deliver_one)
+	$CanvasLayer/Panel/VBox/Delivery/Check.pressed.connect(_check_delivery)
+	_restart()
+
+func _physics_process(delta: float) -> void:
+	if customer.current_state in [Customer.State.SITTING, Customer.State.ORDERING, Customer.State.WAITING_FOR_FOOD]:
+		customer._physics_process(delta)
+	_update_readout()
+
+func _restart() -> void:
+	if customer.order != null and RestaurantManager.orders.has(customer.order):
+		RestaurantManager.remove_order(customer.order)
+	customer.change_state(Customer.State.IDLE)
+	customer.order_taken = false
+	customer.paid = false
+	customer.order = null
+	customer.initialize_customer(\"Jeff\", order_quantity, duration)
+	patience_bar.set_patience(0.0, duration, duration / 100.0)
+	# Let ORDERING create a real, unfulfilled order before testing food waiting.
+	customer.change_state(Customer.State.ORDERING)
+	customer.take_order()
+	customer._physics_process(0.0)
+	# Entering WAITING initializes patience and resets the visual warning.
+	customer.change_state(Customer.State.WAITING_FOR_FOOD)
+	customer.change_state(selected_state)
+	if selected_state != Customer.State.WAITING_FOR_FOOD:
+		customer.order_taken = false
+	$CanvasLayer/Panel/VBox/DeliveryResult.text = \"Deliver one dish at a time, or run the delivery check.\"
+	_update_readout()
+
+func _jump_to_warning() -> void:
+	# Exercise delivery while the food-wait warning is active.
+	selected_state = Customer.State.WAITING_FOR_FOOD
+	_restart()
+	var target := customer.max_patience * patience_bar.warning_percentage * 0.8
+	var elapsed := maxf(customer.get_current_patience() - target, 0.0)
+	customer._physics_process(elapsed)
+	_update_readout()
+
+func _select_state(state: Customer.State) -> void:
+	selected_state = state
+	if customer.current_state not in [Customer.State.SITTING, Customer.State.ORDERING, Customer.State.WAITING_FOR_FOOD]:
+		_restart()
+	else:
+		if state == Customer.State.ORDERING:
+			customer.order_taken = false
+		customer.change_state(state)
+	_update_readout()
+
+
+func _deliver_one() -> void:
+	if customer.current_state != Customer.State.WAITING_FOR_FOOD:
+		return
+	# Use the same entry point as held-food delivery, not a forced state change.
+	var requested := customer.order.get_item(0)
+	var accepted := customer.receive_order_item(OrderItem.new(requested.edible, 1))
+	$CanvasLayer/Panel/VBox/DeliveryResult.text = \"Dish accepted: %s | Complete: %s\" % [accepted, customer.order.is_order_completed()]
+	_update_readout()
+
+
+func _check_delivery() -> void:
+	_jump_to_warning()
+	var passed := patience_bar.visible and patience_bar.warning_active
+	var wrong_dish := Food.new(\"Not on the test order\", 1.0, 1, 1.0)
+	passed = not customer.receive_order_item(OrderItem.new(wrong_dish, 1)) and passed
+	passed = customer.current_state == Customer.State.WAITING_FOR_FOOD and patience_bar.visible and passed
+	for index in range(order_quantity):
+		_deliver_one()
+		if index < order_quantity - 1:
+			passed = customer.current_state == Customer.State.WAITING_FOR_FOOD and patience_bar.visible and passed
+	passed = customer.order.is_order_completed() and passed
+	passed = customer.current_state == Customer.State.EATING and not patience_bar.progress_bar.visible and passed
+	passed = patience_bar.is_visible_in_tree() and patience_bar.icon.is_visible_in_tree() and passed
+	passed = patience_bar.eating_icon != null and patience_bar.icon.texture == patience_bar.eating_icon and passed
+	var icon_tint: Color = patience_bar.icon.material.get_shader_parameter(\"icon_color\")
+	passed = icon_tint.is_equal_approx(patience_bar.eating_tint) and passed
+	passed = not patience_bar.warning_active and not RestaurantManager.orders.has(customer.order) and passed
+	passed = (patience_bar.blink_tween == null or not patience_bar.blink_tween.is_running()) and passed
+	$CanvasLayer/Panel/VBox/DeliveryResult.text = \"Delivery check: %s (wrong dish, partial order, eating icon and tint, warning stopped).\" % (\"PASS\" if passed else \"FAIL\")
+	assert(passed, \"Delivery must enter EATING, show the eating icon and tint, hide the progress ring, and stop the warning.\")
+
+func _update_readout() -> void:
+	$CanvasLayer/Panel/VBox/Delivery/Deliver.disabled = customer.current_state != Customer.State.WAITING_FOR_FOOD
+	$CanvasLayer/Panel/VBox/StyleLabel.text = \"Customer state: \" + customer.get_state_name(customer.current_state)
+	match customer.current_state:
+		Customer.State.SITTING:
+			readout.text = \"Reading menu: Customer will enter ORDERING after 5-10 seconds.\"
+		Customer.State.ORDERING:
+			readout.text = \"Ordering: %.1f s remaining.\" % customer.get_current_patience()
+		Customer.State.WAITING_FOR_FOOD:
+			readout.text = \"Remaining: %.1f s | Warning below: %.1f s\" % [customer.get_current_patience(), customer.max_patience * patience_bar.warning_percentage]
+		Customer.State.LEAVING:
+			readout.text = \"Patience expired - Customer entered LEAVING.\"
+		Customer.State.EATING:
+			readout.text = \"Food delivered: eating icon visible, progress ring hidden. Eating for 5 seconds.\"
+		Customer.State.FINISHED:
+			readout.text = \"Finished eating: eating icon and progress ring hidden.\"
+		_:
+			readout.text = \"Customer paused for inspection.\"
+"
+
+[sub_resource type="Environment" id="Environment_test"]
+background_mode = 1
+background_color = Color(0.055, 0.07, 0.1, 1)
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.6
+
+[node name="PatienceBarTest" type="Node3D" unique_id=30707353]
+script = SubResource("GDScript_kwii6")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1039723328]
+environment = SubResource("Environment_test")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=413830272]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 1.35, 5)
+projection = 1
+current = true
+size = 3.4
+
+[node name="KeyLight" type="DirectionalLight3D" parent="." unique_id=1140946782]
+transform = Transform3D(0.8660254, 0.28678823, -0.40957603, 0, 0.81915206, 0.57357645, 0.5, -0.49673176, 0.7094065, 0, 0, 0)
+light_energy = 1.2
+
+[node name="Customer" parent="." unique_id=835733219 instance=ExtResource("2_customer")]
+
+[node name="Exit" type="Marker3D" parent="." unique_id=696156281]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1218515807]
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer" unique_id=2132551500]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 560.0
+offset_bottom = 240.0
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Panel" unique_id=1985564687]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="CanvasLayer/Panel/VBox" unique_id=904691067]
+layout_mode = 2
+text = "Customer state / patience bar test"
+
+[node name="Readout" type="Label" parent="CanvasLayer/Panel/VBox" unique_id=1353733586]
+layout_mode = 2
+text = "Starting countdown..."
+
+[node name="StyleLabel" type="Label" parent="CanvasLayer/Panel/VBox" unique_id=154369254]
+layout_mode = 2
+text = "Customer state: WAITING_FOR_FOOD"
+
+[node name="Styles" type="HBoxContainer" parent="CanvasLayer/Panel/VBox" unique_id=636348151]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Sitting" type="Button" parent="CanvasLayer/Panel/VBox/Styles" unique_id=716858710]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Enter Sitting"
+
+[node name="Waiting" type="Button" parent="CanvasLayer/Panel/VBox/Styles" unique_id=954020666]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Enter Waiting"
+
+[node name="Ordering" type="Button" parent="CanvasLayer/Panel/VBox/Styles" unique_id=1759577420]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Enter Ordering"
+
+[node name="Restart" type="Button" parent="CanvasLayer/Panel/VBox" unique_id=2076379555]
+layout_mode = 2
+text = "Restart selected state"
+
+[node name="Warning" type="Button" parent="CanvasLayer/Panel/VBox" unique_id=1685144120]
+layout_mode = 2
+text = "Wait for food: jump to warning"
+
+[node name="Delivery" type="HBoxContainer" parent="CanvasLayer/Panel/VBox" unique_id=2051694999]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Deliver" type="Button" parent="CanvasLayer/Panel/VBox/Delivery" unique_id=1274028554]
+layout_mode = 2
+text = "Deliver one matching dish"
+
+[node name="Check" type="Button" parent="CanvasLayer/Panel/VBox/Delivery" unique_id=1935884341]
+layout_mode = 2
+text = "Run delivery check"
+
+[node name="DeliveryResult" type="Label" parent="CanvasLayer/Panel/VBox" unique_id=1979075484]
+layout_mode = 2
+text = "Deliver one dish at a time, or run the delivery check."
+
+[editable path="Customer"]
+[editable path="Customer/CharacterBody3D/Timmy"]
