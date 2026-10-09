@@ -4,7 +4,7 @@ extends Node3D
 var edible_name: String
 var price: float
 
-func _init(edible_name: String, base_price: float, rarity_level: int) -> void:
+func _init(edible_name: String, base_price: float) -> void:
 	self.edible_name = edible_name
 	self.price = base_price
 
