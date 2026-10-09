@@ -61,6 +61,9 @@ func _start_warning() -> void:
 	if blink_tween:
 		blink_tween.kill()
 	blink_tween = create_tween().set_loops()
+	# soooooo bad but im soooooo lazy
+	var parent := get_parent() as Customer
+	parent.play_audio(Customer.AudioSfx.WARNING)
 	blink_tween.tween_property(
 		progress_bar, "tint_progress",
 		warning_progress_tint, animation_duration

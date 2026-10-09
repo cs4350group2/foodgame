@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://ubv0sb3volmr"]
 
 [ext_resource type="Script" uid="uid://bf2vyu30rj2pj" path="res://src/ui/restaurant_ui.gd" id="1_pux36"]
-[ext_resource type="Texture2D" uid="uid://bur4d35ouyht6" path="res://assets/ui/coin_placeholder.png" id="2_pa56n"]
+[ext_resource type="Texture2D" uid="uid://bvah6a7cgv1mq" path="res://assets/ui/icons/coin.png" id="2_pa56n"]
 [ext_resource type="FontFile" uid="uid://8vl643wgamfq" path="res://assets/fonts/upheavtt.ttf" id="3_pa56n"]
+[ext_resource type="Shader" uid="uid://bkuoxh7d003ai" path="res://src/NPC/ui/patience_icon.gdshader" id="5_1vf0p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wksio"]
+shader = ExtResource("5_1vf0p")
+shader_parameter/icon_color = Color(1, 1, 1, 1)
 
 [node name="RestaurantUi" type="CanvasLayer" unique_id=1022008651]
 script = ExtResource("1_pux36")
@@ -27,6 +32,7 @@ theme_override_constants/margin_top = 6
 layout_mode = 2
 
 [node name="MoneyIcon" type="TextureRect" parent="ViewportContainer/MoneyMarginContainer/HBoxContainer" unique_id=769453040]
+material = SubResource("ShaderMaterial_wksio")
 layout_mode = 2
 texture = ExtResource("2_pa56n")
 expand_mode = 2
