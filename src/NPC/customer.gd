@@ -6,6 +6,15 @@ extends CharacterBody3D
 @onready var interaction: InteractComponent = $InteractComponent
 @onready var patience_bar: PatienceBar = $PatienceBar
 @onready var customer_spawner: CustomerSpawner = get_parent() as CustomerSpawner
+@onready var audio_player = $AudioStreamPlayer3D
+
+const HMM_SFX = preload("res://assets/sfx/customer/hmm_sfx.mp3")
+const ORDER_READY_SFX = preload("res://assets/sfx/customer/order_sfx.wav")
+const ORDER_COMPLETE_SFX = preload("res://assets/sfx/customer/satisfied_sfx.wav")
+const ANGRY_SFX = preload("res://assets/sfx/customer/angry_sfx.wav")
+const ENTER_SFX = preload("res://assets/sfx/customer/enter_sfx.wav")
+const ORDER_TAKEN_SFX = preload("res://assets/sfx/customer/order_taken.ogg")
+const LEAVING_SFX = preload("res://assets/sfx/customer/leaving_sfx.wav")
 
 enum State {
 	IDLE,
@@ -47,6 +56,7 @@ func initialize_customer(name: String, level: int, patience: float) -> void:
 func _ready():
 	interaction.interact_while_holding = true
 	interaction.interacted.connect(_on_interacted)
+	audio_player.pitch_scale = randf_range(0.67, 1.3)
 	change_state(State.IDLE)
 	patience_bar.set_patience(0.0, max_patience, max_patience / 100.0)
 
@@ -119,6 +129,7 @@ func enter_state(state: State):
 			pass
 		
 		State.WALKING_TO_TABLE:
+			play_audio(AudioSfx.ENTER)
 			animation_player.play("Walk")
 			update_target_location(assigned_sittingNode.global_position)
 			pass
@@ -157,6 +168,7 @@ func enter_state(state: State):
 		State.LEAVING_ANGRY:
 			global_transform = prev_transform
 			animation_player.play("Walk")
+			play_audio(AudioSfx.ANGRY)
 			update_target_location(exit_point.global_position)
 			pass
 
@@ -209,8 +221,44 @@ var done_waiting_at_table: bool
 func wait_at_table(view_menu_time: float) -> void:
 	print("Customer is looking at menu for ", view_menu_time, " seconds")
 	done_waiting_at_table = false
+	play_audio(AudioSfx.THINKING)
 	await get_tree().create_timer(view_menu_time).timeout
 	done_waiting_at_table = true
+
+enum AudioSfx {
+	ENTER,
+	ORDER_TAKEN,
+	THINKING,
+	ANGRY,
+	ORDERING,
+	COMPLETE,
+	LEAVING
+}
+
+func play_audio(audio_type: AudioSfx):
+	match audio_type:
+		AudioSfx.THINKING:
+			audio_player.volume_linear = 1.0
+			audio_player.stream = HMM_SFX
+		AudioSfx.ANGRY:
+			audio_player.volume_linear = 1.6
+			audio_player.stream = ANGRY_SFX
+		AudioSfx.ORDERING:
+			audio_player.volume_linear = 1.3
+			audio_player.stream = ORDER_READY_SFX
+		AudioSfx.COMPLETE:
+			audio_player.volume_linear = 0.2
+			audio_player.stream = ORDER_COMPLETE_SFX
+		AudioSfx.ORDER_TAKEN:
+			audio_player.volume_linear = 0.9
+			audio_player.stream = ORDER_TAKEN_SFX
+		AudioSfx.ENTER:
+			audio_player.volume_linear = 2.0
+			audio_player.stream = ENTER_SFX
+		AudioSfx.LEAVING:
+			audio_player.volume_linear = 0.4
+			audio_player.stream = LEAVING_SFX
+	audio_player.play()
 
 func state_sitting(delta):
 	# Wait until sitting animation finish
@@ -221,6 +269,7 @@ func state_sitting(delta):
 func take_order() -> void:
 	RestaurantManager.add_order(order)
 	order_taken = true
+	play_audio(AudioSfx.ORDER_TAKEN)
 
 func start_ordering() -> void:
 	patience = max_patience
@@ -234,6 +283,7 @@ func start_ordering() -> void:
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])	
 		order.order_completed.connect(_on_order_complete)
+	play_audio(AudioSfx.ORDERING)
 
 func state_ordering(delta):
 	# Wait until player takes order
@@ -271,6 +321,7 @@ func state_waiting_for_food(delta):
 		return
 
 func start_eating(eating_time: float = 5.0) -> void:
+	play_audio(AudioSfx.COMPLETE)
 	await get_tree().create_timer(eating_time).timeout
 
 	# Do nothing if the customer changed state while waiting.
