@@ -16,3 +16,6 @@ func get_price() -> float:
 
 func is_equal(other: Edible) -> bool:
 	return edible_name == other.edible_name
+
+func get_bonus() -> float:
+	return 0.0

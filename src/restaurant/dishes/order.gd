@@ -6,6 +6,7 @@ signal order_item_received(item: OrderItem, quantity: int)
 
 var items: Array[OrderItem] = []
 var items_received: Array[OrderItem] = []
+var total_bonus: float = 0.0
 
 func _init(order_items: Array[OrderItem]):
 	items = order_items
@@ -44,6 +45,9 @@ func is_order_completed() -> bool:
 func get_order_items() -> Array[OrderItem]:
 	return items
 
+func get_total_bonus() -> float:
+	return total_bonus
+
 func get_items_received() -> Array[OrderItem]:
 	return items_received
 
@@ -74,6 +78,7 @@ func receive_order_item(item: OrderItem) -> bool:
 			if item.get_quantity() > remaining_quantity_required:
 				return false
 			received_item.add_quantity(item.get_quantity())
+			total_bonus += item.get_edible().get_bonus() * item.get_quantity()
 			order_item_received.emit(item, received_item.get_quantity())
 			if is_order_completed():
 				order_completed.emit(self)
@@ -82,6 +87,7 @@ func receive_order_item(item: OrderItem) -> bool:
 	if item.get_quantity() > order_item.get_quantity():
 		return false
 	items_received.append(item)
+	total_bonus += item.get_edible().get_bonus() * item.get_quantity()
 	order_item_received.emit(item, item.get_quantity())
 	if is_order_completed():
 		order_completed.emit(self)

@@ -12,9 +12,27 @@ func _init(edible_name: String, base_price: float, rarity_level: int, dish_quali
 func get_rarity_level() -> int:
 	return rarity_level
 
-# Price is base price multiplied by rarity.
 func get_price() -> float:
-	return price * rarity_level
+	return price
+
+# Calculates the bonus according to dish_quality
+func get_bonus() -> float:
+	var max_bonus: float
+	# More rare, more bonus multiplier it can get based on dish_quality
+	match rarity_level:
+		1:
+			max_bonus = price * 0.25
+			
+		2:
+			max_bonus = price * 0.5
+			
+		3:
+			max_bonus = price * 0.75
+			
+		_: # Default
+			max_bonus = 0
+	
+	return snappedf(max_bonus * (dish_quality / 100), 0.01)
 
 func is_equal(other: Edible) -> bool:
 	return (

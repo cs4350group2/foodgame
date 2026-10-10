@@ -399,7 +399,7 @@ func state_eating(delta):
 
 func take_payment() -> float:
 	paid = true
-	return order.get_order_total_price()
+	return order.get_order_total_price() + order.get_total_bonus()
 
 func state_finished(delta):
 	# Pay, finish eating, etc.
