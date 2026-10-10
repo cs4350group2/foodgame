@@ -32,6 +32,9 @@ enum State {
 func get_state_name(state: State) -> String:
 	return State.keys()[state]
 
+func get_current_state() -> State:
+	return current_state
+
 var current_state = State.IDLE
 var assigned_sittingNode: SittingNode = null
 var order_taken = false
@@ -62,12 +65,19 @@ func _ready():
 	patience_bar.set_patience(0.0, max_patience, max_patience / 100.0)
 
 func _on_interacted(_player: Player) -> void:
+	var held_edible: EdibleItem = _player.held_edible
+	if is_instance_valid(held_edible):
+		_deliver_held_edible(_player)
+		return
+	
 	match current_state:
 		State.ORDERING:
 			take_order()
 			
 		State.WAITING_FOR_FOOD:
-			_deliver_held_edible(_player)
+			# If reaches here, the player is 100% not holding an edible
+			print("You need to be holding a cooked dish/consumable to deliver it.")
+			return
 		
 		State.FINISHED:
 			RestaurantManager.receive_payment(take_payment())
@@ -290,6 +300,9 @@ func start_ordering() -> void:
 		order.order_completed.connect(_on_order_complete)
 	play_audio(AudioSfx.ORDERING)
 
+func get_order() -> Order:
+	return order
+
 func state_ordering(delta):
 	# Wait until player takes order
 	patience -= delta
@@ -360,17 +373,21 @@ func _deliver_held_edible(player: Player) -> void:
 	
 	var data: Edible = held_edible.get_data()
 	if held_edible.is_drink:
-		held_edible.affect_customer(self)
+		if held_edible.affect_customer(self):
+			var delivered_edible := held_edible
+			player.held_edible = null
+			delivered_edible.queue_free()
+			print("Delivered %s." % data.get_edible_name())
 	else: # is Food
 		var delivered_item := OrderItem.new(data, 1)
 		if not receive_order_item(delivered_item):
 			print("That dish does not match the customer's order.")
 			return
-
-	var delivered_edible := held_edible
-	player.held_edible = null
-	delivered_edible.queue_free()
-	print("Delivered %s." % data.get_edible_name())
+		
+		var delivered_edible := held_edible
+		player.held_edible = null
+		delivered_edible.queue_free()
+		print("Delivered %s." % data.get_edible_name())
 
 func state_eating(delta):
 	# Play eating animation

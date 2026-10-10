@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://gvj66cyhgiu0"]
 
-[ext_resource type="Script" uid="uid://7cstjwav77ha" path="res://src/restaurant/dishes/drinks/soda_item.gd" id="1_8pdba"]
+[ext_resource type="Script" uid="uid://b3oxj5sisvqeh" path="res://src/restaurant/dishes/drinks/liquid_food_item.gd" id="1_h1sj1"]
 [ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="2_h1sj1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_8pdba"]
@@ -8,7 +8,7 @@ height = 0.225
 radius = 0.1
 
 [node name="DrinkPlaceHolder" type="RigidBody3D" unique_id=577740580]
-script = ExtResource("1_8pdba")
+script = ExtResource("1_h1sj1")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=1657173609]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)

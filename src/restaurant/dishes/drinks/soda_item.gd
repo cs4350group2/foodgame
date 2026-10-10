@@ -14,6 +14,11 @@ func _process(delta: float) -> void:
 	pass
 
 func affect_customer(customer: Customer) -> void:
-	var curr_patience = customer.get_current_patience()
-	var new_patience = curr_patience + increment
-	customer.set_patience(new_patience)
+	var customer_state = customer.get_current_state()
+	var acceptable_states = [customer.State.ORDERING, 
+							customer.State.WAITING_FOR_FOOD]
+	
+	if customer_state in acceptable_states:
+		var curr_patience = customer.get_current_patience()
+		var new_patience = curr_patience + increment
+		customer.set_patience(new_patience)

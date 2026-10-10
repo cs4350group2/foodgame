@@ -14,6 +14,9 @@ func get_edible() -> Edible:
 func get_quantity() -> int:
 	return quantity
 
+func add_quantity(qty: int) -> void:
+	self.quantity += qty
+
 func get_edible_price() -> float:
 	return edible.get_price()
 	

@@ -16,8 +16,7 @@
 			"name": "Liquid Food",
 			"price": 50.0,
 			"description": "Lazy to cook? Just feed the customer these",
-			"usage": "Acts as a pseudo food that can be served as any food, 
-						but receive no money for it"
+			"usage": "Acts as a pseudo food that can be served as any food"
 		},
 		{
 			"name": "Iced Lemon Tea",

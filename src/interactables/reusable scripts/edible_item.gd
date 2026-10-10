@@ -60,5 +60,5 @@ func get_edible_item_name() -> String:
 		return food_data.get_edible_name()
 
 # Mainly used by drinks which will affect customers
-func affect_customer(customer: Customer) -> void:
-	pass
+func affect_customer(customer: Customer) -> bool:
+	return true
