@@ -44,7 +44,8 @@ var assigned_sittingNode: SittingNode = null
 var order_taken = false
 var paid = false
 var order: Order
-var move_speed = 2.0
+var move_speed: float = 2.0
+var mood_bonus: float = 0.0
 var customer_lvl: int
 var customer_name: String
 var exit_point: Marker3D
@@ -52,6 +53,12 @@ var prev_transform: Transform3D
 
 func get_customer_name() -> String:
 	return customer_name
+
+func get_mood_bonus() -> float:
+	return mood_bonus
+
+func add_mood_bonus(bonus: float) -> void:
+	mood_bonus = minf(mood_bonus + bonus, 100) # can't exceed 100
 
 func assign_sitting_node(node: SittingNode):
 	self.assigned_sittingNode = node
@@ -383,7 +390,14 @@ func _deliver_held_edible(player: Player) -> void:
 			delivered_edible.queue_free()
 			print("Delivered %s." % data.get_edible_name())
 	else: # is Food
-		var delivered_item := OrderItem.new(data, 1)
+		var food_data: Food = data
+		
+		# Finalise dish_quality with customer mood bonus
+		var new_dish_quality = food_data.get_dish_quality() + get_mood_bonus()
+		food_data.set_dish_quality(new_dish_quality)
+		
+		# Create order item
+		var delivered_item := OrderItem.new(food_data, 1)
 		if not receive_order_item(delivered_item):
 			print("That dish does not match the customer's order.")
 			return
@@ -391,7 +405,7 @@ func _deliver_held_edible(player: Player) -> void:
 		var delivered_edible := held_edible
 		player.held_edible = null
 		delivered_edible.queue_free()
-		print("Delivered %s." % data.get_edible_name())
+		print("Delivered %s." % food_data.get_edible_name())
 
 func state_eating(delta):
 	# Play eating animation

@@ -12,6 +12,12 @@ func _init(edible_name: String, base_price: float, rarity_level: int, dish_quali
 func get_rarity_level() -> int:
 	return rarity_level
 
+func get_dish_quality() -> float:
+	return dish_quality
+
+func set_dish_quality(new_dish_quality: float) -> void:
+	dish_quality = minf(new_dish_quality, 100.0)
+
 func get_price() -> float:
 	return price
 
