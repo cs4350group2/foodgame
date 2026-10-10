@@ -13,7 +13,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func affect_customer(customer: Customer) -> void:
+func affect_customer(customer: Customer) -> bool:
 	var customer_state = customer.get_current_state()
 	var acceptable_states = [customer.State.ORDERING, 
 							customer.State.WAITING_FOR_FOOD]
@@ -22,3 +22,6 @@ func affect_customer(customer: Customer) -> void:
 		var curr_patience = customer.get_current_patience()
 		var new_patience = curr_patience + increment
 		customer.set_patience(new_patience)
+		return true
+	else:
+		return false

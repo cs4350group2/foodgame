@@ -8,6 +8,7 @@ extends CharacterBody3D
 @onready var customer_spawner: CustomerSpawner = get_parent() as CustomerSpawner
 @onready var audio_player = $AudioStreamPlayer3D
 
+# SFX
 const HMM_SFX = preload("res://assets/sfx/customer/hmm_sfx.mp3")
 const ORDER_READY_SFX = preload("res://assets/sfx/customer/order_sfx.wav")
 const ORDER_COMPLETE_SFX = preload("res://assets/sfx/customer/satisfied_sfx.wav")
@@ -16,6 +17,9 @@ const ENTER_SFX = preload("res://assets/sfx/customer/enter_sfx.wav")
 const ORDER_TAKEN_SFX = preload("res://assets/sfx/customer/order_taken.ogg")
 const LEAVING_SFX = preload("res://assets/sfx/customer/leaving_sfx.wav")
 const WARNING_SFX = preload("res://assets/sfx/customer/warning_sfx.mp3")
+
+# VFX
+const POOF_SCENE: PackedScene = preload("res://assets/vfx/customer/Poof.tscn")
 
 enum State {
 	IDLE,
@@ -429,10 +433,13 @@ func state_leaving_angry(delta):
 		queue_free()
 		return
 
-func gets_deleted() -> void: # When customer drink EXTREMELY SAFE Drink
-	# TODO Add death and sound effect when deleted
+func disappear_with_poof() -> void: # When customer drink EXTREMELY SAFE Drink
+	var poof := POOF_SCENE.instantiate()
+	
 	if assigned_sittingNode != null:
 		assigned_sittingNode.clear()
 	customer_spawner.release_name(customer_name)
 	RestaurantManager.remove_customer(self)
+	get_tree().current_scene.add_child(poof)
+	poof.global_position = global_position
 	queue_free()
