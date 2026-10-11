@@ -37,13 +37,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		animate_selection()
 
 func animate_selection() -> void:
+	if animation:
+		animation.kill()
+		
 	if orders.is_empty():
 		no_order_label.visible = true
 		return
 	
 	no_order_label.visible = false
-	if animation:
-		animation.kill()
 	
 	animation = create_tween().set_parallel(true)
 	#animation.set_trans(Tween.TRANS_QUAD)
@@ -109,16 +110,26 @@ func _on_order_added(order: Order):
 
 func _on_order_removed(order: Order):
 	var to_remove: OrderUI = null
-	for order_ui in orders:
+	var remove_idx = 0
+	for i in range(len(orders)):
+		var order_ui := orders[i]
 		# they're ref counted so i think the ref should be same
 		if order_ui.get_order() == order:
 			# don't remove it from the array we're iterating through
 			to_remove = order_ui
+			remove_idx = i
 			break
 	
 	if to_remove:
 		orders.erase(to_remove)
 		to_remove.queue_free()
+		if remove_idx < selected:
+			selected -= 1
+		if orders.is_empty():
+			selected = 0
+		else:
+			selected = clampi(selected, 0, orders.size() - 1)
+		animate_selection()
 
 func __get_random_order(order_length: int) -> Order:
 	var menu: Dictionary = RestaurantManager.get_menu()

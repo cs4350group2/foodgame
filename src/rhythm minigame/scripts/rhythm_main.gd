@@ -137,10 +137,8 @@ func _ready() -> void:
 		hide_lane.emit("down")
 		
 	bgm_playback_position = AudioManager.get_bgm_playback_position()
-	AudioManager.fade_out_bgm(1.5)
-	
-	# wait 1.5 seconds before the chart begins, then starts the minigame
-	await get_tree().create_timer(1.5, false).timeout
+
+	await AudioManager.fade_out_bgm(1.5)
 	
 	current_time_ms = -note_lead_time_ms # this is to prevent the first few notes from triggering early
 	is_game_started = true
@@ -151,7 +149,7 @@ func _ready() -> void:
 	
 	# wait for the COOKING END! text to fade out fully
 	await get_tree().create_timer(2.5, false).timeout 
-	AudioManager.play_bgm(MUD_DAGORED, bgm_playback_position)
+	AudioManager.bgm_player.play(bgm_playback_position)
 	
 	rhythm_result_screen_v2.perfect_count_label.text = str(num_perfects)
 	rhythm_result_screen_v2.good_count_label.text = str(num_goods)
