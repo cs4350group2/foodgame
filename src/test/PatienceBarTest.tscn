@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bsjymmckksfwd"]
 
-[ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="2_customer"]
+[ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer/customer.tscn" id="2_customer"]
 
 [sub_resource type="GDScript" id="GDScript_kwii6"]
 script/source = "extends Node3D

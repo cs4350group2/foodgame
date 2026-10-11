@@ -399,7 +399,7 @@ func _deliver_held_edible(player: Player) -> void:
 		# Create order item
 		var delivered_item := OrderItem.new(food_data, 1)
 		if not receive_order_item(delivered_item):
-			print("That dish does not match the customer's order.")
+			print("That dish does not match the customer's order/requirement.")
 			return
 		
 		var delivered_edible := held_edible
