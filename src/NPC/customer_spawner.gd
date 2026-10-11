@@ -44,12 +44,13 @@ func spawn_customer(customer_type: StringName = &"") -> void:
 		print("No unused customer names remain.")
 		return
 		
-	var customer_name: String = available_names.pick_random()
+	var rng := RunManager.get_rng()
+	var customer_name: String = available_names[rng.randi_range(0, available_names.size() - 1)]
 	available_names.erase(customer_name) # Prevents duplicate names.
 	
 	# var customer_level := randi_range(1, 3)
 	var customer_level := 1
-	var patience := randf_range(30.0, 50.0)
+	var patience := rng.randf_range(30.0, 50.0)
 	
 	var customer: Customer = customer_scene.instantiate()
 	customer.initialize_customer(customer_name, customer_level, patience)

@@ -16,7 +16,7 @@ func _ready() -> void:
 	AudioManager.play_bgm(MAIN_MENU_THEME)
 
 func _start_game() -> void:
-	RunManager.start_new_run(seed_text.text == "", hash(seed_text.text))
+	RunManager.start_new_run(seed_text.text != "", hash(seed_text.text))
 	RunManager.enter_level()
 
 func _continue_game() -> void:

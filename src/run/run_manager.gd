@@ -12,6 +12,7 @@ func _ready() -> void:
 
 func retire_run() -> void:
 	current_run = null
+	active_level = null
 
 func start_new_run(seed_entered: bool, start_seed: int) -> void:
 	current_run = RestaurantRun.new(seed_entered, start_seed)

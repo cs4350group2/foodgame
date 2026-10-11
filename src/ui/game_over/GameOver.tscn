@@ -39,5 +39,6 @@ offset_top = -23.0
 offset_right = 576.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "click anywhere to retry"
+theme = ExtResource("1_h3bhr")
+text = "click anywhere to return to menu"
 horizontal_alignment = 1

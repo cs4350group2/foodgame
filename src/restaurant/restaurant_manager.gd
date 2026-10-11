@@ -20,6 +20,11 @@ signal customer_removed()
 signal order_added(order: Order)
 signal order_removed(order: Order)
 
+func reset() -> void:
+	sitting_nodes.clear()
+	orders.clear()
+	customers.clear()
+
 func load_menu():
 	# Load menu
 	var file = FileAccess.open("res://data/menu.json", FileAccess.READ)

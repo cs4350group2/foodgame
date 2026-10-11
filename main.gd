@@ -49,6 +49,9 @@ func unregister_temp(temp: Node):
 	if temp_nodes.has(temp.get_instance_id()):
 		temp_nodes.erase(temp.get_instance_id())
 
+func _exit_tree() -> void:
+	RestaurantManager.reset()
+
 func choose_customer(rng: RandomNumberGenerator) -> StringName:
 	var value := rng.randf_range(0.0, total_weight)
 	for cust: CustomerDistribution in available_customers:
