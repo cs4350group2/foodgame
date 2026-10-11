@@ -1,7 +1,7 @@
 extends Node3D
 class_name DayManager
 
-const GAME_OVER_SCENE := preload("res://src/ui/GameOver.tscn")
+const GAME_OVER_SCENE := preload("res://src/ui/game_over/GameOver.tscn")
 const THANKS_FOR_PLAYING = preload("res://src/ui/ThanksForPlaying.tscn")
 
 const MUD_DAGORED = preload("uid://dibhfexgjqvj")

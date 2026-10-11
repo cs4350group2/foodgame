@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyois83kvg6fj"]
 
-[ext_resource type="Script" uid="uid://db3b5ivyjvyyo" path="res://src/ui/main_menu.gd" id="1_0ogta"]
+[ext_resource type="Script" uid="uid://db3b5ivyjvyyo" path="res://src/ui/main_menu/main_menu.gd" id="1_0ogta"]
 [ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="1_adkca"]
 [ext_resource type="Texture2D" uid="uid://b4unt2owamg4n" path="res://assets/food/stationProps/knife2_1.png" id="3_l8p87"]
 
@@ -36,6 +36,12 @@ theme = ExtResource("1_adkca")
 theme_type_variation = &"HeaderLarge"
 text = "LET ME COOK"
 
+[node name="LineEdit" type="LineEdit" parent="Control/VBoxContainer" unique_id=2120196513]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_adkca")
+placeholder_text = "Seed"
+
 [node name="NewGameButton" type="Button" parent="Control/VBoxContainer" unique_id=770637763]
 unique_name_in_owner = true
 layout_mode = 2
@@ -54,11 +60,6 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_adkca")
 text = "Settings"
-
-[node name="LineEdit" type="LineEdit" parent="Control/VBoxContainer" unique_id=2120196513]
-unique_name_in_owner = true
-layout_mode = 2
-placeholder_text = "Seed"
 
 [node name="BackgroundSplash" type="TextureRect" parent="Control" unique_id=1834650563]
 z_index = -2

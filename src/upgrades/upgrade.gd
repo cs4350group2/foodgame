@@ -1,10 +1,12 @@
-extends Resource
+@abstract
 class_name Upgrade
+extends Resource
 
 @export var name: StringName
 @export var display_name: StringName
 @export var icon: Texture2D
-@export var description: String
+@export_multiline("Put a description here!") var description: String
+# an array of upgrade names that this depends on. not strictly enforced
+@export var dependencies: Array[StringName]
 
-func apply_effect(level: Level) -> void:
-	pass
+@abstract func apply_effect(level: Level)

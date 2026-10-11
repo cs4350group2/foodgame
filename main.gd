@@ -1,6 +1,8 @@
 extends Node3D
 class_name Level
 
+@onready var player: Player = %Player
+
 class CustomerDistribution:
 	var cust_name: StringName
 	var spawn_weight: float

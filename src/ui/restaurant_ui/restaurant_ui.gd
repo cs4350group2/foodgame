@@ -7,7 +7,8 @@ var total_duration: float
 @onready var coins_label: Label = %MoneyLabel
 @onready var timer_progress_bar: TextureProgressBar = %ProgressBar
 @onready var start_day_prompt: Label = %StartDayPrompt
-@onready var progress_container: HBoxContainer = $ViewportContainer/TimerMarginContainer/ProgressContainer
+@onready var progress_container: HBoxContainer = %ProgressContainer
+@onready var day_number: Label = %DayNumber
 
 func get_key_to_action(input_name: StringName) -> String:
 	var events = InputMap.action_get_events(input_name)
@@ -19,6 +20,7 @@ func get_key_to_action(input_name: StringName) -> String:
 func _ready() -> void:
 	_on_coins_updated(RunManager.current_run.coins)
 	RunManager.current_run.coins_updated.connect(_on_coins_updated)
+	RunManager.day_updated.connect(_on_day_update)
 
 	day_manager.setup_finished.connect(_on_dm_setup_finish)
 	day_manager.day_finished.connect(_on_day_finish)
@@ -27,6 +29,7 @@ func _ready() -> void:
 		% get_key_to_action(&"start_day")
 
 	_on_day_finish()
+	_on_day_update(RunManager.current_run.current_day)
 
 func _on_dm_setup_finish() -> void:
 	total_duration = day_manager.total_duration
@@ -51,6 +54,9 @@ func start_day() -> void:
 	start_day_prompt.visible = false
 	progress_container.visible = true
 	day_manager.start_day()
+
+func _on_day_update(day: int) -> void:
+	day_number.text = "Day %d" % day
 
 func _on_day_finish() -> void:
 	progress_container.visible = false

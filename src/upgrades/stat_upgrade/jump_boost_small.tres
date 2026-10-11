@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StatUpgrade" format=3 uid="uid://bn6tru1m3h3uk"]
+
+[ext_resource type="Script" uid="uid://f6rsg3htlyqw" path="res://src/upgrades/stat_upgrade/stat_upgrade.gd" id="1_p4q4b"]
+
+[resource]
+script = ExtResource("1_p4q4b")
+jump_multiplier = 1.2
+name = &"jump_boost_small"
+display_name = &"High Jumpers"
+description = "Do a little bit of exercise that lets you jump higher."
+metadata/_custom_type_script = "uid://f6rsg3htlyqw"

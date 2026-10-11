@@ -31,10 +31,10 @@
 [ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="29_qsp4k"]
 [ext_resource type="PackedScene" uid="uid://drvgq5wpa1odo" path="res://models/environmentMeshes/Restaurant/restaurantDoor.tscn" id="30_ok6jj"]
 [ext_resource type="PackedScene" uid="uid://dvduy5678d5pk" path="res://models/environmentMeshes/Restaurant/restaurantCeiling.tscn" id="31_facbu"]
-[ext_resource type="PackedScene" uid="uid://ubv0sb3volmr" path="res://src/ui/RestaurantUI.tscn" id="33_jq2sk"]
+[ext_resource type="PackedScene" uid="uid://ubv0sb3volmr" path="res://src/ui/restaurant_ui/RestaurantUI.tscn" id="33_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://bncnlon6uyptf" path="res://src/restaurant/DayManager.tscn" id="34_4k2k6"]
 [ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="35_0rl1p"]
-[ext_resource type="PackedScene" uid="uid://dgh6jtkk62vuk" path="res://src/ui/PauseMenu.tscn" id="36_ok6jj"]
+[ext_resource type="PackedScene" uid="uid://dgh6jtkk62vuk" path="res://src/ui/pause_menu/PauseMenu.tscn" id="36_ok6jj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -90,6 +90,7 @@ script = ExtResource("1_0rl1p")
 ui_nodes = [NodePath("CanvasLayer"), NodePath("RestaurantUi")]
 
 [node name="Player" parent="." unique_id=1842546302 instance=ExtResource("1_074og")]
+unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1398200764]
