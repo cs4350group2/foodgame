@@ -4,6 +4,7 @@ var sitting_nodes: Array[Node] = []
 var customers: Array[Customer] = []
 var orders: Array[Order] = []
 var menu_data: Dictionary
+var drinks_menu_data: Dictionary
 var coins: float = 0
 
 signal coins_updated(amount)
@@ -20,12 +21,21 @@ signal order_added(order: Order)
 signal order_removed(order: Order)
 
 func load_menu():
+	# Load menu
 	var file = FileAccess.open("res://data/menu.json", FileAccess.READ)
 	var text = file.get_as_text()
 	menu_data = JSON.parse_string(text)
+	
+	# Load drinks menu
+	var drinks_file = FileAccess.open("res://data/drinks.json", FileAccess.READ)
+	var drinks_text = drinks_file.get_as_text()
+	drinks_menu_data = JSON.parse_string(drinks_text)
 
 func get_menu() -> Dictionary:
 	return menu_data
+
+func get_drinks_menu() -> Dictionary:
+	return drinks_menu_data
 
 func _ready() -> void:
 	load_menu()

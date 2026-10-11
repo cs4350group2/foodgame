@@ -24,7 +24,7 @@ func _on_interacted(player: Player) -> void:
 
 	# Buns, processed ingredients, and dishes remain unchanged.
 	if not INGREDIENT_SCENES.has(ingredient_path):
-		var ingredient_name := original.food_name
+		var ingredient_name := original.get_edible_item_name()
 		if original.food_data != null:
 			ingredient_name = original.food_data.edible_name
 
@@ -53,7 +53,7 @@ func _on_interacted(player: Player) -> void:
 	player.pick_up_edible(chopped)
 
 	if player.held_edible == chopped:
-		print("Chopped ", original.food_name, " into ", chopped.food_name, ".")
+		print("Chopped ", original.get_edible_item_name(), " into ", chopped.get_edible_item_name(), ".")
 		original.queue_free()
 	else:
 		player.held_edible = original
