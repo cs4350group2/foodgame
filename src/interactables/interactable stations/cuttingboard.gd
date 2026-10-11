@@ -1,60 +1,74 @@
 extends StaticBody3D
-@onready var interaction: InteractComponent = $InteractComponent
 
-const INGREDIENT_SCENES = {
-	"res://models/physics/food/ingredients/meatRaw.tscn":
-		preload("res://models/physics/food/ingredients/pattyRaw.tscn"),
-	"res://models/physics/food/ingredients/tomatoWhole.tscn":
-		preload("res://models/physics/food/ingredients/tomatoSliced.tscn"),
-	"res://models/physics/food/ingredients/potato.tscn":
-		preload("res://models/physics/food/ingredients/potatoSliced.tscn")
-}
+@onready var interaction: InteractComponent = $InteractComponent
+@onready var food_point: Marker3D = $FoodPoint
+
+var stored_edible: EdibleItem
+var _stored_original_freeze: bool
+var _stored_original_interaction_enabled: bool
+
 
 func _ready() -> void:
-	interaction.interact_while_holding = true
+	interaction.supports_primary = true
+	interaction.accepts_primary_while_holding = true
 	interaction.interacted.connect(_on_interacted)
 
+
 func _on_interacted(player: Player) -> void:
-	print("Cutting board interaction received")
-	if not is_instance_valid(player.held_edible):
+	if not is_instance_valid(stored_edible):
+		stored_edible = null
+
+	if is_instance_valid(player.held_edible):
+		if stored_edible != null:
+			print("The chopping board is occupied.")
+			return
+
+		_place_food(player)
+	elif stored_edible != null:
+		_take_food(player)
+
+
+func _place_food(player: Player) -> void:
+	var food := player._release_held_edible()
+	if not is_instance_valid(food):
 		return
 
-	var original := player.held_edible
-	var ingredient_path := original.scene_file_path
+	_stored_original_freeze = food.freeze
+	_stored_original_interaction_enabled = food.interaction.enabled
 
-	# Buns, processed ingredients, and dishes remain unchanged.
-	if not INGREDIENT_SCENES.has(ingredient_path):
-		var ingredient_name := original.get_edible_item_name()
-		if original.food_data != null:
-			ingredient_name = original.food_data.edible_name
+	food.interaction.set_highlighted(false)
+	food.interaction.enabled = false
+	food.freeze = true
+	food.linear_velocity = Vector3.ZERO
+	food.angular_velocity = Vector3.ZERO
 
-		print("Cannot chop ", ingredient_name, ".")
-		return
+	food.reparent(self, true)
 
-	var output_scene: PackedScene = INGREDIENT_SCENES[ingredient_path]
-	var instance := output_scene.instantiate()
-	var chopped := instance as EdibleItem
+	var food_scale := food.global_basis.get_scale()
+	var placed_basis := food_point.global_basis.orthonormalized() \
+		* Basis.from_scale(food_scale)
 
-	if chopped == null:
-		push_error("The chopped ingredient needs the EdibleItem script.")
-		instance.queue_free()
-		return
+	food.global_transform = Transform3D(
+		placed_basis,
+		food_point.global_position
+	)
+	food.reset_physics_interpolation()
 
-	# Adding it initializes its @onready interaction reference.
-	get_tree().current_scene.add_child(chopped)
+	stored_edible = food
 
-	if not is_instance_valid(chopped.interaction):
-		push_error("The chopped ingredient needs an InteractComponent.")
-		chopped.queue_free()
-		return
 
-	# Pickup requires an empty hand.
-	player.held_edible = null
-	player.pick_up_edible(chopped)
+func _take_food(player: Player) -> void:
+	var food := stored_edible
 
-	if player.held_edible == chopped:
-		print("Chopped ", original.get_edible_item_name(), " into ", chopped.get_edible_item_name(), ".")
-		original.queue_free()
+	food.reparent(get_tree().current_scene, true)
+	food.freeze = _stored_original_freeze
+	food.interaction.enabled = _stored_original_interaction_enabled
+
+	player.pick_up_edible(food)
+
+	if player.held_edible == food:
+		stored_edible = null
 	else:
-		player.held_edible = original
-		chopped.queue_free()
+		food.reparent(self, true)
+		food.freeze = true
+		food.interaction.enabled = false

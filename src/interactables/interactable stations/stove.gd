@@ -38,8 +38,8 @@ var selected_dish : String = "" # selected dish to cook
 @export var camera_focus_height: float = 2 # vertical offset above stove for player to look at
 
 func _ready() -> void:
-	interaction.interact_while_holding = true
-	interaction.interacted.connect(_on_interacted)
+	interaction.supports_secondary = true
+	interaction.alt_interacted.connect(_on_alt_interacted)
 	
 	var invalid_dialog_label: Label = invalid_recipe_dialog.get_label()
 	

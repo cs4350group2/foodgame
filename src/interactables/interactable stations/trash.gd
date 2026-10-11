@@ -1,16 +1,20 @@
 extends Node3D
 
-@onready var interaction: InteractComponent = $"InteractComponent"
+@onready var interaction: InteractComponent = $InteractComponent
+
 
 func _ready() -> void:
-	interaction.interact_while_holding = true
+	interaction.supports_primary = true
+	interaction.accepts_primary_while_holding = true
 	interaction.interacted.connect(_on_interacted)
 
+
 func _on_interacted(player: Player) -> void:
-	if not is_instance_valid(player.held_food):
+	if not is_instance_valid(player.held_edible):
 		return
 
-	var edible_item := player.held_edible
-	player.held_food = null
-	edible_item.queue_free()
-	print("Threw out ", edible_item.get_edible_item_name(), ".")
+	var item_name := player.held_edible.get_edible_item_name()
+	var food := player._release_held_edible()
+
+	food.queue_free()
+	print("Threw out ", item_name, ".")

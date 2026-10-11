@@ -11,6 +11,7 @@ var is_drink: bool = false
 @onready var interaction: InteractComponent = $InteractComponent
 
 func _ready() -> void:
+	interaction.supports_primary = true
 	interaction.interacted.connect(_on_interacted)
 
 func initialize_data(item_name: String, is_drink: bool = false) -> void:

@@ -22,3 +22,6 @@ shape = SubResource("BoxShape3D_1vivr")
 [node name="InteractComponent" type="Node" parent="StaticBody3D" index="1" unique_id=1181256562]
 script = ExtResource("3_0umya")
 metadata/_custom_type_script = "uid://ca7pbehy5loa"
+
+[node name="Marker3D" type="Marker3D" parent="StaticBody3D" index="2" unique_id=1891311071]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23, 0)
