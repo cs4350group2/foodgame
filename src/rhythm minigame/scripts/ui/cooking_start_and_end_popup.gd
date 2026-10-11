@@ -17,20 +17,20 @@ func animate_cooking_start_text():
 	
 	var tween = create_tween()
 	
-	tween.tween_property(cooking_start_label, "modulate:a", 1.0, 1.5)
+	tween.tween_property(cooking_start_label, "modulate:a", 1.0, 0.5)
 	
 	# keep text on screen for another 0.75 seconds
-	tween.tween_interval(0.75)
+	tween.tween_interval(0.5)
 	
-	tween.tween_property(cooking_start_label, "modulate:a", 0.0, 1.5)
+	tween.tween_property(cooking_start_label, "modulate:a", 0.0, 0.5)
 
 func animate_cooking_end_text():
 	var tween = create_tween()
 	
-	tween.tween_property(cooking_end_label, "modulate:a", 1.0, 1.5)
+	tween.tween_property(cooking_end_label, "modulate:a", 1.0, 0.5)
 	
 	# keep text on screen for another 0.75 seconds
 	tween.tween_interval(0.75)
 	
-	tween.tween_property(cooking_end_label, "modulate:a", 0.0, 1.5)
+	tween.tween_property(cooking_end_label, "modulate:a", 0.0, 0.5)
 	

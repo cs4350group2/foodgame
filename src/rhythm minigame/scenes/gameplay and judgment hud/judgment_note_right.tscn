@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bi7li6mmfwcgu"]
+
+[ext_resource type="PackedScene" uid="uid://clgejlh74tqax" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/judgment_note.tscn" id="1_8a4fb"]
+[ext_resource type="Script" uid="uid://7yewbfprj66u" path="res://src/rhythm minigame/scripts/gameplay and judgment hud/judgment_note.gd" id="2_8a4fb"]
+[ext_resource type="Texture2D" uid="uid://581st8vfd2kb" path="res://assets/rhythm minigame/PNG/white_right_spatula.png" id="3_8klqs"]
+
+[node name="JudgmentArrow" unique_id=1687560457 instance=ExtResource("1_8a4fb")]
+script = ExtResource("2_8a4fb")
+
+[node name="ArrowLeft" parent="." index="0" unique_id=1065824009]
+texture = ExtResource("3_8klqs")
