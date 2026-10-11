@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dai27nvool4vs"]
+
+[ext_resource type="Script" uid="uid://3jayeuijk1q5" path="res://src/NPC/customer/vip_customer.gd" id="1_axcya"]
+[ext_resource type="PackedScene" uid="uid://7vp41bnabrgd" path="res://src/NPC/asset/VIP_Customer/vip_customer_model.tscn" id="2_ow1nv"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="2_rb2kk"]
+[ext_resource type="PackedScene" uid="uid://bni0uok26bsmb" path="res://src/NPC/ui/PatienceBar.tscn" id="3_ow1nv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xrivr"]
+radius = 0.3
+height = 1.8
+
+[node name="VipCustomer" type="CharacterBody3D" unique_id=1663120077]
+script = ExtResource("1_axcya")
+metadata/_custom_type_script = "uid://3jayeuijk1q5"
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=834208737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=172027497]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_xrivr")
+
+[node name="Sketchfab_Scene" parent="CharacterBody3D" unique_id=1702578616 instance=ExtResource("2_ow1nv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="InteractComponent" type="Node" parent="." unique_id=207207384]
+script = ExtResource("2_rb2kk")
+highlight_root_path = NodePath("..")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"
+
+[node name="PatienceBar" parent="." unique_id=258558182 instance=ExtResource("3_ow1nv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1876957, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1929050750]
+bus = &"SFX"
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1429400169]
+path_height_offset = 0.1

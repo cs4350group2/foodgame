@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cr4xwsyqm0h3v"
-path.s3tc="res://.godot/imported/Timmy_Ch09_1001_Diffuse.png-d0b048e00d9627e9c34ca3684fdbad4f.s3tc.ctex"
+path.s3tc="res://.godot/imported/Timmy_Ch09_1001_Diffuse.png-ceb1e4a4d6d6b915e91afc33bde22afd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://src/NPC/asset/Timmy_Ch09_1001_Diffuse.png"
-dest_files=["res://.godot/imported/Timmy_Ch09_1001_Diffuse.png-d0b048e00d9627e9c34ca3684fdbad4f.s3tc.ctex"]
+source_file="res://src/NPC/asset/Timmy/Timmy_Ch09_1001_Diffuse.png"
+dest_files=["res://.godot/imported/Timmy_Ch09_1001_Diffuse.png-ceb1e4a4d6d6b915e91afc33bde22afd.s3tc.ctex"]
 
 [params]
 

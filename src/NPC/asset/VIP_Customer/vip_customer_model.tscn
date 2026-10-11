@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://7vp41bnabrgd"]
+
+[ext_resource type="PackedScene" uid="uid://qxj1fsk1otn3" path="res://src/NPC/asset/VIP_Customer/vip_customer.glb" id="1_eqq4h"]
+
+[node name="Sketchfab_Scene" unique_id=1702578616 instance=ExtResource("1_eqq4h")]

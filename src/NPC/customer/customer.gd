@@ -132,6 +132,19 @@ func _process(delta: float) -> void:
 	match current_state:
 		pass
 
+func play_animation(anim: String) -> void:
+	match anim:
+		"Idle":
+			animation_player.play("Idle")
+		
+		"Walk":
+			animation_player.play("Walk")
+		
+		"Sitting_Idle":
+			animation_player.play("Sitting_Idle")
+		_:
+			pass
+
 # -------------- State Management ----------------------------------
 
 func change_state(new_state: State):
@@ -147,12 +160,12 @@ func change_state(new_state: State):
 func enter_state(state: State):
 	match state:
 		State.IDLE:
-			animation_player.play("Idle")
+			play_animation("Idle")
 			pass
 		
 		State.WALKING_TO_TABLE:
 			play_audio(AudioSfx.ENTER)
-			animation_player.play("Walk")
+			play_animation("Walk")
 			update_target_location(assigned_sittingNode.global_position)
 			pass
 
@@ -161,7 +174,7 @@ func enter_state(state: State):
 			# Play reading menu animation for random seconds
 			prev_transform = global_transform
 			global_transform = assigned_sittingNode.get_seating_transform()
-			animation_player.play("Sitting_Idle")
+			play_animation("Sitting_Idle")
 			var view_menu_time = RunManager.get_rng().randf_range(5.0, 10.0)
 			wait_at_table(view_menu_time)
 			pass
@@ -184,12 +197,12 @@ func enter_state(state: State):
 
 		State.LEAVING:
 			global_transform = prev_transform
-			animation_player.play("Walk")
+			play_animation("Walk")
 			update_target_location(exit_point.global_position)
 			pass
 		State.LEAVING_ANGRY:
 			global_transform = prev_transform
-			animation_player.play("Walk")
+			play_animation("Walk")
 			play_audio(AudioSfx.ANGRY)
 			update_target_location(exit_point.global_position)
 			pass

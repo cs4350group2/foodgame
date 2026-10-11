@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bv4ujjqpdbksg"
-path="res://.godot/imported/Timmy.glb-fc87ca558975a4d4c1f91dc4bac890d4.scn"
+path="res://.godot/imported/Timmy.glb-861e988b00ea8bd56c884a5d808b831c.scn"
 
 [deps]
 
-source_file="res://src/NPC/asset/Timmy.glb"
-dest_files=["res://.godot/imported/Timmy.glb-fc87ca558975a4d4c1f91dc4bac890d4.scn"]
+source_file="res://src/NPC/asset/Timmy/Timmy.glb"
+dest_files=["res://.godot/imported/Timmy.glb-861e988b00ea8bd56c884a5d808b831c.scn"]
 
 [params]
 

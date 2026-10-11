@@ -1,14 +1,17 @@
 class_name CustomerSpawner
 extends Node3D
 
-@export var customer_scene: PackedScene
+@export var customer_scenes: Array[PackedScene]
 @onready var spawn_point: Marker3D = $SpawnPoint
 @onready var exit_point: Marker3D = $Exit
+
+# Preload all available customer scenes
+var vip_customer_scene: PackedScene = preload("res://src/NPC/customer/vip_customer.tscn")
 
 var available_names: Array[String] = []
 var used_names: Dictionary = {}
 var to_spawn: Array[StringName]
-
+var customer_scene: PackedScene
 
 func _ready() -> void:
 	load_names()
@@ -39,6 +42,12 @@ func load_names() -> void:
 		if not customer_name.is_empty() and not available_names.has(customer_name):
 			available_names.append(customer_name)
 
+func choose_random_customer_scene() -> void:
+	if customer_scenes.is_empty():
+		return
+
+	customer_scene = customer_scenes.pick_random()
+
 func spawn_customer(customer_type: StringName = &"") -> void:
 	if available_names.is_empty():
 		print("No unused customer names remain.")
@@ -52,6 +61,16 @@ func spawn_customer(customer_type: StringName = &"") -> void:
 	var customer_level := 1
 	var patience := rng.randf_range(30.0, 50.0)
 	
+	# Set up customer scene
+	match customer_type:
+		&"":
+			choose_random_customer_scene()
+		&"VIP":
+			customer_scene = vip_customer_scene
+		_:
+			print(customer_type)
+			choose_random_customer_scene()
+		
 	var customer: Customer = customer_scene.instantiate()
 	customer.initialize_customer(customer_name, customer_level, patience)
 	customer.exit_point = exit_point
