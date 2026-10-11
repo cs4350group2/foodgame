@@ -418,7 +418,8 @@ func take_payment() -> float:
 
 func state_finished(delta):
 	# Pay, finish eating, etc.
-	_on_interacted(null)
+	# if we don't want to interact to take payment:
+	#RestaurantManager.receive_payment(take_payment())
 	# Go to counter/Leave money on table for collection
 	
 	if paid:
