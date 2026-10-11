@@ -20,6 +20,11 @@ signal customer_removed()
 signal order_added(order: Order)
 signal order_removed(order: Order)
 
+func reset() -> void:
+	sitting_nodes.clear()
+	orders.clear()
+	customers.clear()
+
 func load_menu():
 	# Load menu
 	var file = FileAccess.open("res://data/menu.json", FileAccess.READ)
@@ -106,9 +111,7 @@ func assign_sittingNode(customer: Customer) -> bool:
 	return true
 
 func receive_payment(amount: float) -> void:
-	print("Coins: ", coins, " + ", amount)
-	coins += amount
-	coins_updated.emit(coins)
+	RunManager.current_run.add_coins(amount)
 
 func get_current_coins() -> float:
-	return coins
+	return RunManager.current_run.coins

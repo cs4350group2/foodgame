@@ -71,7 +71,7 @@ func initialize_customer(name: String, level: int, patience: float) -> void:
 func _ready():
 	interaction.interact_while_holding = true
 	interaction.interacted.connect(_on_interacted)
-	audio_player.pitch_scale = randf_range(0.67, 1.3)
+	audio_player.pitch_scale = RunManager.get_rng().randf_range(0.67, 1.3)
 	change_state(State.IDLE)
 	patience_bar.set_patience(0.0, max_patience, max_patience / 100.0)
 
@@ -162,7 +162,7 @@ func enter_state(state: State):
 			prev_transform = global_transform
 			global_transform = assigned_sittingNode.get_seating_transform()
 			animation_player.play("Sitting_Idle")
-			var view_menu_time = randf_range(5.0, 10.0)
+			var view_menu_time = RunManager.get_rng().randf_range(5.0, 10.0)
 			wait_at_table(view_menu_time)
 			pass
 
@@ -303,7 +303,8 @@ func start_ordering() -> void:
 	# Decide order
 	if order == null:
 		var menu: Dictionary = RestaurantManager.get_menu()
-		var food_data = menu["foods"].pick_random()
+		var foods: Array = menu["foods"]
+		var food_data = foods[RunManager.get_rng().randi_range(0, foods.size() - 1)]
 		print(food_data["name"], food_data["price"], food_data["rarity"])
 		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 1.0)
 		var order_item = OrderItem.new(food, customer_lvl)
@@ -417,7 +418,8 @@ func take_payment() -> float:
 
 func state_finished(delta):
 	# Pay, finish eating, etc.
-	_on_interacted(null)
+	# if we don't want to interact to take payment:
+	#RestaurantManager.receive_payment(take_payment())
 	# Go to counter/Leave money on table for collection
 	
 	if paid:
@@ -453,6 +455,8 @@ func disappear_with_poof() -> void: # When customer drink EXTREMELY SAFE Drink
 	if assigned_sittingNode != null:
 		assigned_sittingNode.clear()
 	customer_spawner.release_name(customer_name)
+	if RestaurantManager.orders.has(self.order):
+		RestaurantManager.remove_order(self.order)
 	RestaurantManager.remove_customer(self)
 	get_tree().current_scene.add_child(poof)
 	poof.global_position = global_position

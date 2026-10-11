@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c3rpp6ixwyi0a"]
 
 [ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="1_h3bhr"]
-[ext_resource type="Script" uid="uid://tv4hweci8c06" path="res://src/ui/game_over.gd" id="2_game_over"]
+[ext_resource type="Script" uid="uid://tv4hweci8c06" path="res://src/ui/game_over/game_over.gd" id="2_game_over"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5x3br"]
 bg_color = Color(0, 0, 0, 1)
@@ -39,5 +39,6 @@ offset_top = -23.0
 offset_right = 576.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "click anywhere to retry"
+theme = ExtResource("1_h3bhr")
+text = "click anywhere to return to menu"
 horizontal_alignment = 1

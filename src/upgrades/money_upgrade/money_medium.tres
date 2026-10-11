@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MoneyUpgrade" format=3 uid="uid://duqapujwro18c"]
+
+[ext_resource type="Script" uid="uid://6laiqgi2oolj" path="res://src/upgrades/money_upgrade/money_upgrade.gd" id="1_p4g1v"]
+
+[resource]
+script = ExtResource("1_p4g1v")
+amount = 300.0
+name = &"money_medium"
+display_name = &"Cash Injection"
+description = "Receive a small boost of funds from seemingly nowhere."
+dependencies = Array[StringName]([&"money_small"])
+metadata/_custom_type_script = "uid://6laiqgi2oolj"

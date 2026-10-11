@@ -4,6 +4,9 @@
 # Godot export credentials/presets can contain local machine paths or secrets.
 export_presets.cfg
 
+# the addon bs
+/addons/godot-git-plugin/
+
 # Generated exports/builds
 /android/
 /build/

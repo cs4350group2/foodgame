@@ -1,6 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://thrhjvfrigx3"]
 
 [ext_resource type="FontFile" uid="uid://dk6aai08i16bb" path="res://assets/fonts/W95F.otf" id="1_wksio"]
+[ext_resource type="FontFile" uid="uid://8vl643wgamfq" path="res://assets/fonts/upheavtt.ttf" id="2_lupir"]
 
 [sub_resource type="DPITexture" id="DPITexture_xm6e3"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"5.5\" fill=\"#1a1a1a\" stroke=\"#fff\" stroke-opacity=\".75\" stroke-width=\"3\"/></svg>
@@ -55,6 +56,8 @@ expand_margin_bottom = 2.0
 
 [resource]
 default_font_size = 20
+Button/font_sizes/font_size = 21
+Button/fonts/font = ExtResource("2_lupir")
 CheckBox/colors/checkbox_checked_color = Color(1, 1, 1, 1)
 CheckBox/colors/checkbox_unchecked_color = Color(1, 1, 1, 1)
 CheckBox/colors/font_color = Color(0.875, 0.875, 0.875, 1)
@@ -82,6 +85,13 @@ CheckBox/styles/hover = SubResource("StyleBoxEmpty_dbt65")
 CheckBox/styles/hover_pressed = SubResource("StyleBoxEmpty_dbt65")
 CheckBox/styles/normal = SubResource("StyleBoxEmpty_dbt65")
 CheckBox/styles/pressed = SubResource("StyleBoxEmpty_dbt65")
-Label/colors/font_color = Color(0, 0, 0, 1)
+FoldableContainer/font_sizes/font_size = 30
+FoldableContainer/fonts/font = ExtResource("2_lupir")
+HeaderLarge/colors/font_color = Color(1, 1, 1, 1)
+HeaderLarge/font_sizes/font_size = 40
+HeaderLarge/fonts/font = ExtResource("2_lupir")
+Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0.9166399, 0.91663986, 0.9166398, 1)
 Label/fonts/font = ExtResource("1_wksio")
+LineEdit/font_sizes/font_size = 20
+LineEdit/fonts/font = ExtResource("1_wksio")

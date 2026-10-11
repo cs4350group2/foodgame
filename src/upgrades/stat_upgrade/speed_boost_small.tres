@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SpeedUpgrade" format=3 uid="uid://cey4n00thq4sf"]
+
+[ext_resource type="Script" uid="uid://f6rsg3htlyqw" path="res://src/upgrades/stat_upgrade/stat_upgrade.gd" id="1_4k8dm"]
+
+[resource]
+script = ExtResource("1_4k8dm")
+speed_multiplier = 1.05
+name = &"speed_boost_small"
+display_name = &"Leg Day"
+description = "You do leg day at the gym and can run 5% faster."
+metadata/_custom_type_script = "uid://f6rsg3htlyqw"
