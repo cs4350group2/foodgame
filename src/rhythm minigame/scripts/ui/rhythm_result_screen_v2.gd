@@ -25,4 +25,4 @@ func display_results_screen():
 	tween.tween_property(rhythm_result_screen_v2, "modulate:a", 1.0, 1.5)
 
 func _on_return_to_restaurant_button_pressed() -> void:
-	rhythm_main.return_to_restaurant.emit(rhythm_main.dish_quality)
+	rhythm_main.return_to_restaurant.emit(rhythm_main.final_dish_quality)
