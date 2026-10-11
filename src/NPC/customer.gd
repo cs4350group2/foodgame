@@ -8,6 +8,7 @@ extends CharacterBody3D
 @onready var customer_spawner: CustomerSpawner = get_parent() as CustomerSpawner
 @onready var audio_player = $AudioStreamPlayer3D
 
+# SFX
 const HMM_SFX = preload("res://assets/sfx/customer/hmm_sfx.mp3")
 const ORDER_READY_SFX = preload("res://assets/sfx/customer/order_sfx.wav")
 const ORDER_COMPLETE_SFX = preload("res://assets/sfx/customer/satisfied_sfx.wav")
@@ -16,6 +17,9 @@ const ENTER_SFX = preload("res://assets/sfx/customer/enter_sfx.wav")
 const ORDER_TAKEN_SFX = preload("res://assets/sfx/customer/order_taken.ogg")
 const LEAVING_SFX = preload("res://assets/sfx/customer/leaving_sfx.wav")
 const WARNING_SFX = preload("res://assets/sfx/customer/warning_sfx.mp3")
+
+# VFX
+const POOF_SCENE: PackedScene = preload("res://assets/vfx/customer/Poof.tscn")
 
 enum State {
 	IDLE,
@@ -32,12 +36,16 @@ enum State {
 func get_state_name(state: State) -> String:
 	return State.keys()[state]
 
+func get_current_state() -> State:
+	return current_state
+
 var current_state = State.IDLE
 var assigned_sittingNode: SittingNode = null
 var order_taken = false
 var paid = false
 var order: Order
-var move_speed = 2.0
+var move_speed: float = 2.0
+var mood_bonus: float = 0.0
 var customer_lvl: int
 var customer_name: String
 var exit_point: Marker3D
@@ -45,6 +53,12 @@ var prev_transform: Transform3D
 
 func get_customer_name() -> String:
 	return customer_name
+
+func get_mood_bonus() -> float:
+	return mood_bonus
+
+func add_mood_bonus(bonus: float) -> void:
+	mood_bonus = minf(mood_bonus + bonus, 100) # can't exceed 100
 
 func assign_sitting_node(node: SittingNode):
 	self.assigned_sittingNode = node
@@ -62,12 +76,19 @@ func _ready():
 	patience_bar.set_patience(0.0, max_patience, max_patience / 100.0)
 
 func _on_interacted(_player: Player) -> void:
+	var held_edible: EdibleItem = _player.held_edible
+	if is_instance_valid(held_edible):
+		_deliver_held_edible(_player)
+		return
+	
 	match current_state:
 		State.ORDERING:
 			take_order()
 			
 		State.WAITING_FOR_FOOD:
-			_deliver_held_food(_player)
+			# If reaches here, the player is 100% not holding an edible
+			print("You need to be holding a cooked dish/consumable to deliver it.")
+			return
 		
 		State.FINISHED:
 			RestaurantManager.receive_payment(take_payment())
@@ -290,6 +311,9 @@ func start_ordering() -> void:
 		order.order_completed.connect(_on_order_complete)
 	play_audio(AudioSfx.ORDERING)
 
+func get_order() -> Order:
+	return order
+
 func state_ordering(delta):
 	# Wait until player takes order
 	patience -= delta
@@ -309,6 +333,9 @@ var patience: float
 
 func get_current_patience() -> float:
 	return patience
+
+func set_patience(new_patience: float) -> void:
+	patience = min(max_patience, new_patience)
 
 func start_waiting_for_food() -> void:
 	patience = max_patience
@@ -345,25 +372,40 @@ func receive_order_item(item: OrderItem) -> bool:
 	# if the order is finished, we let the signal tell us
 	return order.receive_order_item(item)
 
-func _deliver_held_food(player: Player) -> void:
-	if not is_instance_valid(player.held_edible):
-		print("You need to be holding a cooked dish to deliver it.")
+func _deliver_held_edible(player: Player) -> void:
+	var held_edible: EdibleItem = player.held_edible
+	if not is_instance_valid(held_edible):
+		print("You need to be holding a cooked dish/consumable to deliver it.")
 		return
-
-	var food_data: Food = player.held_edible.get_data()
-	if food_data == null:
+	
+	if held_edible.is_ingredient():
 		print("Ingredients cannot be delivered. Cook them first.")
 		return
-
-	var delivered_item := OrderItem.new(food_data, 1)
-	if not receive_order_item(delivered_item):
-		print("That dish does not match the customer's order.")
-		return
-
-	var delivered_edible := player.held_edible
-	player.held_edible = null
-	delivered_edible.queue_free()
-	print("Delivered %s." % food_data.edible_name)
+	
+	var data: Edible = held_edible.get_data()
+	if held_edible.is_drink:
+		if held_edible.affect_customer(self):
+			var delivered_edible := held_edible
+			player.held_edible = null
+			delivered_edible.queue_free()
+			print("Delivered %s." % data.get_edible_name())
+	else: # is Food
+		var food_data: Food = data
+		
+		# Finalise dish_quality with customer mood bonus
+		var new_dish_quality = food_data.get_dish_quality() + get_mood_bonus()
+		food_data.set_dish_quality(new_dish_quality)
+		
+		# Create order item
+		var delivered_item := OrderItem.new(food_data, 1)
+		if not receive_order_item(delivered_item):
+			print("That dish does not match the customer's order.")
+			return
+		
+		var delivered_edible := held_edible
+		player.held_edible = null
+		delivered_edible.queue_free()
+		print("Delivered %s." % food_data.get_edible_name())
 
 func state_eating(delta):
 	# Play eating animation
@@ -371,7 +413,7 @@ func state_eating(delta):
 
 func take_payment() -> float:
 	paid = true
-	return order.get_order_total_price()
+	return order.get_order_total_price() + order.get_total_bonus()
 
 func state_finished(delta):
 	# Pay, finish eating, etc.
@@ -404,3 +446,14 @@ func state_leaving_angry(delta):
 		RestaurantManager.remove_angry_customer(self)
 		queue_free()
 		return
+
+func disappear_with_poof() -> void: # When customer drink EXTREMELY SAFE Drink
+	var poof := POOF_SCENE.instantiate()
+	
+	if assigned_sittingNode != null:
+		assigned_sittingNode.clear()
+	customer_spawner.release_name(customer_name)
+	RestaurantManager.remove_customer(self)
+	get_tree().current_scene.add_child(poof)
+	poof.global_position = global_position
+	queue_free()

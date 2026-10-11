@@ -3,10 +3,10 @@ extends Node2D
 @onready var rhythm_main: Node2D = $".."
 
 @onready var judgment_line: Sprite2D = $JudgmentLine
-@onready var judgment_arrow_down: Node2D = $JudgmentArrowDown
-@onready var judgment_arrow_up: Node2D = $JudgmentArrowUp
-@onready var judgment_arrow_right: Node2D = $JudgmentArrowRight
-@onready var judgment_arrow_left: Node2D = $JudgmentArrowLeft
+@onready var judgment_note_left: Node2D = $JudgmentNoteLeft
+@onready var judgment_note_down: Node2D = $JudgmentNoteDown
+@onready var judgment_note_up: Node2D = $JudgmentNoteUp
+@onready var judgment_note_right: Node2D = $JudgmentNoteRight
 
 func _ready() -> void:
 	rhythm_main.cooking_start.connect(reset_visibility)
@@ -17,16 +17,16 @@ func _ready() -> void:
 	stretch_hud()
 
 func hide_specific_lane(lane_name : String) -> void:
-	var target_arrow: Node2D = null
+	var target_note: Node2D = null
 	match lane_name.to_lower():
-		"left": target_arrow = judgment_arrow_left
-		"down": target_arrow = judgment_arrow_down
-		"up": target_arrow = judgment_arrow_up
-		"right": target_arrow = judgment_arrow_right
+		"left": target_note = judgment_note_left
+		"down": target_note = judgment_note_down
+		"up": target_note = judgment_note_up
+		"right": target_note = judgment_note_right
 	
-	if target_arrow:
+	if target_note:
 		var tween = create_tween()
-		tween.tween_property(target_arrow, "modulate:a", 0.0, 1.0)
+		tween.tween_property(target_note, "modulate:a", 0.0, 1.0)
 	
 func reset_visibility() -> void:
 	# turn the asset transparencies back to fully visible 

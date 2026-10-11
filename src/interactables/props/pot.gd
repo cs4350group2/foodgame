@@ -42,22 +42,22 @@ func _on_interacted(player: Player) -> void:
 
 
 func _store_ingredient(player: Player) -> void:
-	var food := player.held_edible
-	var ingredient_path := food.scene_file_path
+	var ingredient := player.held_edible
+	var ingredient_path := ingredient.scene_file_path
 
 	if not INGREDIENT_SCENES.has(ingredient_path):
 		print("Only raw meat, burger buns, tomatoes and potatoes can go in the pot.")
 		return
 
 	if ingredient_buffer.has(ingredient_path):
-		print("The pot already contains ", food.food_name, ".")
+		print("The pot already contains ", ingredient.get_edible_item_name(), ".")
 		return
 
 	ingredient_buffer.append(ingredient_path)
 
 	player.held_edible = null
-	print("Put ", food.food_name, " in the pot.")
-	food.queue_free()
+	print("Put ", ingredient.get_edible_item_name(), " in the pot.")
+	ingredient.queue_free()
 
 
 func _take_ingredient(player: Player) -> void:
@@ -66,14 +66,14 @@ func _take_ingredient(player: Player) -> void:
 		return
 
 	var ingredient_path: String = ingredient_buffer.back()
-	var food_scene: PackedScene = INGREDIENT_SCENES[ingredient_path]
-	var food := food_scene.instantiate() as EdibleItem
+	var ingredient_scene: PackedScene = INGREDIENT_SCENES[ingredient_path]
+	var ingredient := ingredient_scene.instantiate() as EdibleItem
 
-	get_tree().current_scene.add_child(food)
-	player.pick_up_edible(food)
+	get_tree().current_scene.add_child(ingredient)
+	player.pick_up_edible(ingredient)
 
-	if player.held_edible == food:
+	if player.held_edible == ingredient:
 		ingredient_buffer.pop_back()
-		print("Took ", food.food_name, " from the pot.")
+		print("Took ", ingredient.get_edible_item_name(), " from the pot.")
 	else:
-		food.queue_free()
+		ingredient.queue_free()

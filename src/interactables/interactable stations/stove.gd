@@ -16,24 +16,35 @@ const STEW_PATH = preload("res://models/physics/food/stew/stewPlate.tscn")
 @onready var pot = $"../../pot/Cylinder_009/StaticBody3D"
 
 @onready var restaurant_main: Node3D = $"../../.." # restaurant main node
+@onready var restaurant_ui: CanvasLayer = $"../../../RestaurantUi" # restaurant UI CanvasLayer node in restaurant_main
+@onready var restaurant_stove: Node3D = $"../.." # stove Node3D in restaurant_main (gazini_re)
 @onready var invalid_recipe_dialog: AcceptDialog = $"../../../RestaurantUi/InvalidRecipeDialog" # invalid recipe dialog in restaurant_main
-@onready var dish_confirm_dialog: ConfirmationDialog = $"../../../RestaurantUi/DishConfirmDialog" # dish confirmation dialog in restaurant_main
 
-const RHYTHM_MINIGAME_SCENE = preload("uid://bx7cw268w4v8j")
+@onready var dish_confirm_dialog: ConfirmationDialog = $"../../../RestaurantUi/DishConfirmDialog" # dish confirmation dialog in restaurant_main
+@onready var dish_texture: TextureRect = $"../../../RestaurantUi/DishConfirmDialog/VBoxContainer/DishTexture" # dish confirmation dialog dish texture
+@onready var dish_confirm_label: Label = $"../../../RestaurantUi/DishConfirmDialog/VBoxContainer/Label" # label for confirm dialog text
+
+# preloaded dish textures for confirmation dialog
+const RENDERED_BURGER = preload("uid://d3rorjypontk5")
+const RENDERED_MEAT = preload("uid://cotpbx3nt4xan")
+const PLACEHOLDER_STEW_IMAGE = preload("uid://cfw527mfd8dg1")
+
+const RHYTHM_MINIGAME_POPUP_SCENE = preload("uid://bl5f06ugjmaiq")
 
 var active_player : Player = null
 var selected_dish : String = "" # selected dish to cook
-var completed_dish : Food # dish to be returned after player returns to restaurant 
+
+@export var interact_distance: float = 1.2 # distance in front of stove for player to stand at
+@export var camera_focus_height: float = 2 # vertical offset above stove for player to look at
 
 func _ready() -> void:
 	interaction.interact_while_holding = true
 	interaction.interacted.connect(_on_interacted)
 	
 	var invalid_dialog_label: Label = invalid_recipe_dialog.get_label()
-	var dish_confirm_dialog_label: Label = dish_confirm_dialog.get_label()
 	
 	invalid_dialog_label.add_theme_color_override("font_color", Color.WHITE)
-	dish_confirm_dialog_label.add_theme_color_override("font_color", Color.WHITE)
+	dish_confirm_label.add_theme_color_override("font_color", Color.WHITE)
 
 func _on_interacted(_player: Player) -> void:
 	active_player = _player
@@ -70,22 +81,45 @@ func _on_interacted(_player: Player) -> void:
 	show_dish_confirmation(current_ingredients)
 
 func start_cooking(dish_string: String) -> void:
-	restaurant_main.visible = false
 	active_player.crosshair.visible = false
-	if restaurant_main.ui_nodes:
-		for ui: Node in restaurant_main.ui_nodes as Array[Node]:
-			ui.visible = false
-	restaurant_main.process_mode = Node.PROCESS_MODE_DISABLED # freeze restaurant scene during minigame
+	# if restaurant_main.ui_nodes:
+	#	for ui: Node in restaurant_main.ui_nodes as Array[Node]:
+	#		ui.visible = false
+	
 	active_player.process_mode = Node.PROCESS_MODE_DISABLED # disable camera movement during minigame
 	
-	var minigame_instance = RHYTHM_MINIGAME_SCENE.instantiate()
+	# instantiate minigame popup and instance
+	var minigame_popup = RHYTHM_MINIGAME_POPUP_SCENE.instantiate()
+	var minigame_instance = minigame_popup.get_node("MinigameFrame/SubViewportContainer/SubViewport/RhythmMain")
 	
 	minigame_instance.dish_string = dish_string
 	
 	minigame_instance.cooking_end.connect(_on_cooking_end)
-	minigame_instance.return_to_restaurant.connect(_on_return_to_restaurant.bind(minigame_instance))
+	minigame_instance.return_to_restaurant.connect(_on_return_to_restaurant.bind(minigame_popup))
 	
-	get_tree().root.add_child(minigame_instance)
+	# handle camera tweening by moving player in front of stove and moving camera to face straight at stove
+	var target_player_pos = restaurant_stove.global_position + (restaurant_stove.global_transform.basis.x * interact_distance)
+	target_player_pos.y = active_player.global_position.y # keep y-coord the same
+	
+	var focus_point = restaurant_stove.global_position + Vector3(0, camera_focus_height, 0) 
+	
+	var tween_pos = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT) 
+	
+	tween_pos.tween_property(active_player, "global_position", target_player_pos, 0.3) # move player to front of stove in 0.6s
+	
+	await tween_pos.finished
+	
+	var camera3d = active_player.get_node("Head/Camera3D")
+	var target_camera_transform = camera3d.global_transform.looking_at(focus_point, Vector3.UP)
+	
+	var tween_rot = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	
+	tween_rot.tween_property(camera3d, "global_transform:basis", target_camera_transform.basis, 0.3) # move camera transform to point above stove
+	
+	await tween_rot.finished
+	
+	# finally add minigame popup to restaurant scene
+	restaurant_ui.add_child(minigame_popup)
 
 func get_food_data(dish_name: String) -> Dictionary:
 	# helper function to return info for specific dish in menu.json
@@ -177,13 +211,15 @@ func show_dish_confirmation(current_ingredients: Array) -> void:
 	
 	var formatted_dish_name = selected_dish.capitalize()
 	
-	dish_confirm_dialog.dialog_text = \
-	"Current ingredients in stove: " \
-		+ convert_ingredients_array_to_string(current_ingredients) \
-		+ ". " + "\n" \
-		+ "Dish to cook: " + formatted_dish_name + "\n" \
-		+ "Start cooking?" + "\n" \
-		+ "(You can press the Esc key to close/cancel this window)"
+	match selected_dish:
+		"burger":
+			dish_texture.texture = RENDERED_BURGER
+		"steak":
+			dish_texture.texture = RENDERED_MEAT
+		"stew":
+			dish_texture.texture = PLACEHOLDER_STEW_IMAGE
+		
+	dish_confirm_label.text = "Start cooking " + formatted_dish_name + "?" + "\n" 
 		
 	dish_confirm_dialog.popup_centered()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE	# re-enable mouse control when dialog pops up

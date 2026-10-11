@@ -18,4 +18,4 @@ func _on_interacted(player: Player) -> void:
 	var food := food_scene.instantiate() as EdibleItem
 	get_tree().current_scene.add_child(food)
 	player.pick_up_edible(food)
-	print("Pulled %s from the %s." % [food.food_name, spawner_name])
+	print("Pulled %s from the %s." % [food.ingredient_name, spawner_name])

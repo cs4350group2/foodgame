@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://6t0gu43db1t2"]
+
+[ext_resource type="PackedScene" uid="uid://bwga1774je1ql" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/note_generator.tscn" id="1_j34ka"]
+[ext_resource type="PackedScene" uid="uid://blt72ehoxf21q" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/arrows and notes/normal_left_note.tscn" id="2_tuh50"]
+[ext_resource type="PackedScene" uid="uid://ce26wwer3r4fq" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/arrows and notes/gold_left_note.tscn" id="2_vltn4"]
+
+[node name="ArrowGeneratorLeft" unique_id=1019952068 instance=ExtResource("1_j34ka")]
+note_to_generate = ExtResource("2_tuh50")
+gold_note_to_generate = ExtResource("2_vltn4")

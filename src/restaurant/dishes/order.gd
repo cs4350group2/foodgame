@@ -6,14 +6,21 @@ signal order_item_received(item: OrderItem, quantity: int)
 
 var items: Array[OrderItem] = []
 var items_received: Array[OrderItem] = []
+var total_bonus: float = 0.0
 
 func _init(order_items: Array[OrderItem]):
 	items = order_items
 
 func find_item_in_order(item_received: OrderItem) -> OrderItem:
 	for item in items:
-		if item.edible.is_equal(item_received.edible):
+		if item.get_edible().is_equal(item_received.get_edible()):
 			return item
+	return null
+
+func find_received_item_in_order(item: OrderItem) -> OrderItem:
+	for received_item in items_received:
+		if received_item.get_edible().is_equal(item.get_edible()):
+			return received_item
 	return null
 
 func is_order_completed() -> bool:
@@ -23,10 +30,10 @@ func is_order_completed() -> bool:
 		var found := false
 
 		for item_received in items_received:
-			if item.edible.is_equal(item_received.edible):
-				print("Required quantity: ", item.quantity)
-				print("Received quantity: ", item_received.quantity)
-				if item_received.quantity >= item.quantity:
+			if item.get_edible().is_equal(item_received.get_edible()):
+				print("Required quantity: ", item.get_quantity())
+				print("Received quantity: ", item_received.get_quantity())
+				if item_received.get_quantity() >= item.get_quantity():
 					found = true
 					break
 	
@@ -37,6 +44,12 @@ func is_order_completed() -> bool:
 
 func get_order_items() -> Array[OrderItem]:
 	return items
+
+func get_total_bonus() -> float:
+	return total_bonus
+
+func get_items_received() -> Array[OrderItem]:
+	return items_received
 
 func get_item(index: int) -> OrderItem:
 	return items[index]
@@ -60,20 +73,22 @@ func receive_order_item(item: OrderItem) -> bool:
 		return false
 
 	for received_item in items_received:
-		if received_item.edible.is_equal(item.edible):
-			var remaining_quantity_required = order_item.quantity - received_item.quantity
-			if item.quantity > remaining_quantity_required:
+		if received_item.get_edible().is_equal(item.get_edible()):
+			var remaining_quantity_required = order_item.get_quantity() - received_item.get_quantity()
+			if item.get_quantity() > remaining_quantity_required:
 				return false
-			received_item.quantity += item.quantity
-			order_item_received.emit(item, received_item.quantity)
+			received_item.add_quantity(item.get_quantity())
+			total_bonus += item.get_edible().get_bonus() * item.get_quantity()
+			order_item_received.emit(item, received_item.get_quantity())
 			if is_order_completed():
 				order_completed.emit(self)
 			return true
 
-	if item.quantity > order_item.quantity:
+	if item.get_quantity() > order_item.get_quantity():
 		return false
 	items_received.append(item)
-	order_item_received.emit(item, item.quantity)
+	total_bonus += item.get_edible().get_bonus() * item.get_quantity()
+	order_item_received.emit(item, item.get_quantity())
 	if is_order_completed():
 		order_completed.emit(self)
 	return true

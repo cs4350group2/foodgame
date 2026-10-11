@@ -1,0 +1,34 @@
+{
+	"drinks": [
+		{
+			"name": "Soda",
+			"price": 10.0,
+			"description": "Classic soda, served the old fashion way",
+			"usage": "Increase customer's patience +10sec"
+		},
+		{
+			"name": "Cooler Soda",
+			"price": 25.0,
+			"description": "The cooler soda, served the new fashion way",
+			"usage": "Increase customer's patience +30sec"
+		},
+		{
+			"name": "Liquid Food",
+			"price": 50.0,
+			"description": "Lazy to cook? Just feed the customer these",
+			"usage": "Acts as a pseudo food that can be served as any food"
+		},
+		{
+			"name": "Iced Lemon Tea",
+			"price": 15.0,
+			"description": "Every meal gets better with an iced lemon tea",
+			"usage": "Food quality increase +10%"
+		},
+		{
+			"name": "EXTREMELY SAFE Drink",
+			"price": 150.0,
+			"description": "As the name suggests, very safe",
+			"usage": "It's safe, really. I promise."
+		},
+	]
+}

@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bxgcvo4unnk5v"]
+
+[ext_resource type="Script" uid="uid://bui7fiy6aiqnr" path="res://assets/vfx/customer/poof.gd" id="1_slx58"]
+[ext_resource type="Texture2D" uid="uid://bvq7pdiofk3gd" path="res://assets/vfx/customer/whitePuff00.png" id="2_8x1cb"]
+[ext_resource type="AudioStream" uid="uid://dekdu4mehw1sc" path="res://assets/sfx/customer/poof_sfx.mp3" id="3_4bh0i"]
+
+[sub_resource type="Curve" id="Curve_elij6"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(0.35, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_b1lj4"]
+curve = SubResource("Curve_elij6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_13qdw"]
+emission_shape = 1
+emission_sphere_radius = 0.15
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+gravity = Vector3(0, 0.4, 0)
+scale_over_velocity_curve = SubResource("CurveTexture_b1lj4")
+color = Color(0.77257055, 0.7725705, 0.7725704, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_myypy"]
+transparency = 1
+albedo_texture = ExtResource("2_8x1cb")
+emission_enabled = true
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_xrivr"]
+material = SubResource("StandardMaterial3D_myypy")
+size = Vector2(0.3, 0.3)
+
+[node name="Poof" type="Node3D" unique_id=981986368]
+script = ExtResource("1_slx58")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=553690582]
+emitting = false
+amount = 24
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_13qdw")
+draw_pass_1 = SubResource("QuadMesh_xrivr")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1991289323]
+stream = ExtResource("3_4bh0i")

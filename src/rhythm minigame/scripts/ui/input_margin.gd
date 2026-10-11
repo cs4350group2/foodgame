@@ -10,6 +10,7 @@ var tween : Tween
 func _ready() -> void:
 	main.hit.connect(display_judgment)
 	main.miss.connect(display_judgment)
+	main.empty_press.connect(display_judgment)
 	
 	# text starts as invisible
 	input_judgment.modulate.a = 0.0

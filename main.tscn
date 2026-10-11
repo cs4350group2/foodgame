@@ -249,6 +249,19 @@ size = Vector2i(700, 100)
 theme = ExtResource("35_0rl1p")
 ok_button_text = "OK"
 
+[node name="VBoxContainer" type="VBoxContainer" parent="RestaurantUi/DishConfirmDialog" unique_id=927774041]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("35_0rl1p")
+
+[node name="DishTexture" type="TextureRect" parent="RestaurantUi/DishConfirmDialog/VBoxContainer" unique_id=1437975914]
+custom_maximum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="RestaurantUi/DishConfirmDialog/VBoxContainer" unique_id=1324105463]
+layout_mode = 2
+
 [node name="PauseMenu" parent="." unique_id=902983238 instance=ExtResource("36_ok6jj")]
 
 [node name="RestaurantMesh" type="Node3D" parent="." unique_id=184378070]

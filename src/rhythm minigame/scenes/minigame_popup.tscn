@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bl5f06ugjmaiq"]
+
+[ext_resource type="PackedScene" uid="uid://bx7cw268w4v8j" path="res://src/rhythm minigame/scenes/rhythm_main.tscn" id="1_bh6ah"]
+
+[node name="MinigamePopup" type="Control" unique_id=568447861]
+process_mode = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MinigameFrame" type="PanelContainer" parent="." unique_id=1314610090]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -218.75
+offset_right = 350.0
+offset_bottom = 218.75
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MinigameFrame" unique_id=841323444]
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MinigameFrame/SubViewportContainer" unique_id=885537734]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(700, 437)
+size_2d_override = Vector2i(1152, 648)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="RhythmMain" parent="MinigameFrame/SubViewportContainer/SubViewport" unique_id=1835695707 instance=ExtResource("1_bh6ah")]
