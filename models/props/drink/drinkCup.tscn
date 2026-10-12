@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dwkmv6pxcurn0"]
+
+[ext_resource type="PackedScene" uid="uid://dubmc48f0vfdl" path="res://assets/drinks/cups/scene.gltf" id="1_ejbuj"]
+[ext_resource type="Texture2D" uid="uid://btecbborxacpv" path="res://assets/drinks/cups/Juice_Cup_baseColor.jpeg" id="2_5vv4n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kfut"]
+albedo_texture = ExtResource("2_5vv4n")
+
+[node name="Sketchfab_Scene" unique_id=14661006 instance=ExtResource("1_ejbuj")]
+
+[node name="defaultMaterial" parent="Sketchfab_model/Collada visual scene group/drink" parent_id_path=PackedInt32Array(252761569) index="0" unique_id=509557593]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_2kfut")

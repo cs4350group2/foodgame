@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://du22q0pgry5ph"]
+
+[ext_resource type="Texture2D" uid="uid://dwp0cbhnqa40n" path="res://assets/InsideProps/fishTank/None_Base_Color.png" id="1_rgq0l"]
+[ext_resource type="Texture2D" uid="uid://mypdqlnglvbu" path="res://assets/InsideProps/fishTank/None_Mixed_AO.png" id="2_7i26w"]
+[ext_resource type="Texture2D" uid="uid://cukayr8kq3ibr" path="res://assets/InsideProps/fishTank/None_Metallic.png" id="3_8hh2i"]
+[ext_resource type="Texture2D" uid="uid://bf7ls0w8h2di7" path="res://assets/InsideProps/fishTank/Dirt_Normal_OpenGL.png" id="4_a4oe2"]
+
+[resource]
+resource_name = "Algae 1"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_rgq0l")
+metallic = 1.0
+metallic_texture = ExtResource("3_8hh2i")
+emission = Color(0.9063318, 0.9063318, 0.9063318, 1)
+emission_energy_multiplier = 0.0
+normal_texture = ExtResource("4_a4oe2")
+ao_enabled = true
+ao_texture = ExtResource("2_7i26w")
