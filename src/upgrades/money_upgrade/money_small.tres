@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MoneyUpgrade" format=3 uid="uid://c2br6rd0xdpxr"]
+
+[ext_resource type="Script" uid="uid://6laiqgi2oolj" path="res://src/upgrades/money_upgrade/money_upgrade.gd" id="1_jgmg7"]
+
+[resource]
+script = ExtResource("1_jgmg7")
+name = &"money_small"
+display_name = &"Loose Change"
+description = "You find some money left behind on the ground. Sweet!"
+metadata/_custom_type_script = "uid://6laiqgi2oolj"

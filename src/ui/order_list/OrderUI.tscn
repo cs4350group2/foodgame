@@ -46,11 +46,10 @@ layout_mode = 2
 layout_mode = 2
 theme = ExtResource("2_w7ndc")
 theme_type_variation = &"HeaderSmall"
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.52906674, 0.5290667, 0.52906686, 1)
 theme_override_fonts/font = ExtResource("3_fadya")
 theme_override_font_sizes/font_size = 32
-text = "food
-restaurant"
+text = "order chit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -58,7 +57,7 @@ vertical_alignment = 1
 layout_mode = 2
 theme = ExtResource("2_w7ndc")
 theme_type_variation = &"HeaderSmall"
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.52906674, 0.5290667, 0.52906686, 1)
 theme_override_font_sizes/font_size = 20
 text = "1313 Yummy Lane"
 horizontal_alignment = 1
@@ -68,7 +67,7 @@ vertical_alignment = 1
 layout_mode = 2
 theme = ExtResource("2_w7ndc")
 theme_type_variation = &"HeaderSmall"
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.52906674, 0.5290667, 0.52906686, 1)
 theme_override_font_sizes/font_size = 20
 text = "ORDER"
 horizontal_alignment = 1
@@ -80,7 +79,7 @@ layout_mode = 2
 [node name="Metadata" type="Label" parent="PanelContainer/VBoxContainer" unique_id=118491027]
 layout_mode = 2
 theme = ExtResource("2_w7ndc")
-theme_override_colors/font_color = Color(0.16206557, 0.1620656, 0.16206557, 1)
+theme_override_colors/font_color = Color(0.52906674, 0.5290667, 0.52906686, 1)
 text = "Incl. GST 7%, Service Tax 10%"
 
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=950232356]
@@ -92,6 +91,6 @@ theme_override_constants/margin_top = 23
 layout_mode = 2
 size_flags_vertical = 10
 theme = ExtResource("2_w7ndc")
-theme_override_colors/font_color = Color(0.16206557, 0.1620656, 0.16206557, 1)
+theme_override_colors/font_color = Color(0.52906674, 0.5290667, 0.52906686, 1)
 text = "Thank You. See You Again."
 horizontal_alignment = 1
