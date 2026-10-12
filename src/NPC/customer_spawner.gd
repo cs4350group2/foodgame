@@ -59,7 +59,7 @@ func spawn_customer(customer_type: StringName = &"") -> void:
 	
 	# var customer_level := randi_range(1, 3)
 	var customer_level := 1
-	var patience := rng.randf_range(30.0, 50.0)
+	var patience := rng.randf_range(50.0, 70.0)
 	
 	# Set up customer scene
 	var customer: Customer
