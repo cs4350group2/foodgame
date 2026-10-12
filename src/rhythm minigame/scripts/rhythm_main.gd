@@ -99,7 +99,7 @@ var chart_path : String
 var dish_string: String = "burger"
 
 func _ready() -> void:
-	background.self_modulate.a = 0.75
+	background.self_modulate.a = 0.25
 	audio_offset_ms = AudioManager.audio_offset_ms
 	AudioManager.audio_offset_changed.connect(_on_offset_change)
 	
