@@ -327,7 +327,7 @@ func start_ordering() -> void:
 		var foods: Array = menu["foods"]
 		var food_data = foods[RunManager.get_rng().randi_range(0, foods.size() - 1)]
 		print(food_data["name"], food_data["price"], food_data["rarity"])
-		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 1.0)
+		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"])
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])	
 		order.order_completed.connect(_on_order_complete)
@@ -356,8 +356,14 @@ var patience: float
 func get_current_patience() -> float:
 	return patience
 
+func get_max_patience() -> float:
+	return max_patience
+
 func set_patience(new_patience: float) -> void:
 	patience = min(max_patience, new_patience)
+
+func set_max_patience(new_max_patience) -> void:
+	max_patience = new_max_patience
 
 func start_waiting_for_food() -> void:
 	patience = max_patience
@@ -482,3 +488,10 @@ func disappear_with_poof() -> void: # When customer drink EXTREMELY SAFE Drink
 	get_tree().current_scene.add_child(poof)
 	poof.global_position = global_position
 	queue_free()
+
+func is_equal(other: Customer) -> bool:
+	return (
+		customer_name == other.get_customer_name()
+		and customer_lvl == other.get_customer_lvl()
+		and customer_type == other.get_customer_type()
+	)

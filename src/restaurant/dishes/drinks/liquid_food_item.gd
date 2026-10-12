@@ -27,12 +27,16 @@ func affect_customer(customer: Customer) -> bool:
 			if received_item:
 				if received_item.get_quantity() < item.get_quantity():
 					# Order havent receive sufficient qty of this item
-					var liquid_food_item = OrderItem.new(item.get_edible(), 1)
+					var liquid_food: Food = item.get_edible()
+					liquid_food.set_dish_quality(50.0)
+					var liquid_food_item = OrderItem.new(liquid_food, 1)
 					customer_order.receive_order_item(liquid_food_item)
 				else: # Order already received sufficient qty of this item
 					continue
 			else: # Order havent receive this item yet
-				var liquid_food_item = OrderItem.new(item.get_edible(), 1)
+				var liquid_food: Food = item.get_edible()
+				liquid_food.set_dish_quality(50.0)
+				var liquid_food_item = OrderItem.new(liquid_food, 1)
 				customer_order.receive_order_item(liquid_food_item)
 		
 		return true

@@ -42,6 +42,9 @@ func get_menu() -> Dictionary:
 func get_drinks_menu() -> Dictionary:
 	return drinks_menu_data
 
+func get_customers() -> Array[Customer]:
+	return customers
+
 func _ready() -> void:
 	load_menu()
 
