@@ -62,21 +62,33 @@ func spawn_customer(customer_type: StringName = &"") -> void:
 	var patience := rng.randf_range(30.0, 50.0)
 	
 	# Set up customer scene
+	var customer: Customer
 	match customer_type:
 		&"":
 			choose_random_customer_scene()
+			customer = customer_scene.instantiate()
+			customer.initialize_customer(customer_name, customer_level, patience, customer_type)
 		&"VIP":
 			customer_scene = vip_customer_scene
+			customer = customer_scene.instantiate()
+			var vip := customer as VIP_Customer
+			if vip != null:
+				var requirement: float = 50.0
+				vip.initialize_vip_customer(customer_name, 
+				customer_level, patience, customer_type, requirement)
+			customer = vip
 		_:
 			print(customer_type)
 			choose_random_customer_scene()
+			customer = customer_scene.instantiate()
+			customer.initialize_customer(customer_name, customer_level, patience, customer_type)
 		
-	var customer: Customer = customer_scene.instantiate()
-	customer.initialize_customer(customer_name, customer_level, patience)
 	customer.exit_point = exit_point
 	customer.global_position = spawn_point.global_position
 	add_child(customer)
-	print("Spawned ", customer.customer_name, " Level: ", customer.customer_lvl)
+	print("Spawned ", customer.get_customer_name(), 
+	" Level: ", customer.get_customer_lvl(), 
+	" Type: ", customer.get_customer_type())
 
 func release_name(name: String) -> void:
 	if !available_names.has(name):

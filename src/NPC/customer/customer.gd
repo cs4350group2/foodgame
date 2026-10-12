@@ -48,11 +48,18 @@ var move_speed: float = 2.0
 var mood_bonus: float = 0.0
 var customer_lvl: int
 var customer_name: String
+var customer_type: StringName
 var exit_point: Marker3D
 var prev_transform: Transform3D
 
 func get_customer_name() -> String:
 	return customer_name
+
+func get_customer_lvl() -> int:
+	return customer_lvl
+
+func get_customer_type() -> StringName:
+	return customer_type
 
 func get_mood_bonus() -> float:
 	return mood_bonus
@@ -63,10 +70,11 @@ func add_mood_bonus(bonus: float) -> void:
 func assign_sitting_node(node: SittingNode):
 	self.assigned_sittingNode = node
 
-func initialize_customer(name: String, level: int, patience: float) -> void:
+func initialize_customer(name: String, level: int, patience: float, type: StringName = &"") -> void:
 	customer_name = name
 	customer_lvl = level
 	max_patience = patience
+	customer_type = type
 
 func _ready():
 	interaction.interact_while_holding = true

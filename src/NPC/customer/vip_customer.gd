@@ -4,6 +4,11 @@ extends Customer
 @onready var vip_animation_player: AnimationPlayer = $CharacterBody3D/Sketchfab_Scene/AnimationPlayer
 var dish_quality_requirement: float = 0.0
 
+func initialize_vip_customer(name: String, level: int, patience: float, 
+							 type: StringName, requirement: float = 50.0) -> void:
+	initialize_customer(name, level, patience, type)
+	dish_quality_requirement = requirement
+
 func get_dish_quality_requirement() -> float:
 	return dish_quality_requirement
 
