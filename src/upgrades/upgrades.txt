@@ -1,0 +1,9 @@
+res://src/upgrades/money_upgrade/money_small.tres
+res://src/upgrades/money_upgrade/money_medium.tres
+res://src/upgrades/money_upgrade/money_large.tres
+res://src/upgrades/stat_upgrade/freefly_boost.tres
+res://src/upgrades/stat_upgrade/jump_boost_medium.tres
+res://src/upgrades/stat_upgrade/jump_boost_small.tres
+res://src/upgrades/stat_upgrade/speed_boost_large.tres
+res://src/upgrades/stat_upgrade/speed_boost_small.tres
+res://src/upgrades/stat_upgrade/speed_boost_medium.tres

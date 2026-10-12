@@ -4,7 +4,9 @@ const DEATH_TRACK = preload("res://src/music/mud_dagored.tres")
 
 func _input(event):
 	if event.is_pressed():
-		get_tree().change_scene_to_file("res://main.tscn")
+		set_process_input(false)
+		RunManager.retire_run()
+		get_tree().change_scene_to_file("res://src/ui/main_menu/MainMenu.tscn")
 		AudioManager.bgm_player.pitch_scale = 1.0
 
 func _ready() -> void:

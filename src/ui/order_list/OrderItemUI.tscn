@@ -31,6 +31,7 @@ visible = false
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme = ExtResource("2_nie3q")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Steak"
 
 [node name="Per Item" type="Label" parent="VBoxContainer/GridContainer" unique_id=84470945]
@@ -39,6 +40,7 @@ custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_nie3q")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "$4.50"
 
 [node name="Total" type="Label" parent="VBoxContainer/GridContainer" unique_id=408695851]
@@ -46,6 +48,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("2_nie3q")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "$12"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=396435481]
@@ -54,8 +57,10 @@ layout_mode = 2
 [node name="TotalText" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1610321266]
 layout_mode = 2
 theme = ExtResource("2_nie3q")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "TOTAL:"
 
 [node name="TotalValue" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=508547881]
 layout_mode = 2
 size_flags_horizontal = 10
+theme_override_colors/font_color = Color(0, 0, 0, 1)

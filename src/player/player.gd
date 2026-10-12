@@ -20,6 +20,8 @@ var _held_scale: Vector3
 func _ready() -> void:
 	super._ready()
 	interact_ray.add_exception(self)
+	# the moment this player enters, take control of the mouse
+	capture_mouse()
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)

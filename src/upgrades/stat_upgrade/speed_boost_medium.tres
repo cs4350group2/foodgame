@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="StatUpgrade" format=3 uid="uid://ccn01esw6wntj"]
+
+[ext_resource type="Script" uid="uid://f6rsg3htlyqw" path="res://src/upgrades/stat_upgrade/stat_upgrade.gd" id="1_a10pi"]
+
+[resource]
+script = ExtResource("1_a10pi")
+speed_multiplier = 1.1
+name = &"speed_boost_medium"
+display_name = &"Nice Shoes"
+description = "Get a pair of shoes that make you run even faster."
+dependencies = Array[StringName]([&"speed_boost_small"])
+metadata/_custom_type_script = "uid://f6rsg3htlyqw"

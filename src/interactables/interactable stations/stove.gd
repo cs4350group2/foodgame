@@ -24,6 +24,10 @@ const STEW_PATH = preload("res://models/physics/food/stew/stewPlate.tscn")
 @onready var dish_texture: TextureRect = $"../../../RestaurantUi/DishConfirmDialog/VBoxContainer/DishTexture" # dish confirmation dialog dish texture
 @onready var dish_confirm_label: Label = $"../../../RestaurantUi/DishConfirmDialog/VBoxContainer/Label" # label for confirm dialog text
 
+var camera3d
+var original_camera_transform
+var target_camera_transform
+
 # preloaded dish textures for confirmation dialog
 const RENDERED_BURGER = preload("uid://d3rorjypontk5")
 const RENDERED_MEAT = preload("uid://cotpbx3nt4xan")
@@ -109,12 +113,13 @@ func start_cooking(dish_string: String) -> void:
 	
 	await tween_pos.finished
 	
-	var camera3d = active_player.get_node("Head/Camera3D")
-	var target_camera_transform = camera3d.global_transform.looking_at(focus_point, Vector3.UP)
+	camera3d = active_player.get_node("Head/Camera3D")
+	original_camera_transform = camera3d.global_transform
+	target_camera_transform = camera3d.global_transform.looking_at(focus_point, Vector3.UP)
 	
 	var tween_rot = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	
-	tween_rot.tween_property(camera3d, "global_transform:basis", target_camera_transform.basis, 0.3) # move camera transform to point above stove
+	tween_rot.tween_property(camera3d, "global_transform", target_camera_transform, 0.3) # move camera transform to point above stove
 	
 	await tween_rot.finished
 	
@@ -138,6 +143,11 @@ func _on_cooking_end() -> void: # when results screen appears in minigame
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
+	# reverse tween to camera rotation in start_cooking
+	var tween_reverse = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	
+	#tween_reverse.tween_property(camera3d, "global_transform", original_camera_transform, 0.3) 
+	
 	# clear ingredients in pot
 	pot.ingredient_buffer.clear()
 	

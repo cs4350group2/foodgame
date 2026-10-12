@@ -24,6 +24,17 @@ func _ready() -> void:
 	interaction.accepts_primary_while_holding = true
 	interaction.interacted.connect(_on_interacted)
 
+	var ancestor := get_parent()
+	while ancestor != null and not ancestor is Level:
+		ancestor = ancestor.get_parent()
+
+	var level := ancestor as Level
+	if is_instance_valid(level):
+		level.clear_temp.connect(_clear_ingredients)
+
+func _clear_ingredients() -> void:
+	ingredient_buffer.clear()
+
 func _on_interacted(player: Player) -> void:
 	if is_instance_valid(player.held_edible):
 		_store_ingredient(player)

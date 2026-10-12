@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="StatUpgrade" format=3 uid="uid://xrov6eueo686"]
+
+[ext_resource type="Script" uid="uid://f6rsg3htlyqw" path="res://src/upgrades/stat_upgrade/stat_upgrade.gd" id="1_xox18"]
+
+[resource]
+script = ExtResource("1_xox18")
+can_freefly = true
+name = &"freefly_upgrade"
+display_name = &"Ominous Orb Surgery"
+description = "Go through an expensive procedure that allows you to float as if gravity doesn't exist. Press forward to fly in the direction you're facing."
+dependencies = Array[StringName]([&"jump_boost_medium", &"speed_boost_large"])
+metadata/_custom_type_script = "uid://f6rsg3htlyqw"
