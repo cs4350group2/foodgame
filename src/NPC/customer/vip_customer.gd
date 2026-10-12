@@ -49,3 +49,8 @@ func play_animation(anim: String) -> void:
 
 func reset_offset() -> void:
 	model_offset.position = default_position
+
+func take_payment() -> float:
+	paid = true
+	# Gives 2x bonus
+	return order.get_order_total_price() + order.get_total_bonus() * 2
