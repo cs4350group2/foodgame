@@ -6,6 +6,7 @@ class_name FoodSpawner
 @onready var interaction: InteractComponent = $"InteractComponent"
 
 func _ready() -> void:
+	interaction.supports_primary = true
 	interaction.interacted.connect(_on_interacted)
 
 func _on_interacted(player: Player) -> void:

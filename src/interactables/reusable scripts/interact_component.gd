@@ -3,9 +3,13 @@ extends Node
 class_name InteractComponent
 
 signal interacted(player: Player)
+signal alt_interacted(player: Player)
 
-@export var interact_while_holding: bool = false
+@export var supports_primary: bool = false
+@export var supports_secondary: bool = false
+@export var accepts_primary_while_holding: bool = false
 @export var enabled: bool = true
+
 @export_node_path("Node3D") var highlight_root_path: NodePath = NodePath("../..")
 @export var highlight_color := Color(1.0, 0.85, 0.3, 0.3)
 
@@ -58,6 +62,12 @@ func set_highlighted(value: bool) -> void:
 				_meshes[i].material_overlay = _original_overlays[i]
 
 		_original_overlays.clear()
+		
 func interact(player: Player) -> void:
-	if enabled:
+	if enabled and supports_primary:
 		interacted.emit(player)
+
+
+func alt_interact(player: Player) -> void:
+	if enabled and supports_secondary:
+		alt_interacted.emit(player)

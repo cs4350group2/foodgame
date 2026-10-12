@@ -69,30 +69,35 @@ func initialize_customer(name: String, level: int, patience: float) -> void:
 	max_patience = patience
 
 func _ready():
-	interaction.interact_while_holding = true
+	interaction.supports_primary = true
+	interaction.accepts_primary_while_holding = true
 	interaction.interacted.connect(_on_interacted)
 	audio_player.pitch_scale = RunManager.get_rng().randf_range(0.67, 1.3)
 	change_state(State.IDLE)
-	patience_bar.set_patience(0.0, max_patience, max_patience / 100.0)
+	patience_bar.set_patience(
+		0.0,
+		max_patience,
+		max_patience / 100.0
+	)
 
 func _on_interacted(_player: Player) -> void:
-	var held_edible: EdibleItem = _player.held_edible
-	if is_instance_valid(held_edible):
+	if is_instance_valid(_player) \
+			and is_instance_valid(_player.held_edible):
 		_deliver_held_edible(_player)
 		return
-	
+
 	match current_state:
 		State.ORDERING:
 			take_order()
-			
+
 		State.WAITING_FOR_FOOD:
 			# If reaches here, the player is 100% not holding an edible
 			print("You need to be holding a cooked dish/consumable to deliver it.")
 			return
-		
+
 		State.FINISHED:
 			RestaurantManager.receive_payment(take_payment())
-			
+
 	print("Interacted with the customer.")
 
 func _physics_process(delta):
@@ -386,26 +391,27 @@ func _deliver_held_edible(player: Player) -> void:
 	var data: Edible = held_edible.get_data()
 	if held_edible.is_drink:
 		if held_edible.affect_customer(self):
-			var delivered_edible := held_edible
-			player.held_edible = null
+			var delivered_edible := player._release_held_edible()
 			delivered_edible.queue_free()
 			print("Delivered %s." % data.get_edible_name())
 	else: # is Food
-		var food_data: Food = data
-		
-		# Finalise dish_quality with customer mood bonus
-		var new_dish_quality = food_data.get_dish_quality() + get_mood_bonus()
-		food_data.set_dish_quality(new_dish_quality)
-		
-		# Create order item
+		var food_data := data as Food
+		if food_data == null:
+			return
+
+		var original_quality := food_data.get_dish_quality()
+		food_data.set_dish_quality(original_quality + get_mood_bonus())
+
 		var delivered_item := OrderItem.new(food_data, 1)
+
 		if not receive_order_item(delivered_item):
+			food_data.set_dish_quality(original_quality)
 			print("That dish does not match the customer's order.")
 			return
-		
-		var delivered_edible := held_edible
-		player.held_edible = null
+
+		var delivered_edible := player._release_held_edible()
 		delivered_edible.queue_free()
+
 		print("Delivered %s." % food_data.get_edible_name())
 
 func state_eating(delta):

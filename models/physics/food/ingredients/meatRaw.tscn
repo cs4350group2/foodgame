@@ -15,7 +15,7 @@ size = Vector3(0.28936362, 0.1, 0.19076672)
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_vrxuu")
 script = ExtResource("1_nscrg")
-food_name = "raw meat"
+ingredient_name = "raw meat"
 
 [node name="meatraw2" parent="." unique_id=381339205 instance=ExtResource("1_m76kh")]
 
