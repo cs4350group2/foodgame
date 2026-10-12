@@ -38,7 +38,8 @@ func _physics_process(delta: float) -> void:
 	_interact_requested = false
 
 	update_focus()
-
+	update_chopping_progress()
+	
 # Interaction funcs
 func update_focus() -> void:
 	interact_ray.force_raycast_update()
@@ -231,3 +232,14 @@ func _can_alt_interact() -> bool:
 
 	return is_instance_valid(component) \
 		and component.supports_secondary
+
+func update_chopping_progress() -> void:
+	var progress: float = 0.0
+
+	if is_instance_valid(focused_component):
+		var board := focused_component.get_parent() as ChoppingBoard
+
+		if board != null:
+			progress = board.get_chopping_progress()
+
+	crosshair.set_chopping_progress(progress)
