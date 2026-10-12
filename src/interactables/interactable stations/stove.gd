@@ -46,7 +46,7 @@ func _ready() -> void:
 	invalid_dialog_label.add_theme_color_override("font_color", Color.WHITE)
 	dish_confirm_label.add_theme_color_override("font_color", Color.WHITE)
 
-func _on_interacted(_player: Player) -> void:
+func _on_alt_interacted(_player: Player) -> void:
 	active_player = _player
 	var current_ingredients: Array = pot.ingredient_buffer.duplicate()
 	current_ingredients.sort()
@@ -168,17 +168,22 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
 	# each cooked item is already instantiated with correct name, price, rarity. only need to update dish quality
 	completed_edible_item.food_data.dish_quality = dish_quality
 	
-	if active_player:
-		active_player.pick_up_edible(completed_edible_item)
-		
-	# check that all variables are initialised correctly after calling pick_up_edible()
-	print("Finished cooking %s (Price %s, Rarity %s, Dish Quality %s%%)." % [
-		active_player.held_edible.food_data.edible_name,
-		str(active_player.held_edible.food_data.price),
-		str(active_player.held_edible.food_data.rarity_level),
-		str(active_player.held_edible.food_data.dish_quality)
-	]) 
+	# Give the completed dish a useful position even if pickup fails.
+	completed_edible_item.global_position = \
+		active_player.hold_point.global_position
 
+	if not is_instance_valid(active_player.held_edible):
+		active_player.pick_up_edible(completed_edible_item)
+	else:
+		print("Hands occupied; completed dish placed in front of player.")
+
+	print("Finished cooking %s (Price %s, Rarity %s, Dish Quality %s%%)." % [
+		completed_edible_item.food_data.edible_name,
+		str(completed_edible_item.food_data.price),
+		str(completed_edible_item.food_data.rarity_level),
+		str(completed_edible_item.food_data.dish_quality)
+	])
+	
 func convert_ingredients_array_to_string(arr : Array) -> String:
 	# helper function for debugging that converts the current_ingredients array into a clean string with the actual ingredient names
 	if arr.size() == 0:

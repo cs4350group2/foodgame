@@ -12,7 +12,7 @@ radius = 0.31640625
 [node name="RigidBody3D" type="RigidBody3D" unique_id=1750795773]
 mass = 0.2
 script = ExtResource("1_o8fr3")
-food_name = "burger buns"
+ingredient_name = "burger buns"
 
 [node name="burgerbreadtop2" parent="." unique_id=611673879 instance=ExtResource("1_silj5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1536108, 0)

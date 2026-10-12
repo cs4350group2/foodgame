@@ -49,7 +49,7 @@ func _store_ingredient(player: Player) -> void:
 
 	var item_name := ingredient.get_edible_item_name()
 
-	player.release_held_edible()
+	player._release_held_edible()
 	ingredient_buffer.append(ingredient_path)
 	ingredient.queue_free()
 

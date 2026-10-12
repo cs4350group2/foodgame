@@ -154,6 +154,7 @@ func pick_up_edible(edible : EdibleItem) -> void:
 	held_edible = edible
 	update_held_food_transform()
 	edible.reset_physics_interpolation()
+	print("Picked up: ", edible.get_edible_item_name())
 	
 func update_held_food_transform() -> void:
 	if not is_instance_valid(held_edible):
@@ -208,7 +209,7 @@ func _release_held_edible() -> EdibleItem:
 
 	# The food may already have been deleted.
 	if not is_instance_valid(food):
-		return
+		return null
 
 	food.collision_layer = _saved_collision_layer
 	food.collision_mask = _saved_collision_mask

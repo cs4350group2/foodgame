@@ -9,7 +9,7 @@ radius = 0.20142408
 
 [node name="TomatoWhole" type="RigidBody3D" unique_id=1200164544]
 script = ExtResource("1_wx87i")
-food_name = "tomato"
+ingredient_name = "tomato"
 
 [node name="tomato2" parent="." unique_id=1481336563 instance=ExtResource("1_wa2yj")]
 

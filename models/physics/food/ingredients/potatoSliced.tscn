@@ -9,7 +9,7 @@ radius = 0.16166076
 
 [node name="PotatoSliced" type="RigidBody3D" unique_id=169465648]
 script = ExtResource("1_jd5rp")
-food_name = "chopped potato"
+ingredient_name = "chopped potato"
 
 [node name="potatowithgreen2" parent="." unique_id=1421645144 instance=ExtResource("1_7pcsb")]
 transform = Transform3D(0.26420215, -0.16983977, 0.38903943, 0.2703738, 0.42059246, -2.305482e-08, -0.3272541, 0.21037215, 0.3140833, 0.035344437, 0, 0.038675576)
