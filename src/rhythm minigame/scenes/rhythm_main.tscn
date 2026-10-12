@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://bx7cw268w4v8j"]
 
 [ext_resource type="Script" uid="uid://cg3si4nqe0bgk" path="res://src/rhythm minigame/scripts/rhythm_main.gd" id="1_lgoak"]
-[ext_resource type="PackedScene" uid="uid://6t0gu43db1t2" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/arrow_generator_left.tscn" id="2_c5f8g"]
-[ext_resource type="PackedScene" uid="uid://df6qblwknvga7" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/arrow_generator_right.tscn" id="3_rfopb"]
-[ext_resource type="PackedScene" uid="uid://ctcs38cs5yf3o" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/arrow_generator_up.tscn" id="4_weiq5"]
-[ext_resource type="PackedScene" uid="uid://cmrdu3uwy8hl1" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/arrow_generator_down.tscn" id="5_0vqqd"]
+[ext_resource type="PackedScene" uid="uid://6t0gu43db1t2" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/note_generator_left.tscn" id="2_c5f8g"]
+[ext_resource type="Texture2D" uid="uid://dgc2e0rwonki5" path="res://assets/rhythm minigame/PNG/pexels-codioful-6985185.jpg" id="2_lgoak"]
+[ext_resource type="PackedScene" uid="uid://df6qblwknvga7" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/note_generator_right.tscn" id="3_rfopb"]
+[ext_resource type="PackedScene" uid="uid://ctcs38cs5yf3o" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/note_generator_up.tscn" id="4_weiq5"]
+[ext_resource type="PackedScene" uid="uid://cmrdu3uwy8hl1" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/note_generator_down.tscn" id="5_0vqqd"]
 [ext_resource type="Script" uid="uid://cqo6iestotmqe" path="res://src/rhythm minigame/scripts/gameplay and judgment hud/judgment_hud.gd" id="6_gqh03"]
 [ext_resource type="Texture2D" uid="uid://byyqk0trirk32" path="res://assets/rhythm minigame/PNG/Black/1x/minus.png" id="7_fpuma"]
-[ext_resource type="PackedScene" uid="uid://cv4xtgwy6wec8" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/judgment_arrow_down.tscn" id="8_hysoo"]
-[ext_resource type="PackedScene" uid="uid://ckd0jio1a3ndp" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/judgment_arrow_up.tscn" id="9_vvsvh"]
-[ext_resource type="PackedScene" uid="uid://bi7li6mmfwcgu" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/judgment_arrow_right.tscn" id="10_rj7w6"]
-[ext_resource type="PackedScene" uid="uid://dn5u3m4d2cn4x" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/judgment_arrow_left.tscn" id="11_kgy7m"]
+[ext_resource type="PackedScene" uid="uid://cv4xtgwy6wec8" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/judgment_note_down.tscn" id="8_hysoo"]
+[ext_resource type="PackedScene" uid="uid://ckd0jio1a3ndp" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/judgment_note_up.tscn" id="9_vvsvh"]
+[ext_resource type="PackedScene" uid="uid://bi7li6mmfwcgu" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/judgment_note_right.tscn" id="10_rj7w6"]
+[ext_resource type="PackedScene" uid="uid://dn5u3m4d2cn4x" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/judgment_note_left.tscn" id="11_kgy7m"]
 [ext_resource type="Theme" uid="uid://dcj8ax4pmivsw" path="res://assets/rhythm minigame/themes/input_judgment_and_combo_count.tres" id="13_30mjv"]
 [ext_resource type="Script" uid="uid://bjrqksanscus0" path="res://src/rhythm minigame/scripts/ui/input_margin.gd" id="14_vst8i"]
 [ext_resource type="Script" uid="uid://d3b8bawnqkgjd" path="res://src/rhythm minigame/scripts/ui/combo_v_box.gd" id="15_d3tvo"]
@@ -19,23 +20,37 @@
 [ext_resource type="PackedScene" uid="uid://brgmty7m1iu8u" path="res://src/rhythm minigame/scenes/ui/rhythm_result_screen_v2.tscn" id="18_lgoak"]
 
 [node name="RhythmMain" type="Node2D" unique_id=1835695707]
+process_mode = 1
 script = ExtResource("1_lgoak")
+
+[node name="Background" type="TextureRect" parent="." unique_id=2007489565]
+custom_maximum_size = Vector2(1152, 648)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2424.0
+offset_top = -1676.0
+offset_right = 3576.0
+offset_bottom = 2324.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_lgoak")
 
 [node name="JudgmentHUD" type="Node2D" parent="." unique_id=1435270143]
 script = ExtResource("6_gqh03")
 
-[node name="ArrowGenerators" type="Node2D" parent="JudgmentHUD" unique_id=1713021895]
+[node name="NoteGenerators" type="Node2D" parent="JudgmentHUD" unique_id=1713021895]
 
-[node name="ArrowGeneratorLeft" parent="JudgmentHUD/ArrowGenerators" unique_id=1019952068 instance=ExtResource("2_c5f8g")]
+[node name="NoteGeneratorLeft" parent="JudgmentHUD/NoteGenerators" unique_id=1019952068 instance=ExtResource("2_c5f8g")]
 position = Vector2(-200, 0)
 
-[node name="ArrowGeneratorDown" parent="JudgmentHUD/ArrowGenerators" unique_id=544932490 instance=ExtResource("5_0vqqd")]
+[node name="NoteGeneratorDown" parent="JudgmentHUD/NoteGenerators" unique_id=544932490 instance=ExtResource("5_0vqqd")]
 position = Vector2(-67.6, 0)
 
-[node name="ArrowGeneratorUp" parent="JudgmentHUD/ArrowGenerators" unique_id=2075637802 instance=ExtResource("4_weiq5")]
+[node name="NoteGeneratorUp" parent="JudgmentHUD/NoteGenerators" unique_id=2075637802 instance=ExtResource("4_weiq5")]
 position = Vector2(67.6, 0)
 
-[node name="ArrowGeneratorRight" parent="JudgmentHUD/ArrowGenerators" unique_id=746746973 instance=ExtResource("3_rfopb")]
+[node name="NoteGeneratorRight" parent="JudgmentHUD/NoteGenerators" unique_id=746746973 instance=ExtResource("3_rfopb")]
 position = Vector2(200, 0)
 
 [node name="JudgmentLine" type="Sprite2D" parent="JudgmentHUD" unique_id=59846979]
@@ -43,16 +58,16 @@ position = Vector2(0, 600)
 scale = Vector2(35.085, 1)
 texture = ExtResource("7_fpuma")
 
-[node name="JudgmentArrowLeft" parent="JudgmentHUD" unique_id=1687560457 instance=ExtResource("11_kgy7m")]
+[node name="JudgmentNoteLeft" parent="JudgmentHUD" unique_id=1687560457 instance=ExtResource("11_kgy7m")]
 position = Vector2(-200, 600)
 
-[node name="JudgmentArrowDown" parent="JudgmentHUD" unique_id=580993992 instance=ExtResource("8_hysoo")]
+[node name="JudgmentNoteDown" parent="JudgmentHUD" unique_id=580993992 instance=ExtResource("8_hysoo")]
 position = Vector2(-67.6, 600)
 
-[node name="JudgmentArrowUp" parent="JudgmentHUD" unique_id=12563384 instance=ExtResource("9_vvsvh")]
+[node name="JudgmentNoteUp" parent="JudgmentHUD" unique_id=12563384 instance=ExtResource("9_vvsvh")]
 position = Vector2(67.6, 600)
 
-[node name="JudgmentArrowRight" parent="JudgmentHUD" unique_id=1886351826 instance=ExtResource("10_rj7w6")]
+[node name="JudgmentNoteRight" parent="JudgmentHUD" unique_id=1886351826 instance=ExtResource("10_rj7w6")]
 position = Vector2(200, 600)
 
 [node name="RhythmUI" type="CanvasLayer" parent="." unique_id=502008498]

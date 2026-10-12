@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://bec2ugrynpiu"]
+
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="1_oeut0"]
+[ext_resource type="Script" uid="uid://cedglnrjd0c0v" path="res://src/ui/recipe_menu/recipe_menu.gd" id="1_v7jtf"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_35d0n"]
+color = Color(1, 1, 1, 1)
+thickness = 2
+
+[node name="RecipeMenu" type="Control" unique_id=1920279434]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v7jtf")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=367100241]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1268939904]
+custom_minimum_size = Vector2(600, 450)
+custom_maximum_size = Vector2(600, 450)
+layout_mode = 2
+theme = ExtResource("1_oeut0")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=1795374351]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=144826575]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=755267794]
+layout_mode = 2
+theme = ExtResource("1_oeut0")
+theme_type_variation = &"HeaderLarge"
+text = "Recipes:"
+
+[node name="TextureRect" type="Panel" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=908265254]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_35d0n")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1120289124]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1517565118]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 7
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1881975374]
+layout_mode = 2
+theme = ExtResource("1_oeut0")
+theme_override_font_sizes/font_size = 22
+text = "Steak: Add raw meat to pot and interact with stove to cook."
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1970298403]
+layout_mode = 2
+theme = ExtResource("1_oeut0")
+theme_override_font_sizes/font_size = 22
+text = "Burger: Hold raw meat and interact with steak to get chopped meat. Chop tomatoes. Add both to pot with burger bun and cook."
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1023681531]
+layout_mode = 2
+theme = ExtResource("1_oeut0")
+theme_override_font_sizes/font_size = 22
+text = "Stew: Chop raw meat, tomatoes, and potatoes. Add all to pot and cook."
+autowrap_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1074332122]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer" unique_id=1127133634]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+custom_maximum_size = Vector2(200, -1)
+layout_mode = 2
+theme = ExtResource("1_oeut0")
+text = "Back"

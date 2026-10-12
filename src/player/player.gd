@@ -19,6 +19,8 @@ var _held_scale: Vector3
 func _ready() -> void:
 	super._ready()
 	interact_ray.add_exception(self)
+	# the moment this player enters, take control of the mouse
+	capture_mouse()
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -163,7 +165,7 @@ func drop_edible() -> void:
 		print("Not enough space to drop the food.")
 		return
 	
-	print("Dropped edible/ingredient: ", held_edible.get_food_name())
+	print("Dropped edible/ingredient: ", held_edible.get_edible_item_name())
 	_release_held_edible()
 	
 func _can_drop_food() -> bool:

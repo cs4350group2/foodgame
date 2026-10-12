@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AudioData" format=3 uid="uid://uelrcji4210n"]
+
+[ext_resource type="Script" uid="uid://dkblfy12lap7h" path="res://src/audio_manager/audio_data.gd" id="1_d5keg"]
+[ext_resource type="AudioStream" uid="uid://tbxfckwbtsyk" path="res://assets/music/massobeats - honey jam (freetouse.com).mp3" id="1_esqu2"]
+
+[resource]
+script = ExtResource("1_d5keg")
+audio_stream = ExtResource("1_esqu2")
+bpm = 115.226
+metadata/_custom_type_script = "uid://dkblfy12lap7h"

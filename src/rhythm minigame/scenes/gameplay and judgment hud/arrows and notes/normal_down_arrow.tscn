@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://6djpu0leink6"]
-
-[ext_resource type="PackedScene" uid="uid://bdssewhawp5re" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/arrows and notes/parent_arrow.tscn" id="1_wvv7q"]
-
-[node name="ParentArrow" unique_id=1316662934 instance=ExtResource("1_wvv7q")]

@@ -4,7 +4,7 @@ var item_name = "Burger"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	interaction.interacted.connect(_on_interacted)
+	super._ready()
 	initialize_data(item_name)
 	pass # Replace with function body.
 

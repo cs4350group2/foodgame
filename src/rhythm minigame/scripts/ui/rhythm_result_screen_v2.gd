@@ -8,8 +8,10 @@ extends Control
 @onready var perfect_count_label: Label = $MainMargin/MainVBox/MainHBox/StatsSection/PerfectRow/PerfectCountLabel
 @onready var good_count_label: Label = $MainMargin/MainVBox/MainHBox/StatsSection/GoodRow/GoodCountLabel
 @onready var miss_count_label: Label = $MainMargin/MainVBox/MainHBox/StatsSection/MissRow/MissCountLabel
+@onready var empty_count_label: Label = $MainMargin/MainVBox/MainHBox/StatsSection/EmptyPressRow/EmptyCountLabel
 
 @onready var dish_quality_score_label: Label = $MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection/DishQualityScoreLabel
+@onready var total_empty_penalty_label: Label = $MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection/TotalEmptyPenaltyLabel
 
 func _ready() -> void:
 	rhythm_main.results_display.connect(display_results_screen)
@@ -23,4 +25,4 @@ func display_results_screen():
 	tween.tween_property(rhythm_result_screen_v2, "modulate:a", 1.0, 1.5)
 
 func _on_return_to_restaurant_button_pressed() -> void:
-	rhythm_main.return_to_restaurant.emit(rhythm_main.dish_quality)
+	rhythm_main.return_to_restaurant.emit(rhythm_main.final_dish_quality)

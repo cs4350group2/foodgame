@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AudioData" format=3 uid="uid://cywc8eq12f3rn"]
+
+[ext_resource type="AudioStream" uid="uid://ckmxmkbfjrcqa" path="res://assets/music/Lukrembo - Cloud (freetouse.com).mp3" id="1_21soe"]
+[ext_resource type="Script" uid="uid://dkblfy12lap7h" path="res://src/audio_manager/audio_data.gd" id="1_kkavk"]
+
+[resource]
+script = ExtResource("1_kkavk")
+audio_stream = ExtResource("1_21soe")
+bpm = 108.267
+metadata/_custom_type_script = "uid://dkblfy12lap7h"

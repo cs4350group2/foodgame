@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://dhfqwtv64p54f"]
+
+[ext_resource type="Script" uid="uid://dj4mhv8bmthcu" path="res://src/ui/upgrade_ui/upgrade_box.gd" id="1_w1qe3"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="2_ggipf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qymb1"]
+bg_color = Color(0.19215687, 0.15686275, 0, 0.972549)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0.40392157)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ggipf"]
+color = Color(1, 1, 1, 0.5647059)
+
+[node name="UpgradeBox" type="MarginContainer" unique_id=1716650055]
+custom_minimum_size = Vector2(280, 0)
+custom_maximum_size = Vector2(280, -1)
+offset_right = 250.0
+offset_bottom = 400.0
+script = ExtResource("1_w1qe3")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=412562727]
+custom_minimum_size = Vector2(280, 300)
+layout_mode = 2
+theme = ExtResource("2_ggipf")
+theme_override_styles/panel = SubResource("StyleBoxFlat_qymb1")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1363645755]
+custom_maximum_size = Vector2(280, -1)
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 17
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=481303730]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1243672499]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer" unique_id=1686647431]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(80, 80)
+layout_mode = 2
+expand_mode = 5
+
+[node name="Name" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=522056883]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_ggipf")
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 30
+text = "Big boots"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1035872323]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_ggipf")
+
+[node name="Desc" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=622912468]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_ggipf")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "grgjraoijoweijerowijetoeijtwoitjwoiejtoweitjowiejtoewijtowjetowiejtoiwejtowietoweijtowijtoweijtioj"
+autowrap_mode = 3
+
+[node name="SelectButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1498000188]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("2_ggipf")
+text = "Select"

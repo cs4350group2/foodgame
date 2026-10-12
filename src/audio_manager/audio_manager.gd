@@ -19,6 +19,11 @@ var bgm_bpm: float = 0.0
 var rm_bpm: float = 0.0
 var song_first_beat: float = 0.0
 
+func _ready():
+	set_bgm_setting_volume(0.5)
+	set_rm_setting_volume(0.5)
+	set_sfx_setting_volume(0.5)
+
 func play_bgm(audio_data: AudioData, from_position: float = 0.0):
 	play_bgm_to_target_bpm(audio_data, audio_data.bpm, from_position)
 
@@ -80,6 +85,10 @@ func set_rm_volume(volume: float):
 	var bus := AudioServer.get_bus_index("Rhythm Music")
 	AudioServer.set_bus_volume_linear(bus, volume)
 
+func set_master_setting_volume(volume: float):
+	var bus := AudioServer.get_bus_index("Master")
+	AudioServer.set_bus_volume_linear(bus, volume)
+
 func set_bgm_setting_volume(volume: float):
 	var bus := AudioServer.get_bus_index("BGM Setting")
 	AudioServer.set_bus_volume_linear(bus, volume)
@@ -91,6 +100,10 @@ func set_rm_setting_volume(volume: float):
 func set_sfx_setting_volume(volume: float):
 	var bus := AudioServer.get_bus_index("SFX Setting")
 	AudioServer.set_bus_volume_linear(bus, volume)
+
+func get_master_setting_level() -> float:
+	var bus := AudioServer.get_bus_index("Master")
+	return AudioServer.get_bus_volume_linear(bus)
 
 func get_bgm_setting_level() -> float:
 	var bus := AudioServer.get_bus_index("BGM Setting")

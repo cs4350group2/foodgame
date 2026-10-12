@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b26nn7giv313p"]
+
+[ext_resource type="Script" uid="uid://cdwjfmn6fa4p" path="res://src/ui/upgrade_ui/upgrade_ui.gd" id="1_mg4y6"]
+
+[node name="UpgradeUi" type="Control" unique_id=360686117]
+z_index = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mg4y6")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1163694949]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=1068379539]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1

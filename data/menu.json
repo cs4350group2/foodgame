@@ -16,16 +16,4 @@
 			"price": 25.0
 		}
 	],
-	"drinks": [
-		{
-			"name": "Cola",
-			"rarity": 1.0,
-			"price": 4.0
-		},
-		{
-			"name": "Coffee",
-			"rarity": 2.0,
-			"price": 5.0
-		}
-	]
 }
