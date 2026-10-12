@@ -7,6 +7,7 @@ extends Node3D
 
 # Preload all available customer scenes
 var vip_customer_scene: PackedScene = preload("res://src/NPC/customer/vip_customer.tscn")
+var impatient_customer_scene: PackedScene = preload("res://src/NPC/customer/impatient_customer.tscn")
 
 var available_names: Array[String] = []
 var used_names: Dictionary = {}
@@ -77,18 +78,28 @@ func spawn_customer(customer_type: StringName = &"") -> void:
 				vip.initialize_vip_customer(customer_name, 
 				customer_level, patience, customer_type, requirement)
 			customer = vip
+		&"Impatient":
+			customer_scene = impatient_customer_scene
+			customer = customer_scene.instantiate()
+			customer.initialize_customer(customer_name, customer_level, patience / 2, customer_type)
 		_:
 			print(customer_type)
 			choose_random_customer_scene()
 			customer = customer_scene.instantiate()
 			customer.initialize_customer(customer_name, customer_level, patience, customer_type)
 		
-	customer.exit_point = exit_point
-	customer.global_position = spawn_point.global_position
+	set_customer_exit_point(customer)
+	set_customer_spawn_position(customer)
 	add_child(customer)
 	print("Spawned ", customer.get_customer_name(), 
 	" Level: ", customer.get_customer_lvl(), 
 	" Type: ", customer.get_customer_type())
+
+func set_customer_spawn_position(customer: Customer) -> void:
+	customer.global_position = spawn_point.global_position
+
+func set_customer_exit_point(customer: Customer) -> void:
+	customer.exit_point = exit_point
 
 func release_name(name: String) -> void:
 	if !available_names.has(name):

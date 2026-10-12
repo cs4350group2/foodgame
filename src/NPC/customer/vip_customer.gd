@@ -2,10 +2,10 @@ class_name VIP_Customer
 extends Customer
 
 @onready var vip_animation_player: AnimationPlayer = $CharacterBody3D/ModelOffset/Sketchfab_Scene/AnimationPlayer
-var dish_quality_requirement: float = 0.0
-
 @onready var model_offset: Node3D = $CharacterBody3D/ModelOffset
+
 var default_position: Vector3
+var dish_quality_requirement: float = 0.0
 
 func _ready() -> void:
 	super._ready()
