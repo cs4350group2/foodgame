@@ -8,6 +8,7 @@ extends Node3D
 # Preload all available customer scenes
 var vip_customer_scene: PackedScene = preload("res://src/NPC/customer/vip_customer.tscn")
 var impatient_customer_scene: PackedScene = preload("res://src/NPC/customer/impatient_customer.tscn")
+var food_critic_customer_scene: PackedScene = preload("res://src/NPC/customer/food_critic_customer.tscn")
 
 var available_names: Array[String] = []
 var used_names: Dictionary = {}
@@ -82,6 +83,14 @@ func spawn_customer(customer_type: StringName = &"") -> void:
 			customer_scene = impatient_customer_scene
 			customer = customer_scene.instantiate()
 			customer.initialize_customer(customer_name, customer_level, patience / 2, customer_type)
+		&"FoodCritic":
+			customer_scene = food_critic_customer_scene
+			customer = customer_scene.instantiate()
+			print(customer)
+			var food_critic := customer as FoodCritic
+			if food_critic != null:
+				food_critic.initialize_food_critic(customer_name, customer_level, patience, customer_type)
+			customer = food_critic
 		_:
 			print(customer_type)
 			choose_random_customer_scene()
