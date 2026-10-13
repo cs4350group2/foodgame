@@ -20,7 +20,8 @@ const INGREDIENT_SCENES = {
 var ingredient_buffer: Array[String] = []
 
 func _ready() -> void:
-	interaction.interact_while_holding = true
+	interaction.supports_primary = true
+	interaction.accepts_primary_while_holding = true
 	interaction.interacted.connect(_on_interacted)
 
 	var ancestor := get_parent()
@@ -50,14 +51,20 @@ func _store_ingredient(player: Player) -> void:
 		return
 
 	if ingredient_buffer.has(ingredient_path):
-		print("The pot already contains ", ingredient.get_edible_item_name(), ".")
+		print(
+			"The pot already contains ",
+			ingredient.get_edible_item_name(),
+			"."
+		)
 		return
 
-	ingredient_buffer.append(ingredient_path)
+	var item_name := ingredient.get_edible_item_name()
 
-	player.held_edible = null
-	print("Put ", ingredient.get_edible_item_name(), " in the pot.")
+	player._release_held_edible()
+	ingredient_buffer.append(ingredient_path)
 	ingredient.queue_free()
+
+	print("Put ", item_name, " in the pot.")
 
 
 func _take_ingredient(player: Player) -> void:

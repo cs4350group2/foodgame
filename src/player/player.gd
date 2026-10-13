@@ -7,6 +7,7 @@ var focused_component: InteractComponent
 @onready var hold_point: Marker3D = $Head/Camera3D/HoldPoint
 var held_edible: EdibleItem
 var _interact_requested: bool = false
+var _alt_interact_requested : bool = false
 
 var _saved_collision_layer: int
 var _saved_collision_mask: int
@@ -30,20 +31,26 @@ func _physics_process(delta: float) -> void:
 	else:
 		held_edible = null
 
-	if _interact_requested:
-		_interact_requested = false
+	if _alt_interact_requested and _can_alt_interact():
+		try_alt_interact()
+	elif _interact_requested:
 		try_interact()
 
-	if not is_instance_valid(held_edible):
-		update_focus()
+	_alt_interact_requested = false
+	_interact_requested = false
 
+	update_focus()
+	update_chopping_progress()
+	
 # Interaction funcs
 func update_focus() -> void:
-	if is_instance_valid(held_edible):
-		return
-	
 	interact_ray.force_raycast_update()
 	var next_component := get_look_component()
+
+	if is_instance_valid(next_component) \
+			and not next_component.supports_primary \
+			and not next_component.supports_secondary:
+		next_component = null
 
 	if not is_instance_valid(focused_component):
 		focused_component = null
@@ -72,7 +79,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("interact") and not event.is_echo():
 		_interact_requested = true
-
+	if event.is_action_pressed("alt_interact") and not event.is_echo():
+		_alt_interact_requested = true
+		
 func get_look_component() -> InteractComponent:
 	if not interact_ray.is_colliding():
 		return null
@@ -81,34 +90,39 @@ func get_look_component() -> InteractComponent:
 
 	while target != null:
 		var component := target.get_node_or_null(
-	        "InteractComponent"
+			"InteractComponent"
 		) as InteractComponent
 
-		if component != null:
-			if component.enabled:
-				return component
-			return null
+		if component != null and component.enabled:
+			return component
 
 		target = target.get_parent()
 
 	return null
 	
-func try_interact() -> void:
-	if is_instance_valid(held_edible):
-		interact_ray.force_raycast_update()
-		var component := get_look_component()
+func try_alt_interact() -> void:
+	interact_ray.force_raycast_update()
+	var component := get_look_component()
 
-		if component != null and component.interact_while_holding:
+	if is_instance_valid(component) and component.supports_secondary:
+		component.alt_interact(self)
+	
+func try_interact() -> void:
+	interact_ray.force_raycast_update()
+	var component := get_look_component()
+
+	if is_instance_valid(held_edible):
+		if is_instance_valid(component) \
+				and component.supports_primary \
+				and component.accepts_primary_while_holding:
 			component.interact(self)
 			return
 
 		drop_edible()
 		return
 
-	update_focus()
-
-	if is_instance_valid(focused_component):
-		focused_component.interact(self)
+	if is_instance_valid(component) and component.supports_primary:
+		component.interact(self)
 
 # Pickup funcs
 func pick_up_edible(edible : EdibleItem) -> void:
@@ -143,6 +157,7 @@ func pick_up_edible(edible : EdibleItem) -> void:
 	held_edible = edible
 	update_held_food_transform()
 	edible.reset_physics_interpolation()
+	print("Picked up: ", edible.get_edible_item_name())
 	
 func update_held_food_transform() -> void:
 	if not is_instance_valid(held_edible):
@@ -190,14 +205,14 @@ func _can_drop_food() -> bool:
 			return false
 
 	return true
-
-func _release_held_edible() -> void:
+	
+func _release_held_edible() -> EdibleItem:
 	var food := held_edible
 	held_edible = null
 
 	# The food may already have been deleted.
 	if not is_instance_valid(food):
-		return
+		return null
 
 	food.collision_layer = _saved_collision_layer
 	food.collision_mask = _saved_collision_mask
@@ -210,3 +225,23 @@ func _release_held_edible() -> void:
 	if is_instance_valid(food.interaction):
 		food.interaction.set_highlighted(false)
 		food.interaction.enabled = _saved_interaction_enabled
+	return food
+
+		
+func _can_alt_interact() -> bool:
+	interact_ray.force_raycast_update()
+	var component := get_look_component()
+
+	return is_instance_valid(component) \
+		and component.supports_secondary
+
+func update_chopping_progress() -> void:
+	var progress: float = 0.0
+
+	if is_instance_valid(focused_component):
+		var board := focused_component.get_parent() as ChoppingBoard
+
+		if board != null:
+			progress = board.get_chopping_progress()
+
+	crosshair.set_chopping_progress(progress)

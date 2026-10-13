@@ -13,6 +13,7 @@ var is_drink: bool = false
 var owning_level: Level
 
 func _ready() -> void:
+	interaction.supports_primary = true
 	interaction.interacted.connect(_on_interacted)
 	var ancestor := get_parent()
 	while ancestor != null and not ancestor is Level:

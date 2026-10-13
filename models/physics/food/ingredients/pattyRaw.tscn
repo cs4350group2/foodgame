@@ -10,7 +10,7 @@ radius = 0.30126953
 
 [node name="RigidBody3D" type="RigidBody3D" unique_id=337328989]
 script = ExtResource("1_m1iwq")
-food_name = "chopped meat"
+ingredient_name = "chopped meat"
 
 [node name="burgermeat2" parent="." unique_id=484982101 instance=ExtResource("1_c0vkw")]
 
