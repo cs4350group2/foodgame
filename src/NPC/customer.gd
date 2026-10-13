@@ -392,6 +392,10 @@ func _deliver_held_edible(player: Player) -> void:
 	if held_edible.is_drink:
 		if held_edible.affect_customer(self):
 			var delivered_edible := player._release_held_edible()
+			delivered_edible.interaction.set_highlighted(false)
+			delivered_edible.interaction.enabled = false
+			delivered_edible.collision_layer = 0
+			delivered_edible.collision_mask = 0
 			delivered_edible.queue_free()
 			print("Delivered %s." % data.get_edible_name())
 	else: # is Food
@@ -410,6 +414,10 @@ func _deliver_held_edible(player: Player) -> void:
 			return
 
 		var delivered_edible := player._release_held_edible()
+		delivered_edible.interaction.set_highlighted(false)
+		delivered_edible.interaction.enabled = false
+		delivered_edible.collision_layer = 0
+		delivered_edible.collision_mask = 0
 		delivered_edible.queue_free()
 
 		print("Delivered %s." % food_data.get_edible_name())
