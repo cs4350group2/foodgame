@@ -1,4 +1,4 @@
-class_name FoodCritic
+class_name FoodCritic_Customer
 extends Customer
 
 @onready var food_critic_animation_player: AnimationPlayer = $CharacterBody3D/ModelOffset/FoodCritic/AnimationPlayer

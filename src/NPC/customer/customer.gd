@@ -17,6 +17,7 @@ const ENTER_SFX = preload("res://assets/sfx/customer/enter_sfx.wav")
 const ORDER_TAKEN_SFX = preload("res://assets/sfx/customer/order_taken.ogg")
 const LEAVING_SFX = preload("res://assets/sfx/customer/leaving_sfx.wav")
 const WARNING_SFX = preload("res://assets/sfx/customer/warning_sfx.mp3")
+const HOBO_LAUGH_SFX = preload("res://assets/sfx/customer/Hobo_Laugh.mp3")
 
 # VFX
 const POOF_SCENE: PackedScene = preload("res://assets/vfx/customer/Poof.tscn")
@@ -281,7 +282,8 @@ enum AudioSfx {
 	ORDERING,
 	COMPLETE,
 	LEAVING,
-	WARNING
+	WARNING,
+	HOBO_LAUGH
 }
 
 func play_audio(audio_type: AudioSfx):
@@ -310,6 +312,9 @@ func play_audio(audio_type: AudioSfx):
 		AudioSfx.WARNING:
 			audio_player.volume_linear = 2.0
 			audio_player.stream = WARNING_SFX
+		AudioSfx.HOBO_LAUGH:
+			audio_player.volume_linear = 1.0
+			audio_player.stream = HOBO_LAUGH_SFX
 	audio_player.play()
 
 func state_sitting(delta):
@@ -385,7 +390,7 @@ func state_waiting_for_food(delta):
 		
 		return
 
-func start_eating(eating_time: float = 5.0) -> void:
+func start_eating(eating_time: float = 10.0) -> void:
 	play_audio(AudioSfx.COMPLETE)
 	await get_tree().create_timer(eating_time).timeout
 

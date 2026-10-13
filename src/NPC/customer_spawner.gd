@@ -87,7 +87,7 @@ func spawn_customer(customer_type: StringName = &"") -> void:
 			customer_scene = food_critic_customer_scene
 			customer = customer_scene.instantiate()
 			print(customer)
-			var food_critic := customer as FoodCritic
+			var food_critic := customer as FoodCritic_Customer
 			if food_critic != null:
 				food_critic.initialize_food_critic(customer_name, customer_level, patience, customer_type)
 			customer = food_critic
