@@ -6,9 +6,10 @@ extends Node3D
 @onready var exit_point: Marker3D = $Exit
 
 # Preload all available customer scenes
-var vip_customer_scene: PackedScene = preload("res://src/NPC/customer/vip_customer.tscn")
-var impatient_customer_scene: PackedScene = preload("res://src/NPC/customer/impatient_customer.tscn")
-var food_critic_customer_scene: PackedScene = preload("res://src/NPC/customer/food_critic_customer.tscn")
+const vip_customer_scene: PackedScene = preload("res://src/NPC/customer/vip_customer.tscn")
+const impatient_customer_scene: PackedScene = preload("res://src/NPC/customer/impatient_customer.tscn")
+const food_critic_customer_scene: PackedScene = preload("res://src/NPC/customer/food_critic_customer.tscn")
+const hobo_customer_scene: PackedScene = preload("res://src/NPC/customer/hobo_customer.tscn")
 
 var available_names: Array[String] = []
 var used_names: Dictionary = {}
@@ -86,11 +87,14 @@ func spawn_customer(customer_type: StringName = &"") -> void:
 		&"FoodCritic":
 			customer_scene = food_critic_customer_scene
 			customer = customer_scene.instantiate()
-			print(customer)
 			var food_critic := customer as FoodCritic_Customer
 			if food_critic != null:
 				food_critic.initialize_food_critic(customer_name, customer_level, patience, customer_type)
 			customer = food_critic
+		&"Hobo":
+			customer_scene = hobo_customer_scene
+			customer = customer_scene.instantiate()
+			customer.initialize_customer(customer_name, customer_level, patience, customer_type)
 		_:
 			print(customer_type)
 			choose_random_customer_scene()

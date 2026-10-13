@@ -18,6 +18,7 @@ const ORDER_TAKEN_SFX = preload("res://assets/sfx/customer/order_taken.ogg")
 const LEAVING_SFX = preload("res://assets/sfx/customer/leaving_sfx.wav")
 const WARNING_SFX = preload("res://assets/sfx/customer/warning_sfx.mp3")
 const HOBO_LAUGH_SFX = preload("res://assets/sfx/customer/Hobo_Laugh.mp3")
+const PAYMENT_SFX = preload("res://assets/sfx/customer/money_chaching_sfx.mp3")
 
 # VFX
 const POOF_SCENE: PackedScene = preload("res://assets/vfx/customer/Poof.tscn")
@@ -106,6 +107,7 @@ func _on_interacted(_player: Player) -> void:
 
 		State.FINISHED:
 			RestaurantManager.receive_payment(take_payment())
+			play_audio(AudioSfx.PAYMENT)
 
 	print("Interacted with the customer.")
 
@@ -281,6 +283,7 @@ enum AudioSfx {
 	ANGRY,
 	ORDERING,
 	COMPLETE,
+	PAYMENT,
 	LEAVING,
 	WARNING,
 	HOBO_LAUGH
@@ -300,6 +303,9 @@ func play_audio(audio_type: AudioSfx):
 		AudioSfx.COMPLETE:
 			audio_player.volume_linear = 0.2
 			audio_player.stream = ORDER_COMPLETE_SFX
+		AudioSfx.PAYMENT:
+			audio_player.volume_linear = 1.0
+			audio_player.stream = PAYMENT_SFX
 		AudioSfx.ORDER_TAKEN:
 			audio_player.volume_linear = 0.9
 			audio_player.stream = ORDER_TAKEN_SFX
@@ -313,7 +319,7 @@ func play_audio(audio_type: AudioSfx):
 			audio_player.volume_linear = 2.0
 			audio_player.stream = WARNING_SFX
 		AudioSfx.HOBO_LAUGH:
-			audio_player.volume_linear = 1.0
+			audio_player.volume_linear = 1.5
 			audio_player.stream = HOBO_LAUGH_SFX
 	audio_player.play()
 

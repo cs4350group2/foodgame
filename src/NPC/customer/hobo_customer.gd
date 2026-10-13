@@ -26,6 +26,7 @@ func _on_interacted(_player: Player) -> void:
 
 		State.LEAVING: # Only can receive payment if confronted when they are leaving
 			RestaurantManager.receive_payment(take_payment())
+			play_audio(AudioSfx.PAYMENT)
 
 	print("Interacted with the customer.")
 
@@ -48,7 +49,7 @@ func play_animation(anim: String) -> void:
 			hobo_animation_player.play("Walk")
 		
 		"Sitting_Idle":
-			model_offset.position.y -= 0.2
+			model_offset.position.y += 0.1
 			hobo_animation_player.play("Sitting_Idle")
 		_:
 			pass
