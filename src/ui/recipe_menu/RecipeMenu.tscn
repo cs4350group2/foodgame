@@ -91,7 +91,7 @@ layout_mode = 2
 text = "To obtain a Chopped ingredient:
 1. Interact with the chopping board (left mouse click) while holding the unchopped ingredient in your hand.
 2. Repeatedly right-click until the bar is full.
-3. Finally, left-click to retrieve the chopped ingredient from the board.
+3. Left-click to retrieve the chopped ingredient from the board.
 
 To start cooking a dish, you must place all required ingredients in the pot, then interact with the stove."
 autowrap_mode = 2
