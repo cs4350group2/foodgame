@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AudioData" format=3 uid="uid://bsqt6l323865l"]
+
+[ext_resource type="AudioStream" uid="uid://7xa2sax8eiuq" path="res://assets/music/(Rice Bowl) Funny Rock - trimmed version.mp3" id="1_0etyp"]
+[ext_resource type="Script" uid="uid://dkblfy12lap7h" path="res://src/audio_manager/audio_data.gd" id="2_2dshq"]
+
+[resource]
+script = ExtResource("2_2dshq")
+audio_stream = ExtResource("1_0etyp")
+bpm = 89.0
+metadata/_custom_type_script = "uid://dkblfy12lap7h"

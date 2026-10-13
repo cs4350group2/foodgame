@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://h0nm15fhxioi"
+path="res://.godot/imported/FASSounds - Sakura.mp3-af15b8985894bddb12fe032c6223775e.mp3str"
+
+[deps]
+
+source_file="res://assets/music/FASSounds - Sakura.mp3"
+dest_files=["res://.godot/imported/FASSounds - Sakura.mp3-af15b8985894bddb12fe032c6223775e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
