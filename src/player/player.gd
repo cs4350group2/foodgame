@@ -5,6 +5,8 @@ class_name Player
 var focused_component: InteractComponent
 
 @onready var hold_point: Marker3D = $Head/Camera3D/HoldPoint
+@onready var hold_visual_point: Marker3D = \
+	$Head/Camera3D/HoldVisualPoint
 var held_edible: EdibleItem
 var _interact_requested: bool = false
 var _alt_interact_requested : bool = false
@@ -169,14 +171,18 @@ func update_held_food_transform() -> void:
 	if not is_instance_valid(held_edible):
 		return
 
-	var held_basis := hold_point.global_basis.orthonormalized() \
-		* Basis.from_scale(_held_scale)
-
 	held_edible.global_transform = Transform3D(
-		held_basis,
+		hold_visual_point.global_basis.orthonormalized()
+			* Basis.from_scale(_held_scale),
+		hold_visual_point.global_position
+	)
+func _held_drop_transform() -> Transform3D:
+	return Transform3D(
+		hold_point.global_basis.orthonormalized()
+			* Basis.from_scale(_held_scale),
 		hold_point.global_position
 	)
-	
+		
 func drop_edible() -> void:
 	if not is_instance_valid(held_edible):
 		held_edible = null
@@ -202,7 +208,7 @@ func _can_drop_food(ignore_item: EdibleItem = null) -> bool:
 
 		var query := PhysicsShapeQueryParameters3D.new()
 		query.shape = collider.shape
-		query.transform = collider.global_transform
+		query.transform = _held_drop_transform() * collider.transform
 		query.collision_mask = _saved_collision_mask
 		var exclusions: Array[RID] = [held_edible.get_rid()]
 		
@@ -231,7 +237,10 @@ func _release_held_edible() -> EdibleItem:
 	# The food may already have been deleted.
 	if not is_instance_valid(food):
 		return null
-
+		
+	food.global_transform = _held_drop_transform()
+	food.reset_physics_interpolation()
+	
 	food.collision_layer = _saved_collision_layer
 	food.collision_mask = _saved_collision_mask
 
