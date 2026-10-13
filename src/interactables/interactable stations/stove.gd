@@ -123,6 +123,8 @@ func start_cooking(dish_string: String) -> void:
 	
 	await tween_rot.finished
 	
+	print("Changed camera global transform to " + str(camera3d.global_transform) + " for rhythm minigame")
+	
 	# finally add minigame popup to restaurant scene
 	restaurant_ui.add_child(minigame_popup)
 
@@ -146,7 +148,9 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
 	# reverse tween to camera rotation in start_cooking
 	var tween_reverse = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	
-	#tween_reverse.tween_property(camera3d, "global_transform", original_camera_transform, 0.3) 
+	tween_reverse.tween_property(camera3d, "global_transform", original_camera_transform, 0.3) 
+	
+	await tween_reverse.finished
 	
 	# clear ingredients in pot
 	pot.ingredient_buffer.clear()

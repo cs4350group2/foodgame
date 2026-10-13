@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AudioData" format=3 uid="uid://drtgu1sgw60te"]
 
-[ext_resource type="AudioStream" uid="uid://dfrhcfwq64f17" path="res://assets/music/Harlem Heat - trimmed version.mp3" id="1_g47om"]
+[ext_resource type="AudioStream" uid="uid://dfrhcfwq64f17" path="res://assets/music/(Steak) Harlem Heat - trimmed version.mp3" id="1_g47om"]
 [ext_resource type="Script" uid="uid://dkblfy12lap7h" path="res://src/audio_manager/audio_data.gd" id="1_wdhw2"]
 
 [resource]

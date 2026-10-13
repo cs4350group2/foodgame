@@ -65,22 +65,36 @@ theme_override_constants/separation = 7
 layout_mode = 2
 theme = ExtResource("1_oeut0")
 theme_override_font_sizes/font_size = 22
-text = "Steak: Add raw meat to pot and interact with stove to cook."
+text = "Steak: 
+Raw Meat"
 autowrap_mode = 3
 
 [node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1970298403]
 layout_mode = 2
 theme = ExtResource("1_oeut0")
 theme_override_font_sizes/font_size = 22
-text = "Burger: Hold raw meat and interact with steak to get chopped meat. Chop tomatoes. Add both to pot with burger bun and cook."
+text = "Burger: 
+Chopped Raw Meat + Chopped Tomatoes + Burger Buns"
 autowrap_mode = 3
 
 [node name="Label3" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1023681531]
 layout_mode = 2
 theme = ExtResource("1_oeut0")
 theme_override_font_sizes/font_size = 22
-text = "Stew: Chop raw meat, tomatoes, and potatoes. Add all to pot and cook."
+text = "Stew: 
+Chopped Raw Meat + Chopped Tomatoes + Chopped Potatoes
+"
 autowrap_mode = 3
+
+[node name="Label4" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1226492018]
+layout_mode = 2
+text = "To obtain a Chopped ingredient:
+1. Interact with the chopping board (left mouse click) while holding the unchopped ingredient in your hand.
+2. Repeatedly right-click until the bar is full.
+3. Finally, left-click to retrieve the chopped ingredient from the board.
+
+To start cooking a dish, you must place all required ingredients in the pot, then interact with the stove."
+autowrap_mode = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1074332122]
 layout_mode = 2
