@@ -73,6 +73,9 @@ func apply_impressed_effect() -> void:
 				max_patience,
 				max_patience / 100.0
 			)
+			
+			# Play vfx
+			customer.show_patience_up()
 
 func play_animation(anim: String) -> void:
 	reset_offset()

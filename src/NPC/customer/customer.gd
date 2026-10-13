@@ -1,6 +1,7 @@
 class_name Customer
 extends CharacterBody3D
 
+@onready var effect_anchor: Node3D = $EffectAnchor
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var animation_player: AnimationPlayer = $CharacterBody3D/Timmy/AnimationPlayer
 @onready var interaction: InteractComponent = $InteractComponent
@@ -22,6 +23,7 @@ const PAYMENT_SFX = preload("res://assets/sfx/customer/money_chaching_sfx.mp3")
 
 # VFX
 const POOF_SCENE: PackedScene = preload("res://assets/vfx/customer/Poof.tscn")
+const PATIENCE_UP_SCENE: PackedScene = preload("res://assets/vfx/customer/PatienceUp.tscn")
 
 enum State {
 	IDLE,
@@ -493,6 +495,7 @@ func state_leaving_angry(delta):
 		queue_free()
 		return
 
+# --------------------------------VFX-------------------------------------------
 func disappear_with_poof() -> void: # When customer drink EXTREMELY SAFE Drink
 	var poof := POOF_SCENE.instantiate()
 	
@@ -505,6 +508,11 @@ func disappear_with_poof() -> void: # When customer drink EXTREMELY SAFE Drink
 	get_tree().current_scene.add_child(poof)
 	poof.global_position = global_position
 	queue_free()
+
+func show_patience_up() -> void:
+	var effect := PATIENCE_UP_SCENE.instantiate()
+	get_tree().current_scene.add_child(effect)
+	effect.global_position = effect_anchor.global_position
 
 func is_equal(other: Customer) -> bool:
 	return (

@@ -36,3 +36,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1876957, 0)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=42300729]
 bus = &"SFX"
+
+[node name="EffectAnchor" type="Node3D" parent="." unique_id=1373237388]
