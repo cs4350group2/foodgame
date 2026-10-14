@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://dvduy5678d5pk" path="res://models/environmentMeshes/Restaurant/restaurantCeiling.tscn" id="31_facbu"]
 [ext_resource type="PackedScene" uid="uid://ubv0sb3volmr" path="res://src/ui/restaurant_ui/RestaurantUI.tscn" id="33_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://bncnlon6uyptf" path="res://src/restaurant/DayManager.tscn" id="34_4k2k6"]
+[ext_resource type="PackedScene" uid="uid://pt4l2u10n4s4" path="res://models/environmentMeshes/Outdoors/subway.tscn" id="35_0cp0l"]
 [ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="35_0rl1p"]
 [ext_resource type="PackedScene" uid="uid://di31n2nduku34" path="res://models/interactable stations/bartableCashier.tscn" id="36_facbu"]
 [ext_resource type="PackedScene" uid="uid://dgh6jtkk62vuk" path="res://src/ui/pause_menu/PauseMenu.tscn" id="36_ok6jj"]
@@ -90,6 +91,13 @@ albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qf7sd"]
 size = Vector3(114.873566, 15.353943, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2t1y"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qf7sd"]
+material = SubResource("StandardMaterial3D_d2t1y")
+size = Vector2(3.5, 7)
 
 [node name="Main" type="Node3D" unique_id=579835186 node_paths=PackedStringArray("ui_nodes")]
 script = ExtResource("1_0rl1p")
@@ -369,6 +377,13 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 39.5
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Outdoor/StaticBody3D4" unique_id=922705785]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8758392, -2.7337341, 0)
 shape = SubResource("BoxShape3D_qf7sd")
+
+[node name="Subway" parent="Outdoor" unique_id=1568811084 instance=ExtResource("35_0cp0l")]
+transform = Transform3D(0.6757219, 0, 0.7371566, 0, 1, 0, -0.7371566, 0, 0.6757219, -38.709393, -0.63063025, 3.2211118)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Outdoor/Subway" unique_id=209437195]
+transform = Transform3D(0.6611923, 0, -0.75021684, 0, 1, 0, 0.75021684, 0, 0.6611923, -1.1550236, 0.44908702, -0.6603794)
+mesh = SubResource("PlaneMesh_qf7sd")
 
 [node name="BartableCashier" parent="." unique_id=881016471 instance=ExtResource("36_facbu")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, 0.5, 4)
