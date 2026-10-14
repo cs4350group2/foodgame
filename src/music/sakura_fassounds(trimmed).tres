@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AudioData" format=3 uid="uid://c2goqhvc18loo"]
+
+[ext_resource type="AudioStream" uid="uid://bk4ntngj7gdsv" path="res://assets/music/(Sushi) Sakura - trimmed version.mp3" id="1_4v41r"]
+[ext_resource type="Script" uid="uid://dkblfy12lap7h" path="res://src/audio_manager/audio_data.gd" id="1_yv5s7"]
+
+[resource]
+script = ExtResource("1_yv5s7")
+audio_stream = ExtResource("1_4v41r")
+bpm = 140.0
+metadata/_custom_type_script = "uid://dkblfy12lap7h"

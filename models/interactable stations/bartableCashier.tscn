@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://di31n2nduku34"]
+
+[ext_resource type="PackedScene" uid="uid://bflinwj3lf3lo" path="res://models/counters/bartable.tscn" id="1_dfes0"]
+[ext_resource type="PackedScene" uid="uid://cc4cejmqy4i3y" path="res://models/props/cash_register.tscn" id="2_qa57u"]
+
+[node name="BartableCashier" type="Node3D" unique_id=881016471]
+
+[node name="workplan" parent="." unique_id=1513500207 instance=ExtResource("1_dfes0")]
+
+[node name="cash_register" parent="." unique_id=1791361408 instance=ExtResource("2_qa57u")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.008131226, 0.56455386, 0.11797017)

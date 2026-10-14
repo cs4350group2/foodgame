@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://svdpy0q8xadi"
+path="res://.godot/imported/(Grilled Fish) Funk - trimmed version.mp3-c833fb1811c20835e39c167a8da44e07.mp3str"
+
+[deps]
+
+source_file="res://assets/music/(Grilled Fish) Funk - trimmed version.mp3"
+dest_files=["res://.godot/imported/(Grilled Fish) Funk - trimmed version.mp3-c833fb1811c20835e39c167a8da44e07.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -11,7 +11,6 @@ radius = 0.42382813
 
 [node name="RigidBody3D" type="RigidBody3D" unique_id=2101027367]
 script = ExtResource("1_cvr3d")
-food_name = null
 
 [node name="burgerall2" parent="." unique_id=116500474 instance=ExtResource("1_1p4ms")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10609541, 0)
@@ -24,4 +23,5 @@ shape = SubResource("CylinderShape3D_qf7sd")
 
 [node name="InteractComponent" type="Node" parent="." unique_id=245763223]
 script = ExtResource("4_cvr3d")
+highlight_root_path = NodePath("..")
 metadata/_custom_type_script = "uid://ca7pbehy5loa"

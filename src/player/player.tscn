@@ -39,6 +39,9 @@ target_position = Vector3(0, 0, -3)
 [node name="HoldPoint" type="Marker3D" parent="Head/Camera3D" unique_id=51156030]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -1)
 
+[node name="HoldVisualPoint" type="Marker3D" parent="Head/Camera3D" unique_id=971276959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.4, -1)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=715037056]
 
 [node name="Crosshair" type="Control" parent="CanvasLayer" unique_id=965388831]

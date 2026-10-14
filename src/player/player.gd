@@ -5,6 +5,8 @@ class_name Player
 var focused_component: InteractComponent
 
 @onready var hold_point: Marker3D = $Head/Camera3D/HoldPoint
+@onready var hold_visual_point: Marker3D = \
+	$Head/Camera3D/HoldVisualPoint
 var held_edible: EdibleItem
 var _interact_requested: bool = false
 var _alt_interact_requested : bool = false
@@ -110,6 +112,12 @@ func try_alt_interact() -> void:
 func try_interact() -> void:
 	interact_ray.force_raycast_update()
 	var component := get_look_component()
+	
+	if is_instance_valid(held_edible) and is_instance_valid(component):
+		var target := component.get_parent() as EdibleItem
+		if is_instance_valid(target):
+			swap_edible(target)
+			return
 
 	if is_instance_valid(held_edible):
 		if is_instance_valid(component) \
@@ -163,14 +171,18 @@ func update_held_food_transform() -> void:
 	if not is_instance_valid(held_edible):
 		return
 
-	var held_basis := hold_point.global_basis.orthonormalized() \
-		* Basis.from_scale(_held_scale)
-
 	held_edible.global_transform = Transform3D(
-		held_basis,
+		hold_visual_point.global_basis.orthonormalized()
+			* Basis.from_scale(_held_scale),
+		hold_visual_point.global_position
+	)
+func _held_drop_transform() -> Transform3D:
+	return Transform3D(
+		hold_point.global_basis.orthonormalized()
+			* Basis.from_scale(_held_scale),
 		hold_point.global_position
 	)
-	
+		
 func drop_edible() -> void:
 	if not is_instance_valid(held_edible):
 		held_edible = null
@@ -183,7 +195,7 @@ func drop_edible() -> void:
 	print("Dropped edible/ingredient: ", held_edible.get_edible_item_name())
 	_release_held_edible()
 	
-func _can_drop_food() -> bool:
+func _can_drop_food(ignore_item: EdibleItem = null) -> bool:
 	var space := get_world_3d().direct_space_state
 
 	for child in held_edible.get_children():
@@ -196,12 +208,24 @@ func _can_drop_food() -> bool:
 
 		var query := PhysicsShapeQueryParameters3D.new()
 		query.shape = collider.shape
-		query.transform = collider.global_transform
+		query.transform = _held_drop_transform() * collider.transform
 		query.collision_mask = _saved_collision_mask
-		query.exclude = [held_edible.get_rid()]
+		var exclusions: Array[RID] = [held_edible.get_rid()]
+		
+		if is_instance_valid(ignore_item):
+			exclusions.append(ignore_item.get_rid())
+		query.exclude = exclusions
 		query.margin = 0.01
 
-		if not space.intersect_shape(query, 1).is_empty():
+		var hits := space.intersect_shape(query, 8)
+		if not hits.is_empty():
+			for hit in hits:
+				var blocker := hit["collider"] as Node
+				if is_instance_valid(blocker):
+					print(
+						"Cannot release ", held_edible.get_edible_item_name(),
+						"; blocked by ", blocker.get_path()
+					)
 			return false
 
 	return true
@@ -213,7 +237,10 @@ func _release_held_edible() -> EdibleItem:
 	# The food may already have been deleted.
 	if not is_instance_valid(food):
 		return null
-
+		
+	food.global_transform = _held_drop_transform()
+	food.reset_physics_interpolation()
+	
 	food.collision_layer = _saved_collision_layer
 	food.collision_mask = _saved_collision_mask
 
@@ -226,7 +253,29 @@ func _release_held_edible() -> EdibleItem:
 		food.interaction.set_highlighted(false)
 		food.interaction.enabled = _saved_interaction_enabled
 	return food
+	
+func swap_edible(target: EdibleItem) -> bool:
+	if not is_instance_valid(held_edible):
+		return false
+	if not is_instance_valid(target) or target == held_edible:
+		return false
+	if not is_instance_valid(target.interaction):
+		return false
+	if not target.interaction.enabled:
+		return false
 
+	if not _can_drop_food(target):
+		print("Swap blocked: no room to release held item.")
+		return false
+
+	_release_held_edible()
+	pick_up_edible(target)
+
+	if held_edible == target:
+		print("Swap successful: now holding ", target.get_edible_item_name())
+		return true
+
+	return false
 		
 func _can_alt_interact() -> bool:
 	interact_ray.force_raycast_update()

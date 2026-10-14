@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://blruyqi0arko3"]
+
+[ext_resource type="PackedScene" uid="uid://cwlsbyx56whov" path="res://models/props/food/Ingredients/rice.tscn" id="1_hhyib"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qf7sd"]
+height = 0.3433838
+radius = 0.21044922
+
+[node name="Rice" type="RigidBody3D" unique_id=392615255]
+
+[node name="Sketchfab_Scene" parent="." unique_id=1024811580 instance=ExtResource("1_hhyib")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1903813830]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.055236816, 0)
+shape = SubResource("CylinderShape3D_qf7sd")

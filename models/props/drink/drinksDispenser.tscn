@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://ducg3vknedj5c"]
+
+[ext_resource type="PackedScene" uid="uid://dsn2q2ljxcd10" path="res://assets/drinks/drinkDispenser/scene.gltf" id="1_3hjsg"]
+[ext_resource type="Texture2D" uid="uid://kmkgg26fsojn" path="res://assets/drinks/drinkDispenser/T_SodaDispenser_baseColor.png" id="2_ajlkj"]
+[ext_resource type="Texture2D" uid="uid://bp00b80ni3ibq" path="res://assets/drinks/drinkDispenser/T_SodaDispenser_metallicRoughness.png" id="3_ltc00"]
+[ext_resource type="Texture2D" uid="uid://csbtkbx5ijcec" path="res://assets/drinks/drinkDispenser/T_SodaDispenser_normal.png" id="4_r63t7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2pk0"]
+albedo_texture = ExtResource("2_ajlkj")
+metallic = 1.0
+metallic_texture = ExtResource("3_ltc00")
+roughness_texture = ExtResource("3_ltc00")
+normal_enabled = true
+normal_texture = ExtResource("4_r63t7")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qf7sd"]
+size = Vector3(0.8789673, 1.222168, 0.66119385)
+
+[node name="Sketchfab_Scene" unique_id=652762603 instance=ExtResource("1_3hjsg")]
+
+[node name="Object_4" parent="Sketchfab_model/root/GLTF_SceneRootNode/Soda Box_005_0" parent_id_path=PackedInt32Array(836790714) index="0" unique_id=1581103221]
+surface_material_override/0 = SubResource("StandardMaterial3D_t2pk0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/root/GLTF_SceneRootNode/Soda Box_005_0/Object_4" index="0" unique_id=1309088220]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/root/GLTF_SceneRootNode/Soda Box_005_0/Object_4/StaticBody3D" index="0" unique_id=2079054094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0020446777, 0.60668945, 0.056243896)
+shape = SubResource("BoxShape3D_qf7sd")

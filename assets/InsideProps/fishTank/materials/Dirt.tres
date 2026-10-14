@@ -1,0 +1,23 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://4p36aoqloxt7"]
+
+[ext_resource type="Texture2D" uid="uid://bsqy856cfpnlf" path="res://assets/InsideProps/fishTank/Dirt_Base_Color.png" id="1_2qwdi"]
+[ext_resource type="Texture2D" uid="uid://c0cepmigeyfkj" path="res://assets/InsideProps/fishTank/Dirt_Mixed_AO.png" id="2_bri2i"]
+[ext_resource type="Texture2D" uid="uid://iomk2vym8073" path="res://assets/InsideProps/fishTank/Dirt_Metallic.png" id="3_7jnn8"]
+[ext_resource type="Texture2D" uid="uid://bf7ls0w8h2di7" path="res://assets/InsideProps/fishTank/Dirt_Normal_OpenGL.png" id="4_ok0nb"]
+[ext_resource type="Texture2D" uid="uid://cthajnry2a7mc" path="res://assets/InsideProps/fishTank/Dirt_Roughness.png" id="5_polnv"]
+
+[resource]
+resource_name = "Dirt"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.8209799, 0.8209799, 0.8209799, 1)
+albedo_texture = ExtResource("1_2qwdi")
+metallic = 1.0
+metallic_texture = ExtResource("3_7jnn8")
+roughness_texture = ExtResource("5_polnv")
+emission_enabled = true
+emission = Color(0.9063318, 0.9063318, 0.9063318, 1)
+emission_energy_multiplier = 0.0
+normal_enabled = true
+normal_texture = ExtResource("4_ok0nb")
+ao_enabled = true
+ao_texture = ExtResource("2_bri2i")

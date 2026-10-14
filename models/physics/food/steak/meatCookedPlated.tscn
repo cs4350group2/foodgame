@@ -24,4 +24,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05768081, 0)
 
 [node name="InteractComponent" type="Node" parent="." unique_id=898502681]
 script = ExtResource("4_2bbsq")
+highlight_root_path = NodePath("..")
 metadata/_custom_type_script = "uid://ca7pbehy5loa"

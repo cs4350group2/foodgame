@@ -87,16 +87,20 @@ var is_audio_started : bool = false
 
 const _15_SECONDS_NO_SOUND = preload("uid://cp8g3egjiix00") # 15-second soundless track for testing, can ignore
 
-const ALL_NIGHT_BURGUNDY_TRIMMED_ = preload("uid://bgx2ev5nxatk8") # rhythm minigame burger track 
-const HARLEM_HEAT_DAGORED_TRIMMED_ = preload("uid://drtgu1sgw60te") # rhythm minigame steak track
-const PIRATE_TAVERN_MAGIKSOLO_TRIMMED_ = preload("uid://3tm476mhsfm7") # rhythm minigame stew track
+const ALL_NIGHT_BURGUNDY_TRIMMED_ = preload("uid://bgx2ev5nxatk8") # burger track 
+const HARLEM_HEAT_DAGORED_TRIMMED_ = preload("uid://drtgu1sgw60te") # steak track
+const PIRATE_TAVERN_MAGIKSOLO_TRIMMED_ = preload("uid://3tm476mhsfm7") # stew track
+const SAKURA_FASSOUNDS_TRIMMED_ = preload("uid://c2goqhvc18loo") # sushi track
+const FUNNY_ROCK_SOUNDFORYOU_TRIMMED_ = preload("uid://bsqt6l323865l") # rice bowl track
+const FUNK_SUBCLAIR_TRIMMED_ = preload("uid://c78g65qvv2ay4") # grilled fish track
+
 const MUD_DAGORED = preload("uid://dibhfexgjqvj") # BGM 
 
 # more variables to make code look a bit cleaner for now
 var bgm : AudioData = MUD_DAGORED
 var chart_song : AudioData
 var chart_path : String
-var dish_string: String = "burger"
+var dish_string: String = "grilled_fish"
 
 func _ready() -> void:
 	background.self_modulate.a = 0.25
@@ -109,10 +113,19 @@ func _ready() -> void:
 			chart_path = "res://assets/rhythm minigame/charts/all_night.fsc"
 		"steak":
 			chart_song = HARLEM_HEAT_DAGORED_TRIMMED_
-			chart_path = "res://assets/rhythm minigame/charts/harlem_heat.fsc" # can change to the modified 4-lane if needed
+			chart_path = "res://assets/rhythm minigame/charts/harlem_heat.fsc" 
 		"stew":
 			chart_song = PIRATE_TAVERN_MAGIKSOLO_TRIMMED_
 			chart_path = "res://assets/rhythm minigame/charts/pirate_tavern.fsc"
+		"sushi":
+			chart_song = SAKURA_FASSOUNDS_TRIMMED_
+			chart_path = "res://assets/rhythm minigame/charts/sakura.fsc"
+		"rice_bowl":
+			chart_song = FUNNY_ROCK_SOUNDFORYOU_TRIMMED_
+			chart_path = "res://assets/rhythm minigame/charts/funny_rock.fsc"
+		"grilled_fish":
+			chart_song = FUNK_SUBCLAIR_TRIMMED_
+			chart_path = "res://assets/rhythm minigame/charts/funk.fsc"
 		"test_gold":
 			chart_song = _15_SECONDS_NO_SOUND
 			chart_path = "res://assets/rhythm minigame/charts/test_gold_notes.fsc"
@@ -132,7 +145,11 @@ func _ready() -> void:
 	
 	cooking_start.emit()
 	
-	if dish_string == "burger" or dish_string == "steak": # hide "up" and "down" lanes for All Night and Harlem Heat charts
+	if dish_string == "burger" \
+	or dish_string == "steak" \
+	or dish_string == "sushi" \
+	or dish_string == "rice_bowl" \
+	or dish_string == "grilled_fish": # hide "up" and "down" lanes for certain charts
 		hide_lane.emit("up")
 		hide_lane.emit("down")
 		
@@ -178,7 +195,7 @@ func _process(delta: float) -> void:
 	
 		if current_time_ms >= 0.0:
 			is_audio_started = true
-			AudioManager.set_rm_volume(0.2) # this value can be modified between 0 and 1 inclusive, i just felt that the original volume was quite loud
+			AudioManager.set_rm_volume(0.5) # this value can be modified between 0 and 1 inclusive, i just felt that the original volume was quite loud
 			
 			AudioManager.play_rhythm_to_target_bpm(chart_song, bgm.bpm, 0.0) 
 			current_time_ms = 0.0
@@ -303,7 +320,7 @@ func load_rhythm_chart(file_path: String, speed_mult : float) -> Array:
 		print("Failed to load rhythm chart as JSON.")
 		return []
 		
-	var data = json.data	
+	var data = json.data
 	var parsed_notes: Array = []
 	
 	var raw_notes: Array = data.get("HitObjects", [])

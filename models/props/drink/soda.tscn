@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c4oahs2k5iwv7"]
+
+[ext_resource type="PackedScene" uid="uid://dpg5bok1qpa0a" path="res://assets/drinks/cups/Soda Can.fbx" id="1_5yaew"]
+
+[node name="Soda Can" unique_id=1072766302 instance=ExtResource("1_5yaew")]
+
+[node name="Can" parent="." index="0" unique_id=889305853]
+transform = Transform3D(8, 0, 0, 0, -3.496911e-07, 8, 0, -8, -3.496911e-07, 0, 0, 0)

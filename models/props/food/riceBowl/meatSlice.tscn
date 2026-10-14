@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://du6fo6gagpebg"]
+
+[ext_resource type="PackedScene" uid="uid://c1wxxnnh2i0a4" path="res://assets/food/steak/meatcookedslice.gltf" id="1_e4ane"]
+
+[node name="meatcookedslice2" unique_id=121560083 instance=ExtResource("1_e4ane")]
+
+[node name="meatcookedslice" parent="." index="0" unique_id=2033484092]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11425478, 0, 0)

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://7xa2sax8eiuq"
+path="res://.godot/imported/(Rice Bowl) Funny Rock - trimmed version.mp3-3c02976aba0d283a5cbfd52e0a84cfcc.mp3str"
+
+[deps]
+
+source_file="res://assets/music/(Rice Bowl) Funny Rock - trimmed version.mp3"
+dest_files=["res://.godot/imported/(Rice Bowl) Funny Rock - trimmed version.mp3-3c02976aba0d283a5cbfd52e0a84cfcc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

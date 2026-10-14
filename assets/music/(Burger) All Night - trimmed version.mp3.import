@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://jwmo8w80oxus"
+path="res://.godot/imported/(Burger) All Night - trimmed version.mp3-69d3d5d00fa18704abbbff013abe3798.mp3str"
+
+[deps]
+
+source_file="res://assets/music/(Burger) All Night - trimmed version.mp3"
+dest_files=["res://.godot/imported/(Burger) All Night - trimmed version.mp3-69d3d5d00fa18704abbbff013abe3798.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
