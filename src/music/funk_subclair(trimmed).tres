@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AudioData" format=3 uid="uid://c78g65qvv2ay4"]
+
+[ext_resource type="AudioStream" uid="uid://svdpy0q8xadi" path="res://assets/music/(Grilled Fish) Funk - trimmed version.mp3" id="1_1fa7s"]
+[ext_resource type="Script" uid="uid://dkblfy12lap7h" path="res://src/audio_manager/audio_data.gd" id="2_n13yt"]
+
+[resource]
+script = ExtResource("2_n13yt")
+audio_stream = ExtResource("1_1fa7s")
+bpm = 118.0
+metadata/_custom_type_script = "uid://dkblfy12lap7h"

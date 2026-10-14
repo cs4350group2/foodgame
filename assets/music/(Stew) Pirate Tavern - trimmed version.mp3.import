@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dhleo0q6anel2"
+path="res://.godot/imported/(Stew) Pirate Tavern - trimmed version.mp3-74842538918a6c6171a0b75dcf6e9bb0.mp3str"
+
+[deps]
+
+source_file="res://assets/music/(Stew) Pirate Tavern - trimmed version.mp3"
+dest_files=["res://.godot/imported/(Stew) Pirate Tavern - trimmed version.mp3-74842538918a6c6171a0b75dcf6e9bb0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

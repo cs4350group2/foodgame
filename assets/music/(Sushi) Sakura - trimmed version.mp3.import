@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bk4ntngj7gdsv"
+path="res://.godot/imported/(Sushi) Sakura - trimmed version.mp3-1d01dec89904e01aef6b817aebe3d879.mp3str"
+
+[deps]
+
+source_file="res://assets/music/(Sushi) Sakura - trimmed version.mp3"
+dest_files=["res://.godot/imported/(Sushi) Sakura - trimmed version.mp3-1d01dec89904e01aef6b817aebe3d879.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

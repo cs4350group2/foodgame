@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AudioData" format=3 uid="uid://3tm476mhsfm7"]
 
-[ext_resource type="AudioStream" uid="uid://dhleo0q6anel2" path="res://assets/music/Pirate Tavern - trimmed version.mp3" id="1_5ef5w"]
+[ext_resource type="AudioStream" uid="uid://dhleo0q6anel2" path="res://assets/music/(Stew) Pirate Tavern - trimmed version.mp3" id="1_5ef5w"]
 [ext_resource type="Script" uid="uid://dkblfy12lap7h" path="res://src/audio_manager/audio_data.gd" id="1_7p5fn"]
 
 [resource]
