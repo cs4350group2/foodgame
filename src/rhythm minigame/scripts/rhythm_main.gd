@@ -145,7 +145,11 @@ func _ready() -> void:
 	
 	cooking_start.emit()
 	
-	if dish_string == "burger" or dish_string == "steak": # hide "up" and "down" lanes for All Night and Harlem Heat charts
+	if dish_string == "burger" \
+	or dish_string == "steak" \
+	or dish_string == "sushi" \
+	or dish_string == "rice_bowl" \
+	or dish_string == "grilled_fish": # hide "up" and "down" lanes for certain charts
 		hide_lane.emit("up")
 		hide_lane.emit("down")
 		
