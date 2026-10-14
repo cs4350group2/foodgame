@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cc4cejmqy4i3y"]
+
+[ext_resource type="PackedScene" uid="uid://bn6b66ywcpgbv" path="res://assets/InsideProps/cashRegister/cash_register.fbx" id="1_nkr57"]
+[ext_resource type="Texture2D" uid="uid://bs0garig7w6s4" path="res://assets/InsideProps/cashRegister/textures_(1).png" id="2_wtsfq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf7sd"]
+albedo_texture = ExtResource("2_wtsfq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oo0pn"]
+albedo_texture = ExtResource("2_wtsfq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8erdm"]
+albedo_texture = ExtResource("2_wtsfq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4mje"]
+albedo_texture = ExtResource("2_wtsfq")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qf7sd"]
+size = Vector3(0.72906494, 0.5170288, 0.91967773)
+
+[node name="cash_register" unique_id=1791361408 instance=ExtResource("1_nkr57")]
+
+[node name="Cube" parent="." index="0" unique_id=438060189]
+surface_material_override/0 = SubResource("StandardMaterial3D_qf7sd")
+
+[node name="Cube_001" parent="." index="1" unique_id=1702783930]
+surface_material_override/0 = SubResource("StandardMaterial3D_oo0pn")
+
+[node name="Cube_002" parent="." index="2" unique_id=1080835019]
+surface_material_override/0 = SubResource("StandardMaterial3D_8erdm")
+
+[node name="Cube_003" parent="." index="3" unique_id=1359082466]
+surface_material_override/0 = SubResource("StandardMaterial3D_g4mje")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="4" unique_id=210782896]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=687765999]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00015258789, 0.14468384, 0.15368652)
+shape = SubResource("BoxShape3D_qf7sd")

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b8va5jn0khxnr"
-path="res://.godot/imported/flourpyramid.gltf-9e5393040fa9f10bb32e016ca11efab6.scn"
+uid="uid://dsn2q2ljxcd10"
+path="res://.godot/imported/scene.gltf-d9531eb0af7eb60d098ed1167bdf3d98.scn"
 
 [deps]
 
-source_file="res://assets/food/ingredients/flourpyramid.gltf"
-dest_files=["res://.godot/imported/flourpyramid.gltf-9e5393040fa9f10bb32e016ca11efab6.scn"]
+source_file="res://assets/drinks/drinkDispenser/scene.gltf"
+dest_files=["res://.godot/imported/scene.gltf-d9531eb0af7eb60d098ed1167bdf3d98.scn"]
 
 [params]
 

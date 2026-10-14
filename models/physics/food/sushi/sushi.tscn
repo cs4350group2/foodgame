@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dyaq6tbs2ft02"]
+
+[ext_resource type="PackedScene" uid="uid://dm0v8o2ocl357" path="res://models/props/food/sushi/sushi.tscn" id="1_7e5s6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qf7sd"]
+size = Vector3(1.0705566, 0.17663574, 0.34472656)
+
+[node name="Sushi" type="RigidBody3D" unique_id=1250095170]
+
+[node name="sushisSetwithSushis" parent="." unique_id=2144792710 instance=ExtResource("1_7e5s6")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1320627039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20861816, 0.061584473, 0.0073242188)
+shape = SubResource("BoxShape3D_qf7sd")

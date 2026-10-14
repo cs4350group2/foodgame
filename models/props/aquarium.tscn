@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bgmdho1u1yyym"]
+
+[ext_resource type="PackedScene" uid="uid://b4u3nfocyt8dv" path="res://assets/InsideProps/fishTank/Aquarium Retry.fbx" id="1_ol23s"]
+
+[node name="Aquarium Retry" unique_id=1519014377 instance=ExtResource("1_ol23s")]

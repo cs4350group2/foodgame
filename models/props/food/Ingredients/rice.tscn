@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cwlsbyx56whov"]
+
+[ext_resource type="PackedScene" uid="uid://c1pwdwa2yu176" path="res://assets/food/ingredients/rice/scene.gltf" id="1_pfoj0"]
+
+[node name="Sketchfab_Scene" unique_id=1024811580 instance=ExtResource("1_pfoj0")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)

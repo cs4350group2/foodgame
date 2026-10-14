@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c7wup4v1dbv62"]
+
+[ext_resource type="PackedScene" uid="uid://d3y3gq2gt63bf" path="res://assets/food/burger/cumcumberslice.fbx" id="1_l1yk4"]
+
+[node name="cumcumberslice" unique_id=813621327 instance=ExtResource("1_l1yk4")]
+
+[node name="cumcumberslice" parent="." index="0" unique_id=1230899419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

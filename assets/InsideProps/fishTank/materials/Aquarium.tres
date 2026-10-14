@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b4kq5erf6n1gb"]
+
+[ext_resource type="Texture2D" uid="uid://debu3rgn7caw" path="res://assets/InsideProps/fishTank/Aquarium_Base_Color.png" id="1_18gcn"]
+[ext_resource type="Texture2D" uid="uid://y0yubyfjlmkj" path="res://assets/InsideProps/fishTank/Aquarium_Mixed_AO.png" id="2_j2vaf"]
+[ext_resource type="Texture2D" uid="uid://dvgg3tofbhoni" path="res://assets/InsideProps/fishTank/Aquarium_Emissive.png" id="3_1v18x"]
+[ext_resource type="Texture2D" uid="uid://b4m2dq2jav5je" path="res://assets/InsideProps/fishTank/Aquarium_Metallic.png" id="4_18xxc"]
+[ext_resource type="Texture2D" uid="uid://cubl2gx6rmykh" path="res://assets/InsideProps/fishTank/Aquarium_Roughness.png" id="5_500vb"]
+
+[resource]
+resource_name = "Aquarium"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.8209799, 0.8209799, 0.8209799, 1)
+albedo_texture = ExtResource("1_18gcn")
+metallic = 1.0
+metallic_texture = ExtResource("4_18xxc")
+roughness_texture = ExtResource("5_500vb")
+emission_enabled = true
+emission = Color(0.9063318, 0.9063318, 0.9063318, 1)
+emission_energy_multiplier = 0.0
+emission_texture = ExtResource("3_1v18x")
+ao_enabled = true
+ao_texture = ExtResource("2_j2vaf")

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bb5ywm1b7dvp2"]
+
+[ext_resource type="PackedScene" uid="uid://drinx5ntr2vyo" path="res://assets/food/grilledFish/scene.gltf" id="1_2xxq3"]
+[ext_resource type="Texture2D" uid="uid://wc5fgg88n55b" path="res://assets/food/grilledFish/fish_low_poly_material_baseColor.png" id="2_jsj44"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1v7qh"]
+albedo_texture = ExtResource("2_jsj44")
+
+[node name="Sketchfab_Scene" unique_id=78391070 instance=ExtResource("1_2xxq3")]
+
+[node name="Object_2" parent="Sketchfab_model/fish_obj_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(959314673) index="0" unique_id=1096533182]
+surface_material_override/0 = SubResource("StandardMaterial3D_1v7qh")

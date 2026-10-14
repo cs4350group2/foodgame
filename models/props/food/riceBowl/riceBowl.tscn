@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bh5jwiooch8fl"]
+
+[ext_resource type="PackedScene" uid="uid://cwlsbyx56whov" path="res://models/props/food/Ingredients/rice.tscn" id="1_uvtpr"]
+[ext_resource type="PackedScene" uid="uid://du6fo6gagpebg" path="res://models/props/food/riceBowl/meatSlice.tscn" id="2_uxyhe"]
+[ext_resource type="PackedScene" uid="uid://ck0qs03gqwdvw" path="res://models/props/food/riceBowl/eggYolk.tscn" id="3_imca0"]
+[ext_resource type="PackedScene" uid="uid://c7wup4v1dbv62" path="res://models/props/food/riceBowl/cumcumberSlice.tscn" id="4_ve0ys"]
+
+[node name="RiceBowl" type="Node3D" unique_id=1256667715]
+
+[node name="Sketchfab_Scene" parent="." unique_id=1024811580 instance=ExtResource("1_uvtpr")]
+
+[node name="meatcookedslice2" parent="." unique_id=121560083 instance=ExtResource("2_uxyhe")]
+transform = Transform3D(1.030866, 0.6119748, 0.052934796, -0.5057662, 0.9043178, -0.6053179, -0.34859094, 0.49769092, 1.034789, 0.011870757, 0.06750784, 0.13628145)
+
+[node name="meatcookedslice3" parent="." unique_id=178904012 instance=ExtResource("2_uxyhe")]
+transform = Transform3D(0.7886173, 0.7645444, 0.48327503, -0.5057663, 0.9043178, -0.60531783, -0.74985534, 0.19411659, 0.9165344, 0.069480814, 0.06750784, 0.112975225)
+
+[node name="meatcookedslice4" parent="." unique_id=748893135 instance=ExtResource("2_uxyhe")]
+transform = Transform3D(0.57692754, 0.7887987, 0.6963848, -0.5057663, 0.9043178, -0.60531783, -0.92268914, -0.0024862587, 0.7672279, 0.10880112, 0.06750784, 0.06697157)
+
+[node name="meatcookedslice5" parent="." unique_id=543834009 instance=ExtResource("2_uxyhe")]
+transform = Transform3D(0.23348877, 0.7421358, 0.9136289, -0.50576633, 0.90431774, -0.6053179, -1.0628657, -0.26729, 0.488746, 0.1373693, 0.06620861, 0.015883446)
+
+[node name="meatcookedslice6" parent="." unique_id=368613609 instance=ExtResource("2_uxyhe")]
+transform = Transform3D(-0.20328704, 0.5772352, 1.032218, -0.50576633, 0.9043176, -0.6053179, -1.0690533, -0.53759545, 0.090091586, 0.1373693, 0.063186504, -0.04992775)
+
+[node name="SushisEggSingle" parent="." unique_id=230789976 instance=ExtResource("3_imca0")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.11073879, 0)
+
+[node name="cumcumberslice" parent="." unique_id=813621327 instance=ExtResource("4_ve0ys")]
+transform = Transform3D(0.927496, -0.0842348, 0.364219, -0.16105555, 0.7891911, 0.5926536, -0.33736053, -0.6083434, 0.7184053, -0.043618806, 0.07570693, -0.12339938)
+
+[node name="cumcumberslice2" parent="." unique_id=1951288413 instance=ExtResource("4_ve0ys")]
+transform = Transform3D(0.586376, -0.40650177, 0.70065665, -0.16105555, 0.7891911, 0.5926536, -0.79386663, -0.4603625, 0.3972935, -0.105289884, 0.06580493, -0.07319772)
+
+[node name="cumcumberslice3" parent="." unique_id=292496133 instance=ExtResource("4_ve0ys")]
+transform = Transform3D(0.35563797, -0.5137454, 0.78076094, -0.02290304, 0.830333, 0.5567965, -0.9343431, -0.21589975, 0.28353167, -0.12578267, 0.071441144, 0.009386376)

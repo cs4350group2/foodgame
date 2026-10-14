@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cxx5rljexjyfh"]
+
+[ext_resource type="PackedScene" uid="uid://b64kymnykw2ab" path="res://assets/food/sushi/SushisMaguroFlat.fbx" id="1_6tbdv"]
+
+[node name="SushisMaguroFlat" unique_id=380758307 instance=ExtResource("1_6tbdv")]
+
+[node name="SushisMaguroFlat" parent="." index="0" unique_id=684320070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

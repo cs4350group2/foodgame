@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c3a3wske7qdhq"]
+
+[ext_resource type="PackedScene" uid="uid://crn1ut31rmkjs" path="res://models/props/food/sushi/salmonSlice.tscn" id="1_lgwvk"]
+[ext_resource type="PackedScene" uid="uid://cxx5rljexjyfh" path="res://models/props/food/sushi/tunaSlice.tscn" id="2_gpd4x"]
+
+[node name="SlicedFish" type="Node3D" unique_id=1064862032]
+
+[node name="SushisSalmonFlat" parent="." unique_id=1120510999 instance=ExtResource("1_lgwvk")]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, -0.57357645, 0, 0.57357645, 0.81915206, -7.084012e-05, 0.02721119, 0.18674488)
+
+[node name="SushisMaguroFlat" parent="." unique_id=380758307 instance=ExtResource("2_gpd4x")]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, -7.084012e-05, 0, 0.079337165)
+
+[node name="SushisSalmonFlat2" parent="." unique_id=878393984 instance=ExtResource("1_lgwvk")]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, -0.57357645, 0, 0.57357645, 0.81915206, -7.084012e-05, 0.02721119, 0.037163273)
+
+[node name="SushisMaguroFlat2" parent="." unique_id=1661300417 instance=ExtResource("2_gpd4x")]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, -7.084012e-05, -0.0051302314, -0.0650567)
+
+[node name="SushisSalmonFlat3" parent="." unique_id=1773577648 instance=ExtResource("1_lgwvk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.084012e-05, 0.019086726, -0.14891016)

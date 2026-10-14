@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cal4pwqbabqv5"
-path.s3tc="res://.godot/imported/flourbag_color.png-f22eb48154cb4eb8946d470ce4721723.s3tc.ctex"
+uid="uid://bsqy856cfpnlf"
+path.s3tc="res://.godot/imported/Dirt_Base_Color.png-433c75df031522d7ed285a24dd95c796.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/food/ingredients/flourbag_color.png"
-dest_files=["res://.godot/imported/flourbag_color.png-f22eb48154cb4eb8946d470ce4721723.s3tc.ctex"]
+source_file="res://assets/InsideProps/fishTank/Dirt_Base_Color.png"
+dest_files=["res://.godot/imported/Dirt_Base_Color.png-433c75df031522d7ed285a24dd95c796.s3tc.ctex"]
 
 [params]
 

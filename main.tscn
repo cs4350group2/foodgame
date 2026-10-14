@@ -34,7 +34,13 @@
 [ext_resource type="PackedScene" uid="uid://ubv0sb3volmr" path="res://src/ui/restaurant_ui/RestaurantUI.tscn" id="33_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://bncnlon6uyptf" path="res://src/restaurant/DayManager.tscn" id="34_4k2k6"]
 [ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="35_0rl1p"]
+[ext_resource type="PackedScene" uid="uid://di31n2nduku34" path="res://models/interactable stations/bartableCashier.tscn" id="36_facbu"]
 [ext_resource type="PackedScene" uid="uid://dgh6jtkk62vuk" path="res://src/ui/pause_menu/PauseMenu.tscn" id="36_ok6jj"]
+[ext_resource type="PackedScene" uid="uid://b6ed0ouorcs0m" path="res://models/interactable stations/drinksDispenser.tscn" id="37_b1qrp"]
+[ext_resource type="PackedScene" uid="uid://bkj5ixiq31knv" path="res://models/physics/drinks/IceLemonTea.tscn" id="38_come4"]
+[ext_resource type="PackedScene" uid="uid://c6t0ugj3vca3q" path="res://models/physics/drinks/sodaRegular.tscn" id="39_h8e4i"]
+[ext_resource type="PackedScene" uid="uid://r24vdp7qegiw" path="res://models/physics/drinks/sodaSpecial.tscn" id="40_4lmeg"]
+[ext_resource type="PackedScene" uid="uid://bgi1a47734pt8" path="res://models/interactable stations/fishTank.tscn" id="41_4lmeg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -301,7 +307,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.742, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4.742, 0)
 
 [node name="Roof" type="MeshInstance3D" parent="RestaurantMesh" unique_id=614535031]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5.767, -0.116)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0003147, 5.767, -0.11373067)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_ikrja")
 surface_material_override/0 = SubResource("StandardMaterial3D_8erdm")
@@ -364,3 +370,21 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 39.5
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Outdoor/StaticBody3D4" unique_id=922705785]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8758392, -2.7337341, 0)
 shape = SubResource("BoxShape3D_qf7sd")
+
+[node name="BartableCashier" parent="." unique_id=881016471 instance=ExtResource("36_facbu")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, 0.5, 4)
+
+[node name="DrinksDispenser" parent="." unique_id=652149325 instance=ExtResource("37_b1qrp")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14, 0.5, 1)
+
+[node name="IceLemonTea" parent="." unique_id=2089918298 instance=ExtResource("38_come4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0890245, 1.1545537, -3.1991136)
+
+[node name="SodaRegular" parent="." unique_id=2101937588 instance=ExtResource("39_h8e4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9926925, 1.0975919, -3.518568)
+
+[node name="SodaSpecial" parent="." unique_id=1347820385 instance=ExtResource("40_4lmeg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8373513, 1.097592, -3.7133353)
+
+[node name="FishTank" parent="." unique_id=1445951407 instance=ExtResource("41_4lmeg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14, 0.5, 2.5)

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dcknkkqgblpt7"]
+
+[ext_resource type="PackedScene" uid="uid://vs1p27o8b2w2" path="res://assets/drinks/cups/SodaSpecial.fbx" id="1_7vue8"]
+
+[node name="SodaSpecial" unique_id=1372127029 instance=ExtResource("1_7vue8")]
+
+[node name="Can" parent="." index="0" unique_id=1920766109]
+transform = Transform3D(8, 0, 0, 0, -3.496911e-07, 8, 0, -8, -3.496911e-07, 0, 0, 0)
