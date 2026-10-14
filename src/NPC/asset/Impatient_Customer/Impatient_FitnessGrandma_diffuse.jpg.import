@@ -2,23 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdrcghxyfc8tt"
-path="res://.godot/imported/Timmy_Ch09_1001_Specular.png-67a9e0cbe3bd655892c99ac4a504b5ec.ctex"
+uid="uid://damnkfn5thdua"
+path.s3tc="res://.godot/imported/Impatient_FitnessGrandma_diffuse.jpg-6d69f6f2252f330c4859cd4f69978a7f.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={
-"md5": "cc54f89ab2f803775b259523df174726"
+"md5": "f56a1740938c31039904d3276307e103"
 }
 
 [deps]
 
-source_file="res://src/NPC/asset/Timmy_Ch09_1001_Specular.png"
-dest_files=["res://.godot/imported/Timmy_Ch09_1001_Specular.png-67a9e0cbe3bd655892c99ac4a504b5ec.ctex"]
+source_file="res://src/NPC/asset/Impatient_Customer/Impatient_FitnessGrandma_diffuse.jpg"
+dest_files=["res://.godot/imported/Impatient_FitnessGrandma_diffuse.jpg-6d69f6f2252f330c4859cd4f69978a7f.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -40,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

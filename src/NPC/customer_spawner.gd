@@ -1,14 +1,20 @@
 class_name CustomerSpawner
 extends Node3D
 
-@export var customer_scene: PackedScene
+@export var customer_scenes: Array[PackedScene]
 @onready var spawn_point: Marker3D = $SpawnPoint
 @onready var exit_point: Marker3D = $Exit
+
+# Preload all available customer scenes
+const vip_customer_scene: PackedScene = preload("res://src/NPC/customer/vip_customer.tscn")
+const impatient_customer_scene: PackedScene = preload("res://src/NPC/customer/impatient_customer.tscn")
+const food_critic_customer_scene: PackedScene = preload("res://src/NPC/customer/food_critic_customer.tscn")
+const hobo_customer_scene: PackedScene = preload("res://src/NPC/customer/hobo_customer.tscn")
 
 var available_names: Array[String] = []
 var used_names: Dictionary = {}
 var to_spawn: Array[StringName]
-
+var customer_scene: PackedScene
 
 func _ready() -> void:
 	load_names()
@@ -39,6 +45,12 @@ func load_names() -> void:
 		if not customer_name.is_empty() and not available_names.has(customer_name):
 			available_names.append(customer_name)
 
+func choose_random_customer_scene() -> void:
+	if customer_scenes.is_empty():
+		return
+
+	customer_scene = customer_scenes.pick_random()
+
 func spawn_customer(customer_type: StringName = &"") -> void:
 	if available_names.is_empty():
 		print("No unused customer names remain.")
@@ -50,14 +62,57 @@ func spawn_customer(customer_type: StringName = &"") -> void:
 	
 	# var customer_level := randi_range(1, 3)
 	var customer_level := 1
-	var patience := rng.randf_range(30.0, 50.0)
+	var patience := rng.randf_range(50.0, 70.0)
 	
-	var customer: Customer = customer_scene.instantiate()
-	customer.initialize_customer(customer_name, customer_level, patience)
-	customer.exit_point = exit_point
-	customer.global_position = spawn_point.global_position
+	# Set up customer scene
+	var customer: Customer
+	match customer_type:
+		&"":
+			choose_random_customer_scene()
+			customer = customer_scene.instantiate()
+			customer.initialize_customer(customer_name, customer_level, patience, customer_type)
+		&"VIP":
+			customer_scene = vip_customer_scene
+			customer = customer_scene.instantiate()
+			var vip := customer as VIP_Customer
+			if vip != null:
+				var requirement: float = 50.0
+				vip.initialize_vip_customer(customer_name, 
+				customer_level, patience, customer_type, requirement)
+			customer = vip
+		&"Impatient":
+			customer_scene = impatient_customer_scene
+			customer = customer_scene.instantiate()
+			customer.initialize_customer(customer_name, customer_level, patience / 2, customer_type)
+		&"FoodCritic":
+			customer_scene = food_critic_customer_scene
+			customer = customer_scene.instantiate()
+			var food_critic := customer as FoodCritic_Customer
+			if food_critic != null:
+				food_critic.initialize_food_critic(customer_name, customer_level, patience, customer_type)
+			customer = food_critic
+		&"Hobo":
+			customer_scene = hobo_customer_scene
+			customer = customer_scene.instantiate()
+			customer.initialize_customer(customer_name, customer_level, patience, customer_type)
+		_:
+			print(customer_type)
+			choose_random_customer_scene()
+			customer = customer_scene.instantiate()
+			customer.initialize_customer(customer_name, customer_level, patience, customer_type)
+		
+	set_customer_exit_point(customer)
+	set_customer_spawn_position(customer)
 	add_child(customer)
-	print("Spawned ", customer.customer_name, " Level: ", customer.customer_lvl)
+	print("Spawned ", customer.get_customer_name(), 
+	" Level: ", customer.get_customer_lvl(), 
+	" Type: ", customer.get_customer_type())
+
+func set_customer_spawn_position(customer: Customer) -> void:
+	customer.global_position = spawn_point.global_position
+
+func set_customer_exit_point(customer: Customer) -> void:
+	customer.exit_point = exit_point
 
 func release_name(name: String) -> void:
 	if !available_names.has(name):

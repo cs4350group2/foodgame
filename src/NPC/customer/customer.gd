@@ -1,6 +1,7 @@
 class_name Customer
 extends CharacterBody3D
 
+@onready var effect_anchor: Node3D = $EffectAnchor
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var animation_player: AnimationPlayer = $CharacterBody3D/Timmy/AnimationPlayer
 @onready var interaction: InteractComponent = $InteractComponent
@@ -17,9 +18,12 @@ const ENTER_SFX = preload("res://assets/sfx/customer/enter_sfx.wav")
 const ORDER_TAKEN_SFX = preload("res://assets/sfx/customer/order_taken.ogg")
 const LEAVING_SFX = preload("res://assets/sfx/customer/leaving_sfx.wav")
 const WARNING_SFX = preload("res://assets/sfx/customer/warning_sfx.mp3")
+const HOBO_LAUGH_SFX = preload("res://assets/sfx/customer/Hobo_Laugh.mp3")
+const PAYMENT_SFX = preload("res://assets/sfx/customer/money_chaching_sfx.mp3")
 
 # VFX
 const POOF_SCENE: PackedScene = preload("res://assets/vfx/customer/Poof.tscn")
+const PATIENCE_UP_SCENE: PackedScene = preload("res://assets/vfx/customer/PatienceUp.tscn")
 
 enum State {
 	IDLE,
@@ -48,11 +52,18 @@ var move_speed: float = 2.0
 var mood_bonus: float = 0.0
 var customer_lvl: int
 var customer_name: String
+var customer_type: StringName
 var exit_point: Marker3D
 var prev_transform: Transform3D
 
 func get_customer_name() -> String:
 	return customer_name
+
+func get_customer_lvl() -> int:
+	return customer_lvl
+
+func get_customer_type() -> StringName:
+	return customer_type
 
 func get_mood_bonus() -> float:
 	return mood_bonus
@@ -63,10 +74,11 @@ func add_mood_bonus(bonus: float) -> void:
 func assign_sitting_node(node: SittingNode):
 	self.assigned_sittingNode = node
 
-func initialize_customer(name: String, level: int, patience: float) -> void:
+func initialize_customer(name: String, level: int, patience: float, type: StringName = &"") -> void:
 	customer_name = name
 	customer_lvl = level
 	max_patience = patience
+	customer_type = type
 
 func _ready():
 	interaction.supports_primary = true
@@ -97,6 +109,7 @@ func _on_interacted(_player: Player) -> void:
 
 		State.FINISHED:
 			RestaurantManager.receive_payment(take_payment())
+			play_audio(AudioSfx.PAYMENT)
 
 	print("Interacted with the customer.")
 
@@ -137,6 +150,19 @@ func _process(delta: float) -> void:
 	match current_state:
 		pass
 
+func play_animation(anim: String) -> void:
+	match anim:
+		"Idle":
+			animation_player.play("Idle")
+		
+		"Walk":
+			animation_player.play("Walk")
+		
+		"Sitting_Idle":
+			animation_player.play("Sitting_Idle")
+		_:
+			pass
+
 # -------------- State Management ----------------------------------
 
 func change_state(new_state: State):
@@ -152,12 +178,12 @@ func change_state(new_state: State):
 func enter_state(state: State):
 	match state:
 		State.IDLE:
-			animation_player.play("Idle")
+			play_animation("Idle")
 			pass
 		
 		State.WALKING_TO_TABLE:
 			play_audio(AudioSfx.ENTER)
-			animation_player.play("Walk")
+			play_animation("Walk")
 			update_target_location(assigned_sittingNode.global_position)
 			pass
 
@@ -166,7 +192,7 @@ func enter_state(state: State):
 			# Play reading menu animation for random seconds
 			prev_transform = global_transform
 			global_transform = assigned_sittingNode.get_seating_transform()
-			animation_player.play("Sitting_Idle")
+			play_animation("Sitting_Idle")
 			var view_menu_time = RunManager.get_rng().randf_range(5.0, 10.0)
 			wait_at_table(view_menu_time)
 			pass
@@ -189,12 +215,12 @@ func enter_state(state: State):
 
 		State.LEAVING:
 			global_transform = prev_transform
-			animation_player.play("Walk")
+			play_animation("Walk")
 			update_target_location(exit_point.global_position)
 			pass
 		State.LEAVING_ANGRY:
 			global_transform = prev_transform
-			animation_player.play("Walk")
+			play_animation("Walk")
 			play_audio(AudioSfx.ANGRY)
 			update_target_location(exit_point.global_position)
 			pass
@@ -259,8 +285,10 @@ enum AudioSfx {
 	ANGRY,
 	ORDERING,
 	COMPLETE,
+	PAYMENT,
 	LEAVING,
-	WARNING
+	WARNING,
+	HOBO_LAUGH
 }
 
 func play_audio(audio_type: AudioSfx):
@@ -277,6 +305,9 @@ func play_audio(audio_type: AudioSfx):
 		AudioSfx.COMPLETE:
 			audio_player.volume_linear = 0.2
 			audio_player.stream = ORDER_COMPLETE_SFX
+		AudioSfx.PAYMENT:
+			audio_player.volume_linear = 1.0
+			audio_player.stream = PAYMENT_SFX
 		AudioSfx.ORDER_TAKEN:
 			audio_player.volume_linear = 0.9
 			audio_player.stream = ORDER_TAKEN_SFX
@@ -289,6 +320,9 @@ func play_audio(audio_type: AudioSfx):
 		AudioSfx.WARNING:
 			audio_player.volume_linear = 2.0
 			audio_player.stream = WARNING_SFX
+		AudioSfx.HOBO_LAUGH:
+			audio_player.volume_linear = 1.5
+			audio_player.stream = HOBO_LAUGH_SFX
 	audio_player.play()
 
 func state_sitting(delta):
@@ -311,7 +345,7 @@ func start_ordering() -> void:
 		var foods: Array = menu["foods"]
 		var food_data = foods[RunManager.get_rng().randi_range(0, foods.size() - 1)]
 		print(food_data["name"], food_data["price"], food_data["rarity"])
-		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"], 1.0)
+		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"])
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])	
 		order.order_completed.connect(_on_order_complete)
@@ -340,8 +374,14 @@ var patience: float
 func get_current_patience() -> float:
 	return patience
 
+func get_max_patience() -> float:
+	return max_patience
+
 func set_patience(new_patience: float) -> void:
 	patience = min(max_patience, new_patience)
+
+func set_max_patience(new_max_patience) -> void:
+	max_patience = new_max_patience
 
 func start_waiting_for_food() -> void:
 	patience = max_patience
@@ -358,7 +398,7 @@ func state_waiting_for_food(delta):
 		
 		return
 
-func start_eating(eating_time: float = 5.0) -> void:
+func start_eating(eating_time: float = 10.0) -> void:
 	play_audio(AudioSfx.COMPLETE)
 	await get_tree().create_timer(eating_time).timeout
 
@@ -409,8 +449,8 @@ func _deliver_held_edible(player: Player) -> void:
 		var delivered_item := OrderItem.new(food_data, 1)
 
 		if not receive_order_item(delivered_item):
+			print("That dish does not match the customer's order/requirement.")
 			food_data.set_dish_quality(original_quality)
-			print("That dish does not match the customer's order.")
 			return
 
 		var delivered_edible := player._release_held_edible()
@@ -463,6 +503,7 @@ func state_leaving_angry(delta):
 		queue_free()
 		return
 
+# --------------------------------VFX-------------------------------------------
 func disappear_with_poof() -> void: # When customer drink EXTREMELY SAFE Drink
 	var poof := POOF_SCENE.instantiate()
 	
@@ -475,3 +516,15 @@ func disappear_with_poof() -> void: # When customer drink EXTREMELY SAFE Drink
 	get_tree().current_scene.add_child(poof)
 	poof.global_position = global_position
 	queue_free()
+
+func show_patience_up() -> void:
+	var effect := PATIENCE_UP_SCENE.instantiate()
+	get_tree().current_scene.add_child(effect)
+	effect.global_position = effect_anchor.global_position
+
+func is_equal(other: Customer) -> bool:
+	return (
+		customer_name == other.get_customer_name()
+		and customer_lvl == other.get_customer_lvl()
+		and customer_type == other.get_customer_type()
+	)

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://by7pd5ee6nyy6"]
+
+[ext_resource type="PackedScene" uid="uid://bsbtn4vcsqb61" path="res://src/NPC/asset/Hobo_Customer/Hobo.glb" id="1_mg2y7"]
+
+[node name="Hobo" unique_id=993496241 instance=ExtResource("1_mg2y7")]

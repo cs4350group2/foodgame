@@ -4,7 +4,7 @@ extends Edible
 var rarity_level: int # Currently have 1 -> 3 levels.
 var dish_quality: float # Dish quality determined by cooking minigame
 
-func _init(edible_name: String, base_price: float, rarity_level: int, dish_quality: float) -> void:
+func _init(edible_name: String, base_price: float, rarity_level: int, dish_quality: float = 50.0) -> void:
 	super(edible_name, base_price)
 	self.rarity_level = rarity_level
 	self.dish_quality = dish_quality

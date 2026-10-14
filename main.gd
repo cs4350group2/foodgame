@@ -16,7 +16,7 @@ class CustomerDistribution:
 var temp_nodes: Dictionary[int, Node] = {}
 @onready var day_manager: DayManager = %DayManager
 
-var available_customers: Array[CustomerDistribution] = [CustomerDistribution.new(&"regular", 100.0)]
+var available_customers: Array[CustomerDistribution] = [CustomerDistribution.new(&"", 100.0)]
 var total_weight: float = 100.0
 
 signal clear_temp()

@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://bharvmcqy35l5"]
+
+[ext_resource type="Texture2D" uid="uid://diu55q1bup2a0" path="res://assets/ui/icons/clock-solid.svg" id="1_rnlaf"]
+[ext_resource type="Script" uid="uid://dxntecr3gnot6" path="res://assets/vfx/customer/patience_up.gd" id="1_y5xjx"]
+[ext_resource type="PackedScene" uid="uid://dvrjsrsntofat" path="res://assets/vfx/customer/FloatingClock.tscn" id="2_rsxdn"]
+
+[sub_resource type="Animation" id="Animation_y5xjx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rsxdn"]
+resource_name = "float_up"
+length = 3.0000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 0),
+"update": 0,
+"values": [Color(0, 1, 0, 1), Color(0, 1, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hkc4r"]
+_data = {
+&"RESET": SubResource("Animation_y5xjx"),
+&"float_up": SubResource("Animation_rsxdn")
+}
+
+[node name="PatienceUp" type="Node3D" unique_id=104180415]
+script = ExtResource("1_y5xjx")
+icon_scene = ExtResource("2_rsxdn")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=808120742]
+billboard = 1
+texture = ExtResource("1_rnlaf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite3D" unique_id=1724791322]
+libraries/ = SubResource("AnimationLibrary_hkc4r")
+
+[connection signal="animation_finished" from="Sprite3D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

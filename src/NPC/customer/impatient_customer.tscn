@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://hgcmng1kqj3n"]
+
+[ext_resource type="Script" uid="uid://bs8cwb2h7fndo" path="res://src/NPC/customer/impatient_customer.gd" id="1_76epn"]
+[ext_resource type="PackedScene" uid="uid://dptpl68kpaoo8" path="res://src/NPC/asset/Impatient_Customer/Impatient.glb" id="2_76epn"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_5eo4w"]
+[ext_resource type="PackedScene" uid="uid://bni0uok26bsmb" path="res://src/NPC/ui/PatienceBar.tscn" id="4_7ygbm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i2whk"]
+radius = 0.3
+height = 1.8
+
+[node name="ImpatientCustomer" type="CharacterBody3D" unique_id=259023669 groups=["customers"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_76epn")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1135132478]
+path_height_offset = 0.1
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=295268076]
+
+[node name="ModelOffset" type="Node3D" parent="CharacterBody3D" unique_id=1147700990]
+
+[node name="Impatient" parent="CharacterBody3D/ModelOffset" unique_id=1549074507 instance=ExtResource("2_76epn")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -0.85, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1488200544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, 0)
+shape = SubResource("CapsuleShape3D_i2whk")
+
+[node name="InteractComponent" type="Node" parent="." unique_id=2068584594]
+script = ExtResource("3_5eo4w")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"
+
+[node name="PatienceBar" parent="." unique_id=258558182 instance=ExtResource("4_7ygbm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1876957, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=42300729]
+bus = &"SFX"
+
+[node name="EffectAnchor" type="Node3D" parent="." unique_id=1373237388]
