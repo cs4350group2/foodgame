@@ -17,6 +17,24 @@ const INGREDIENT_SCENES = {
 	"res://models/physics/food/ingredients/tomatoSliced.tscn":
 		preload("res://models/physics/food/ingredients/tomatoSliced.tscn")
 }
+
+const INGREDIENT_NAMES = {
+	"res://models/physics/food/ingredients/meatRaw.tscn":
+		"raw meat",
+	"res://models/physics/food/ingredients/pattyRaw.tscn":
+		"chopped meat",
+	"res://models/physics/food/ingredients/buns.tscn":
+		"burger buns",
+	"res://models/physics/food/ingredients/potato.tscn":
+		"potato",
+	"res://models/physics/food/ingredients/potatoSliced.tscn":
+		"chopped potato",
+	"res://models/physics/food/ingredients/tomatoWhole.tscn":
+		"tomato",
+	"res://models/physics/food/ingredients/tomatoSliced.tscn":
+		"chopped tomato",
+}
+
 var ingredient_buffer: Array[String] = []
 
 func _ready() -> void:
@@ -31,7 +49,10 @@ func _ready() -> void:
 	var level := ancestor as Level
 	if is_instance_valid(level):
 		level.clear_temp.connect(_clear_ingredients)
-
+	
+	interaction.display_name = "pot"
+	interaction.tooltip_provider = _get_tooltip_actions
+	
 func _clear_ingredients() -> void:
 	ingredient_buffer.clear()
 
@@ -84,3 +105,40 @@ func _take_ingredient(player: Player) -> void:
 		print("Took ", ingredient.get_edible_item_name(), " from the pot.")
 	else:
 		ingredient.queue_free()
+
+func _get_contents_text() -> String:
+	if ingredient_buffer.is_empty():
+		return "Empty"
+
+	var ingredient_names: PackedStringArray = []
+
+	for ingredient_path in ingredient_buffer:
+		ingredient_names.append(str(
+			INGREDIENT_NAMES.get(ingredient_path, "unknown ingredient")
+		))
+
+	return ", ".join(ingredient_names)
+
+
+func _get_tooltip_actions(player: Player) -> Dictionary:
+	var primary := ""
+	var details := "Contents: %s" % _get_contents_text()
+
+	if is_instance_valid(player.held_edible):
+		var ingredient := player.held_edible
+		var ingredient_path := ingredient.scene_file_path
+		var item_name := ingredient.get_edible_item_name()
+
+		if not INGREDIENT_SCENES.has(ingredient_path):
+			details += "\nCannot put %s in the pot" % item_name
+		elif ingredient_buffer.has(ingredient_path):
+			details += "\nThe pot already contains %s" % item_name
+		else:
+			primary = "Add ingredient"
+	elif not ingredient_buffer.is_empty():
+		primary = "Take last ingredient"
+
+	return {
+		"details": details,
+		"primary": primary,
+	}

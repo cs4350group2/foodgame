@@ -21,7 +21,8 @@ func _ready() -> void:
 	owning_level = ancestor as Level
 	if is_instance_valid(owning_level):
 		owning_level.register_temp(self)
-
+	interaction.primary_description = "Pick up"
+	
 func _exit_tree() -> void:
 	if is_instance_valid(owning_level):
 		owning_level.unregister_temp(self)
