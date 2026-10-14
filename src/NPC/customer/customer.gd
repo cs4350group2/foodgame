@@ -32,7 +32,8 @@ enum State {
 	ORDERING,
 	WAITING_FOR_FOOD,
 	EATING,
-	FINISHED,
+	WALKING_TO_CASHIER,
+	PAYING,
 	LEAVING,
 	LEAVING_ANGRY
 }
@@ -107,8 +108,11 @@ func _on_interacted(_player: Player) -> void:
 			print("You need to be holding a cooked dish/consumable to deliver it.")
 			return
 
-		State.FINISHED:
+		State.PAYING:
+			if not RestaurantManager.is_next_to_pay(self):
+				return
 			RestaurantManager.receive_payment(take_payment())
+			RestaurantManager.customer_paid(self)
 			play_audio(AudioSfx.PAYMENT)
 
 	print("Interacted with the customer.")
@@ -127,8 +131,10 @@ func _physics_process(delta):
 			state_waiting_for_food(delta)
 		State.EATING:
 			state_eating(delta)
-		State.FINISHED:
-			state_finished(delta)
+		State.PAYING:
+			state_paying(delta)
+		State.WALKING_TO_CASHIER:
+			state_walking_to_cashier(delta)
 		State.LEAVING:
 			state_leaving(delta)
 		State.LEAVING_ANGRY:
@@ -210,11 +216,17 @@ func enter_state(state: State):
 			start_eating()
 			pass
 
-		State.FINISHED:
+		State.WALKING_TO_CASHIER:
+			global_transform = prev_transform
+			play_animation("Walk")
+			RestaurantManager.enqueue_for_payment(self)
+			pass
+
+		State.PAYING:
+			play_animation("Idle")
 			pass
 
 		State.LEAVING:
-			global_transform = prev_transform
 			play_animation("Walk")
 			update_target_location(exit_point.global_position)
 			pass
@@ -245,7 +257,10 @@ func exit_state(state:State):
 		State.EATING:
 			pass
 
-		State.FINISHED:
+		State.WALKING_TO_CASHIER:
+			pass
+
+		State.PAYING:
 			pass
 
 		State.LEAVING:
@@ -404,7 +419,7 @@ func start_eating(eating_time: float = 10.0) -> void:
 
 	# Do nothing if the customer changed state while waiting.
 	if current_state == State.EATING:
-		change_state(State.FINISHED)
+		change_state(State.WALKING_TO_CASHIER)
 	
 func _on_order_complete(completed_order: Order):
 	# some guard checks
@@ -466,11 +481,26 @@ func state_eating(delta):
 	# Play eating animation
 	pass
 
+func state_walking_to_cashier(delta):
+	if nav_agent.is_navigation_finished():
+		if RestaurantManager.is_next_to_pay(self):
+			change_state(State.PAYING)
+		else:
+			# Queuing
+			play_animation("Idle")
+	move_toward_navigation_target(delta)
+
+func set_cashier_queue_target(target: Vector3, is_front: bool) -> void:
+	if current_state != State.WALKING_TO_CASHIER:
+		return
+	update_target_location(target)
+	play_animation("Walk")
+
 func take_payment() -> float:
 	paid = true
 	return order.get_order_total_price() + order.get_total_bonus()
 
-func state_finished(delta):
+func state_paying(delta):
 	# Pay, finish eating, etc.
 	# if we don't want to interact to take payment:
 	#RestaurantManager.receive_payment(take_payment())
@@ -481,6 +511,7 @@ func state_finished(delta):
 
 
 func state_leaving(delta):
+	RestaurantManager.remove_from_cashier_queue(self)
 	# Walk toward the restaurant exit	
 	move_toward_navigation_target(delta)
 	
@@ -494,6 +525,7 @@ func state_leaving(delta):
 		return
 
 func state_leaving_angry(delta):
+	RestaurantManager.remove_from_cashier_queue(self)
 	move_toward_navigation_target(delta)
 	if nav_agent.is_navigation_finished():
 		if assigned_sittingNode != null:
