@@ -28,7 +28,6 @@
 [ext_resource type="Script" uid="uid://d24c3v2gtky0m" path="res://src/NPC/customer_spawner.gd" id="28_kq58d"]
 [ext_resource type="PackedScene" uid="uid://b0fbt4od6fufi" path="res://src/ui/order_list/OrderList.tscn" id="28_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://brgthvls3m4lk" path="res://models/environmentMeshes/Restaurant/restaurantWindowBig.tscn" id="29_0rl1p"]
-[ext_resource type="PackedScene" uid="uid://m1q0ywvqfq1n" path="res://src/NPC/customer.tscn" id="29_qsp4k"]
 [ext_resource type="PackedScene" uid="uid://drvgq5wpa1odo" path="res://models/environmentMeshes/Restaurant/restaurantDoor.tscn" id="30_ok6jj"]
 [ext_resource type="PackedScene" uid="uid://dvduy5678d5pk" path="res://models/environmentMeshes/Restaurant/restaurantCeiling.tscn" id="31_facbu"]
 [ext_resource type="PackedScene" uid="uid://ubv0sb3volmr" path="res://src/ui/restaurant_ui/RestaurantUI.tscn" id="33_jq2sk"]
@@ -40,6 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://bkj5ixiq31knv" path="res://models/physics/drinks/IceLemonTea.tscn" id="38_come4"]
 [ext_resource type="PackedScene" uid="uid://c6t0ugj3vca3q" path="res://models/physics/drinks/sodaRegular.tscn" id="39_h8e4i"]
 [ext_resource type="PackedScene" uid="uid://r24vdp7qegiw" path="res://models/physics/drinks/sodaSpecial.tscn" id="40_4lmeg"]
+[ext_resource type="PackedScene" uid="uid://ujkr0mjx6opi" path="res://models/spawners/riceBag.tscn" id="41_0cp0l"]
 [ext_resource type="PackedScene" uid="uid://bgi1a47734pt8" path="res://models/interactable stations/fishTank.tscn" id="41_4lmeg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
@@ -215,7 +215,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9825783, 0.21423626, 0.936
 
 [node name="CustomerSpawner" type="Node3D" parent="Restaurant" unique_id=1733515437]
 script = ExtResource("28_kq58d")
-customer_scene = ExtResource("29_qsp4k")
 metadata/_custom_type_script = "uid://d24c3v2gtky0m"
 
 [node name="SpawnPoint" type="Marker3D" parent="Restaurant/CustomerSpawner" unique_id=1467502327]
@@ -375,7 +374,7 @@ shape = SubResource("BoxShape3D_qf7sd")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, 0.5, 4)
 
 [node name="DrinksDispenser" parent="." unique_id=652149325 instance=ExtResource("37_b1qrp")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14, 0.5, 1)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14, 0.5, 2)
 
 [node name="IceLemonTea" parent="." unique_id=2089918298 instance=ExtResource("38_come4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0890245, 1.1545537, -3.1991136)
@@ -387,4 +386,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9926925, 1.0975919, -3.5185
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8373513, 1.097592, -3.7133353)
 
 [node name="FishTank" parent="." unique_id=1445951407 instance=ExtResource("41_4lmeg")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14, 0.5, 2.5)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14, 0.5, 3.5)
+
+[node name="RiceBag" parent="." unique_id=901272984 instance=ExtResource("41_0cp0l")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14, 0.453, 1)
