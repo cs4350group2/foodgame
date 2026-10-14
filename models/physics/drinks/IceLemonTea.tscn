@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://bkj5ixiq31knv"]
 
 [ext_resource type="PackedScene" uid="uid://dwkmv6pxcurn0" path="res://models/props/drink/drinkCup.tscn" id="1_73cki"]
+[ext_resource type="Script" uid="uid://bndhu1u328g6" path="res://src/restaurant/dishes/drinks/iced_lemon_tea_item.gd" id="1_j36j2"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qf7sd"]
 height = 0.29626465
 radius = 0.091796875
 
 [node name="IceLemonTea" type="RigidBody3D" unique_id=2089918298]
+script = ExtResource("1_j36j2")
 
 [node name="Sketchfab_Scene" parent="." unique_id=14661006 instance=ExtResource("1_73cki")]
 

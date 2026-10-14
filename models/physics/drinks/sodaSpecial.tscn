@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://r24vdp7qegiw"]
 
 [ext_resource type="PackedScene" uid="uid://dcknkkqgblpt7" path="res://models/props/drink/soda_special.tscn" id="1_0rsrr"]
+[ext_resource type="Script" uid="uid://cko7ikg6n1ck" path="res://src/restaurant/dishes/drinks/cooler_soda_item.gd" id="1_gdgj6"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gdgj6"]
 height = 0.29516602
 radius = 0.08984375
 
 [node name="SodaSpecial" type="RigidBody3D" unique_id=1347820385]
+script = ExtResource("1_gdgj6")
 
 [node name="SodaSpecial" parent="." unique_id=1372127029 instance=ExtResource("1_0rsrr")]
 
