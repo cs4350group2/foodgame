@@ -16,7 +16,10 @@ func show_target(component: InteractComponent, player: Player) -> void:
 	var lines: PackedStringArray = []
 
 	lines.append(str(data["title"]))
-
+	var category: String = data.get("category", "")
+	if not category.is_empty():
+		lines.append(category)
+		
 	var details: String = data.get("details", "")
 	var primary: String = data.get("primary", "")
 	var secondary: String = data.get("secondary", "")

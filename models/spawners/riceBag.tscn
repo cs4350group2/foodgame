@@ -15,7 +15,7 @@ size = Vector3(1, 1.0618896, 0.776001)
 [node name="StaticBody3D" type="StaticBody3D" parent="flourbag_low2" unique_id=630625953]
 script = ExtResource("2_r1f1c")
 food_scene = ExtResource("3_bgaax")
-spawner_name = "rice bag"
+spawner_name = "Rice Bag"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="flourbag_low2/StaticBody3D" unique_id=62479465]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07147217, -6.1035156e-05)

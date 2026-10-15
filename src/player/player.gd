@@ -1,6 +1,8 @@
 extends ProtoController
 class_name Player
 
+@export var max_hold_retraction: float = 0.35
+
 @onready var interact_ray: RayCast3D = $Head/Camera3D/InteractRay
 var focused_component: InteractComponent
 
@@ -174,11 +176,53 @@ func update_held_food_transform() -> void:
 	if not is_instance_valid(held_edible):
 		return
 
-	held_edible.global_transform = Transform3D(
+	var camera := hold_visual_point.get_parent() as Camera3D
+	var start := camera.global_position
+	var motion := hold_visual_point.global_position - start
+	var held_basis := (
 		hold_visual_point.global_basis.orthonormalized()
-			* Basis.from_scale(_held_scale),
-		hold_visual_point.global_position
+		* Basis.from_scale(_held_scale)
 	)
+	var space := get_world_3d().direct_space_state
+	var safe_fraction: float = 1.0
+	var exclusions: Array[RID] = [get_rid(), held_edible.get_rid()]
+
+	for child in held_edible.get_children():
+		var collider := child as CollisionShape3D
+		if collider == null:
+			continue
+		if collider.disabled or collider.shape == null:
+			continue
+
+		var query := PhysicsShapeQueryParameters3D.new()
+		query.shape = collider.shape
+		query.transform = (
+			Transform3D(held_basis, start) * collider.transform
+		)
+		query.motion = motion
+		query.collision_mask = _saved_collision_mask
+		query.exclude = exclusions
+		query.margin = 0.03
+
+		var fractions := space.cast_motion(query)
+		safe_fraction = minf(safe_fraction, fractions[0])
+
+	var distance := motion.length()
+	var min_fraction: float = 0.0
+
+	if distance > 0.001:
+		min_fraction = maxf(
+			0.0,
+			1.0 - max_hold_retraction / distance
+		)
+
+	safe_fraction = maxf(safe_fraction, min_fraction)
+
+	held_edible.global_transform = Transform3D(
+		held_basis,
+		start + motion * safe_fraction
+	)
+	
 func _held_drop_transform() -> Transform3D:
 	return Transform3D(
 		hold_point.global_basis.orthonormalized()

@@ -7,7 +7,7 @@ func _ready() -> void:
 	interaction.supports_primary = true
 	interaction.accepts_primary_while_holding = true
 	interaction.interacted.connect(_on_interacted)
-	interaction.display_name = "trash"
+	interaction.display_name = "Trashcan"
 	interaction.tooltip_provider = _get_tooltip_actions
 
 func _on_interacted(player: Player) -> void:

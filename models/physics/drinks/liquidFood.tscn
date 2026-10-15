@@ -1,14 +1,22 @@
 [gd_scene format=3 uid="uid://defoa2lo1an4c"]
 
+[ext_resource type="Script" uid="uid://b3oxj5sisvqeh" path="res://src/restaurant/dishes/drinks/liquid_food_item.gd" id="1_guo12"]
 [ext_resource type="PackedScene" uid="uid://cqdix0er5it7p" path="res://models/props/drink/liquidFood.tscn" id="1_pqb32"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_sx2cx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qf7sd"]
 size = Vector3(0.25195313, 0.5107422, 0.2006836)
 
 [node name="LiquidFood" type="RigidBody3D" unique_id=1583905067]
+script = ExtResource("1_guo12")
 
 [node name="LiquidFood" parent="." unique_id=818899843 instance=ExtResource("1_pqb32")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=140755068]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03466797, -0.00024414063)
 shape = SubResource("BoxShape3D_qf7sd")
+
+[node name="InteractComponent" type="Node" parent="." unique_id=1522999798]
+script = ExtResource("3_sx2cx")
+highlight_root_path = NodePath("..")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"
