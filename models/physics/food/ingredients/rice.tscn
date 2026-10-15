@@ -1,15 +1,24 @@
 [gd_scene format=3 uid="uid://blruyqi0arko3"]
 
 [ext_resource type="PackedScene" uid="uid://cwlsbyx56whov" path="res://models/props/food/Ingredients/rice.tscn" id="1_hhyib"]
+[ext_resource type="Script" uid="uid://caqi7kx4ccnu5" path="res://src/interactables/reusable scripts/edible_item.gd" id="1_xq5d3"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_2f0qf"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qf7sd"]
 height = 0.3433838
 radius = 0.21044922
 
 [node name="Rice" type="RigidBody3D" unique_id=392615255]
+script = ExtResource("1_xq5d3")
+ingredient_name = "rice"
 
 [node name="Sketchfab_Scene" parent="." unique_id=1024811580 instance=ExtResource("1_hhyib")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1903813830]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.055236816, 0)
 shape = SubResource("CylinderShape3D_qf7sd")
+
+[node name="InteractComponent" type="Node" parent="." unique_id=990844274]
+script = ExtResource("3_2f0qf")
+highlight_root_path = NodePath("..")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"

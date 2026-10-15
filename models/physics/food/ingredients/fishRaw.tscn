@@ -1,15 +1,24 @@
 [gd_scene format=3 uid="uid://c152qwjlmo45k"]
 
+[ext_resource type="Script" uid="uid://caqi7kx4ccnu5" path="res://src/interactables/reusable scripts/edible_item.gd" id="1_msahe"]
 [ext_resource type="PackedScene" uid="uid://bpwjyrtpakbl6" path="res://models/props/food/Ingredients/fishRaw.tscn" id="1_nqjv3"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_8jtpc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qf7sd"]
 radius = 0.119628906
 height = 0.7003784
 
 [node name="FishRaw" type="RigidBody3D" unique_id=1627951194]
+script = ExtResource("1_msahe")
+ingredient_name = "raw fish"
 
 [node name="3_fish" parent="." unique_id=159745215 instance=ExtResource("1_nqjv3")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1939703378]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.006728856, 0.039764404)
 shape = SubResource("CapsuleShape3D_qf7sd")
+
+[node name="InteractComponent" type="Node" parent="." unique_id=1221195814]
+script = ExtResource("3_8jtpc")
+highlight_root_path = NodePath("..")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"
