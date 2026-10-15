@@ -41,7 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://c6t0ugj3vca3q" path="res://models/physics/drinks/sodaRegular.tscn" id="39_h8e4i"]
 [ext_resource type="PackedScene" uid="uid://r24vdp7qegiw" path="res://models/physics/drinks/sodaSpecial.tscn" id="40_4lmeg"]
 [ext_resource type="PackedScene" uid="uid://ujkr0mjx6opi" path="res://models/spawners/riceBag.tscn" id="41_0cp0l"]
-[ext_resource type="PackedScene" uid="uid://bgi1a47734pt8" path="res://models/interactable stations/fishTank.tscn" id="41_4lmeg"]
+[ext_resource type="PackedScene" uid="uid://bgi1a47734pt8" path="res://models/spawners/fishTank.tscn" id="41_4lmeg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://ujkr0mjx6opi"]
 
 [ext_resource type="PackedScene" uid="uid://du8rgyetbjiun" path="res://models/props/riceBag.tscn" id="1_b5ogt"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="2_a18rh"]
+[ext_resource type="Script" uid="uid://dcto3uhvv54ym" path="res://src/interactables/reusable scripts/food_spawner.gd" id="2_r1f1c"]
+[ext_resource type="PackedScene" uid="uid://blruyqi0arko3" path="res://models/physics/food/ingredients/rice.tscn" id="3_bgaax"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qf7sd"]
 size = Vector3(1, 1.0618896, 0.776001)
@@ -10,7 +13,14 @@ size = Vector3(1, 1.0618896, 0.776001)
 [node name="flourbag_low2" parent="." unique_id=1233302699 instance=ExtResource("1_b5ogt")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="flourbag_low2" unique_id=630625953]
+script = ExtResource("2_r1f1c")
+food_scene = ExtResource("3_bgaax")
+spawner_name = "rice bag"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="flourbag_low2/StaticBody3D" unique_id=62479465]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07147217, -6.1035156e-05)
 shape = SubResource("BoxShape3D_qf7sd")
+
+[node name="InteractComponent" type="Node" parent="flourbag_low2/StaticBody3D" unique_id=890338646]
+script = ExtResource("2_a18rh")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"
