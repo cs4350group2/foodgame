@@ -42,6 +42,8 @@
 [ext_resource type="PackedScene" uid="uid://r24vdp7qegiw" path="res://models/physics/drinks/sodaSpecial.tscn" id="40_4lmeg"]
 [ext_resource type="PackedScene" uid="uid://ujkr0mjx6opi" path="res://models/spawners/riceBag.tscn" id="41_0cp0l"]
 [ext_resource type="PackedScene" uid="uid://bgi1a47734pt8" path="res://models/spawners/fishTank.tscn" id="41_4lmeg"]
+[ext_resource type="PackedScene" uid="uid://be40touv1jgt4" path="res://models/physics/drinks/extremelySafeDrink.tscn" id="43_gngh3"]
+[ext_resource type="PackedScene" uid="uid://defoa2lo1an4c" path="res://models/physics/drinks/liquidFood.tscn" id="44_0n3wm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -405,3 +407,9 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14, 
 
 [node name="RiceBag" parent="." unique_id=901272984 instance=ExtResource("41_0cp0l")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14, 0.453, 1)
+
+[node name="ExtremelySafeDrink" parent="." unique_id=2101097796 instance=ExtResource("43_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3540874, 1.1350696, -4.0823016)
+
+[node name="LiquidFood" parent="." unique_id=1583905067 instance=ExtResource("44_0n3wm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8280497, 1.1751862, -4.5128818)

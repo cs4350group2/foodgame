@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://btpuw2mrdnlgg"]
+
+[ext_resource type="PackedScene" uid="uid://l7qqauvd8nxv" path="res://assets/drinks/extremelySafeDrink/scene.gltf" id="1_0e3gy"]
+[ext_resource type="Texture2D" uid="uid://d3r27h7uvhvbn" path="res://assets/drinks/extremelySafeDrink/Cork_baseColor.png" id="2_ic4bw"]
+[ext_resource type="Texture2D" uid="uid://b3vbxf4ogljyk" path="res://assets/drinks/extremelySafeDrink/Decor_metallicRoughness.png" id="3_1ts5u"]
+[ext_resource type="Texture2D" uid="uid://l7b8eroqgosf" path="res://assets/drinks/extremelySafeDrink/Cork_normal.png" id="4_g5kj1"]
+[ext_resource type="Texture2D" uid="uid://clgqipl5uavif" path="res://assets/drinks/extremelySafeDrink/Cork_metallicRoughness.png" id="5_4mhke"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0plu7"]
+albedo_texture = ExtResource("2_ic4bw")
+metallic = 1.0
+metallic_texture = ExtResource("3_1ts5u")
+roughness_texture = ExtResource("5_4mhke")
+normal_enabled = true
+normal_texture = ExtResource("4_g5kj1")
+
+[node name="Sketchfab_Scene" unique_id=1183193307 instance=ExtResource("1_0e3gy")]
+
+[node name="Sketchfab_model" parent="." index="0" unique_id=410853275]
+transform = Transform3D(0.6, 0, 0, 0, -2.6226834e-08, 0.6, 0, -0.6, -2.6226834e-08, 0, 9.290125e-09, -1.861834e-08)
+
+[node name="Object_7" parent="Sketchfab_model/root/GLTF_SceneRootNode/Pot_2" parent_id_path=PackedInt32Array(907129947) index="3" unique_id=1263322467]
+surface_material_override/0 = SubResource("StandardMaterial3D_0plu7")
