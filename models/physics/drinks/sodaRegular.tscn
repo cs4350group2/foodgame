@@ -19,4 +19,5 @@ shape = SubResource("CylinderShape3D_qf7sd")
 
 [node name="InteractComponent" type="Node" parent="." unique_id=1058646029]
 script = ExtResource("3_3oxj0")
+highlight_root_path = NodePath("..")
 metadata/_custom_type_script = "uid://ca7pbehy5loa"
