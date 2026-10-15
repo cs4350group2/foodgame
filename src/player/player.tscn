@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dpqqqk623fihy" path="res://src/player/player.gd" id="1_4anbu"]
 [ext_resource type="Script" uid="uid://wwt7h2uv1be6" path="res://src/player/crosshair.gd" id="2_rxibo"]
 [ext_resource type="Script" uid="uid://dp5b6l55lmeib" path="res://src/player/tooltip.gd" id="3_mf2ua"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="4_244u8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
@@ -77,3 +78,5 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Text" type="Label" parent="CanvasLayer/Crosshair/Tooltip/MarginContainer" unique_id=1186998692]
 layout_mode = 2
+theme = ExtResource("4_244u8")
+theme_override_font_sizes/font_size = 26
