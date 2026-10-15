@@ -18,6 +18,8 @@ var _saved_interaction_enabled: bool
 var _held_scale: Vector3
 
 @onready var crosshair: Control = $CanvasLayer/Crosshair # added reticle reference for easy access
+@onready var tooltip: Tooltip = \
+	$CanvasLayer/Crosshair/Tooltip
 
 func _ready() -> void:
 	super._ready()
@@ -43,6 +45,7 @@ func _physics_process(delta: float) -> void:
 
 	update_focus()
 	update_chopping_progress()
+	update_tooltip()
 	
 # Interaction funcs
 func update_focus() -> void:
@@ -284,6 +287,7 @@ func _can_alt_interact() -> bool:
 	return is_instance_valid(component) \
 		and component.supports_secondary
 
+# Chopping
 func update_chopping_progress() -> void:
 	var progress: float = 0.0
 
@@ -294,3 +298,11 @@ func update_chopping_progress() -> void:
 			progress = board.get_chopping_progress()
 
 	crosshair.set_chopping_progress(progress)
+	
+# Tooltip on hover
+func update_tooltip() -> void:
+	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		tooltip.hide()
+		return
+
+	tooltip.show_target(focused_component, self)

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dpqqqk623fihy" path="res://src/player/player.gd" id="1_4anbu"]
 [ext_resource type="Script" uid="uid://wwt7h2uv1be6" path="res://src/player/crosshair.gd" id="2_rxibo"]
+[ext_resource type="Script" uid="uid://dp5b6l55lmeib" path="res://src/player/tooltip.gd" id="3_mf2ua"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
@@ -55,3 +56,24 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_rxibo")
+
+[node name="Tooltip" type="PanelContainer" parent="CanvasLayer/Crosshair" unique_id=1750334169]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(24, 40)
+mouse_filter = 2
+script = ExtResource("3_mf2ua")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Crosshair/Tooltip" unique_id=1597312114]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Text" type="Label" parent="CanvasLayer/Crosshair/Tooltip/MarginContainer" unique_id=1186998692]
+layout_mode = 2
