@@ -1,11 +1,17 @@
 extends Node2D
 
+var bartable_cashier: Node3D
+
 var sitting_nodes: Array[Node] = []
 var customers: Array[Customer] = []
 var orders: Array[Order] = []
 var menu_data: Dictionary
 var drinks_menu_data: Dictionary
 var coins: float = 0
+
+# Customers waiting to pay, ordered from the register outward.
+var cashier_queue: Array[Customer] = []
+const CASHIER_QUEUE_SPACING: float = 1.25
 
 signal coins_updated(amount)
 
@@ -24,6 +30,44 @@ func reset() -> void:
 	sitting_nodes.clear()
 	orders.clear()
 	customers.clear()
+	cashier_queue.clear()
+
+func register_cashier(cashier: Node3D) -> void:
+	bartable_cashier = cashier
+	_refresh_cashier_queue()
+
+func enqueue_for_payment(customer: Customer) -> void:
+	if not is_instance_valid(customer) or cashier_queue.has(customer):
+		return
+	cashier_queue.append(customer)
+	_refresh_cashier_queue()
+
+func is_next_to_pay(customer: Customer) -> bool:
+	return not cashier_queue.is_empty() and cashier_queue[0] == customer
+
+func customer_paid(customer: Customer) -> void:
+	if cashier_queue.is_empty() or cashier_queue[0] != customer:
+		return
+	cashier_queue.pop_front()
+	_refresh_cashier_queue()
+
+func remove_from_cashier_queue(customer: Customer) -> void:
+	if cashier_queue.has(customer):
+		cashier_queue.erase(customer)
+		_refresh_cashier_queue()
+
+func _refresh_cashier_queue() -> void:
+	if not is_instance_valid(bartable_cashier):
+		return
+	# The register is the first spot. Positive local Z places the remaining
+	# customers behind it; rotate the direction with the cashier scene.
+	var behind_direction := bartable_cashier.global_basis.z.normalized()
+	for i in cashier_queue.size():
+		var customer := cashier_queue[i]
+		if not is_instance_valid(customer):
+			continue
+		var slot := bartable_cashier.global_position + behind_direction * CASHIER_QUEUE_SPACING * i
+		customer.set_cashier_queue_target(slot, i == 0)
 
 func load_menu():
 	# Load menu
@@ -118,3 +162,6 @@ func receive_payment(amount: float) -> void:
 
 func get_current_coins() -> float:
 	return RunManager.current_run.coins
+
+func get_cashier_location() -> Vector3:
+	return bartable_cashier.global_position
