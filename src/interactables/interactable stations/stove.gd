@@ -6,11 +6,17 @@ const CHOPPED_MEAT_PATH = "res://models/physics/food/ingredients/pattyRaw.tscn"
 const BUNS_PATH = "res://models/physics/food/ingredients/buns.tscn"
 const CHOPPED_TOMATOES_PATH = "res://models/physics/food/ingredients/tomatoSliced.tscn"
 const CHOPPED_POTATOES_PATH = "res://models/physics/food/ingredients/potatoSliced.tscn"
+const UNCHOPPED_FISH_PATH = "res://models/physics/food/ingredients/fishRaw.tscn"
+const CHOPPED_FISH_PATH = "res://models/physics/food/ingredients/fishSliced.tscn"
+const RICE_PATH = "res://models/physics/food/ingredients/rice.tscn"
 
 # dish scene files 
 const BURGER_PATH = preload("res://models/physics/food/burger/burgerallPlated.tscn")
 const STEAK_PATH = preload("res://models/physics/food/steak/meatCookedPlated.tscn")
 const STEW_PATH = preload("res://models/physics/food/stew/stewPlate.tscn")
+const SUSHI_PATH = preload("res://models/physics/food/sushi/sushi.tscn")
+const RICE_BOWL_PATH = preload("res://models/physics/food/riceBowl/riceBowl.tscn")
+const GRILLED_FISH_PATH = preload("res://models/physics/food/grilledFish/grilledFish.tscn")
 
 @onready var interaction: InteractComponent = $InteractComponent
 @onready var pot = $"../../pot/Cylinder_009/StaticBody3D"
@@ -32,6 +38,9 @@ var target_camera_transform
 const RENDERED_BURGER = preload("uid://d3rorjypontk5")
 const RENDERED_MEAT = preload("uid://cotpbx3nt4xan")
 const PLACEHOLDER_STEW_IMAGE = preload("uid://cfw527mfd8dg1")
+const PLACEHOLDER_SUSHI_IMAGE = preload("uid://bn23jfaurw5dx")
+const PLACEHOLDER_RICE_BOWL_IMAGE = preload("uid://b1tw7umwumc1p")
+const PLACEHOLDER_GRILLED_FISH_IMAGE = preload("uid://0jnh88u3iriw")
 
 const RHYTHM_MINIGAME_POPUP_SCENE = preload("uid://bl5f06ugjmaiq")
 
@@ -66,12 +75,27 @@ func _on_alt_interacted(_player: Player) -> void:
 	var stew_recipe: Array = [CHOPPED_MEAT_PATH, CHOPPED_TOMATOES_PATH, CHOPPED_POTATOES_PATH]
 	stew_recipe.sort()
 	
+	var sushi_recipe: Array = [RICE_PATH, CHOPPED_FISH_PATH]
+	sushi_recipe.sort()
+	
+	var rice_bowl_recipe: Array = [RICE_PATH, CHOPPED_MEAT_PATH]
+	rice_bowl_recipe.sort()
+	
+	var grilled_fish_recipe: Array = [UNCHOPPED_FISH_PATH]
+	
+	
 	if current_ingredients == burger_recipe:
 		selected_dish = "burger"
 	elif current_ingredients == steak_recipe:
 		selected_dish = "steak"
 	elif current_ingredients == stew_recipe:
 		selected_dish = "stew"
+	elif current_ingredients == sushi_recipe:
+		selected_dish = "sushi"
+	elif current_ingredients == rice_bowl_recipe:
+		selected_dish = "rice_bowl"
+	elif current_ingredients == grilled_fish_recipe:
+		selected_dish = "grilled_fish"
 	else: # invalid recipe
 		invalid_recipe_dialog.dialog_text = \
 		"Current ingredients in stove: " \
@@ -125,10 +149,9 @@ func start_cooking(dish_string: String) -> void:
 	
 	await tween_rot.finished
 	
-	print("Changed camera global transform to " + str(camera3d.global_transform) + " for rhythm minigame")
-	
 	# finally add minigame popup to restaurant scene
 	restaurant_ui.add_child(minigame_popup)
+
 
 func get_food_data(dish_name: String) -> Dictionary:
 	# helper function to return info for specific dish in menu.json
@@ -164,7 +187,6 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
 		for ui: Node in restaurant_main.ui_nodes as Array[Node]:
 			ui.visible = true
 	active_player.crosshair.visible = true
-	restaurant_main.process_mode = Node.PROCESS_MODE_INHERIT # re-enable restaurant scene
 	active_player.process_mode = Node.PROCESS_MODE_INHERIT # re-enable player controls
 	active_player.capture_mouse() # restore mouse capture and the controller's capture flag
 	
@@ -177,6 +199,12 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
 			target_scene = STEAK_PATH
 		"stew":
 			target_scene = STEW_PATH
+		"sushi":
+			target_scene = SUSHI_PATH
+		"rice_bowl":
+			target_scene = RICE_BOWL_PATH
+		"grilled_fish":
+			target_scene = GRILLED_FISH_PATH
 	
 	var completed_edible_item := target_scene.instantiate() as EdibleItem
 	restaurant_main.add_child(completed_edible_item)
@@ -223,6 +251,12 @@ func convert_ingredients_array_to_string(arr : Array) -> String:
 				names.append("Chopped potatoes")
 			"res://models/physics/food/ingredients/potato.tscn":
 				names.append("Unchopped potatoes")
+			"res://models/physics/food/ingredients/fishRaw.tscn":
+				names.append("Unchopped fish")
+			"res://models/physics/food/ingredients/fishSliced.tscn":
+				names.append("Chopped fish")
+			"res://models/physics/food/ingredients/rice.tscn":
+				names.append("Rice")
 	
 	return ", ".join(names)
 	
@@ -239,6 +273,12 @@ func show_dish_confirmation(current_ingredients: Array) -> void:
 			dish_texture.texture = RENDERED_MEAT
 		"stew":
 			dish_texture.texture = PLACEHOLDER_STEW_IMAGE
+		"sushi":
+			dish_texture.texture = PLACEHOLDER_SUSHI_IMAGE
+		"rice_bowl":
+			dish_texture.texture = PLACEHOLDER_RICE_BOWL_IMAGE
+		"grilled_fish":
+			dish_texture.texture = PLACEHOLDER_GRILLED_FISH_IMAGE
 		
 	dish_confirm_label.text = "Start cooking " + formatted_dish_name + "?" + "\n" 
 		

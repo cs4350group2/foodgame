@@ -14,6 +14,21 @@
 			"name": "Stew",
 			"rarity": 2.0,
 			"price": 25.0
+		},
+		{
+			"name": "Sushi",
+			"rarity": 2.0,
+			"price": 10.0
+		},
+		{
+			"name": "Rice Bowl",
+			"rarity": 2.0,
+			"price": 20.0
+		},
+		{
+			"name": "Grilled Fish",
+			"rarity": 1.0,
+			"price": 12.50
 		}
 	],
 }

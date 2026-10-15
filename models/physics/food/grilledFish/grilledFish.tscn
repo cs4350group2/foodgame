@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cqc0701wrh20w"]
 
+[ext_resource type="Script" uid="uid://cfebgem1fhimy" path="res://src/restaurant/dishes/food/grilled_fish_item.gd" id="1_mxx1h"]
 [ext_resource type="PackedScene" uid="uid://bb5ywm1b7dvp2" path="res://models/props/food/GrilledFish/GrilledFish.tscn" id="1_v0sga"]
 [ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="2_1a50g"]
 
@@ -7,6 +8,7 @@
 height = 0.31359863
 
 [node name="GrilledFish" type="RigidBody3D" unique_id=98694237]
+script = ExtResource("1_mxx1h")
 
 [node name="Sketchfab_Scene" parent="." unique_id=78391070 instance=ExtResource("1_v0sga")]
 

@@ -37,7 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://di31n2nduku34" path="res://models/interactable stations/bartableCashier.tscn" id="36_facbu"]
 [ext_resource type="PackedScene" uid="uid://dgh6jtkk62vuk" path="res://src/ui/pause_menu/PauseMenu.tscn" id="36_ok6jj"]
 [ext_resource type="PackedScene" uid="uid://b6ed0ouorcs0m" path="res://models/interactable stations/drinksDispenser.tscn" id="37_b1qrp"]
-[ext_resource type="PackedScene" uid="uid://bkj5ixiq31knv" path="res://models/physics/drinks/IceLemonTea.tscn" id="38_come4"]
+[ext_resource type="PackedScene" uid="uid://bkj5ixiq31knv" path="res://models/physics/drinks/IcedLemonTea.tscn" id="38_come4"]
 [ext_resource type="PackedScene" uid="uid://c6t0ugj3vca3q" path="res://models/physics/drinks/sodaRegular.tscn" id="39_h8e4i"]
 [ext_resource type="PackedScene" uid="uid://r24vdp7qegiw" path="res://models/physics/drinks/sodaSpecial.tscn" id="40_4lmeg"]
 [ext_resource type="PackedScene" uid="uid://ujkr0mjx6opi" path="res://models/spawners/riceBag.tscn" id="41_0cp0l"]
@@ -243,6 +243,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.154287, 1.0261151, -0.74467
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1284833, 1.1683636, -2.346963)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1288704786]
+process_mode = 3
 layer = 2
 
 [node name="OrderList" parent="CanvasLayer" unique_id=257962796 instance=ExtResource("28_xuqvo")]
