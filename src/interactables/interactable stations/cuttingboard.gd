@@ -7,7 +7,9 @@ const CHOPPED_SCENES = {
 	"res://models/physics/food/ingredients/tomatoWhole.tscn":
 		preload("res://models/physics/food/ingredients/tomatoSliced.tscn"),
 	"res://models/physics/food/ingredients/potato.tscn":
-		preload("res://models/physics/food/ingredients/potatoSliced.tscn")
+		preload("res://models/physics/food/ingredients/potatoSliced.tscn"),
+	"res://models/physics/food/ingredients/fishRaw.tscn":
+		preload("res://models/physics/food/ingredients/fishSliced.tscn"),
 }
 
 const REQUIRED_CLICKS: int = 4
@@ -41,6 +43,10 @@ func _on_interacted(player: Player) -> void:
 	if is_instance_valid(player.held_edible):
 		if stored_edible != null:
 			print("The chopping board is occupied.")
+			return
+
+		if not CHOPPED_SCENES.has(player.held_edible.scene_file_path):
+			print("This item cannot be chopped.")
 			return
 
 		var food := player._release_held_edible()
@@ -181,10 +187,11 @@ func _get_tooltip_actions(player: Player) -> Dictionary:
 		if occupied:
 			details += "\nThe chopping board is occupied"
 		else:
-			primary = "Place food"
-
 			var ingredient := player.held_edible
-			if not CHOPPED_SCENES.has(ingredient.scene_file_path):
+
+			if CHOPPED_SCENES.has(ingredient.scene_file_path):
+				primary = "Place food"
+			else:
 				details += "\nCannot chop %s" \
 					% ingredient.get_edible_item_name()
 	elif occupied:

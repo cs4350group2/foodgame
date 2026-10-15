@@ -17,7 +17,7 @@ const INGREDIENT_SCENES = {
 	"res://models/physics/food/ingredients/tomatoWhole.tscn":
 		preload("res://models/physics/food/ingredients/tomatoWhole.tscn"),
 	"res://models/physics/food/ingredients/tomatoSliced.tscn":
-		preload("res://models/physics/food/ingredients/fishSliced.tscn"),
+		preload("res://models/physics/food/ingredients/tomatoSliced.tscn"),
 	"res://models/physics/food/ingredients/fishSliced.tscn":
 		preload("res://models/physics/food/ingredients/fishSliced.tscn"),
 	"res://models/physics/food/ingredients/rice.tscn":
@@ -80,7 +80,7 @@ func _store_ingredient(player: Player) -> void:
 	var ingredient_path := ingredient.scene_file_path
 
 	if not INGREDIENT_SCENES.has(ingredient_path):
-		print("Only raw meat, burger buns, tomatoes and potatoes can go in the pot.")
+		print("Only raw meat, burger buns, raw fish, rice, tomatoes and potatoes can go in the pot.")
 		return
 
 	if ingredient_buffer.has(ingredient_path):

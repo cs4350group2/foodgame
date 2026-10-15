@@ -120,7 +120,33 @@ func get_tooltip_data(player: Player) -> Dictionary:
 
 	return {
 		"title": title,
+		"category": _get_tooltip_category(),
 		"details": details,
 		"primary": primary,
 		"secondary": secondary,
 	}
+	
+func _get_tooltip_category() -> String:
+	var owner_node := get_parent()
+
+	if owner_node is Customer:
+		return ""
+
+	var edible := owner_node as EdibleItem
+	if edible != null:
+		if edible.is_drink:
+			return "Drink"
+
+		if edible.is_ingredient():
+			if edible.scene_file_path in [
+				"res://models/physics/food/ingredients/meatRaw.tscn",
+				"res://models/physics/food/ingredients/fishRaw.tscn",
+				"res://models/physics/food/ingredients/potato.tscn",
+				"res://models/physics/food/ingredients/tomatoWhole.tscn",
+			]:
+				return "Choppable Ingredient"
+			return "Ingredient"
+
+		return "Dish"
+
+	return "Interactable Station"
