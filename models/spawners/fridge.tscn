@@ -24,7 +24,7 @@ transform = Transform3D(25, 0, 0, 0, -1.0927847e-06, 25, 0, -25, -1.0927847e-06,
 [node name="StaticBody3D" type="StaticBody3D" parent="fridge" index="0" unique_id=1808877682]
 script = ExtResource("2_2cla1")
 food_scene = ExtResource("3_ykk66")
-spawner_name = "fridge"
+spawner_name = "Fridge"
 
 [node name="InteractComponent" type="Node" parent="fridge/StaticBody3D" index="0" unique_id=1243036389]
 script = ExtResource("4_jxrpk")

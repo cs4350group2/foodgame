@@ -10,7 +10,7 @@ height = 0.7003784
 
 [node name="FishRaw" type="RigidBody3D" unique_id=1627951194]
 script = ExtResource("1_msahe")
-ingredient_name = "raw fish"
+ingredient_name = "Raw Fish"
 
 [node name="3_fish" parent="." unique_id=159745215 instance=ExtResource("1_nqjv3")]
 

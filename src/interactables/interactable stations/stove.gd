@@ -49,7 +49,7 @@ func _ready() -> void:
 	
 	invalid_dialog_label.add_theme_color_override("font_color", Color.WHITE)
 	dish_confirm_label.add_theme_color_override("font_color", Color.WHITE)
-	interaction.display_name = "stove"
+	interaction.display_name = "Stove"
 	interaction.secondary_description = "Check recipe / Cook"
 
 func _on_alt_interacted(_player: Player) -> void:

@@ -32,7 +32,7 @@ mesh = SubResource("BoxMesh_qf7sd")
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=628357465]
 script = ExtResource("3_5rtpq")
 food_scene = ExtResource("4_jf3i2")
-spawner_name = "tomato box"
+spawner_name = "Tomato Box"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=133775841]
 shape = SubResource("BoxShape3D_e1ddy")

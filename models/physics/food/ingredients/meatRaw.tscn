@@ -10,7 +10,7 @@ size = Vector3(0.28936362, 0.1, 0.19076672)
 [node name="RigidBody3D" type="RigidBody3D" unique_id=563726617]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_nscrg")
-ingredient_name = "raw meat"
+ingredient_name = "Raw Meat"
 
 [node name="meatraw2" parent="." unique_id=381339205 instance=ExtResource("1_m76kh")]
 

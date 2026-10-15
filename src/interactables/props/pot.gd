@@ -8,6 +8,8 @@ const INGREDIENT_SCENES = {
 		preload("res://models/physics/food/ingredients/pattyRaw.tscn"),
 	"res://models/physics/food/ingredients/buns.tscn":
 		preload("res://models/physics/food/ingredients/buns.tscn"),
+	"res://models/physics/food/ingredients/fishRaw.tscn":
+		preload("res://models/physics/food/ingredients/fishRaw.tscn"),
 	"res://models/physics/food/ingredients/potato.tscn":
 		preload("res://models/physics/food/ingredients/potato.tscn"),
 	"res://models/physics/food/ingredients/potatoSliced.tscn":
@@ -15,7 +17,11 @@ const INGREDIENT_SCENES = {
 	"res://models/physics/food/ingredients/tomatoWhole.tscn":
 		preload("res://models/physics/food/ingredients/tomatoWhole.tscn"),
 	"res://models/physics/food/ingredients/tomatoSliced.tscn":
-		preload("res://models/physics/food/ingredients/tomatoSliced.tscn")
+		preload("res://models/physics/food/ingredients/fishSliced.tscn"),
+	"res://models/physics/food/ingredients/fishSliced.tscn":
+		preload("res://models/physics/food/ingredients/fishSliced.tscn"),
+	"res://models/physics/food/ingredients/rice.tscn":
+		preload("res://models/physics/food/ingredients/rice.tscn")
 }
 
 const INGREDIENT_NAMES = {
@@ -23,6 +29,10 @@ const INGREDIENT_NAMES = {
 		"raw meat",
 	"res://models/physics/food/ingredients/pattyRaw.tscn":
 		"chopped meat",
+	"res://models/physics/food/ingredients/fishRaw.tscn":
+		"raw fish",
+	"res://models/physics/food/ingredients/fishSliced.tscn":
+		"chopped fish",
 	"res://models/physics/food/ingredients/buns.tscn":
 		"burger buns",
 	"res://models/physics/food/ingredients/potato.tscn":
@@ -33,6 +43,8 @@ const INGREDIENT_NAMES = {
 		"tomato",
 	"res://models/physics/food/ingredients/tomatoSliced.tscn":
 		"chopped tomato",
+	"res://models/physics/food/ingredients/rice.tscn":
+		"rice"
 }
 
 var ingredient_buffer: Array[String] = []
@@ -50,7 +62,7 @@ func _ready() -> void:
 	if is_instance_valid(level):
 		level.clear_temp.connect(_clear_ingredients)
 	
-	interaction.display_name = "pot"
+	interaction.display_name = "Cooking Pot"
 	interaction.tooltip_provider = _get_tooltip_actions
 	
 func _clear_ingredients() -> void:

@@ -10,7 +10,7 @@ radius = 0.21044922
 
 [node name="Rice" type="RigidBody3D" unique_id=392615255]
 script = ExtResource("1_xq5d3")
-ingredient_name = "rice"
+ingredient_name = "Rice"
 
 [node name="Sketchfab_Scene" parent="." unique_id=1024811580 instance=ExtResource("1_hhyib")]
 

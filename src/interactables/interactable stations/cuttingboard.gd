@@ -29,7 +29,7 @@ func _ready() -> void:
 	interaction.interacted.connect(_on_interacted)
 	interaction.alt_interacted.connect(_on_alt_interacted)
 	
-	interaction.display_name = "chopping board"
+	interaction.display_name = "Chopping Board"
 	interaction.tooltip_provider = _get_tooltip_actions
 
 

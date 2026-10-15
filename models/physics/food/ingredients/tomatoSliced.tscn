@@ -9,7 +9,7 @@ size = Vector3(0.30419922, 0.31100464, 0.50512695)
 
 [node name="TomatoSliced" type="RigidBody3D" unique_id=1910771617]
 script = ExtResource("1_vgy2f")
-ingredient_name = "chopped tomato"
+ingredient_name = "Chopped Tomato"
 
 [node name="tomatohalf2" parent="." unique_id=913905293 instance=ExtResource("1_slc4l")]
 
