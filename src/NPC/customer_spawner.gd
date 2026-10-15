@@ -14,7 +14,7 @@ const hobo_customer_scene: PackedScene = preload("res://src/NPC/customer/hobo_cu
 var available_names: Array[String] = []
 var used_names: Dictionary = {}
 var to_spawn: Array[StringName]
-var customer_scene: PackedScene
+var customer_scene: PackedScene = preload("res://src/NPC/customer/customer.tscn")
 
 func _ready() -> void:
 	load_names()

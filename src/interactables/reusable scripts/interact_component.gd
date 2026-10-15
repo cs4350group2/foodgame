@@ -13,6 +13,15 @@ signal alt_interacted(player: Player)
 @export_node_path("Node3D") var highlight_root_path: NodePath = NodePath("../..")
 @export var highlight_color := Color(1.0, 0.85, 0.3, 0.3)
 
+@export_group("Tooltip")
+@export var display_name: String = ""
+@export var primary_description: String = "Interact"
+@export var secondary_description: String = "Use"
+
+# Optional function supplied by the owning interactable.
+# Returns descriptions and details based on its current state.
+var tooltip_provider: Callable
+
 var _meshes: Array[MeshInstance3D] = []
 var _original_overlays: Array[Material] = []
 var _highlight_material: StandardMaterial3D
@@ -71,3 +80,47 @@ func interact(player: Player) -> void:
 func alt_interact(player: Player) -> void:
 	if enabled and supports_secondary:
 		alt_interacted.emit(player)
+
+
+func get_tooltip_data(player: Player) -> Dictionary:
+	var title := display_name
+	var details := ""
+	var primary := primary_description
+	var secondary := secondary_description
+
+	var target := get_parent() as EdibleItem
+	var holding := is_instance_valid(player.held_edible)
+
+	# Food already has a naming system; reuse it.
+	if is_instance_valid(target):
+		title = target.get_edible_item_name()
+
+	if title.is_empty():
+		title = str(get_parent().name).capitalize()
+
+	# Stations can provide state-dependent descriptions.
+	if tooltip_provider.is_valid():
+		var descriptions: Dictionary = tooltip_provider.call(player)
+		details = descriptions.get("details", "")
+		primary = descriptions.get("primary", primary)
+		secondary = descriptions.get("secondary", secondary)
+
+	# Do not advertise unsupported component actions.
+	if not supports_primary:
+		primary = ""
+	if not supports_secondary:
+		secondary = ""
+
+	# Match the routing in Player.try_interact().
+	if holding:
+		if is_instance_valid(target):
+			primary = "Swap held item"
+		elif not supports_primary or not accepts_primary_while_holding:
+			primary = "Drop held item"
+
+	return {
+		"title": title,
+		"details": details,
+		"primary": primary,
+		"secondary": secondary,
+	}

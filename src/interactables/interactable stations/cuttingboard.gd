@@ -28,6 +28,9 @@ func _ready() -> void:
 
 	interaction.interacted.connect(_on_interacted)
 	interaction.alt_interacted.connect(_on_alt_interacted)
+	
+	interaction.display_name = "chopping board"
+	interaction.tooltip_provider = _get_tooltip_actions
 
 
 func _on_interacted(player: Player) -> void:
@@ -159,3 +162,36 @@ func _finish_chopping() -> void:
 		chopped.get_edible_item_name(),
 		"."
 	)
+
+func _get_tooltip_actions(player: Player) -> Dictionary:
+	var primary := ""
+	var details := "Contents: Empty"
+
+	var occupied := is_instance_valid(stored_edible)
+	var holding := is_instance_valid(player.held_edible)
+
+	if occupied:
+		var item_name := stored_edible.get_edible_item_name()
+		details = "Contents: %s" % item_name
+
+		if not can_chop():
+			details += "\nCannot chop %s" % item_name
+
+	if holding:
+		if occupied:
+			details += "\nThe chopping board is occupied"
+		else:
+			primary = "Place food"
+
+			var ingredient := player.held_edible
+			if not CHOPPED_SCENES.has(ingredient.scene_file_path):
+				details += "\nCannot chop %s" \
+					% ingredient.get_edible_item_name()
+	elif occupied:
+		primary = "Take food"
+
+	return {
+		"details": details,
+		"primary": primary,
+		"secondary": "Chop" if can_chop() else "",
+	}
