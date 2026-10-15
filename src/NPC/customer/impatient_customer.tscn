@@ -29,6 +29,7 @@ shape = SubResource("CapsuleShape3D_i2whk")
 
 [node name="InteractComponent" type="Node" parent="." unique_id=2068584594]
 script = ExtResource("3_5eo4w")
+highlight_root_path = NodePath("../CharacterBody3D")
 metadata/_custom_type_script = "uid://ca7pbehy5loa"
 
 [node name="PatienceBar" parent="." unique_id=258558182 instance=ExtResource("4_7ygbm")]

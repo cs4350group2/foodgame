@@ -27,7 +27,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0
 
 [node name="InteractComponent" type="Node" parent="." unique_id=207207384]
 script = ExtResource("2_rb2kk")
-highlight_root_path = NodePath("..")
+highlight_root_path = NodePath("../CharacterBody3D")
 metadata/_custom_type_script = "uid://ca7pbehy5loa"
 
 [node name="PatienceBar" parent="." unique_id=258558182 instance=ExtResource("3_ow1nv")]
