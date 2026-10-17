@@ -6,6 +6,7 @@ extends Node3D
 
 func _ready() -> void:
 	for i in icon_count:
+		print("spawned effect!!!")
 		var icon := icon_scene.instantiate() as Node3D
 		add_child(icon)
 
@@ -18,3 +19,6 @@ func _ready() -> void:
 		# Stagger their starts so they don't all rise together.
 		await get_tree().create_timer(randf_range(0.0, 0.25)).timeout
 		icon.play_float()
+
+func _on_animation_finished() -> void:
+	queue_free()
