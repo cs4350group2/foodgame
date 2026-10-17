@@ -42,16 +42,16 @@ script = ExtResource("6_gqh03")
 [node name="NoteGenerators" type="Node2D" parent="JudgmentHUD" unique_id=1713021895]
 
 [node name="NoteGeneratorLeft" parent="JudgmentHUD/NoteGenerators" unique_id=1019952068 instance=ExtResource("2_c5f8g")]
-position = Vector2(-200, 0)
+position = Vector2(-250, 0)
 
 [node name="NoteGeneratorDown" parent="JudgmentHUD/NoteGenerators" unique_id=544932490 instance=ExtResource("5_0vqqd")]
-position = Vector2(-67.6, 0)
+position = Vector2(-83, 0)
 
 [node name="NoteGeneratorUp" parent="JudgmentHUD/NoteGenerators" unique_id=2075637802 instance=ExtResource("4_weiq5")]
-position = Vector2(67.6, 0)
+position = Vector2(83, 0)
 
 [node name="NoteGeneratorRight" parent="JudgmentHUD/NoteGenerators" unique_id=746746973 instance=ExtResource("3_rfopb")]
-position = Vector2(200, 0)
+position = Vector2(250, 0)
 
 [node name="JudgmentLine" type="Sprite2D" parent="JudgmentHUD" unique_id=59846979]
 position = Vector2(0, 600)
@@ -59,16 +59,16 @@ scale = Vector2(35.085, 1)
 texture = ExtResource("7_fpuma")
 
 [node name="JudgmentNoteLeft" parent="JudgmentHUD" unique_id=1687560457 instance=ExtResource("11_kgy7m")]
-position = Vector2(-200, 600)
+position = Vector2(-250, 600)
 
 [node name="JudgmentNoteDown" parent="JudgmentHUD" unique_id=580993992 instance=ExtResource("8_hysoo")]
-position = Vector2(-67.6, 600)
+position = Vector2(-83, 600)
 
 [node name="JudgmentNoteUp" parent="JudgmentHUD" unique_id=12563384 instance=ExtResource("9_vvsvh")]
-position = Vector2(67.6, 600)
+position = Vector2(83, 600)
 
 [node name="JudgmentNoteRight" parent="JudgmentHUD" unique_id=1886351826 instance=ExtResource("10_rj7w6")]
-position = Vector2(200, 600)
+position = Vector2(250, 600)
 
 [node name="RhythmUI" type="CanvasLayer" parent="." unique_id=502008498]
 

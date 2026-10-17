@@ -82,7 +82,31 @@ layout_mode = 2
 theme = ExtResource("1_oeut0")
 theme_override_font_sizes/font_size = 22
 text = "Stew: 
-Chopped Raw Meat + Chopped Tomatoes + Chopped Potatoes
+Chopped Raw Meat + Chopped Tomatoes + Chopped Potatoes"
+autowrap_mode = 3
+
+[node name="Label5" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1142810623]
+layout_mode = 2
+theme = ExtResource("1_oeut0")
+theme_override_font_sizes/font_size = 22
+text = "Sushi:
+Rice + Chopped Fish"
+autowrap_mode = 3
+
+[node name="Label6" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1563892353]
+layout_mode = 2
+theme = ExtResource("1_oeut0")
+theme_override_font_sizes/font_size = 22
+text = "Rice Bowl:
+Rice + Chopped Raw Meat"
+autowrap_mode = 3
+
+[node name="Label7" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1254708937]
+layout_mode = 2
+theme = ExtResource("1_oeut0")
+theme_override_font_sizes/font_size = 22
+text = "Grilled Fish:
+Unchopped Fish
 "
 autowrap_mode = 3
 

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bgjmwmkledugc"]
 
+[ext_resource type="Script" uid="uid://c0h156v7ekpg3" path="res://src/restaurant/dishes/food/rice_bowl_item.gd" id="1_5vjlv"]
 [ext_resource type="PackedScene" uid="uid://bh5jwiooch8fl" path="res://models/props/food/riceBowl/riceBowl.tscn" id="1_m4ji3"]
 [ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="2_6of16"]
 
@@ -8,6 +9,7 @@ height = 0.6020508
 radius = 0.3173828
 
 [node name="RiceBowl" type="RigidBody3D" unique_id=871502674]
+script = ExtResource("1_5vjlv")
 
 [node name="RiceBowl" parent="." unique_id=1256667715 instance=ExtResource("1_m4ji3")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
