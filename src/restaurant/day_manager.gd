@@ -58,7 +58,7 @@ func _process(delta):
 		spawn_customer.emit(customer_string_names.pick_random())
 		
 		# Then uncomment this
-		# spawn_customer.emit(timings[current_customers].customer_type)
+		#spawn_customer.emit(timings[current_customers].customer_type)
 		current_customers += 1
 
 func _ready() -> void:

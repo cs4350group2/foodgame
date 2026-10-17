@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ubv0sb3volmr"]
 
 [ext_resource type="Script" uid="uid://bf2vyu30rj2pj" path="res://src/ui/restaurant_ui/restaurant_ui.gd" id="1_pux36"]
+[ext_resource type="PackedScene" uid="uid://deabp1ky0cw3n" path="res://src/ui/notification/notification.tscn" id="2_m7ans"]
 [ext_resource type="Texture2D" uid="uid://bvah6a7cgv1mq" path="res://assets/ui/icons/coin.png" id="2_pa56n"]
 [ext_resource type="FontFile" uid="uid://8vl643wgamfq" path="res://assets/fonts/upheavtt.ttf" id="3_pa56n"]
 [ext_resource type="Texture2D" uid="uid://diu55q1bup2a0" path="res://assets/ui/icons/clock-solid.svg" id="4_7iprg"]
@@ -32,6 +33,8 @@ fill_to = Vector2(0.7718447, 0)
 
 [node name="RestaurantUi" type="CanvasLayer" unique_id=1022008651]
 script = ExtResource("1_pux36")
+
+[node name="Notification" parent="." unique_id=1164443459 instance=ExtResource("2_m7ans")]
 
 [node name="ViewportContainer" type="Control" parent="." unique_id=1776253913]
 layout_mode = 3

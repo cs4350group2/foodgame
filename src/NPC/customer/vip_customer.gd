@@ -4,12 +4,14 @@ extends Customer
 @onready var vip_animation_player: AnimationPlayer = $CharacterBody3D/ModelOffset/Sketchfab_Scene/AnimationPlayer
 @onready var model_offset: Node3D = $CharacterBody3D/ModelOffset
 
+var notification_data: Dictionary
 var default_position: Vector3
 var dish_quality_requirement: float = 0.0
 
 func _ready() -> void:
 	super._ready()
 	default_position = model_offset.position
+	show_spawn_notification()
 
 func initialize_vip_customer(name: String, level: int, patience: float, 
 							 type: StringName, requirement: float = 50.0) -> void:
@@ -41,7 +43,7 @@ func play_animation(anim: String) -> void:
 		
 		"Sitting_Idle":
 			model_offset.position.x -= 0.2
-			model_offset.position.y -= 0.6
+			model_offset.position.y -= 1.0
 			vip_animation_player.play("Rig|sitting_idle")
 		_:
 			pass
@@ -53,3 +55,15 @@ func take_payment() -> float:
 	paid = true
 	# Gives 2x bonus
 	return order.get_order_total_price() + order.get_total_bonus() * 2
+
+func show_spawn_notification() -> void:
+	var file := FileAccess.open("res://data/notification.json", FileAccess.READ)
+	if file == null:
+		push_error("Could not open notification.json")
+		return
+
+	notification_data = JSON.parse_string(file.get_as_text())
+	
+	var message: String = notification_data["special_customer_notification"].get(customer_type)
+	var description_message: String = notification_data["special_customer_descriptions"].get(customer_type)
+	restaurant_ui.show_notification_top(message, true, description_message)
