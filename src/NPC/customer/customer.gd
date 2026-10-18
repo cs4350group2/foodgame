@@ -231,6 +231,7 @@ func enter_state(state: State):
 			play_animation("Walk")
 			update_target_location(exit_point.global_position)
 			pass
+
 		State.LEAVING_ANGRY:
 			global_transform = prev_transform
 			play_animation("Walk")
@@ -256,6 +257,7 @@ func exit_state(state:State):
 			pass
 
 		State.EATING:
+			global_transform = prev_transform
 			pass
 
 		State.WALKING_TO_CASHIER:
