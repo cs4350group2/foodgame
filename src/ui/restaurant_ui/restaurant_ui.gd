@@ -1,3 +1,4 @@
+class_name RestaurantUI
 extends CanvasLayer
 
 var total_duration: float
@@ -9,6 +10,7 @@ var total_duration: float
 @onready var start_day_prompt: Label = %StartDayPrompt
 @onready var progress_container: HBoxContainer = %ProgressContainer
 @onready var day_number: Label = %DayNumber
+@onready var notification: Notification = $Notification
 
 func get_key_to_action(input_name: StringName) -> String:
 	var events = InputMap.action_get_events(input_name)
@@ -67,3 +69,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("start_day"):
 		start_day()
 		get_viewport().set_input_as_handled()
+
+func show_notification_top(message: String, show_description: bool = false, description_message: String = "") -> void:
+	notification.show_top(message, show_description, description_message)

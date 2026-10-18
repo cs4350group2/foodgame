@@ -8,6 +8,7 @@ extends CharacterBody3D
 @onready var patience_bar: PatienceBar = $PatienceBar
 @onready var customer_spawner: CustomerSpawner = get_parent() as CustomerSpawner
 @onready var audio_player = $AudioStreamPlayer3D
+@onready var restaurant_ui: RestaurantUI = get_tree().current_scene.get_node("RestaurantUi")
 
 # SFX
 const HMM_SFX = preload("res://assets/sfx/customer/hmm_sfx.mp3")

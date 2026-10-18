@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://deabp1ky0cw3n"]
+
+[ext_resource type="Script" uid="uid://5jrydj464ia0" path="res://src/ui/notification/notification.gd" id="1_ylmpq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ylmpq"]
+bg_color = Color(0.92, 0, 0, 0.49803922)
+
+[node name="Notification" type="CanvasLayer" unique_id=764959482]
+script = ExtResource("1_ylmpq")
+debug = true
+
+[node name="Top" type="Panel" parent="." unique_id=200903029]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -216.0
+offset_top = 60.0
+offset_right = 184.0
+offset_bottom = 100.00003
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="Label" type="Label" parent="Top" unique_id=229059774]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 8.0
+offset_right = -20.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 22
+text = "Message shown."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Description" type="Panel" parent="Top" unique_id=17609163]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 40.0
+offset_right = 200.0
+offset_bottom = 70.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Top/Description" unique_id=1646694467]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 8.0
+offset_right = -20.0
+offset_bottom = -8.0
+text = "Description"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ErrorBottom" type="Panel" parent="." unique_id=2129298264]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -216.0
+offset_top = -148.0
+offset_right = 184.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ylmpq")
+
+[node name="Label" type="Label" parent="ErrorBottom" unique_id=1895034613]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 22
+text = "Message shown."
+horizontal_alignment = 1
+vertical_alignment = 1

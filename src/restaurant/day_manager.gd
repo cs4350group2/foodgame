@@ -46,7 +46,19 @@ func _process(delta):
 	if current_customers == num_customers:
 		return
 	if (current_time >= timings[current_customers].arrival_time):
-		spawn_customer.emit(timings[current_customers].customer_type)
+		# Remove this randomization of spawning customer after upgrades of
+		# customers is implemented
+		var customer_string_names = [
+			&"",
+			&"VIP",
+			&"Impatient",
+			&"FoodCritic",
+			&"Hobo",
+		]
+		spawn_customer.emit(customer_string_names.pick_random())
+		
+		# Then uncomment this
+		#spawn_customer.emit(timings[current_customers].customer_type)
 		current_customers += 1
 
 func _ready() -> void:

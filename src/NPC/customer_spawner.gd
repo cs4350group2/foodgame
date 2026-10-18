@@ -6,15 +6,16 @@ extends Node3D
 @onready var exit_point: Marker3D = $Exit
 
 # Preload all available customer scenes
+const normal_customer_scene: PackedScene = preload("res://src/NPC/customer/customer.tscn")
 const vip_customer_scene: PackedScene = preload("res://src/NPC/customer/vip_customer.tscn")
 const impatient_customer_scene: PackedScene = preload("res://src/NPC/customer/impatient_customer.tscn")
 const food_critic_customer_scene: PackedScene = preload("res://src/NPC/customer/food_critic_customer.tscn")
 const hobo_customer_scene: PackedScene = preload("res://src/NPC/customer/hobo_customer.tscn")
 
+var customer_scene: PackedScene = preload("res://src/NPC/customer/customer.tscn")
 var available_names: Array[String] = []
 var used_names: Dictionary = {}
 var to_spawn: Array[StringName]
-var customer_scene: PackedScene = preload("res://src/NPC/customer/customer.tscn")
 
 func _ready() -> void:
 	load_names()
