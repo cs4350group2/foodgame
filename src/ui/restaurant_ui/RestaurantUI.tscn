@@ -8,6 +8,7 @@
 [ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="4_b45cv"]
 [ext_resource type="Shader" uid="uid://bkuoxh7d003ai" path="res://src/NPC/ui/patience_icon.gdshader" id="5_1vf0p"]
 [ext_resource type="PackedScene" uid="uid://b26nn7giv313p" path="res://src/ui/upgrade_ui/UpgradeUi.tscn" id="7_03d6k"]
+[ext_resource type="PackedScene" path="res://src/ui/drink_menu/DrinkMenu.tscn" id="8_drink_menu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wksio"]
 shader = ExtResource("5_1vf0p")
@@ -166,3 +167,5 @@ text = "Day 2"
 
 [node name="UpgradeUi" parent="ViewportContainer" unique_id=360686117 instance=ExtResource("7_03d6k")]
 layout_mode = 1
+
+[node name="DrinkMenu" parent="." instance=ExtResource("8_drink_menu")]
