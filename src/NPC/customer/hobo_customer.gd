@@ -9,6 +9,7 @@ var default_position: Vector3
 
 func _ready() -> void:
 	super._ready()
+	default_position = model_offset.position
 	show_spawn_notification()
 
 func _on_interacted(_player: Player) -> void:
@@ -27,8 +28,9 @@ func _on_interacted(_player: Player) -> void:
 			return
 
 		State.LEAVING: # Only can receive payment if confronted when they are leaving
-			RestaurantManager.receive_payment(take_payment())
-			play_audio(AudioSfx.PAYMENT)
+			if not paid:
+				RestaurantManager.receive_payment(take_payment())
+				play_audio(AudioSfx.PAYMENT)
 
 	print("Interacted with the customer.")
 

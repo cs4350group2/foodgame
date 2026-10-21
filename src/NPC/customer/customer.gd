@@ -218,7 +218,6 @@ func enter_state(state: State):
 			pass
 
 		State.WALKING_TO_CASHIER:
-			global_transform = prev_transform
 			play_animation("Walk")
 			RestaurantManager.enqueue_for_payment(self)
 			pass
@@ -233,7 +232,6 @@ func enter_state(state: State):
 			pass
 
 		State.LEAVING_ANGRY:
-			global_transform = prev_transform
 			play_animation("Walk")
 			play_audio(AudioSfx.ANGRY)
 			update_target_location(exit_point.global_position)
@@ -500,8 +498,11 @@ func set_cashier_queue_target(target: Vector3, is_front: bool) -> void:
 	play_animation("Walk")
 
 func take_payment() -> float:
-	paid = true
-	return order.get_order_total_price() + order.get_total_bonus()
+	if not paid:
+		paid = true
+		return order.get_order_total_price() + order.get_total_bonus()
+	else:
+		return 0.0
 
 func state_paying(delta):
 	# Pay, finish eating, etc.
@@ -515,7 +516,7 @@ func state_paying(delta):
 
 func state_leaving(delta):
 	RestaurantManager.remove_from_cashier_queue(self)
-	# Walk toward the restaurant exit	
+	# Walk toward the restaurant exit
 	move_toward_navigation_target(delta)
 	
 	if nav_agent.is_navigation_finished():
