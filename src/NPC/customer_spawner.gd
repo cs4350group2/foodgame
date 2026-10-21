@@ -5,6 +5,9 @@ extends Node3D
 @onready var spawn_point: Marker3D = $SpawnPoint
 @onready var exit_point: Marker3D = $Exit
 
+@export var min_patience: float = 80.0
+@export var max_patience: float = 150.0
+
 # Preload all available customer scenes
 const normal_customer_scene: PackedScene = preload("res://src/NPC/customer/customer.tscn")
 const vip_customer_scene: PackedScene = preload("res://src/NPC/customer/vip_customer.tscn")
@@ -48,6 +51,7 @@ func load_names() -> void:
 
 func choose_random_customer_scene() -> void:
 	if customer_scenes.is_empty():
+		customer_scene = normal_customer_scene
 		return
 
 	customer_scene = customer_scenes.pick_random()
@@ -63,7 +67,7 @@ func spawn_customer(customer_type: StringName = &"") -> void:
 	
 	# var customer_level := randi_range(1, 3)
 	var customer_level := 1
-	var patience := rng.randf_range(50.0, 70.0)
+	var patience := rng.randf_range(min_patience, max_patience)
 	
 	# Set up customer scene
 	var customer: Customer

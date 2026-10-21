@@ -15,6 +15,10 @@ const RECIPE_MENU_SCENE = preload("res://src/ui/recipe_menu/RecipeMenu.tscn")
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause_game") and not event.is_echo():
 		get_viewport().set_input_as_handled()
+		var drink_menu := get_parent().get_node_or_null("RestaurantUi/DrinkMenu") as Control
+		if is_instance_valid(drink_menu) and drink_menu.visible:
+			drink_menu.close_menu()
+			return
 		if recipe_menu and recipe_menu.visible:
 			_on_recipe_closed()
 		elif get_tree().paused:

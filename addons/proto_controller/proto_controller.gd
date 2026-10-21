@@ -61,9 +61,11 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Mouse capturing
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if event is InputEventMouseButton \
+			and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		capture_mouse()
-	if Input.is_key_pressed(KEY_ESCAPE):
+	if event is InputEventKey and event.keycode == KEY_ESCAPE \
+			and event.pressed and not event.echo:
 		release_mouse()
 	
 	# Look around
