@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/ui/main_menu/food_backdrop.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://models/props/food/Burger/burgerall.tscn" id="2_burger"]
+[ext_resource type="PackedScene" path="res://models/props/food/sushi/sushi.tscn" id="3_sushi"]
+[ext_resource type="PackedScene" path="res://models/props/food/Steak/meatCooked.tscn" id="4_steak"]
+[ext_resource type="PackedScene" path="res://models/props/food/GrilledFish/GrilledFish.tscn" id="5_fish"]
+[ext_resource type="PackedScene" path="res://models/props/food/riceBowl/riceBowl.tscn" id="6_rice"]
+[ext_resource type="PackedScene" path="res://models/props/food/Ingredients/tomatoWhole.tscn" id="7_tomato"]
+[ext_resource type="PackedScene" path="res://models/props/food/Ingredients/potato.tscn" id="8_potato"]
+
+[sub_resource type="Environment" id="Environment_backdrop"]
+background_mode = 3
+background_canvas_max_layer = -1
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.94, 0.84, 1)
+ambient_light_energy = 0.7
+
+[node name="FoodBackdrop" type="Node3D"]
+script = ExtResource("1_script")
+food_scenes = Array[PackedScene]([ExtResource("2_burger"), ExtResource("3_sushi"), ExtResource("4_steak"), ExtResource("5_fish"), ExtResource("6_rice"), ExtResource("7_tomato"), ExtResource("8_potato")])
+
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(0, 0, 15)
+projection = 1
+current = true
+size = 12.0
+near = 0.1
+far = 30.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_backdrop")
+
+[node name="KeyLight" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-35, -25, 0)
+light_color = Color(1, 0.96, 0.88, 1)
+light_energy = 1.1

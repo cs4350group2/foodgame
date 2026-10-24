@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bec2ugrynpiu"]
 
-[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="1_oeut0"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/OrderUITheme.tres" id="1_oeut0"]
 [ext_resource type="Script" uid="uid://cedglnrjd0c0v" path="res://src/ui/recipe_menu/recipe_menu.gd" id="1_v7jtf"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_35d0n"]

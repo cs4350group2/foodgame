@@ -1,5 +1,7 @@
 extends Control
 
+const DRINK_ENTRY_SCENE: PackedScene = preload("res://src/ui/drink_menu/DrinkEntry.tscn")
+
 const DRINK_SCENES: Dictionary = {
 	"Soda": "res://models/physics/drinks/sodaRegular.tscn",
 	"Cooler Soda": "res://models/physics/drinks/sodaSpecial.tscn",
@@ -9,7 +11,11 @@ const DRINK_SCENES: Dictionary = {
 }
 
 @onready var coins_label: Label = %CoinsLabel
-@onready var drink_list: VBoxContainer = %DrinkList
+@onready var drink_list: GridContainer = %DrinkList
+@onready var drink_scroll: ScrollContainer = drink_list.get_parent() as ScrollContainer
+@onready var menu_panel: PanelContainer = $Panel
+@onready var panel_margin: MarginContainer = $Panel/Margin
+@onready var menu_content: VBoxContainer = $Panel/Margin/Content
 @onready var close_button: Button = %CloseButton
 
 var _player: Player
@@ -26,6 +32,8 @@ func _ready() -> void:
 	hide()
 	close_button.pressed.connect(close_menu)
 	_build_drink_list()
+	resized.connect(_update_drink_columns)
+	_update_drink_columns.call_deferred()
 
 
 func _build_drink_list() -> void:
@@ -37,36 +45,41 @@ func _build_drink_list() -> void:
 		if price < 0.0 or not is_finite(price):
 			continue
 
-		var panel := PanelContainer.new()
-		drink_list.add_child(panel)
-		var margin := MarginContainer.new()
-		for side in ["left", "right", "top", "bottom"]:
-			margin.add_theme_constant_override("margin_" + side, 12)
-		panel.add_child(margin)
-		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", 16)
-		margin.add_child(row)
-		var details := VBoxContainer.new()
-		details.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		row.add_child(details)
-		var title := Label.new()
-		title.text = "%s — %s coins" % [drink_name, str(price)]
-		title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		details.add_child(title)
-		for field in ["description", "usage"]:
-			var label := Label.new()
-			label.text = drink.get(field, "")
-			label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-			label.add_theme_font_size_override("font_size", 16)
-			details.add_child(label)
-		var buy := Button.new()
-		buy.text = "Buy"
-		buy.custom_minimum_size.x = 90
-		buy.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		buy.pressed.connect(_buy_drink.bind(drink_name, price))
-		row.add_child(buy)
-		_buttons.append(buy)
+		var entry := DRINK_ENTRY_SCENE.instantiate() as DrinkEntry
+		drink_list.add_child(entry)
+		var drink_data := Drink.new(
+			drink_name, price, drink.get("description", ""), drink.get("usage", "")
+		)
+		entry.add_child(drink_data)
+		entry.setup(drink_data)
+		entry.buy_requested.connect(_buy_drink)
+		_buttons.append(entry.button)
 		_prices.append(price)
+
+
+func _update_drink_columns() -> void:
+	var entry_count := drink_list.get_child_count()
+	if entry_count == 0:
+		drink_list.columns = 1
+		return
+	var entry_width := 0.0
+	for entry: Control in drink_list.get_children():
+		entry_width = maxf(entry_width, entry.get_combined_minimum_size().x)
+	var spacing := float(drink_list.get_theme_constant("h_separation"))
+	var panel_padding := menu_panel.get_theme_stylebox("panel").get_minimum_size().x
+	panel_padding += panel_margin.get_theme_constant("margin_left") + panel_margin.get_theme_constant("margin_right")
+	# Use the viewport budget rather than the shrinking panel to avoid feedback.
+	var scrollbar_width := drink_scroll.get_v_scroll_bar().get_combined_minimum_size().x
+	var available_width := size.x * 0.84 - panel_padding - scrollbar_width
+	var columns_that_fit := floori((available_width + spacing) / maxf(entry_width + spacing, 1.0))
+	drink_list.columns = clampi(columns_that_fit, 1, entry_count)
+	var content_width := drink_list.get_combined_minimum_size().x + scrollbar_width
+	for child: Control in menu_content.get_children():
+		if child != drink_scroll:
+			content_width = maxf(content_width, child.get_combined_minimum_size().x)
+	var panel_width := content_width + panel_padding
+	menu_panel.offset_left = -panel_width / 2.0
+	menu_panel.offset_right = panel_width / 2.0
 
 
 func open_menu(player: Player) -> void:
@@ -83,9 +96,9 @@ func open_menu(player: Player) -> void:
 	player.release_mouse()
 	player.crosshair.hide()
 	show()
+	_update_drink_columns.call_deferred()
 	_refresh_availability()
 	get_tree().paused = true
-	close_button.grab_focus()
 
 
 func _input(event: InputEvent) -> void:
@@ -104,12 +117,10 @@ func _refresh_availability() -> void:
 	if not _active:
 		return
 	coins_label.text = "Coins: %s" % str(_run.coins)
+	_update_drink_columns.call_deferred()
 	var hands_full := is_instance_valid(_player) and is_instance_valid(_player.held_edible)
 	for i in _buttons.size():
 		_buttons[i].disabled = _buying or _closing or hands_full or _run.coins < _prices[i]
-		_buttons[i].tooltip_text = "Put down your held item first." if hands_full else (
-			"Not enough coins." if _run.coins < _prices[i] else "Buy this drink."
-		)
 
 
 func _buy_drink(drink_name: String, price: float) -> void:

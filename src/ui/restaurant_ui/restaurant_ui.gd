@@ -6,10 +6,11 @@ var total_duration: float
 @export var day_manager: DayManager
 
 @onready var coins_label: Label = %MoneyLabel
-@onready var timer_progress_bar: TextureProgressBar = %ProgressBar
+@onready var day_progress_slider: HSlider = %ProgressSlider
 @onready var start_day_prompt: Label = %StartDayPrompt
 @onready var progress_container: HBoxContainer = %ProgressContainer
 @onready var day_number: Label = %DayNumber
+@onready var controls_label: Label = %ControlsLabel
 @onready var notification: Notification = $Notification
 
 func get_key_to_action(input_name: StringName) -> String:
@@ -30,21 +31,25 @@ func _ready() -> void:
 	start_day_prompt.text = " Hit %s to open for the day!" \
 		% get_key_to_action(&"start_day")
 
+	controls_label.text = "HOLD [%s] ORDERS     [%s] PAUSE" % [
+		get_key_to_action(&"show_orders"), get_key_to_action(&"pause_game")
+	]
+
 	_on_day_finish()
 	_on_day_update(RunManager.current_run.current_day)
 
 func _on_dm_setup_finish() -> void:
 	total_duration = day_manager.total_duration
-	timer_progress_bar.max_value = total_duration
-	timer_progress_bar.step = total_duration / 1000
-	timer_progress_bar.value = day_manager.current_time
+	day_progress_slider.max_value = total_duration
+	day_progress_slider.step = total_duration / 1000
+	day_progress_slider.value = day_manager.current_time
 
 	progress_container.visible = false
 	start_day_prompt.visible = true
 	set_process_input(true)
 
 func _process(delta: float) -> void:
-	timer_progress_bar.value = day_manager.current_time
+	day_progress_slider.value = day_manager.current_time
 
 func _on_coins_updated(amount: float):
 	coins_label.text = "%d" % amount 
@@ -58,7 +63,7 @@ func start_day() -> void:
 	day_manager.start_day()
 
 func _on_day_update(day: int) -> void:
-	day_number.text = "Day %d" % day
+	day_number.text = "%d" % day
 
 func _on_day_finish() -> void:
 	progress_container.visible = false

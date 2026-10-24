@@ -348,6 +348,8 @@ func state_sitting(delta):
 		change_state(State.ORDERING)
 
 func take_order() -> void:
+	order.customer_name = customer_name
+	order.customer_type = customer_type
 	RestaurantManager.add_order(order)
 	order_taken = true
 	play_audio(AudioSfx.ORDER_TAKEN)

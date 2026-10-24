@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bx1nx2vtvtlsc"]
+
+[ext_resource type="Script" uid="uid://bh4wspw3oao4k" path="res://src/ui/drink_menu/drink_menu_tooltip.gd" id="1_n3kdw"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/OrderUITheme.tres" id="2_wqto2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1mj5m"]
+bg_color = Color(0, 0, 0, 0.5372549)
+
+[node name="DrinkMenuTooltip" type="PanelContainer" unique_id=1768537133]
+custom_minimum_size = Vector2(90, 0)
+offset_right = 1.0
+offset_bottom = 77.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1mj5m")
+script = ExtResource("1_n3kdw")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=276799351]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1487391399]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1402925162]
+layout_mode = 2
+theme = ExtResource("2_wqto2")
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 30
+text = "text name"
+
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer" unique_id=711929703]
+layout_mode = 2
+theme = ExtResource("2_wqto2")
+text = "this is the text"
+
+[node name="Usage" type="Label" parent="MarginContainer/VBoxContainer" unique_id=487342048]
+layout_mode = 2
+theme = ExtResource("2_wqto2")
+text = "this is the text"

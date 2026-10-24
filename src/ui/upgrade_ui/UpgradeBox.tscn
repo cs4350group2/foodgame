@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dhfqwtv64p54f"]
 
 [ext_resource type="Script" uid="uid://dj4mhv8bmthcu" path="res://src/ui/upgrade_ui/upgrade_box.gd" id="1_w1qe3"]
-[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="2_ggipf"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/OrderUITheme.tres" id="2_ggipf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qymb1"]
 bg_color = Color(0.19215687, 0.15686275, 0, 0.972549)

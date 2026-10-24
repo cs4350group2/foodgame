@@ -5,37 +5,161 @@
 [ext_resource type="Texture2D" uid="uid://bvah6a7cgv1mq" path="res://assets/ui/icons/coin.png" id="2_pa56n"]
 [ext_resource type="FontFile" uid="uid://8vl643wgamfq" path="res://assets/fonts/upheavtt.ttf" id="3_pa56n"]
 [ext_resource type="Texture2D" uid="uid://diu55q1bup2a0" path="res://assets/ui/icons/clock-solid.svg" id="4_7iprg"]
-[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="4_b45cv"]
+[ext_resource type="Theme" uid="uid://cp6t4mnfwas5v" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="4_b45cv"]
 [ext_resource type="Shader" uid="uid://bkuoxh7d003ai" path="res://src/NPC/ui/patience_icon.gdshader" id="5_1vf0p"]
 [ext_resource type="PackedScene" uid="uid://b26nn7giv313p" path="res://src/ui/upgrade_ui/UpgradeUi.tscn" id="7_03d6k"]
-[ext_resource type="PackedScene" path="res://src/ui/drink_menu/DrinkMenu.tscn" id="8_drink_menu"]
+[ext_resource type="PackedScene" uid="uid://10t47xmvtvat" path="res://src/ui/drink_menu/DrinkMenu.tscn" id="8_drink_menu"]
+[ext_resource type="Texture2D" uid="uid://b1t7ldg8tglew" path="res://assets/ui/icons/sun-solid.svg" id="8_p54sj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xawh2"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.7596366, 0.36742812, 0.070075355, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 2
+shadow_color = Color(0.32, 0.14, 0.035, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wksio"]
 shader = ExtResource("5_1vf0p")
-shader_parameter/icon_color = Color(1, 1, 1, 1)
+shader_parameter/icon_color = Color(1, 0.956863, 0.85098, 1)
 
-[sub_resource type="Gradient" id="Gradient_7iprg"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p54sj"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.9686696, 0.34954146, 0.5588421, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.44, 0.12, 0.22, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_morll"]
-gradient = SubResource("Gradient_7iprg")
-width = 300
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_35d0n"]
+content_margin_left = 2.0
+content_margin_top = 3.0
+content_margin_right = 2.0
+content_margin_bottom = 1.0
+bg_color = Color(0.19, 0.075, 0.12, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_track_mask"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="Gradient" id="Gradient_p54sj"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p54sj"]
+gradient = SubResource("Gradient_p54sj")
+width = 4
 height = 40
-fill_from = Vector2(1, 0)
+fill_to = Vector2(0.4514563, 0)
 
-[sub_resource type="Gradient" id="Gradient_pa56n"]
-colors = PackedColorArray(0.9999997, 0.78038436, 0.44063565, 1, 0.11402158, 0.11377103, 0.23101896, 1)
+[sub_resource type="Gradient" id="Gradient_uhb0l"]
+offsets = PackedFloat32Array(0, 0.352459, 0.78688526)
+colors = PackedColorArray(0.99411386, 0.65738577, 0.4200155, 1, 0.8471449, 0.5556959, 1.732707e-06, 1, 0.016038261, 0.007866514, 0.2953605, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1vf0p"]
-gradient = SubResource("Gradient_pa56n")
-width = 300
-height = 40
-fill_to = Vector2(0.7718447, 0)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mmqxt"]
+gradient = SubResource("Gradient_uhb0l")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_day_track"]
+content_margin_left = 0.0
+content_margin_top = 20.0
+content_margin_right = 0.0
+content_margin_bottom = 20.0
+texture = SubResource("GradientTexture2D_mmqxt")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_day_fill"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmqxt"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.31778625, 0.17026424, 0.037681997, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.16, 0.075, 0.025, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mmqxt"]
+shader = ExtResource("5_1vf0p")
+shader_parameter/icon_color = Color(1, 0.956863, 0.85098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhb0l"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.12, 0.085, 0.07, 0.94)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.065, 0.045, 0.035, 0.9)
+shadow_size = 2
+shadow_offset = Vector2(0, 2)
+anti_aliasing = false
 
 [node name="RestaurantUi" type="CanvasLayer" unique_id=1022008651]
 script = ExtResource("1_pux36")
 
 [node name="Notification" parent="." unique_id=1164443459 instance=ExtResource("2_m7ans")]
+visible = false
 
 [node name="ViewportContainer" type="Control" parent="." unique_id=1776253913]
 layout_mode = 3
@@ -50,31 +174,44 @@ mouse_filter = 2
 layout_mode = 0
 offset_right = 81.0
 offset_bottom = 53.0
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 6
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
 
 [node name="PanelContainer3" type="PanelContainer" parent="ViewportContainer/TopLeft" unique_id=1800118385]
+custom_minimum_size = Vector2(108, 72)
 layout_mode = 2
+theme = ExtResource("4_b45cv")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xawh2")
 
 [node name="MoneyMarginContainer" type="MarginContainer" parent="ViewportContainer/TopLeft/PanelContainer3" unique_id=2009976658]
 layout_mode = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme = ExtResource("4_b45cv")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ViewportContainer/TopLeft/PanelContainer3/MoneyMarginContainer" unique_id=1018715154]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="MoneyIcon" type="TextureRect" parent="ViewportContainer/TopLeft/PanelContainer3/MoneyMarginContainer/HBoxContainer" unique_id=769453040]
 material = SubResource("ShaderMaterial_wksio")
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("2_pa56n")
-expand_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="MoneyLabel" type="Label" parent="ViewportContainer/TopLeft/PanelContainer3/MoneyMarginContainer/HBoxContainer" unique_id=406715077]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.956863, 0.85098, 1)
+theme_override_colors/font_shadow_color = Color(0.18, 0.07, 0.045, 0.8)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("3_pa56n")
 theme_override_font_sizes/font_size = 40
 text = "0"
@@ -88,25 +225,31 @@ offset_left = -114.0
 offset_right = 114.0
 offset_bottom = 40.0
 grow_horizontal = 2
-theme_override_constants/margin_top = 5
+theme_override_constants/margin_top = 12
 
 [node name="PanelContainer2" type="PanelContainer" parent="ViewportContainer/TopCenter" unique_id=1515612682]
-custom_minimum_size = Vector2(0, 45)
+custom_minimum_size = Vector2(63, 72)
 layout_mode = 2
+theme = ExtResource("4_b45cv")
+theme_override_styles/panel = SubResource("StyleBoxFlat_p54sj")
 
 [node name="TimerMarginContainer" type="MarginContainer" parent="ViewportContainer/TopCenter/PanelContainer2" unique_id=1353131518]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 7
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
 
 [node name="StartDayPrompt" type="Label" parent="ViewportContainer/TopCenter/PanelContainer2/TimerMarginContainer" unique_id=1305771246]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme = ExtResource("4_b45cv")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 0.956863, 0.85098, 1)
+theme_override_colors/font_shadow_color = Color(0.18, 0.07, 0.045, 0.8)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 26
 text = "tung tung tung sahur"
@@ -114,21 +257,45 @@ horizontal_alignment = 1
 
 [node name="ProgressContainer" type="HBoxContainer" parent="ViewportContainer/TopCenter/PanelContainer2/TimerMarginContainer" unique_id=2087527018]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="ProgressIcon" type="TextureRect" parent="ViewportContainer/TopCenter/PanelContainer2/TimerMarginContainer/ProgressContainer" unique_id=1645649820]
 material = SubResource("ShaderMaterial_wksio")
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("4_7iprg")
-expand_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
-[node name="ProgressBar" type="TextureProgressBar" parent="ViewportContainer/TopCenter/PanelContainer2/TimerMarginContainer/ProgressContainer" unique_id=435629798]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 40)
+[node name="PanelContainer" type="PanelContainer" parent="ViewportContainer/TopCenter/PanelContainer2/TimerMarginContainer/ProgressContainer" unique_id=1210328052]
 layout_mode = 2
-texture_under = SubResource("GradientTexture2D_morll")
-texture_progress = SubResource("GradientTexture2D_1vf0p")
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_35d0n")
+
+[node name="TrackMask" type="PanelContainer" parent="ViewportContainer/TopCenter/PanelContainer2/TimerMarginContainer/ProgressContainer/PanelContainer" unique_id=1790715474]
+clip_children = 1
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_track_mask")
+
+[node name="ProgressSlider" type="HSlider" parent="ViewportContainer/TopCenter/PanelContainer2/TimerMarginContainer/ProgressContainer/PanelContainer/TrackMask" unique_id=1170068256]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+theme = ExtResource("4_b45cv")
+theme_override_icons/grabber = SubResource("GradientTexture2D_p54sj")
+theme_override_icons/grabber_highlight = SubResource("GradientTexture2D_p54sj")
+theme_override_icons/grabber_disabled = SubResource("GradientTexture2D_p54sj")
+theme_override_styles/slider = SubResource("StyleBoxTexture_day_track")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_day_fill")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_day_fill")
+step = 0.001
+editable = false
+scrollable = false
 
 [node name="TopRight" type="MarginContainer" parent="ViewportContainer" unique_id=95140598]
 layout_mode = 1
@@ -138,34 +305,83 @@ anchor_right = 1.0
 offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 5
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
 
 [node name="PanelContainer" type="PanelContainer" parent="ViewportContainer/TopRight" unique_id=1460552103]
+custom_minimum_size = Vector2(96, 72)
 layout_mode = 2
+theme = ExtResource("4_b45cv")
+theme_override_styles/panel = SubResource("StyleBoxFlat_mmqxt")
 
 [node name="MarginContainer" type="MarginContainer" parent="ViewportContainer/TopRight/PanelContainer" unique_id=1687966996]
+custom_minimum_size = Vector2(0, 63)
 layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ViewportContainer/TopRight/PanelContainer/MarginContainer" unique_id=244848757]
 layout_mode = 2
 theme = ExtResource("4_b45cv")
+theme_override_constants/separation = 10
 
 [node name="TextureRect" type="TextureRect" parent="ViewportContainer/TopRight/PanelContainer/MarginContainer/HBoxContainer" unique_id=740962131]
+material = SubResource("ShaderMaterial_mmqxt")
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("8_p54sj")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="DayNumber" type="Label" parent="ViewportContainer/TopRight/PanelContainer/MarginContainer/HBoxContainer" unique_id=1779550625]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4_b45cv")
 theme_type_variation = &"HeaderLarge"
-text = "Day 2"
+theme_override_colors/font_color = Color(1, 0.956863, 0.85098, 1)
+theme_override_colors/font_shadow_color = Color(0.18, 0.07, 0.045, 0.8)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+text = "2"
+
+[node name="ControlsHint" type="PanelContainer" parent="ViewportContainer" unique_id=58087897]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = -54.0
+offset_bottom = -18.0
+grow_vertical = 0
+mouse_filter = 2
+theme = ExtResource("4_b45cv")
+theme_override_styles/panel = SubResource("StyleBoxFlat_uhb0l")
+
+[node name="Margin" type="MarginContainer" parent="ViewportContainer/ControlsHint" unique_id=895106441]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="ControlsLabel" type="Label" parent="ViewportContainer/ControlsHint/Margin" unique_id=1537303984]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.956863, 0.85098, 1)
+theme_override_colors/font_shadow_color = Color(0.18, 0.07, 0.045, 0.8)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 18
+text = "HOLD [Tab] ORDERS     [Esc] PAUSE"
 
 [node name="UpgradeUi" parent="ViewportContainer" unique_id=360686117 instance=ExtResource("7_03d6k")]
 layout_mode = 1
 
-[node name="DrinkMenu" parent="." instance=ExtResource("8_drink_menu")]
+[node name="DrinkMenu" parent="." unique_id=1658584733 instance=ExtResource("8_drink_menu")]
+visible = false

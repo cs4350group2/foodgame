@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://bgwbqd2pfso3n"]
+
+[ext_resource type="Script" uid="uid://ups7frrsev7q" path="res://src/ui/drink_menu/drink_entry.gd" id="1_6csb1"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/OrderUITheme.tres" id="2_jjx5v"]
+[ext_resource type="Shader" uid="uid://03ywgxyhluxs" path="res://src/ui/drink_menu/DrinkEntry.gdshader" id="3_1mj5m"]
+[ext_resource type="Script" uid="uid://dmld5m0h4wifg" path="res://src/ui/drink_menu/drink_entry_button.gd" id="4_tooltip"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1mj5m"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.42, 0.045, 0.055, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.19, 0.025, 0.035, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jjx5v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1mj5m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d4ukr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bst06"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6m770"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_display"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.025, 0.04, 0.055, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.11, 0.13, 0.15, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Gradient" id="Gradient_ljm42"]
+colors = PackedColorArray(0.12, 0.2, 0.24, 1, 0.025, 0.04, 0.055, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_35d0n"]
+gradient = SubResource("Gradient_ljm42")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1mj5m"]
+shader = ExtResource("3_1mj5m")
+shader_parameter/glass_tint = Color(0.85, 0.95, 1, 1)
+shader_parameter/reflection_strength = 0.3450000163875
+shader_parameter/base_opacity = 0.0470000022325
+
+[sub_resource type="Gradient" id="Gradient_d4ukr"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jjx5v"]
+gradient = SubResource("Gradient_d4ukr")
+fill_from = Vector2(0.9678899, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_price"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+bg_color = Color(0.025, 0.075, 0.055, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.16, 0.2, 0.18, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="DrinkEntry" type="PanelContainer" unique_id=690608397]
+offset_right = 64.0
+offset_bottom = 112.0
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1mj5m")
+script = ExtResource("1_6csb1")
+
+[node name="Button" type="Button" parent="." unique_id=168712078]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jjx5v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1mj5m")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d4ukr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bst06")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6m770")
+script = ExtResource("4_tooltip")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=551588125]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=778476721]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="DisplayLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2077035218]
+layout_mode = 2
+theme = ExtResource("2_jjx5v")
+theme_override_colors/font_color = Color(0.95, 0.75, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "COLD DRINKS"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1028427840]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_display")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=843883945]
+custom_minimum_size = Vector2(128, 128)
+custom_maximum_size = Vector2(128, 128)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_35d0n")
+
+[node name="DrinkImage" type="TextureRect" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=1288993862]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
+custom_maximum_size = Vector2(128, 128)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GlassTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/MarginContainer" unique_id=22758218]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_1mj5m")
+custom_minimum_size = Vector2(128, 128)
+custom_maximum_size = Vector2(128, 128)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_jjx5v")
+
+[node name="DrinkName" type="Label" parent="MarginContainer/VBoxContainer" unique_id=994501423]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(144, 44)
+layout_mode = 2
+theme = ExtResource("2_jjx5v")
+theme_override_colors/font_color = Color(1, 0.94, 0.84, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="PricePanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=2114823975]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_price")
+
+[node name="Price" type="Label" parent="MarginContainer/VBoxContainer/PricePanel" unique_id=643312214]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_jjx5v")
+theme_override_colors/font_color = Color(0.55, 1, 0.67, 1)
+theme_override_font_sizes/font_size = 20
+text = "$30"
+horizontal_alignment = 1
+
+[node name="SelectLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=109731626]
+layout_mode = 2
+theme = ExtResource("2_jjx5v")
+theme_override_colors/font_color = Color(0.95, 0.75, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "PRESS TO BUY"
+horizontal_alignment = 1

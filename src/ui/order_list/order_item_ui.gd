@@ -1,59 +1,40 @@
-extends MarginContainer
+extends VBoxContainer
 class_name OrderItemUI
 
-@export var grid_container: GridContainer
-@export var total_text: Label
-@export var total_value: Label
-@export var name_template: Label
-@export var per_item_template: Label
-@export var total_template: Label
-var name_string_template := "%s (%d/%d)"
+@onready var customer_label: Label = $Details/CustomerName
+@onready var items_container: VBoxContainer = $Details/Items
 
-var order_items: Array[OrderItem]
-var name_labels: Array[Label]
-var per_item_labels: Array[Label]
-var total_labels: Array[Label]
+var order: Order
+var item_labels: Array[Label] = []
 
-func set_order_items(order_items: Array[OrderItem]):
-	self.order_items = order_items
-	refresh_visuals()
 
-func _on_receive_item(item: OrderItem, quantity: int):
-	for i in range(len(order_items)):
-		if order_items[i].edible.is_equal(item.edible):
-			set_name_label(i, quantity, order_items[i].quantity)
+func _ready() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for control: Control in find_children("*", "Control", true, false):
+		control.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+
+func set_order(new_order: Order) -> void:
+	order = new_order
+	var type_label := "Regular" if order.customer_type == &"" else String(order.customer_type).replace("FoodCritic", "Food Critic")
+	customer_label.text = "%s (%s)" % [order.customer_name, type_label]
+	for item: OrderItem in order.items:
+		var label := Label.new()
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		label.add_theme_color_override("font_color", Color.BLACK)
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.text = "%s (0/%d)" % [item.edible.get_edible_name(), item.quantity]
+		items_container.add_child(label)
+		item_labels.append(label)
+	for received_item: OrderItem in order.items_received:
+		_on_receive_item(received_item, received_item.quantity)
+	order.order_item_received.connect(_on_receive_item)
+
+
+func _on_receive_item(item: OrderItem, quantity: int) -> void:
+	for i in order.items.size():
+		if order.items[i].edible.is_equal(item.edible):
+			item_labels[i].text = "%s (%d/%d)" % [
+				order.items[i].edible.get_edible_name(), quantity, order.items[i].quantity
+			]
 			return
-
-func set_name_label(i: int, received: int, total: int):
-	var label: Label = name_labels[i]
-	label.text = name_string_template % [order_items[i].edible.get_edible_name(), received, total]
-
-func refresh_visuals() -> void:
-	var total_cost: float = 0.0
-	name_labels.clear()
-	per_item_labels.clear()
-	total_labels.clear()
-	for item: OrderItem in order_items:
-		var name_label: Label = name_template.duplicate()
-		name_label.text = name_string_template % [item.edible.get_edible_name(), 0, item.quantity]
-		name_labels.append(name_label)
-
-		var per_item_label: Label = per_item_template.duplicate()
-		per_item_label.text =  "%.2f" % item.get_edible_price()
-		per_item_labels.append(per_item_label)
-
-		var total_label: Label = total_template.duplicate()
-		total_label.text = "$%.2f" % item.get_total_price()
-		total_labels.append(total_label)
-
-		total_cost += item.get_total_price()
-
-		grid_container.add_child(name_label)
-		grid_container.add_child(per_item_label)
-		grid_container.add_child(total_label)
-
-		name_label.visible = true
-		per_item_label.visible = true
-		total_label.visible = true
-	
-	total_value.text = "$%.2f" % total_cost
