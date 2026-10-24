@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d1ccl3n4b7eae"]
 
-[ext_resource type="Texture2D" uid="uid://co8fdme5mer5r" path="res://models/props/food/Ingredients/Screenshot 2026-09-24 171914.png" id="1_neoxv"]
+[ext_resource type="Texture2D" uid="uid://o2gvrnha4a8s" path="res://pictures/New Textures/16_potatoes.png" id="1_e130a"]
 [ext_resource type="PackedScene" uid="uid://c4iascsgu3xbp" path="res://models/props/woodenbox.tscn" id="2_e130a"]
 [ext_resource type="Script" uid="uid://dcto3uhvv54ym" path="res://src/interactables/reusable scripts/food_spawner.gd" id="3_e130a"]
 [ext_resource type="PackedScene" uid="uid://byqdxc8evyanr" path="res://models/physics/food/ingredients/potato.tscn" id="4_b1wmc"]
@@ -9,7 +9,7 @@
 [sub_resource type="PlaneMesh" id="PlaneMesh_vgq1p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e4tav"]
-albedo_texture = ExtResource("1_neoxv")
+albedo_texture = ExtResource("1_e130a")
 
 [sub_resource type="BoxMesh" id="BoxMesh_qf7sd"]
 
