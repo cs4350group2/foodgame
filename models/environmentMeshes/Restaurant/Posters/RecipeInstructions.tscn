@@ -1,16 +1,15 @@
 [gd_scene format=3 uid="uid://dnonas80qqkcv"]
 
-[ext_resource type="Texture2D" uid="uid://b5wnabfg3tfr3" path="res://pictures/Low-Poly Parchment Recipe Board.png" id="1_r3dcd"]
+[ext_resource type="Texture2D" uid="uid://dofvtbxik8n3p" path="res://pictures/New Textures/Posters/Low-Poly Parchment Recipe Board.png" id="1_ikudn"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qf7sd"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwkvq"]
-albedo_texture = ExtResource("1_r3dcd")
-metallic_specular = 0.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lawcu"]
+albedo_texture = ExtResource("1_ikudn")
 
 [node name="RecipeInstructions" type="Node3D" unique_id=959185680]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1541107399]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.3, 0, 0, 0)
 mesh = SubResource("PlaneMesh_qf7sd")
-surface_material_override/0 = SubResource("StandardMaterial3D_fwkvq")
+surface_material_override/0 = SubResource("StandardMaterial3D_lawcu")

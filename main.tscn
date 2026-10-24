@@ -298,7 +298,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.25)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -5.25)
 
 [node name="RestaurantWalls4" parent="RestaurantMesh" unique_id=1928441489 instance=ExtResource("28_4k2k6")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14.75, 0, 0.5)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14.75, 0, 0)
 
 [node name="RestaurantWalls5" parent="RestaurantMesh" unique_id=1412202370 instance=ExtResource("29_0rl1p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 5.25)
