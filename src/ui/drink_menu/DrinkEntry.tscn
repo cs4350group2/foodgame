@@ -4,6 +4,16 @@
 [ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/OrderUITheme.tres" id="2_jjx5v"]
 [ext_resource type="Shader" uid="uid://03ywgxyhluxs" path="res://src/ui/drink_menu/DrinkEntry.gdshader" id="3_1mj5m"]
 [ext_resource type="Script" uid="uid://dmld5m0h4wifg" path="res://src/ui/drink_menu/drink_entry_button.gd" id="4_tooltip"]
+[ext_resource type="Script" uid="uid://dkog12iqq4sfh" path="res://src/ui/drink_menu/drink_feedback_icon.gd" id="5_feedback"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tooltip_wrapper"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[sub_resource type="Theme" id="Theme_tooltip_wrapper"]
+TooltipPanel/styles/panel = SubResource("StyleBoxEmpty_tooltip_wrapper")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1mj5m"]
 content_margin_left = 0.0
@@ -16,6 +26,99 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 5
 border_color = Color(0.19, 0.025, 0.035, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_hover"]
+resource_name = "Card Hover"
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.4664, 0.1214, 0.1306, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(1, 0.94, 0.84, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.21, 0.0225, 0.0275, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_pressed"]
+resource_name = "Card Pressed"
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.357, 0.03825, 0.04675, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(1, 0.94, 0.84, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_disabled"]
+resource_name = "Card Disabled"
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.336, 0.036, 0.044, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.36, 0.22, 0.2, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_accepted"]
+resource_name = "Card Accepted"
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.42, 0.045, 0.055, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.55, 1, 0.67, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_rejected"]
+resource_name = "Card Rejected"
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.42, 0.045, 0.055, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(1, 0.43, 0.4, 1)
 border_blend = true
 corner_radius_top_left = 8
 corner_radius_top_right = 8
@@ -88,8 +191,15 @@ corner_radius_bottom_left = 3
 offset_right = 64.0
 offset_bottom = 112.0
 size_flags_horizontal = 0
+theme = SubResource("Theme_tooltip_wrapper")
 theme_override_styles/panel = SubResource("StyleBoxFlat_1mj5m")
 script = ExtResource("1_6csb1")
+normal_style = SubResource("StyleBoxFlat_1mj5m")
+hover_style = SubResource("StyleBoxFlat_card_hover")
+pressed_style = SubResource("StyleBoxFlat_card_pressed")
+disabled_style = SubResource("StyleBoxFlat_card_disabled")
+accepted_style = SubResource("StyleBoxFlat_card_accepted")
+rejected_style = SubResource("StyleBoxFlat_card_rejected")
 
 [node name="Button" type="Button" parent="." unique_id=168712078]
 layout_mode = 2
@@ -170,7 +280,19 @@ theme_override_font_sizes/font_size = 20
 text = "$30"
 horizontal_alignment = 1
 
-[node name="SelectLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=109731626]
+[node name="FeedbackRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=696039564]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="StatusIcon" type="Control" parent="MarginContainer/VBoxContainer/FeedbackRow" unique_id=916003433]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+script = ExtResource("5_feedback")
+
+[node name="SelectLabel" type="Label" parent="MarginContainer/VBoxContainer/FeedbackRow" unique_id=109731626]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_jjx5v")
 theme_override_colors/font_color = Color(0.95, 0.75, 0.65, 1)

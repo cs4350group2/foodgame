@@ -2,13 +2,7 @@ extends Control
 
 const DRINK_ENTRY_SCENE: PackedScene = preload("res://src/ui/drink_menu/DrinkEntry.tscn")
 
-const DRINK_SCENES: Dictionary = {
-	"Soda": "res://models/physics/drinks/sodaRegular.tscn",
-	"Cooler Soda": "res://models/physics/drinks/sodaSpecial.tscn",
-	"Liquid Food": "res://models/physics/drinks/liquidFood.tscn",
-	"Iced Lemon Tea": "res://models/physics/drinks/IcedLemonTea.tscn",
-	"EXTREMELY SAFE Drink": "res://models/physics/drinks/extremelySafeDrink.tscn",
-}
+@export var buy_timeout := 0.2
 
 @onready var coins_label: Label = %CoinsLabel
 @onready var drink_list: GridContainer = %DrinkList
@@ -20,8 +14,8 @@ const DRINK_SCENES: Dictionary = {
 
 var _player: Player
 var _run: RestaurantRun
-var _buttons: Array[Button] = []
-var _prices: Array[float] = []
+var _entries: Array[DrinkEntry] = []
+var _session_id: int = 0
 var _active := false
 var _closing := false
 var _buying := false
@@ -39,7 +33,8 @@ func _ready() -> void:
 func _build_drink_list() -> void:
 	for drink: Dictionary in RestaurantManager.get_drinks_menu().get("drinks", []):
 		var drink_name: String = drink.get("name", "")
-		if not DRINK_SCENES.has(drink_name):
+		var scene_path: String = drink.get("scene_path", "")
+		if scene_path.is_empty():
 			continue
 		var price := float(drink.get("price", 0.0))
 		if price < 0.0 or not is_finite(price):
@@ -48,13 +43,12 @@ func _build_drink_list() -> void:
 		var entry := DRINK_ENTRY_SCENE.instantiate() as DrinkEntry
 		drink_list.add_child(entry)
 		var drink_data := Drink.new(
-			drink_name, price, drink.get("description", ""), drink.get("usage", "")
+			drink_name, price, drink.get("description", ""), drink.get("usage", ""), scene_path
 		)
 		entry.add_child(drink_data)
 		entry.setup(drink_data)
-		entry.buy_requested.connect(_buy_drink)
-		_buttons.append(entry.button)
-		_prices.append(price)
+		entry.buy_requested.connect(_buy_drink.bind(entry))
+		_entries.append(entry)
 
 
 func _update_drink_columns() -> void:
@@ -92,6 +86,9 @@ func open_menu(player: Player) -> void:
 	_previous_crosshair_visible = player.crosshair.visible
 	_active = true
 	_closing = false
+	_session_id += 1
+	for entry in _entries:
+		entry.reset_feedback()
 	_run.coins_updated.connect(_on_coins_updated)
 	player.release_mouse()
 	player.crosshair.hide()
@@ -119,52 +116,69 @@ func _refresh_availability() -> void:
 	coins_label.text = "Coins: %s" % str(_run.coins)
 	_update_drink_columns.call_deferred()
 	var hands_full := is_instance_valid(_player) and is_instance_valid(_player.held_edible)
-	for i in _buttons.size():
-		_buttons[i].disabled = _buying or _closing or hands_full or _run.coins < _prices[i]
+	for entry in _entries:
+		var reason := ""
+		if _closing:
+			reason = "CLOSING..."
+		elif _buying:
+			reason = "DISPENSING..."
+		elif hands_full:
+			reason = "HANDS FULL"
+		elif _run.coins < entry.price:
+			reason = "NOT ENOUGH COINS"
+		entry.set_availability(reason.is_empty(), reason)
 
 
-func _buy_drink(drink_name: String, price: float) -> void:
+func _buy_drink(_drink_name: String, price: float, entry: DrinkEntry) -> void:
 	if not _active or _closing or _buying or not is_instance_valid(_player):
 		return
-	if is_instance_valid(_player.held_edible) or _run.coins < price:
+	if is_instance_valid(_player.held_edible):
 		_refresh_availability()
+		entry.show_rejected("HANDS FULL")
 		return
 	_buying = true
-	var scene := load(DRINK_SCENES[drink_name]) as PackedScene
+	if not _run.try_remove_coins(price):
+		_buying = false
+		_refresh_availability()
+		entry.show_rejected("NOT ENOUGH COINS")
+		return
+	_refresh_availability()
+	var scene := load(entry.current_drink.scene_path) as PackedScene
 	if scene == null:
-		_purchase_failed()
+		_purchase_failed(entry, price)
 		return
 	var instance := scene.instantiate()
 	var drink := instance as EdibleItem
 	if drink == null:
-		instance.free()
-		_purchase_failed()
+		_purchase_failed(entry, price, instance)
 		return
 	get_tree().current_scene.add_child(drink)
 	drink.global_position = _player.hold_point.global_position
 	if drink.drink_data == null or not is_instance_valid(drink.interaction):
-		drink.queue_free()
-		_purchase_failed()
-		return
-	if not _run.try_remove_coins(price):
-		drink.queue_free()
-		_buying = false
-		_refresh_availability()
+		_purchase_failed(entry, price, drink)
 		return
 	_player.pick_up_edible(drink)
 	if _player.held_edible != drink:
-		_run.add_coins(price)
-		drink.queue_free()
-		_purchase_failed()
+		_purchase_failed(entry, price, drink)
+		return
+	entry.show_accepted()
+	var purchase_session := _session_id
+	# Leave time to see the confirmation while the world remains paused.
+	await get_tree().create_timer(buy_timeout, true).timeout
+	if not _active or _closing or purchase_session != _session_id:
 		return
 	_buying = false
 	close_menu()
 
 
-func _purchase_failed() -> void:
+func _purchase_failed(entry: DrinkEntry, price: float, instance: Node = null) -> void:
+	if is_instance_valid(instance):
+		instance.queue_free()
 	_buying = false
+	_run.add_coins(price)
 	_refresh_availability()
-	push_warning("Could not dispense this drink. No coins were spent.")
+	entry.show_rejected("DISPENSE FAILED")
+	push_warning("Could not dispense this drink. The payment was refunded.")
 
 
 func close_menu() -> void:
@@ -172,15 +186,26 @@ func close_menu() -> void:
 		return
 	_closing = true
 	_refresh_availability()
-	# Keep the world paused until the closing click/Escape has finished routing.
-	_finish_close.call_deferred()
+	_finish_close_after_input()
+
+
+func _finish_close_after_input() -> void:
+	var closing_session := _session_id
+	# Finish input routing, then resume outside the deferred physics-query flush.
+	await get_tree().process_frame
+	if _active and closing_session == _session_id:
+		_finish_close()
 
 
 func _finish_close() -> void:
 	if not _active:
 		return
 	_active = false
+	_session_id += 1
+	_buying = false
 	hide()
+	for entry in _entries:
+		entry.reset_feedback()
 	if is_instance_valid(_run) and _run.coins_updated.is_connected(_on_coins_updated):
 		_run.coins_updated.disconnect(_on_coins_updated)
 	get_tree().paused = false

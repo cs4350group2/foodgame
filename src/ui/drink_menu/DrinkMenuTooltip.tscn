@@ -4,7 +4,19 @@
 [ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/OrderUITheme.tres" id="2_wqto2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1mj5m"]
-bg_color = Color(0, 0, 0, 0.5372549)
+bg_color = Color(0, 0, 0, 0.8117647)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0, 0, 0, 0.6509804)
+shadow_size = 1
+shadow_offset = Vector2(0, 3)
 
 [node name="DrinkMenuTooltip" type="PanelContainer" unique_id=1768537133]
 custom_minimum_size = Vector2(90, 0)
@@ -15,10 +27,10 @@ script = ExtResource("1_n3kdw")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=276799351]
 layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 7
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1487391399]
 layout_mode = 2
