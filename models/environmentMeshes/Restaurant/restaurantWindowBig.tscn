@@ -11,7 +11,7 @@ roughness = 0.1
 refraction_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yhqua"]
-albedo_color = Color(0.68235296, 0.6862745, 0.6117647, 1)
+albedo_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c5iw7"]
 size = Vector3(10.074707, 10.125, 0.5002098)
