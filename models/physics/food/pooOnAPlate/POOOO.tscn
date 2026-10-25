@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b03jbfo8j711j"]
+
+[ext_resource type="PackedScene" uid="uid://nl1u2n5clfcw" path="res://models/props/plate.tscn" id="1_8g8bf"]
+[ext_resource type="PackedScene" uid="uid://detnue8sq5d1b" path="res://models/props/food/POO/poo.tscn" id="2_gg1tv"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ikrja"]
+height = 0.2781372
+radius = 0.39941406
+
+[node name="Poooo" type="RigidBody3D" unique_id=381857738]
+
+[node name="plate" parent="." unique_id=1897826909 instance=ExtResource("1_8g8bf")]
+
+[node name="Sketchfab_Scene" parent="." unique_id=867096627 instance=ExtResource("2_gg1tv")]
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0, 0.00398273, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=626190716]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12557983, 0)
+shape = SubResource("CylinderShape3D_ikrja")
