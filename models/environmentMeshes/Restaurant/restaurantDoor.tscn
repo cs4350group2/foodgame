@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://drvgq5wpa1odo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1cj3"]
-albedo_color = Color(0.68235296, 0.6862745, 0.6117647, 1)
+albedo_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r1bx6"]
 size = Vector3(4.2476807, 9.973389, 1)

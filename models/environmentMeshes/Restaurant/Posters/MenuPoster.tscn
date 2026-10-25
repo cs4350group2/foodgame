@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://da5esxxk7tgjl"]
+
+[ext_resource type="Texture2D" uid="uid://dnwhxfbgtnwcx" path="res://pictures/New Textures/Posters/Retro Low-Poly Restaurant Menu.png" id="1_k6v3x"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qf7sd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hr86"]
+albedo_texture = ExtResource("1_k6v3x")
+
+[node name="Poster1" type="Node3D" unique_id=85912825]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=52039285]
+transform = Transform3D(3.2, 0, 0, 0, 0.32, 0, 0, 0, 0.8, 0, 0, 0)
+mesh = SubResource("PlaneMesh_qf7sd")
+surface_material_override/0 = SubResource("StandardMaterial3D_3hr86")

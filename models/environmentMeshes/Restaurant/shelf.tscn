@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://fqy3n8icfeuf"]
+
+[ext_resource type="PackedScene" uid="uid://darvqj61k45jg" path="res://assets/individualsfiles/shelftockage.fbx" id="1_cl8wh"]
+
+[node name="shelftockage" unique_id=876480311 instance=ExtResource("1_cl8wh")]
+
+[node name="Cube_016" parent="." index="0" unique_id=1071524663]
+transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, 50, 0, -50, -2.1855694e-06, 0, 0, 0)
+cast_shadow = 0
