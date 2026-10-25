@@ -1,13 +1,431 @@
 [gd_scene format=3 uid="uid://cyois83kvg6fj"]
 
 [ext_resource type="Script" uid="uid://db3b5ivyjvyyo" path="res://src/ui/main_menu/main_menu.gd" id="1_0ogta"]
-[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="1_adkca"]
-[ext_resource type="Texture2D" uid="uid://b4unt2owamg4n" path="res://assets/food/stationProps/knife2_1.png" id="3_l8p87"]
+[ext_resource type="PackedScene" uid="uid://da3uo20xndj24" path="res://models/props/food/Burger/burgerall.tscn" id="3_af53c"]
+[ext_resource type="Theme" uid="uid://cp6t4mnfwas5v" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="3_mlydd"]
+[ext_resource type="PackedScene" uid="uid://dm0v8o2ocl357" path="res://models/props/food/sushi/sushi.tscn" id="4_ldwx4"]
+[ext_resource type="PackedScene" path="res://src/ui/main_menu/MainMenuSettings.tscn" id="4_settings"]
+[ext_resource type="PackedScene" path="res://src/ui/main_menu/FoodBackdrop.tscn" id="5_food_backdrop"]
+[ext_resource type="PackedScene" uid="uid://dyay3u62ej8fu" path="res://models/props/food/Steak/meatCooked.tscn" id="5_omtnj"]
+[ext_resource type="PackedScene" uid="uid://bb5ywm1b7dvp2" path="res://models/props/food/GrilledFish/GrilledFish.tscn" id="6_j86ma"]
+[ext_resource type="PackedScene" uid="uid://bh5jwiooch8fl" path="res://models/props/food/riceBowl/riceBowl.tscn" id="7_be7hx"]
+[ext_resource type="PackedScene" uid="uid://brkod26kk2nx8" path="res://models/props/food/Ingredients/tomatoWhole.tscn" id="8_m1p38"]
+[ext_resource type="PackedScene" uid="uid://sv76vmelok6f" path="res://models/props/food/Ingredients/potato.tscn" id="9_mhuh5"]
+[ext_resource type="PackedScene" uid="uid://dnfgneyk71oyy" path="res://models/physics/food/stew/stewPlate.tscn" id="10_8mlxt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seed_input"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.12, 0.085, 0.07, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seed_focus"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.79, 0.33, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 1
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xre00"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0.4901349, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_NewGameButton_pressed"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0.38230523, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_NewGameButton_hover"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1, 0.5411214, 0.1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.98, 0.91, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_NewGameButton_hover_pressed"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0.4313187, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oarqq"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(5.2943824e-07, 0.4926775, 0.57860804, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ContinueButton_pressed"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(4.1296184e-07, 0.38428846, 0.45131427, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ContinueButton_hover"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.10000048, 0.54340976, 0.6207472, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.98, 0.91, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ContinueButton_hover_pressed"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(4.6590566e-07, 0.4335562, 0.50917506, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlydd"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.15127608, 0.15127608, 0.15127608, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_SettingsButton_pressed"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.117995344, 0.117995344, 0.117995344, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_SettingsButton_hover"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.23614848, 0.23614848, 0.23614848, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.98, 0.91, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_SettingsButton_hover_pressed"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.13312295, 0.13312295, 0.13312295, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56llo"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.44705883, 0, 0, 0.8980392)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_QuitButton_pressed"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.3487059, 0, 0, 0.8980392)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_QuitButton_hover"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.50235295, 0.1, 0.1, 0.8980392)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.98, 0.91, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_QuitButton_hover_pressed"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.39341176, 0, 0, 0.8980392)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
+[sub_resource type="Gradient" id="Gradient_xre00"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_56llo"]
+gradient = SubResource("Gradient_xre00")
 
 [node name="MainMenu" type="Node3D" unique_id=1140286162]
 script = ExtResource("1_0ogta")
 
-[node name="Control" type="Control" parent="." unique_id=789862209]
+[node name="FoodBackdrop" parent="." unique_id=1052790104 instance=ExtResource("5_food_backdrop")]
+food_scenes = Array[PackedScene]([ExtResource("3_af53c"), ExtResource("4_ldwx4"), ExtResource("5_omtnj"), ExtResource("6_j86ma"), ExtResource("7_be7hx"), ExtResource("8_m1p38"), ExtResource("9_mhuh5"), ExtResource("10_8mlxt")])
+initial_count = 6
+maximum_count = 20
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1525753321]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=789862209]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,54 +433,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("3_mlydd")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1931818977]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -124.0
-offset_top = -20.0
-offset_right = 124.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Title" type="Label" parent="Control/VBoxContainer" unique_id=1719265942]
-layout_mode = 2
-theme = ExtResource("1_adkca")
-theme_type_variation = &"HeaderLarge"
-text = "LET ME COOK"
-
-[node name="LineEdit" type="LineEdit" parent="Control/VBoxContainer" unique_id=2120196513]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("1_adkca")
-placeholder_text = "Seed"
-
-[node name="NewGameButton" type="Button" parent="Control/VBoxContainer" unique_id=770637763]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("1_adkca")
-text = "New Game"
-
-[node name="ContinueButton" type="Button" parent="Control/VBoxContainer" unique_id=406656767]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("1_adkca")
-text = "Continue
-"
-
-[node name="SettingsButton" type="Button" parent="Control/VBoxContainer" unique_id=1691446546]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("1_adkca")
-text = "Settings"
-
-[node name="BackgroundSplash" type="TextureRect" parent="Control" unique_id=1834650563]
-z_index = -2
+[node name="MenuCenter" type="CenterContainer" parent="CanvasLayer/Control" unique_id=1147029995]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,5 +443,101 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("3_l8p87")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MenuCenter" unique_id=1931818977]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="CanvasLayer/Control/MenuCenter/VBoxContainer" unique_id=1719265942]
+layout_mode = 2
+theme = ExtResource("3_mlydd")
+theme_type_variation = &"HeaderLarge"
+theme_override_colors/font_color = Color(1, 0.956863, 0.85098, 1)
+theme_override_colors/font_shadow_color = Color(0.14, 0.06, 0.02, 0.9)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 72
+text = "LET ME COOK"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/Control/MenuCenter/VBoxContainer" unique_id=2120196513]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme = ExtResource("3_mlydd")
+theme_override_colors/font_color = Color(1, 0.956863, 0.85098, 1)
+theme_override_colors/font_placeholder_color = Color(0.8, 0.75, 0.66, 1)
+theme_override_colors/caret_color = Color(1, 0.956863, 0.85098, 1)
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_seed_input")
+theme_override_styles/focus = SubResource("StyleBoxFlat_seed_focus")
+placeholder_text = "Set a seed for your new run!"
+
+[node name="NewGameButton" type="Button" parent="CanvasLayer/Control/MenuCenter/VBoxContainer" unique_id=770637763]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+theme = ExtResource("3_mlydd")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_xre00")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_NewGameButton_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_NewGameButton_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_NewGameButton_hover_pressed")
+text = "New Game"
+
+[node name="ContinueButton" type="Button" parent="CanvasLayer/Control/MenuCenter/VBoxContainer" unique_id=406656767]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+theme = ExtResource("3_mlydd")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_oarqq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ContinueButton_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ContinueButton_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ContinueButton_hover_pressed")
+text = "Continue"
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/Control/MenuCenter/VBoxContainer" unique_id=1691446546]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+theme = ExtResource("3_mlydd")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_mlydd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_SettingsButton_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_SettingsButton_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_SettingsButton_hover_pressed")
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/Control/MenuCenter/VBoxContainer" unique_id=687796436]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+theme = ExtResource("3_mlydd")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_56llo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_QuitButton_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_QuitButton_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_QuitButton_hover_pressed")
+text = "Quit"
+
+[node name="SettingsPage" parent="CanvasLayer/Control" unique_id=1364403805 instance=ExtResource("4_settings")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=498241883]
+layer = -1
+
+[node name="BackgroundSplash" type="TextureRect" parent="CanvasLayer2" unique_id=1834650563]
+z_index = -2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_56llo")
 expand_mode = 2

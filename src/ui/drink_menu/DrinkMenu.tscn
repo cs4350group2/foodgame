@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://10t47xmvtvat"]
 
 [ext_resource type="Script" uid="uid://dq1mmy6ijuw56" path="res://src/ui/drink_menu/drink_menu.gd" id="1_script"]
-[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="2_theme"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/OrderUITheme.tres" id="2_theme"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-bg_color = Color(0.08, 0.08, 0.12, 1)
+bg_color = Color(0.35686275, 0, 0, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -13,6 +13,13 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dou28"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="DrinkMenu" type="Control" unique_id=360308284]
 process_mode = 3
@@ -37,10 +44,12 @@ color = Color(0, 0, 0, 0.65)
 [node name="Panel" type="PanelContainer" parent="." unique_id=261982025]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.08
+anchor_left = 0.5
 anchor_top = 0.06
-anchor_right = 0.92
+anchor_right = 0.5
 anchor_bottom = 0.94
+offset_left = -240.0
+offset_right = 240.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_theme")
@@ -63,23 +72,43 @@ layout_mode = 2
 [node name="Title" type="Label" parent="Panel/Margin/Content/Header" unique_id=378144791]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "DRINK DISPENSER"
+theme = ExtResource("2_theme")
+theme_type_variation = &"HeaderLarge"
+text = "EZ-DRINKS"
 
 [node name="CoinsLabel" type="Label" parent="Panel/Margin/Content/Header" unique_id=1903395072]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 26
 text = "Coins: 0"
+
+[node name="TextureRect" type="PanelContainer" parent="Panel/Margin/Content" unique_id=939769417]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dou28")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Margin/Content/TextureRect" unique_id=1237096525]
+layout_mode = 2
+theme_override_constants/margin_right = 6
+
+[node name="Label" type="Label" parent="Panel/Margin/Content/TextureRect/MarginContainer" unique_id=1896354487]
+layout_mode = 2
+theme = ExtResource("2_theme")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "The hottest drinks since 1990!"
+horizontal_alignment = 2
 
 [node name="Scroll" type="ScrollContainer" parent="Panel/Margin/Content" unique_id=945869672]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="DrinkList" type="VBoxContainer" parent="Panel/Margin/Content/Scroll" unique_id=1579216643]
+[node name="DrinkList" type="GridContainer" parent="Panel/Margin/Content/Scroll" unique_id=1579216643]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 10
+size_flags_horizontal = 0
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
 
 [node name="CloseButton" type="Button" parent="Panel/Margin/Content" unique_id=705115051]
 unique_name_in_owner = true

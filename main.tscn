@@ -33,7 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://ubv0sb3volmr" path="res://src/ui/restaurant_ui/RestaurantUI.tscn" id="33_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://bncnlon6uyptf" path="res://src/restaurant/DayManager.tscn" id="34_4k2k6"]
 [ext_resource type="PackedScene" uid="uid://pt4l2u10n4s4" path="res://models/environmentMeshes/Outdoors/subway.tscn" id="35_0cp0l"]
-[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="35_0rl1p"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/OrderUITheme.tres" id="35_0rl1p"]
 [ext_resource type="PackedScene" uid="uid://di31n2nduku34" path="res://models/interactable stations/bartableCashier.tscn" id="36_facbu"]
 [ext_resource type="PackedScene" uid="uid://dgh6jtkk62vuk" path="res://src/ui/pause_menu/PauseMenu.tscn" id="36_ok6jj"]
 [ext_resource type="PackedScene" uid="uid://b6ed0ouorcs0m" path="res://models/interactable stations/drinksDispenser.tscn" id="37_b1qrp"]

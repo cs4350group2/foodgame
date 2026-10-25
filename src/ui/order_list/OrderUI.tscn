@@ -1,96 +1,68 @@
 [gd_scene format=3 uid="uid://sutnp65kbs0d"]
 
-[ext_resource type="Script" uid="uid://cfijgj2ytgfv8" path="res://src/ui/order_list/order_ui.gd" id="1_84rct"]
-[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="2_w7ndc"]
-[ext_resource type="FontFile" uid="uid://8vl643wgamfq" path="res://assets/fonts/upheavtt.ttf" id="3_fadya"]
-[ext_resource type="PackedScene" uid="uid://cxk1y2vfdnu75" path="res://src/ui/order_list/OrderItemUI.tscn" id="4_fadya"]
+[ext_resource type="Script" uid="uid://cfijgj2ytgfv8" path="res://src/ui/order_list/order_ui.gd" id="1_script"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/OrderUITheme.tres" id="2_theme"]
+[ext_resource type="FontFile" uid="uid://8vl643wgamfq" path="res://assets/fonts/upheavtt.ttf" id="3_font"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lupir"]
-content_margin_left = 47.0
-content_margin_top = 40.0
-content_margin_right = 47.0
-content_margin_bottom = 20.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_receipt"]
+content_margin_left = 28.0
+content_margin_top = 24.0
+content_margin_right = 28.0
+content_margin_bottom = 24.0
 bg_color = Color(0.9531947, 0.9127342, 0.8878834, 1)
 
-[node name="OrderUI" type="ScrollContainer" unique_id=812066937 node_paths=PackedStringArray("item_ui")]
-offset_right = 400.0
-offset_bottom = 600.0
-script = ExtResource("1_84rct")
-item_ui = NodePath("PanelContainer/VBoxContainer/OrderItemUI")
+[node name="OrderUI" type="PanelContainer" unique_id=812066937]
+offset_right = 560.0
+offset_bottom = 0.0
+theme = ExtResource("2_theme")
+theme_override_styles/panel = SubResource("StyleBoxFlat_receipt")
+script = ExtResource("1_script")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1122550578]
-custom_minimum_size = Vector2(400, 0)
-custom_maximum_size = Vector2(400, -1)
+[node name="Content" type="VBoxContainer" parent="." unique_id=1842993586]
 layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("2_w7ndc")
-theme_override_styles/panel = SubResource("StyleBoxFlat_lupir")
+theme_override_constants/separation = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=704475530]
+[node name="Title" type="Label" parent="Content" unique_id=1382386656]
 layout_mode = 2
-
-[node name="Number" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1449300716]
-layout_mode = 2
-theme = ExtResource("2_w7ndc")
-theme_type_variation = &"HeaderSmall"
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 32
-text = "6"
+text = "ORDERS"
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=1098830423]
+[node name="Address" type="Label" parent="Content" unique_id=1500153725]
 layout_mode = 2
-
-[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer" unique_id=1841990896]
-layout_mode = 2
-theme = ExtResource("2_w7ndc")
-theme_type_variation = &"HeaderSmall"
-theme_override_colors/font_color = Color(0.52906674, 0.5290667, 0.52906686, 1)
-theme_override_fonts/font = ExtResource("3_fadya")
-theme_override_font_sizes/font_size = 32
-text = "order chit"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Title" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1896085555]
-layout_mode = 2
-theme = ExtResource("2_w7ndc")
-theme_type_variation = &"HeaderSmall"
-theme_override_colors/font_color = Color(0.52906674, 0.5290667, 0.52906686, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.53, 0.53, 0.53, 1)
 text = "1313 Yummy Lane"
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Title2" type="Label" parent="PanelContainer/VBoxContainer" unique_id=876821051]
+[node name="HeaderSeparator" type="HSeparator" parent="Content" unique_id=1028030563]
 layout_mode = 2
-theme = ExtResource("2_w7ndc")
-theme_type_variation = &"HeaderSmall"
-theme_override_colors/font_color = Color(0.52906674, 0.5290667, 0.52906686, 1)
-theme_override_font_sizes/font_size = 20
-text = "ORDER"
+
+[node name="OrderScroll" type="ScrollContainer" parent="Content" unique_id=1503811323]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Rows" type="VBoxContainer" parent="Content/OrderScroll" unique_id=334541556]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="NoOrders" type="Label" parent="Content/OrderScroll/Rows" unique_id=16962496]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "No orders!"
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="OrderItemUI" parent="PanelContainer/VBoxContainer" unique_id=1347782805 instance=ExtResource("4_fadya")]
+[node name="FooterSeparator" type="HSeparator" parent="Content" unique_id=1830236043]
 layout_mode = 2
 
-[node name="Metadata" type="Label" parent="PanelContainer/VBoxContainer" unique_id=118491027]
+[node name="Footer" type="Label" parent="Content" unique_id=1935980901]
 layout_mode = 2
-theme = ExtResource("2_w7ndc")
-theme_override_colors/font_color = Color(0.52906674, 0.5290667, 0.52906686, 1)
-text = "Incl. GST 7%, Service Tax 10%"
-
-[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=950232356]
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_constants/margin_top = 23
-
-[node name="ByeBye" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer2" unique_id=928155358]
-layout_mode = 2
-size_flags_vertical = 10
-theme = ExtResource("2_w7ndc")
-theme_override_colors/font_color = Color(0.52906674, 0.5290667, 0.52906686, 1)
+theme_override_colors/font_color = Color(0.53, 0.53, 0.53, 1)
 text = "Thank You. See You Again."
 horizontal_alignment = 1
