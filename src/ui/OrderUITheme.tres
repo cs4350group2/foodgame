@@ -3,6 +3,21 @@
 [ext_resource type="FontFile" uid="uid://dk6aai08i16bb" path="res://assets/fonts/W95F.otf" id="1_wksio"]
 [ext_resource type="FontFile" uid="uid://8vl643wgamfq" path="res://assets/fonts/upheavtt.ttf" id="2_lupir"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oarqq"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(5.2943824e-07, 0.4926775, 0.57860804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="DPITexture" id="DPITexture_xm6e3"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"5.5\" fill=\"#1a1a1a\" stroke=\"#fff\" stroke-opacity=\".75\" stroke-width=\"3\"/></svg>
 "
@@ -55,9 +70,11 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [resource]
+resource_name = "OrderUITheme"
 default_font_size = 20
 Button/font_sizes/font_size = 21
 Button/fonts/font = ExtResource("2_lupir")
+Button/styles/pressed = SubResource("StyleBoxFlat_oarqq")
 CheckBox/colors/checkbox_checked_color = Color(1, 1, 1, 1)
 CheckBox/colors/checkbox_unchecked_color = Color(1, 1, 1, 1)
 CheckBox/colors/font_color = Color(0.875, 0.875, 0.875, 1)

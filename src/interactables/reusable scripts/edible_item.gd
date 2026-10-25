@@ -36,8 +36,8 @@ func initialize_data(item_name: String, is_drink: bool = false) -> void:
 		
 		for drink in drinks_list:
 			if drink["name"] == item_name:
-				drink_data = Drink.new(drink["name"], drink["price"], drink["description"], 
-				drink["usage"])
+				drink_data = Drink.new(drink["name"], drink["price"], drink["description"],
+					drink["usage"], drink.get("scene_path", ""))
 	else:
 		var restaurant_menu: Dictionary = RestaurantManager.get_menu()
 		var foods_list: Array = restaurant_menu.get("foods")

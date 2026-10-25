@@ -5,6 +5,8 @@ signal order_completed(order: Order)
 signal order_item_received(item: OrderItem, quantity: int)
 
 var items: Array[OrderItem] = []
+var customer_name: String
+var customer_type: StringName
 var items_received: Array[OrderItem] = []
 var total_bonus: float = 0.0
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cr4fk4rwfoft2"]
 
-[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/ui_theme.tres" id="1_vrk4y"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/OrderUITheme.tres" id="1_vrk4y"]
 [ext_resource type="Script" uid="uid://3osgdehm41fr" path="res://src/ui/thanks_for_playing.gd" id="2_thanks_for_playing"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyxal"]

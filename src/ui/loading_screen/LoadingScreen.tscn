@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dgkmjd5c3uekb"]
+
+[ext_resource type="Script" uid="uid://sr8d8f1gk7td" path="res://src/ui/loading_screen/loading_screen.gd" id="1_rkrnh"]
+[ext_resource type="Theme" uid="uid://cp6t4mnfwas5v" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="1_theme"]
+
+[node name="LoadingScreen" type="CanvasLayer" unique_id=1529192367]
+process_mode = 3
+layer = 200
+script = ExtResource("1_rkrnh")
+
+[node name="Background" type="ColorRect" parent="." unique_id=58434407]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06, 0.07, 0.09, 1)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=1774779449]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_theme")
+
+[node name="Content" type="VBoxContainer" parent="Center" unique_id=980350417]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="Center/Content" unique_id=2056282978]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "LET ME COOK"
+horizontal_alignment = 1
+
+[node name="Status" type="Label" parent="Center/Content" unique_id=212774212]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Loading restaurant..."
+horizontal_alignment = 1
+
+[node name="Progress" type="ProgressBar" parent="Center/Content" unique_id=1656181778]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme = ExtResource("1_theme")
+
+[node name="BackButton" type="Button" parent="Center/Content" unique_id=1476311203]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Back to Main Menu"
