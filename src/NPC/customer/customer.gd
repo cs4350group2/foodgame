@@ -25,6 +25,7 @@ const PAYMENT_SFX = preload("res://assets/sfx/customer/money_chaching_sfx.mp3")
 # VFX
 const POOF_SCENE: PackedScene = preload("res://assets/vfx/customer/Poof.tscn")
 const PATIENCE_UP_SCENE: PackedScene = preload("res://assets/vfx/customer/PatienceUp.tscn")
+const SLEEP_ZZZ_SCENE: PackedScene = preload("res://assets/vfx/customer/SleepZzz.tscn")
 
 enum State {
 	IDLE,
@@ -94,6 +95,19 @@ func _ready():
 		max_patience / 100.0
 	)
 
+func _process(delta: float) -> void:
+	match current_status_effect:
+		StatusEffect.UNCONSCIOUS:
+			if unconscious_effect_remaining > 0.0:
+				unconscious_effect_remaining -= delta
+				if unconscious_effect_remaining <= 0.0:
+					unconscious_effect_remaining = 0.0
+					patience_timer_stopped = false
+					change_status_effect(StatusEffect.NORMAL)
+	
+	match current_state:
+		pass
+
 func _on_interacted(_player: Player) -> void:
 	if is_instance_valid(_player) \
 			and is_instance_valid(_player.held_edible):
@@ -153,10 +167,6 @@ func move_toward_navigation_target(delta) -> void:
 func update_target_location(target_location):
 	nav_agent.target_position = target_location
 
-func _process(delta: float) -> void:
-	match current_state:
-		pass
-
 func play_animation(anim: String) -> void:
 	match anim:
 		"Idle":
@@ -170,7 +180,7 @@ func play_animation(anim: String) -> void:
 		_:
 			pass
 
-# -------------- State Management ----------------------------------
+# <------------- State Management --------------------------------------------->
 
 func change_state(new_state: State):
 	if current_state == new_state:
@@ -374,8 +384,10 @@ func get_order() -> Order:
 
 func state_ordering(delta):
 	# Wait until player takes order
-	patience -= delta
-	patience_bar.update_patience(patience)
+	if not patience_timer_stopped:
+		patience -= delta
+		patience_bar.update_patience(patience)
+	
 	if patience <= 0.0:
 		patience = 0.0
 		print(self, " leaving because out of patience")
@@ -407,8 +419,10 @@ func start_waiting_for_food() -> void:
 
 func state_waiting_for_food(delta):
 	# Wait until restaurant tells us the food is ready
-	patience -= delta
-	patience_bar.update_patience(patience)
+	if not patience_timer_stopped:
+		patience -= delta
+		patience_bar.update_patience(patience)
+	
 	if patience <= 0.0:
 		patience = 0.0
 		print(self, " leaving because out of patience")
@@ -541,7 +555,7 @@ func state_leaving_angry(delta):
 		queue_free()
 		return
 
-# --------------------------------VFX-------------------------------------------
+# <-------------------------------VFX------------------------------------------>
 func disappear_with_poof() -> void: # When customer drink EXTREMELY SAFE Drink
 	var poof := POOF_SCENE.instantiate()
 	
@@ -560,9 +574,50 @@ func show_patience_up() -> void:
 	get_tree().current_scene.add_child(effect)
 	effect.global_position = effect_anchor.global_position
 
+func show_unconscious_effect() -> void:
+	if is_instance_valid(unconscious_effect):
+		return
+
+	unconscious_effect = SLEEP_ZZZ_SCENE.instantiate() as Node3D
+	effect_anchor.add_child(unconscious_effect)
+	unconscious_effect.position = Vector3(0.0, 2.1, 0.0)
+
 func is_equal(other: Customer) -> bool:
 	return (
 		customer_name == other.get_customer_name()
 		and customer_lvl == other.get_customer_lvl()
 		and customer_type == other.get_customer_type()
 	)
+
+# <-------------------------------Status Effect-------------------------------->
+enum StatusEffect {
+	NORMAL,
+	UNCONSCIOUS,
+}
+
+var current_status_effect: StatusEffect = StatusEffect.NORMAL
+var patience_timer_stopped: bool = false
+var unconscious_effect_remaining: float = 0.0
+var unconscious_effect: Node3D
+
+func change_status_effect(status_effect: StatusEffect) -> void:
+	current_status_effect = status_effect
+	if status_effect == StatusEffect.UNCONSCIOUS:
+		show_unconscious_effect()
+	elif is_instance_valid(unconscious_effect):
+		unconscious_effect.queue_free()
+		unconscious_effect = null
+
+func set_patience_timer_stop(value: bool) -> void:
+	patience_timer_stopped = value
+
+func apply_unconscious_effect(duration: float) -> void:
+	set_patience_timer_stop(true)
+	unconscious_effect_remaining = maxf(duration, 0.0)
+	change_status_effect(StatusEffect.UNCONSCIOUS)
+	show_unconscious_effect()
+
+func stop_unconscious_effect() -> void:
+	set_patience_timer_stop(false)
+	unconscious_effect_remaining = 0.0
+	change_status_effect(StatusEffect.NORMAL)

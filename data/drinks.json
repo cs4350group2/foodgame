@@ -34,6 +34,13 @@
 			"price": 150.0,
 			"description": "As the name suggests, very safe",
 			"usage": "It's safe, really. I promise."
+		},
+		{
+			"name": "Alcohol",
+			"scene_path": "",
+			"price": 30.0,
+			"description": "Make sure this is served to customers above the age of 18.",
+			"usage": "Pause the customer’s patience level and puts the customer in an unconscious state."
 		}
 	]
 }
