@@ -1,9 +1,13 @@
 extends Node2D
 class_name Note
 
-@export var note_speed : float = 1 # time taken for note to reach judgment line from top, in seconds
+@export var base_factor : float = 5.0 # because 5 note speed is the default
+@export var note_speed : float = 5.0 # value from 1 to 10, adjustable in settings, default is 5
 @export var y_destination : float = 600 # judgment line y-coordinate
 @export var miss_overflow_distance : float = 100 # the y-distance travelled past the judgment line before arrow disappears
+@export var time_to_reach_judgment_line_sec : float: 
+	get:
+		return base_factor / note_speed
 
 var target_hit_time_ms: float 
 var pair_target_note: Note = null
@@ -15,17 +19,21 @@ var move_tween: Tween # store reference so we can kill it on hit
 @onready var hit_effect_player: AudioStreamPlayer = $HitEffectPlayer # hit effect player to play the note SFX
  
 func _ready() -> void:
-	var initial_position : Vector2 = self.position # arrow's initial position when spawned
+	pass
+
+func initialize(speed: float) -> void:
+	note_speed = speed
 	
+	var initial_position : Vector2 = self.position # arrow's initial position when spawned
 	move_tween = create_tween()
 	
 	# main fall to judgment line
-	move_tween.tween_property(self, "position", Vector2(initial_position.x, y_destination), note_speed)
+	move_tween.tween_property(self, "position", Vector2(initial_position.x, y_destination), time_to_reach_judgment_line_sec)
 	
 	# falling past judgment line at the same speed (to not mess with the initial fall's maths)
-	var overflow_time: float = note_speed * (miss_overflow_distance / y_destination)
+	var overflow_time: float = time_to_reach_judgment_line_sec * (miss_overflow_distance / y_destination)
 	move_tween.tween_property(self, "position", Vector2(initial_position.x, y_destination + miss_overflow_distance), overflow_time)
-
+	
 func setup_connector(target_note : Note) -> void:
 	pair_target_note = target_note
 	
@@ -75,3 +83,4 @@ func play_hit_anim() -> void:
 	
 	# the animation handles freeing the arrow, so no other method call needed
 	animation_player.play("successful_hit")
+	

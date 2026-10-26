@@ -7,7 +7,23 @@ extends Node3D
 @onready var seed_text: LineEdit = %LineEdit
 @onready var menu_buttons: VBoxContainer = %NewGameButton.get_parent()
 @onready var settings_page: CenterContainer = %SettingsPage
-@onready var back_button: Button = %SettingsPage/Panel/Margin/Settings/BackButton
+
+# settings buttons
+@onready var volume_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/CategorySelection/ButtonVBox/VolumeButton
+@onready var rhythm_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/CategorySelection/ButtonVBox/RhythmButton
+
+# settings tabs
+@onready var category_selection: VBoxContainer = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/CategorySelection
+@onready var volume_settings: VBoxContainer = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/VolumeSettings
+@onready var rhythm_settings: VBoxContainer = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/RhythmSettings
+
+# back buttons
+@onready var category_back_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/CategorySelection/ButtonVBox/CategoryBackButton
+@onready var volume_back_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/VolumeSettings/VolumeBackButton
+@onready var rhythm_back_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/RhythmSettings/RhythmBackButton
+
+@onready var reset_to_defaults_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/RhythmSettings/ResetToDefaultsButton
+
 const MAIN_MENU_THEME = preload("res://src/music/cloud.tres")
 
 # Called when the node enters the scene tree for the first time.
@@ -15,8 +31,12 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	new_game_button.pressed.connect(_start_game)
 	continue_button.pressed.connect(_continue_game)
-	settings_button.pressed.connect(_open_settings)
-	back_button.pressed.connect(_close_settings)
+	settings_button.pressed.connect(_open_settings_selection)
+	volume_button.pressed.connect(_open_volume_settings)
+	rhythm_button.pressed.connect(_open_rhythm_settings)
+	category_back_button.pressed.connect(_close_settings)
+	volume_back_button.pressed.connect(_go_to_settings_selection)
+	rhythm_back_button.pressed.connect(_go_to_settings_selection)
 	quit_button.pressed.connect(_on_quit)
 	if RunManager.current_run == null:
 		continue_button.visible = false
@@ -31,10 +51,28 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		_close_settings()
 
-func _open_settings() -> void:
+func _open_settings_selection() -> void:
 	menu_buttons.hide()
 	settings_page.show()
+	category_selection.visible = true
+	volume_settings.visible = false
+	rhythm_settings.visible = false
 
+func _open_volume_settings() -> void:
+	category_selection.visible = false
+	volume_settings.visible = true
+	rhythm_settings.visible = false
+
+func _open_rhythm_settings() -> void:
+	category_selection.visible = false
+	volume_settings.visible = false
+	rhythm_settings.visible = true
+
+func _go_to_settings_selection() -> void:
+	category_selection.visible = true
+	volume_settings.visible = false
+	rhythm_settings.visible = false
+	
 func _close_settings() -> void:
 	settings_page.hide()
 	menu_buttons.show()

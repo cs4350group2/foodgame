@@ -28,6 +28,7 @@ buses/default_bus_layout="uid://2wind731ofh6"
 AudioManager="*uid://diljxx64vyoov"
 RestaurantManager="*uid://c13jwmdtv0dqf"
 RunManager="*uid://bj0llj26dtai1"
+RhythmManager="*uid://cn8pkdyon37cg"
 
 [display]
 

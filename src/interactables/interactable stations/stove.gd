@@ -35,12 +35,12 @@ var original_camera_transform
 var target_camera_transform
 
 # preloaded dish textures for confirmation dialog
-const RENDERED_BURGER = preload("uid://d3rorjypontk5")
-const RENDERED_MEAT = preload("uid://cotpbx3nt4xan")
-const PLACEHOLDER_STEW_IMAGE = preload("uid://cfw527mfd8dg1")
-const PLACEHOLDER_SUSHI_IMAGE = preload("uid://bn23jfaurw5dx")
-const PLACEHOLDER_RICE_BOWL_IMAGE = preload("uid://b1tw7umwumc1p")
-const PLACEHOLDER_GRILLED_FISH_IMAGE = preload("uid://0jnh88u3iriw")
+const BURGER_TEXTURE = preload("uid://c0xyyibaje6e3")
+const STEAK_TEXTURE = preload("uid://b6tpa6sao7ri6")
+const STEW_TEXTURE = preload("uid://2no7u8k2e01j")
+const SUSHI_TEXTURE = preload("uid://cmeeivvg18fe2")
+const RICE_BOWL_TEXTURE = preload("uid://deyvt7atxh5xd")
+const GRILLED_FISH_TEXTURE = preload("uid://ddfmoioq0rtj7")
 
 const RHYTHM_MINIGAME_POPUP_SCENE = preload("uid://bl5f06ugjmaiq")
 
@@ -122,6 +122,8 @@ func start_cooking(dish_string: String) -> void:
 	var minigame_popup = RHYTHM_MINIGAME_POPUP_SCENE.instantiate()
 	var minigame_instance = minigame_popup.get_node("MinigameFrame/SubViewportContainer/SubViewport/RhythmMain")
 	
+	var minigame_bg = minigame_instance.get_node("Background")
+	
 	minigame_instance.dish_string = dish_string
 	
 	minigame_instance.cooking_end.connect(_on_cooking_end)
@@ -151,7 +153,6 @@ func start_cooking(dish_string: String) -> void:
 	
 	# finally add minigame popup to restaurant scene
 	restaurant_ui.add_child(minigame_popup)
-
 
 func get_food_data(dish_name: String) -> Dictionary:
 	# helper function to return info for specific dish in menu.json
@@ -268,17 +269,17 @@ func show_dish_confirmation(current_ingredients: Array) -> void:
 	
 	match selected_dish:
 		"burger":
-			dish_texture.texture = RENDERED_BURGER
+			dish_texture.texture = BURGER_TEXTURE
 		"steak":
-			dish_texture.texture = RENDERED_MEAT
+			dish_texture.texture = STEAK_TEXTURE
 		"stew":
-			dish_texture.texture = PLACEHOLDER_STEW_IMAGE
+			dish_texture.texture = STEW_TEXTURE
 		"sushi":
-			dish_texture.texture = PLACEHOLDER_SUSHI_IMAGE
+			dish_texture.texture = SUSHI_TEXTURE
 		"rice_bowl":
-			dish_texture.texture = PLACEHOLDER_RICE_BOWL_IMAGE
+			dish_texture.texture = RICE_BOWL_TEXTURE
 		"grilled_fish":
-			dish_texture.texture = PLACEHOLDER_GRILLED_FISH_IMAGE
+			dish_texture.texture = GRILLED_FISH_TEXTURE
 		
 	dish_confirm_label.text = "Start cooking " + formatted_dish_name + "?" + "\n" 
 		
