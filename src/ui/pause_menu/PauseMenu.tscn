@@ -314,122 +314,122 @@ theme_override_font_sizes/font_size = 28
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="VolumeTab" type="FoldableContainer" parent="Center/Panel/Margin/Settings" unique_id=653102553]
+[node name="AudioTab" type="FoldableContainer" parent="Center/Panel/Margin/Settings" unique_id=653102553]
 layout_mode = 2
 theme = ExtResource("2_14lbk")
 folded = true
-title = "Volume"
+title = "Audio"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Center/Panel/Margin/Settings/VolumeTab" unique_id=1322528158]
+[node name="VBoxContainer" type="VBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab" unique_id=1322528158]
 visible = false
 layout_mode = 2
 script = ExtResource("5_settings")
 
-[node name="MasterRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer" unique_id=583593460]
+[node name="MasterRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer" unique_id=583593460]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/MasterRow" unique_id=1032228729]
+[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/MasterRow" unique_id=1032228729]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/MasterRow/Header" unique_id=1158947285]
+[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/MasterRow/Header" unique_id=1158947285]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "Master"
 
-[node name="MasterValue" type="Label" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/MasterRow/Header" unique_id=621602600]
+[node name="MasterValue" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/MasterRow/Header" unique_id=621602600]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "100%"
 
-[node name="MasterSlider" type="HSlider" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/MasterRow" unique_id=443844455]
+[node name="MasterSlider" type="HSlider" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/MasterRow" unique_id=443844455]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 value = 100.0
 
-[node name="BGMRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer" unique_id=1048883676]
+[node name="BGMRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer" unique_id=1048883676]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/BGMRow" unique_id=297375532]
+[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/BGMRow" unique_id=297375532]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/BGMRow/Header" unique_id=217599459]
+[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/BGMRow/Header" unique_id=217599459]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "BGM"
 
-[node name="BGMValue" type="Label" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/BGMRow/Header" unique_id=1657872592]
+[node name="BGMValue" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/BGMRow/Header" unique_id=1657872592]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "100%"
 
-[node name="BGMSlider" type="HSlider" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/BGMRow" unique_id=304676979]
+[node name="BGMSlider" type="HSlider" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/BGMRow" unique_id=304676979]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 value = 100.0
 
-[node name="RhythmRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer" unique_id=1878721656]
+[node name="RhythmRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer" unique_id=1878721656]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/RhythmRow" unique_id=1602942266]
+[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/RhythmRow" unique_id=1602942266]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/RhythmRow/Header" unique_id=892836403]
+[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/RhythmRow/Header" unique_id=892836403]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "Rhythm"
 
-[node name="RhythmValue" type="Label" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/RhythmRow/Header" unique_id=542914220]
+[node name="RhythmValue" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/RhythmRow/Header" unique_id=542914220]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "100%"
 
-[node name="RhythmSlider" type="HSlider" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/RhythmRow" unique_id=1688623855]
+[node name="RhythmSlider" type="HSlider" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/RhythmRow" unique_id=1688623855]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 value = 100.0
 
-[node name="SFXRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer" unique_id=2029696561]
+[node name="SFXRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer" unique_id=2029696561]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/SFXRow" unique_id=1161422092]
+[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/SFXRow" unique_id=1161422092]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/SFXRow/Header" unique_id=697081091]
+[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/SFXRow/Header" unique_id=697081091]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "SFX"
 
-[node name="SFXValue" type="Label" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/SFXRow/Header" unique_id=1575453734]
+[node name="SFXValue" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/SFXRow/Header" unique_id=1575453734]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "100%"
 
-[node name="SFXSlider" type="HSlider" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer/SFXRow" unique_id=1923479183]
+[node name="SFXSlider" type="HSlider" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/SFXRow" unique_id=1923479183]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 value = 100.0
 
-[node name="OffsetHint" type="Label" parent="Center/Panel/Margin/Settings/VolumeTab/VBoxContainer" unique_id=127689491]
+[node name="OffsetHint" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer" unique_id=127689491]
 layout_mode = 2
 theme = ExtResource("2_14lbk")
 theme_override_colors/font_color = Color(1, 1, 1, 1)

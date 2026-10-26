@@ -9,17 +9,17 @@ extends Node3D
 @onready var settings_page: CenterContainer = %SettingsPage
 
 # settings buttons
-@onready var volume_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/CategorySelection/ButtonVBox/VolumeButton
+@onready var audio_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/CategorySelection/ButtonVBox/AudioButton
 @onready var rhythm_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/CategorySelection/ButtonVBox/RhythmButton
 
 # settings tabs
 @onready var category_selection: VBoxContainer = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/CategorySelection
-@onready var volume_settings: VBoxContainer = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/VolumeSettings
+@onready var audio_settings: VBoxContainer = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/AudioSettings
 @onready var rhythm_settings: VBoxContainer = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/RhythmSettings
 
 # back buttons
 @onready var category_back_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/CategorySelection/ButtonVBox/CategoryBackButton
-@onready var volume_back_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/VolumeSettings/VolumeBackButton
+@onready var audio_back_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/AudioSettings/AudioBackButton
 @onready var rhythm_back_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/RhythmSettings/RhythmBackButton
 
 @onready var reset_to_defaults_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/RhythmSettings/ResetToDefaultsButton
@@ -32,10 +32,10 @@ func _ready() -> void:
 	new_game_button.pressed.connect(_start_game)
 	continue_button.pressed.connect(_continue_game)
 	settings_button.pressed.connect(_open_settings_selection)
-	volume_button.pressed.connect(_open_volume_settings)
+	audio_button.pressed.connect(_open_audio_settings)
 	rhythm_button.pressed.connect(_open_rhythm_settings)
 	category_back_button.pressed.connect(_close_settings)
-	volume_back_button.pressed.connect(_go_to_settings_selection)
+	audio_back_button.pressed.connect(_go_to_settings_selection)
 	rhythm_back_button.pressed.connect(_go_to_settings_selection)
 	quit_button.pressed.connect(_on_quit)
 	if RunManager.current_run == null:
@@ -55,22 +55,22 @@ func _open_settings_selection() -> void:
 	menu_buttons.hide()
 	settings_page.show()
 	category_selection.visible = true
-	volume_settings.visible = false
+	audio_settings.visible = false
 	rhythm_settings.visible = false
 
-func _open_volume_settings() -> void:
+func _open_audio_settings() -> void:
 	category_selection.visible = false
-	volume_settings.visible = true
+	audio_settings.visible = true
 	rhythm_settings.visible = false
 
 func _open_rhythm_settings() -> void:
 	category_selection.visible = false
-	volume_settings.visible = false
+	audio_settings.visible = false
 	rhythm_settings.visible = true
 
 func _go_to_settings_selection() -> void:
 	category_selection.visible = true
-	volume_settings.visible = false
+	audio_settings.visible = false
 	rhythm_settings.visible = false
 	
 func _close_settings() -> void:

@@ -4,7 +4,7 @@ var previous_mouse_mode: Input.MouseMode
 
 @onready var player: Player = get_parent().get_node_or_null("Player") as Player
 
-@onready var settings_controls: VBoxContainer = $Center/Panel/Margin/Settings/VolumeTab/VBoxContainer
+@onready var settings_controls: VBoxContainer = $Center/Panel/Margin/Settings/AudioTab/VBoxContainer
 
 const RECIPE_MENU_SCENE = preload("res://src/ui/recipe_menu/RecipeMenu.tscn")
 

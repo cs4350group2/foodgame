@@ -74,7 +74,6 @@ func _on_background_brightness_changed(value: float) -> void:
 	rhythm_preview.background_brightness = normalized_brightness
 	%BackgroundBrightnessValue.text = "%d%%" % int(background_brightness_slider.value)
 
-
 func _on_reset_to_defaults_button_pressed() -> void:
 	RhythmManager.set_note_speed(5.0)
 	note_speed_slider.value = 5.0
