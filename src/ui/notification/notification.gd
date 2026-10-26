@@ -20,6 +20,8 @@ func _ready() -> void:
 	error_bottom.modulate = Color(1, 1, 1, 0)
 
 func show_top(message: String, show_description: bool = false, description_message: String = "") -> void:
+	visible = true
+
 	if top_tween_reference:
 		top_tween_reference.kill()
 

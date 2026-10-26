@@ -159,7 +159,6 @@ anti_aliasing = false
 script = ExtResource("1_pux36")
 
 [node name="Notification" parent="." unique_id=1164443459 instance=ExtResource("2_m7ans")]
-visible = false
 
 [node name="ViewportContainer" type="Control" parent="." unique_id=1776253913]
 layout_mode = 3
