@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://gvj66cyhgiu0"]
 
-[ext_resource type="Script" uid="uid://c1rvelqqwe34m" path="res://src/restaurant/dishes/drinks/ESD_item.gd" id="1_h1sj1"]
+[ext_resource type="Script" uid="uid://bvbl00arxaedc" path="res://src/restaurant/dishes/drinks/alcohol_item.gd" id="1_h1sj1"]
 [ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="2_h1sj1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_8pdba"]
