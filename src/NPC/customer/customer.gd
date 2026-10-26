@@ -146,7 +146,7 @@ func move_toward_navigation_target(delta) -> void:
 	var direction := global_position.direction_to(next_position)
 	var target_rotation = atan2(direction.x, direction.z) + PI / 2
 
-	velocity = direction * move_speed
+	velocity = velocity.move_toward(direction * move_speed, .25)
 	rotation.y = lerp_angle(rotation.y, target_rotation, 10.0 * delta)
 	move_and_slide()
 
