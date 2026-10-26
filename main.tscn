@@ -40,6 +40,7 @@
 [ext_resource type="PackedScene" uid="uid://b03jbfo8j711j" path="res://models/physics/food/pooOnAPlate/POOOO.tscn" id="40_h8e4i"]
 [ext_resource type="PackedScene" uid="uid://ujkr0mjx6opi" path="res://models/spawners/riceBag.tscn" id="41_0cp0l"]
 [ext_resource type="PackedScene" uid="uid://bgi1a47734pt8" path="res://models/spawners/fishTank.tscn" id="41_4lmeg"]
+[ext_resource type="PackedScene" uid="uid://ckegkpsi3apu7" path="res://models/interactable stations/microwaveStation.tscn" id="41_d2t1y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -169,9 +170,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.02, -4.5)
 
 [node name="workplan" parent="." unique_id=1513500207 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, 0.5, -4.5)
-
-[node name="workplan7" parent="." unique_id=509597713 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 11, 0.5, -4.5)
 
 [node name="workplan3" parent="." unique_id=168477126 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, 0.5, -3.5)
@@ -432,3 +430,6 @@ transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1
 
 [node name="Poooo" parent="." unique_id=381857738 instance=ExtResource("40_h8e4i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.078758, 0.9663765, -2.00476)
+
+[node name="MicrowaveStation" parent="." unique_id=1109045891 instance=ExtResource("41_d2t1y")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 11, 0.5, -4.5)
