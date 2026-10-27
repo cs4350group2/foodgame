@@ -10,6 +10,9 @@ extends CharacterBody3D
 @onready var audio_player = $AudioStreamPlayer3D
 @onready var restaurant_ui: RestaurantUI = get_tree().current_scene.get_node("RestaurantUi")
 
+# Notifications
+var notification_data: Dictionary
+
 # SFX
 const HMM_SFX = preload("res://assets/sfx/customer/hmm_sfx.mp3")
 const ORDER_READY_SFX = preload("res://assets/sfx/customer/order_sfx.wav")
@@ -85,6 +88,14 @@ func initialize_customer(name: String, level: int, patience: float, type: String
 	max_patience = patience
 	customer_type = type
 
+func initialize_notification() -> void:
+	var file := FileAccess.open("res://data/notification.json", FileAccess.READ)
+	if file == null:
+		push_error("Could not open notification.json")
+		return
+
+	notification_data = JSON.parse_string(file.get_as_text())
+
 func _ready():
 	interaction.supports_primary = true
 	interaction.accepts_primary_while_holding = true
@@ -96,6 +107,7 @@ func _ready():
 		max_patience,
 		max_patience / 100.0
 	)
+	initialize_notification()
 
 func _process(delta: float) -> void:
 	if StatusEffect.UNCONSCIOUS in current_status_effects:
@@ -457,8 +469,35 @@ func receive_order_item(item: OrderItem) -> bool:
 	if current_state != State.WAITING_FOR_FOOD:
 		return false
 	
+	if StatusEffect.TASTELESS in current_status_effects:
+		return tasteless_receive_order_item()
+	
 	# if the order is finished, we let the signal tell us
 	return order.receive_order_item(item)
+
+func tasteless_receive_order_item() -> bool:
+	var order_items = order.get_order_items()
+	
+	for item in order_items:
+		var received_item = order.find_received_item_in_order(item)
+		if received_item:
+			if received_item.get_quantity() < item.get_quantity():
+				# Order havent receive sufficient qty of this item
+				var food: Food = item.get_edible()
+				food.set_dish_quality(100.0)
+				var food_item = OrderItem.new(food, 1)
+				order.receive_order_item(food_item)
+				break
+			else: # Order already received sufficient qty of this item
+				continue
+		else: # Order havent receive this item yet
+			var food: Food = item.get_edible()
+			food.set_dish_quality(100.0)
+			var food_item = OrderItem.new(food, 1)
+			order.receive_order_item(food_item)
+			break
+			
+	return true
 
 func _deliver_held_edible(player: Player) -> void:
 	var held_edible: EdibleItem = player.held_edible
@@ -604,6 +643,7 @@ func is_equal(other: Customer) -> bool:
 enum StatusEffect {
 	NORMAL,
 	UNCONSCIOUS,
+	TASTELESS,
 }
 
 var current_status_effects: Array[StatusEffect] = []
@@ -618,6 +658,10 @@ func enter_status_effect(status_effect: StatusEffect) -> void:
 		StatusEffect.UNCONSCIOUS:
 			show_unconscious_effect()
 			pass
+		StatusEffect.TASTELESS:
+			pass
+		_:
+			pass
 
 func exit_status_effect(status_effect: StatusEffect) -> void:
 	match status_effect:
@@ -625,6 +669,10 @@ func exit_status_effect(status_effect: StatusEffect) -> void:
 			pass
 		StatusEffect.UNCONSCIOUS:
 			stop_unconscious_effect()
+			pass
+		StatusEffect.TASTELESS:
+			pass
+		_:
 			pass
 
 func add_status_effect(status_effect: StatusEffect) -> void:

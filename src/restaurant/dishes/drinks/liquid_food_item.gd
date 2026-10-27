@@ -20,7 +20,6 @@ func affect_customer(customer: Customer) -> bool:
 	if customer_state in acceptable_states:
 		var customer_order: Order = customer.get_order()
 		var order_items = customer_order.get_order_items()
-		var received_items = customer_order.get_items_received()
 		
 		for item in order_items:
 			var received_item = customer_order.find_received_item_in_order(item)
@@ -31,6 +30,7 @@ func affect_customer(customer: Customer) -> bool:
 					liquid_food.set_dish_quality(50.0)
 					var liquid_food_item = OrderItem.new(liquid_food, 1)
 					customer_order.receive_order_item(liquid_food_item)
+					break
 				else: # Order already received sufficient qty of this item
 					continue
 			else: # Order havent receive this item yet
@@ -38,6 +38,7 @@ func affect_customer(customer: Customer) -> bool:
 				liquid_food.set_dish_quality(50.0)
 				var liquid_food_item = OrderItem.new(liquid_food, 1)
 				customer_order.receive_order_item(liquid_food_item)
+				break
 		
 		return true
 	else:
