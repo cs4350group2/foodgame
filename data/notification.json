@@ -15,5 +15,11 @@
 		"order_dish_requirement_not_fulfilled": "This dish does not match the customer's order/requirement.",
 		"delivering_empty_handed": "You need to be holding a cooked dish/consumable to deliver it.",
 		"uncooked_ingredient_error": "Ingredients cannot be delivered. Cook them first.",
-	}
+	},
+	"action_notification": {
+		"deliver_item": "Delivered %s.",
+	},
+	"customer_action_notification": {
+		"leaving_out_of_patience": "%s leaving because out of patience.",
+	},
 }

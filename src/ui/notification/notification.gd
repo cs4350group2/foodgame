@@ -2,11 +2,13 @@ class_name Notification
 extends CanvasLayer
 
 @export var debug: bool = false
+@export var side_label_node: PackedScene = preload("res://src/ui/notification/SideLabel.tscn")
 
 @onready var top: Panel = $Top
 @onready var error_bottom: Panel = $ErrorBottom
 @onready var top_label: Label = $Top/Label
 @onready var error_bottom_label: Label = $ErrorBottom/Label
+@onready var side: VBoxContainer = $Side
 
 const TOP_MIN_WIDTH := 400.0
 const ERROR_MIN_WIDTH := 160.0
@@ -16,8 +18,9 @@ const VIEWPORT_SIDE_MARGIN := 20.0
 const ERROR_BOTTOM_MARGIN := 108.0
 
 var top_tween_reference = null
-var show_top_description: bool = false
 var error_bottom_tween_reference = null
+var side_tween_reference = null
+var show_top_description: bool = false
 
 func _ready() -> void:
 	top.modulate = Color(1, 1, 1, 0)
@@ -70,8 +73,34 @@ func show_error_bottom(message: String) -> void:
 		error_bottom_tween_reference.tween_property(error_bottom, "scale", Vector2(1, 1), 0.5)
 		error_bottom_tween_reference.tween_property(error_bottom, "modulate", Color(1, 1, 1, 1), 0.5)
 
-		error_bottom_tween_reference.chain().tween_interval(7)
+		error_bottom_tween_reference.chain().tween_interval(5)
 		error_bottom_tween_reference.chain().tween_property(error_bottom, "modulate", Color(1, 1, 1, 0), 0.5)
+
+func show_side(message: String) -> void:
+	visible = true
+	var side_label: Label = side_label_node.instantiate()
+	side_label.text = message
+	side_label.scale = Vector2(0.8, 0.8)
+	side_label.modulate = Color(1, 1, 1, 0)
+	side.add_child(side_label)
+
+	# Keep each label's animation and hold independent from other side notifications.
+	side_tween_reference = side_label.create_tween().set_parallel(true)
+	var tween: Tween = side_tween_reference
+	tween.tween_property(side_label, "scale", Vector2.ONE, 0.5)
+	tween.tween_property(side_label, "modulate", Color.WHITE, 0.5)
+	await tween.finished
+	await get_tree().create_timer(4.0).timeout
+	if not is_instance_valid(side_label):
+		return
+
+	side_tween_reference = side_label.create_tween().set_parallel(true)
+	tween = side_tween_reference
+	tween.tween_property(side_label, "scale", Vector2(0.8, 0.8), 0.5)
+	tween.tween_property(side_label, "modulate", Color(1, 1, 1, 0), 0.5)
+	await tween.finished
+	if is_instance_valid(side_label):
+		side_label.queue_free()
 
 func _resize_top_to_text(message: String) -> void:
 	var font := top_label.get_theme_font("font")

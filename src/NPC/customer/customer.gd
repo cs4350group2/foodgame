@@ -413,6 +413,8 @@ func state_ordering(delta):
 	if patience <= 0.0:
 		patience = 0.0
 		print(self, " leaving because out of patience")
+		var message: String = notification_data["customer_action_notification"].get("leaving_out_of_patience") % get_customer_name()
+		restaurant_ui.show_side(message)
 		change_state(State.LEAVING_ANGRY)
 		return
 		
@@ -448,6 +450,8 @@ func state_waiting_for_food(delta):
 	if patience <= 0.0:
 		patience = 0.0
 		print(self, " leaving because out of patience")
+		var message: String = notification_data["customer_action_notification"].get("leaving_out_of_patience") % get_customer_name()
+		restaurant_ui.show_side(message)
 		change_state(State.LEAVING_ANGRY)
 		
 		return
@@ -521,6 +525,9 @@ func _deliver_held_edible(player: Player) -> void:
 			delivered_edible.collision_layer = 0
 			delivered_edible.collision_mask = 0
 			delivered_edible.queue_free()
+			
+			var action_message: String = notification_data["action_notification"].get("deliver_item") % data.get_edible_name()
+			restaurant_ui.show_side(action_message)
 			print("Delivered %s." % data.get_edible_name())
 	else: # is Food
 		var food_data := data as Food
@@ -544,7 +551,9 @@ func _deliver_held_edible(player: Player) -> void:
 		delivered_edible.collision_layer = 0
 		delivered_edible.collision_mask = 0
 		delivered_edible.queue_free()
-
+		
+		var action_message: String = notification_data["action_notification"].get("deliver_item") % food_data.get_edible_name()
+		restaurant_ui.show_side(action_message)
 		print("Delivered %s." % food_data.get_edible_name())
 
 func state_eating(delta):

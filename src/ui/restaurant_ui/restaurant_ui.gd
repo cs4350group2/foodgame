@@ -80,3 +80,6 @@ func show_notification_top(message: String, show_description: bool = false, desc
 
 func show_notification_error_bottom(message: String) -> void:
 	notification.show_error_bottom(message)
+
+func show_side(message: String) -> void:
+	notification.show_side(message)

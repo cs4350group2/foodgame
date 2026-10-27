@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cgbw5pa67kuuh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1wuc7"]
+bg_color = Color(0.2592937, 0.2592937, 0.2592937, 0.6862745)
+
+[node name="Label" type="Label" unique_id=299211405]
+pivot_offset_ratio = Vector2(1, 0.5)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_1wuc7")
+text = "Item"
+horizontal_alignment = 1
+vertical_alignment = 1
