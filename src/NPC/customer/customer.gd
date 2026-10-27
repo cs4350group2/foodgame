@@ -21,6 +21,7 @@ const LEAVING_SFX = preload("res://assets/sfx/customer/leaving_sfx.wav")
 const WARNING_SFX = preload("res://assets/sfx/customer/warning_sfx.mp3")
 const HOBO_LAUGH_SFX = preload("res://assets/sfx/customer/Hobo_Laugh.mp3")
 const PAYMENT_SFX = preload("res://assets/sfx/customer/money_chaching_sfx.mp3")
+const SNORING_SFX = preload("res://assets/sfx/customer/snoring_sfx.mp3")
 
 # VFX
 const POOF_SCENE: PackedScene = preload("res://assets/vfx/customer/Poof.tscn")
@@ -314,8 +315,12 @@ enum AudioSfx {
 	PAYMENT,
 	LEAVING,
 	WARNING,
-	HOBO_LAUGH
+	HOBO_LAUGH,
+	SNORING
 }
+
+func stop_audio() -> void:
+	audio_player.stop()
 
 func play_audio(audio_type: AudioSfx):
 	match audio_type:
@@ -349,6 +354,9 @@ func play_audio(audio_type: AudioSfx):
 		AudioSfx.HOBO_LAUGH:
 			audio_player.volume_linear = 1.5
 			audio_player.stream = HOBO_LAUGH_SFX
+		AudioSfx.SNORING:
+			audio_player.volume_linear = 2.0
+			audio_player.stream = SNORING_SFX
 	audio_player.play()
 
 func state_sitting(delta):
@@ -600,24 +608,38 @@ var patience_timer_stopped: bool = false
 var unconscious_effect_remaining: float = 0.0
 var unconscious_effect: Node3D
 
+func enter_status_effect(status_effect: StatusEffect) -> void:
+	match status_effect:
+		StatusEffect.NORMAL:
+			pass
+		StatusEffect.UNCONSCIOUS:
+			show_unconscious_effect()
+			pass
+
+func exit_status_effect(status_effect: StatusEffect) -> void:
+	match status_effect:
+		StatusEffect.NORMAL:
+			pass
+		StatusEffect.UNCONSCIOUS:
+			stop_unconscious_effect()
+			pass
+
 func change_status_effect(status_effect: StatusEffect) -> void:
+	exit_status_effect(current_status_effect)
 	current_status_effect = status_effect
-	if status_effect == StatusEffect.UNCONSCIOUS:
-		show_unconscious_effect()
-	elif is_instance_valid(unconscious_effect):
-		unconscious_effect.queue_free()
-		unconscious_effect = null
+	enter_status_effect(status_effect)
 
 func set_patience_timer_stop(value: bool) -> void:
 	patience_timer_stopped = value
 
 func apply_unconscious_effect(duration: float) -> void:
 	set_patience_timer_stop(true)
+	play_audio(AudioSfx.SNORING)
 	unconscious_effect_remaining = maxf(duration, 0.0)
 	change_status_effect(StatusEffect.UNCONSCIOUS)
-	show_unconscious_effect()
 
 func stop_unconscious_effect() -> void:
 	set_patience_timer_stop(false)
+	stop_audio()
 	unconscious_effect_remaining = 0.0
-	change_status_effect(StatusEffect.NORMAL)
+	unconscious_effect.queue_free()
