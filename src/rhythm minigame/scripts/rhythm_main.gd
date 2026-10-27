@@ -73,7 +73,7 @@ signal empty_press(input_judgment : String)
 
 # signals for cooking start/cooking end text, and results screen appearance
 signal cooking_start
-signal cooking_end
+signal cooking_end(combo_result: String)
 signal results_display
 signal return_to_restaurant(dish_quality: float)
 signal hide_lane(lane_name : String)
@@ -160,7 +160,6 @@ func _ready() -> void:
 	if dish_string == "burger" \
 	or dish_string == "steak" \
 	or dish_string == "sushi" \
-	or dish_string == "rice_bowl" \
 	or dish_string == "grilled_fish": # hide "up" and "down" lanes for certain charts
 		hide_lane.emit("up")
 		hide_lane.emit("down")
@@ -174,7 +173,16 @@ func _ready() -> void:
 	
 	await AudioManager.rm_player.finished
 	
-	cooking_end.emit()
+	num_total_notes = num_perfects + num_goods + num_misses # calculate this early for the cooking end message
+	
+	if num_perfects == num_total_notes and num_empty_presses == 0:
+		# all perfect
+		cooking_end.emit("AP")
+	elif num_misses == 0 and num_empty_presses == 0:
+		# full combo
+		cooking_end.emit("FC")
+	else:
+		cooking_end.emit("NORMAL")
 	
 	# wait for the COOKING END! text to fade out fully
 	await get_tree().create_timer(2.5, false).timeout 
@@ -184,8 +192,6 @@ func _ready() -> void:
 	rhythm_result_screen_v2.good_count_label.text = str(num_goods)
 	rhythm_result_screen_v2.miss_count_label.text = str(num_misses)
 	rhythm_result_screen_v2.empty_count_label.text = str(num_empty_presses)
-	
-	num_total_notes = num_perfects + num_goods + num_misses
 	
 	player_score = num_perfects * 100 + num_goods * 75 
 	max_score = num_total_notes * 100

@@ -24,7 +24,15 @@ func animate_cooking_start_text():
 	
 	tween.tween_property(cooking_start_label, "modulate:a", 0.0, 0.5)
 
-func animate_cooking_end_text():
+func animate_cooking_end_text(combo_result: String):
+	match combo_result:
+		"AP":
+			cooking_end_label.text = "ALL PERFECT!"
+		"FC":
+			cooking_end_label.text = "FULL COMBO!"
+		"NORMAL":
+			cooking_end_label.text = "COOKING END!"
+	
 	var tween = create_tween()
 	
 	tween.tween_property(cooking_end_label, "modulate:a", 1.0, 0.5)

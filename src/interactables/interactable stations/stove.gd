@@ -26,6 +26,8 @@ const GRILLED_FISH_PATH = preload("res://models/physics/food/grilledFish/grilled
 @onready var restaurant_stove: Node3D = $"../.." # stove Node3D in restaurant_main (gazini_re)
 @onready var invalid_recipe_dialog: AcceptDialog = $"../../../RestaurantUi/InvalidRecipeDialog" # invalid recipe dialog in restaurant_main
 
+@onready var pause_menu: CanvasLayer = $"../../../PauseMenu" # restaurant pause menu
+
 @onready var dish_confirm_dialog: ConfirmationDialog = $"../../../RestaurantUi/DishConfirmDialog" # dish confirmation dialog in restaurant_main
 @onready var dish_texture: TextureRect = $"../../../RestaurantUi/DishConfirmDialog/VBoxContainer/DishTexture" # dish confirmation dialog dish texture
 @onready var dish_confirm_label: Label = $"../../../RestaurantUi/DishConfirmDialog/VBoxContainer/Label" # label for confirm dialog text
@@ -153,7 +155,11 @@ func start_cooking(dish_string: String) -> void:
 	
 	# finally add minigame popup to restaurant scene
 	restaurant_ui.add_child(minigame_popup)
-
+	
+	pause_menu.set_rhythm_settings_locked(true) # lock rhythm settings in pause menu
+	
+	restaurant_main.process_mode = Node.PROCESS_MODE_DISABLED # pause entire restaurant scene (except for pause menu)
+	
 func get_food_data(dish_name: String) -> Dictionary:
 	# helper function to return info for specific dish in menu.json
 	var restaurant_menu: Dictionary = RestaurantManager.get_menu()
@@ -171,6 +177,7 @@ func _on_cooking_end() -> void: # when results screen appears in minigame
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
+	restaurant_main.process_mode = Node.PROCESS_MODE_INHERIT # un-pause restaurant scene
 	# reverse tween to camera rotation in start_cooking
 	var tween_reverse = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	
@@ -183,10 +190,12 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
 	
 	minigame_node.queue_free()
 	
-	restaurant_main.visible = true
-	if restaurant_main.ui_nodes:
-		for ui: Node in restaurant_main.ui_nodes as Array[Node]:
-			ui.visible = true
+	pause_menu.set_rhythm_settings_locked(false) # unlock rhythm settings in pause menu
+	
+	# if restaurant_main.ui_nodes:
+	#	for ui: Node in restaurant_main.ui_nodes as Array[Node]:
+	#		ui.visible = true
+	
 	active_player.crosshair.visible = true
 	active_player.process_mode = Node.PROCESS_MODE_INHERIT # re-enable player controls
 	active_player.capture_mouse() # restore mouse capture and the controller's capture flag

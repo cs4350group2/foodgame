@@ -6,6 +6,9 @@ var previous_mouse_mode: Input.MouseMode
 
 @onready var settings_controls: VBoxContainer = $Center/Panel/Margin/Settings/AudioTab/VBoxContainer
 
+@onready var audio_tab: FoldableContainer = $Center/Panel/Margin/Settings/AudioTab
+@onready var rhythm_tab: FoldableContainer = $Center/Panel/Margin/Settings/RhythmTab
+
 const RECIPE_MENU_SCENE = preload("res://src/ui/recipe_menu/RecipeMenu.tscn")
 
 func _input(event: InputEvent) -> void:
@@ -56,6 +59,15 @@ func _on_main_menu_pressed() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	RunManager.active_level = null
 
+func set_rhythm_settings_locked(is_locked: bool) -> void:
+	if is_locked:
+		rhythm_tab.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		rhythm_tab.modulate = Color(0.5, 0.5, 0.5, 1)
+	
+	else:
+		rhythm_tab.mouse_filter = Control.MOUSE_FILTER_STOP
+		rhythm_tab.modulate = Color.WHITE
+	
 #! IMPORTANT: Timers still run during pause, so 
 # we may need to change the behaviour
 func pause_game() -> void:
@@ -72,6 +84,8 @@ func pause_game() -> void:
 
 func unpause_game() -> void:
 	hide()
+	audio_tab.fold()
+	rhythm_tab.fold()
 	if is_instance_valid(player):
 		if previous_mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			player.capture_mouse()
