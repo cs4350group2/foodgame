@@ -88,12 +88,11 @@ func initialize_customer(name: String, level: int, patience: float, type: String
 	max_patience = patience
 	customer_type = type
 
-func initialize_notification() -> void:
-	var file := FileAccess.open("res://data/notification.json", FileAccess.READ)
+func load_notification_data() -> void:
+	var file = FileAccess.open("res://data/notification.json", FileAccess.READ)
 	if file == null:
 		push_error("Could not open notification.json")
 		return
-
 	notification_data = JSON.parse_string(file.get_as_text())
 
 func _ready():
@@ -107,7 +106,7 @@ func _ready():
 		max_patience,
 		max_patience / 100.0
 	)
-	initialize_notification()
+	load_notification_data()
 
 func _process(delta: float) -> void:
 	if StatusEffect.UNCONSCIOUS in current_status_effects:
@@ -131,7 +130,8 @@ func _on_interacted(_player: Player) -> void:
 
 		State.WAITING_FOR_FOOD:
 			# If reaches here, the player is 100% not holding an edible
-			print("You need to be holding a cooked dish/consumable to deliver it.")
+			var error_message: String = notification_data["error"].get("delivering_empty_handed")
+			restaurant_ui.show_notification_error_bottom(error_message)
 			return
 
 		State.PAYING:
@@ -502,11 +502,13 @@ func tasteless_receive_order_item() -> bool:
 func _deliver_held_edible(player: Player) -> void:
 	var held_edible: EdibleItem = player.held_edible
 	if not is_instance_valid(held_edible):
-		print("You need to be holding a cooked dish/consumable to deliver it.")
+		var error_message: String = notification_data["error"].get("delivering_empty_handed")
+		restaurant_ui.show_notification_error_bottom(error_message)
 		return
 	
 	if held_edible.is_ingredient():
-		print("Ingredients cannot be delivered. Cook them first.")
+		var error_message: String = notification_data["error"].get("uncooked_ingredient_error")
+		restaurant_ui.show_notification_error_bottom(error_message)
 		return
 	
 	var data: Edible = held_edible.get_data()
@@ -531,7 +533,8 @@ func _deliver_held_edible(player: Player) -> void:
 		var delivered_item := OrderItem.new(food_data, 1)
 
 		if not receive_order_item(delivered_item):
-			print("That dish does not match the customer's order/requirement.")
+			var error_message: String = notification_data["error"].get("order_dish_requirement_not_fulfilled")
+			restaurant_ui.show_notification_error_bottom(error_message)
 			food_data.set_dish_quality(original_quality)
 			return
 

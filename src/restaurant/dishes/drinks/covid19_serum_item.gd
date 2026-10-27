@@ -27,7 +27,7 @@ func affect_customer(customer: Customer) -> bool:
 	
 	if customer_state in acceptable_states:
 		# Customer now accepts any food and any quality
-		
+		customer.add_status_effect(Customer.StatusEffect.TASTELESS)
 		return true
 	else:
 		return false
