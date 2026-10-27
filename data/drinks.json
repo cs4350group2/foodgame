@@ -32,7 +32,7 @@
 			"name": "EXTREMELY SAFE Drink",
 			"scene_path": "res://models/physics/drinks/extremelySafeDrink.tscn",
 			"price": 150.0,
-			"description": "As the name suggests, very safe",
+			"description": "As the name suggests, very safe.",
 			"usage": "It's safe, really. I promise."
 		},
 		{
@@ -41,6 +41,13 @@
 			"price": 0.0,
 			"description": "Make sure this is served to customers above the age of 18.",
 			"usage": "Pause the customer’s patience level and puts the customer in an unconscious state."
-		}
+		},
+		{
+			"name": "Covid-19 Serum",
+			"scene_path": "res://models/physics/drinks/drink_placeholder.tscn",
+			"price": 0.0,
+			"description": "One of the symptoms of Covid-19 is losing your taste.",
+			"usage": "Customer accepts any food and any quality."
+		},
 	]
 }
