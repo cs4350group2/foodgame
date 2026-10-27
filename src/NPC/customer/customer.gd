@@ -11,16 +11,16 @@ extends CharacterBody3D
 @onready var restaurant_ui: RestaurantUI = get_tree().current_scene.get_node("RestaurantUi")
 
 # SFX
-const HMM_SFX = preload("res://assets/sfx/customer/hmm_sfx.mp3")
-const ORDER_READY_SFX = preload("res://assets/sfx/customer/order_sfx.wav")
+const HMM_SFX = preload("res://assets/sfx/customer/hmm_new.mp3")
+const ORDER_READY_SFX = preload("res://assets/sfx/customer/order_fulfilled_new.mp3")
 const ORDER_COMPLETE_SFX = preload("res://assets/sfx/customer/satisfied_sfx.wav")
-const ANGRY_SFX = preload("res://assets/sfx/customer/angry_sfx.wav")
-const ENTER_SFX = preload("res://assets/sfx/customer/enter_sfx.wav")
-const ORDER_TAKEN_SFX = preload("res://assets/sfx/customer/order_taken.ogg")
-const LEAVING_SFX = preload("res://assets/sfx/customer/leaving_sfx.wav")
-const WARNING_SFX = preload("res://assets/sfx/customer/warning_sfx.mp3")
-const HOBO_LAUGH_SFX = preload("res://assets/sfx/customer/Hobo_Laugh.mp3")
-const PAYMENT_SFX = preload("res://assets/sfx/customer/money_chaching_sfx.mp3")
+const ANGRY_SFX = preload("res://assets/sfx/customer/angry_new.mp3")
+const ENTER_SFX = preload("res://assets/sfx/customer/enter_new.mp3")
+const ORDER_TAKEN_SFX = preload("res://assets/sfx/customer/order_taken_new.mp3")
+const LEAVING_SFX = preload("res://assets/sfx/customer/leaving_new.mp3")
+const WARNING_SFX = preload("res://assets/sfx/customer/warning_new.mp3")
+const HOBO_LAUGH_SFX = preload("res://assets/sfx/customer/hobo_laugh_new.mp3")
+const PAYMENT_SFX = preload("res://assets/sfx/customer/chaching_new.mp3")
 
 # VFX
 const POOF_SCENE: PackedScene = preload("res://assets/vfx/customer/Poof.tscn")
@@ -313,31 +313,31 @@ func play_audio(audio_type: AudioSfx):
 			audio_player.volume_linear = 1.0
 			audio_player.stream = HMM_SFX
 		AudioSfx.ANGRY:
-			audio_player.volume_linear = 1.6
+			audio_player.volume_linear = 1.0
 			audio_player.stream = ANGRY_SFX
 		AudioSfx.ORDERING:
-			audio_player.volume_linear = 1.3
+			audio_player.volume_linear = 1.0
 			audio_player.stream = ORDER_READY_SFX
 		AudioSfx.COMPLETE:
-			audio_player.volume_linear = 0.2
+			audio_player.volume_linear = 1.0
 			audio_player.stream = ORDER_COMPLETE_SFX
 		AudioSfx.PAYMENT:
 			audio_player.volume_linear = 1.0
 			audio_player.stream = PAYMENT_SFX
 		AudioSfx.ORDER_TAKEN:
-			audio_player.volume_linear = 0.9
+			audio_player.volume_linear = 1.0
 			audio_player.stream = ORDER_TAKEN_SFX
 		AudioSfx.ENTER:
-			audio_player.volume_linear = 2.0
+			audio_player.volume_linear = 1.0
 			audio_player.stream = ENTER_SFX
 		AudioSfx.LEAVING:
-			audio_player.volume_linear = 0.4
+			audio_player.volume_linear = 1.0
 			audio_player.stream = LEAVING_SFX
 		AudioSfx.WARNING:
-			audio_player.volume_linear = 2.0
+			audio_player.volume_linear = 1.0
 			audio_player.stream = WARNING_SFX
 		AudioSfx.HOBO_LAUGH:
-			audio_player.volume_linear = 1.5
+			audio_player.volume_linear = 1.0
 			audio_player.stream = HOBO_LAUGH_SFX
 	audio_player.play()
 
