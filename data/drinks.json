@@ -47,7 +47,14 @@
 			"scene_path": "res://models/physics/drinks/drink_placeholder.tscn",
 			"price": 0.0,
 			"description": "One of the symptoms of Covid-19 is losing your taste.",
-			"usage": "Customer accepts any food and any quality."
+			"usage": "Customer accepts any quality."
+		},
+		{
+			"name": "1 Day Blinding Stew",
+			"scene_path": "res://models/physics/drinks/drink_placeholder.tscn",
+			"price": 0.0,
+			"description": "My daughter is biting hair.",
+			"usage": "Customer accepts any food."
 		},
 		{
 			"name": "Soup Of Oblivion",

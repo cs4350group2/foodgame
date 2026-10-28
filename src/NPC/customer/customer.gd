@@ -473,13 +473,19 @@ func receive_order_item(item: OrderItem) -> bool:
 	if current_state != State.WAITING_FOR_FOOD:
 		return false
 	
+	if StatusEffect.TASTELESS in current_status_effects and StatusEffect.BLIND in current_status_effects:
+		return anyhow_receive_order_item()
+	
 	if StatusEffect.TASTELESS in current_status_effects:
-		return tasteless_receive_order_item()
+		return tasteless_receive_order_item(item)
+	
+	if StatusEffect.BLIND in current_status_effects:
+		return blind_receive_order_item(item)
 	
 	# if the order is finished, we let the signal tell us
 	return order.receive_order_item(item)
 
-func tasteless_receive_order_item() -> bool:
+func anyhow_receive_order_item() -> bool: # Accepts any food and auto 100% dish quality
 	var order_items = order.get_order_items()
 	
 	for item in order_items:
@@ -497,6 +503,36 @@ func tasteless_receive_order_item() -> bool:
 		else: # Order havent receive this item yet
 			var food: Food = item.get_edible()
 			food.set_dish_quality(100.0)
+			var food_item = OrderItem.new(food, 1)
+			order.receive_order_item(food_item)
+			break
+			
+	return true
+
+func tasteless_receive_order_item(item: OrderItem) -> bool: # Auto 100% quality
+	var food: Food = item.get_edible()
+	food.set_dish_quality(100.0)
+	return order.receive_order_item(item)
+
+func blind_receive_order_item(item: OrderItem) -> bool: # Accepts any food
+	var order_items = order.get_order_items()
+	var dish_quality = item.get_edible().get_dish_quality()
+	
+	for order_item in order_items:
+		var received_item = order.find_received_item_in_order(order_item)
+		if received_item:
+			if received_item.get_quantity() < order_item.get_quantity():
+				# Order havent receive sufficient qty of this item
+				var food: Food = order_item.get_edible()
+				food.set_dish_quality(dish_quality)
+				var food_item = OrderItem.new(food, 1)
+				order.receive_order_item(food_item)
+				break
+			else: # Order already received sufficient qty of this item
+				continue
+		else: # Order havent receive this item yet
+			var food: Food = order_item.get_edible()
+			food.set_dish_quality(dish_quality)
 			var food_item = OrderItem.new(food, 1)
 			order.receive_order_item(food_item)
 			break
@@ -668,6 +704,7 @@ enum StatusEffect {
 	NORMAL,
 	UNCONSCIOUS,
 	TASTELESS,
+	BLIND,
 }
 
 var current_status_effects: Array[StatusEffect] = []
@@ -684,6 +721,8 @@ func enter_status_effect(status_effect: StatusEffect) -> void:
 			pass
 		StatusEffect.TASTELESS:
 			pass
+		StatusEffect.BLIND:
+			pass
 		_:
 			pass
 
@@ -695,6 +734,8 @@ func exit_status_effect(status_effect: StatusEffect) -> void:
 			stop_unconscious_effect()
 			pass
 		StatusEffect.TASTELESS:
+			pass
+		StatusEffect.BLIND:
 			pass
 		_:
 			pass

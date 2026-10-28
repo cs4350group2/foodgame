@@ -38,7 +38,7 @@ func receive_order_item(item: OrderItem) -> bool:
 	
 	if StatusEffect.TASTELESS in current_status_effects:
 		dish_quality = 100.0
-		received = tasteless_receive_order_item()
+		received = tasteless_receive_order_item(item)
 	else:
 		food = item.get_edible()
 		dish_quality = food.get_dish_quality()

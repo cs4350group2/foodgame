@@ -25,7 +25,7 @@ func receive_order_item(item: OrderItem) -> bool:
 		return false
 	
 	if StatusEffect.TASTELESS in current_status_effects:
-		return tasteless_receive_order_item()
+		return tasteless_receive_order_item(item)
 	
 	var food: Food = item.get_edible()
 	var dish_quality: float = food.get_dish_quality()

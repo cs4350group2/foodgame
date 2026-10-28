@@ -57,6 +57,20 @@ func play_animation(anim: String) -> void:
 		_:
 			pass
 
+func receive_order_item(item: OrderItem) -> bool:
+	if current_state != State.WAITING_FOR_FOOD:
+		return false
+	
+	var food_name = item.get_edible().get_edible_name()
+	if food_name == "Mistake":
+		return anyhow_receive_order_item()
+	
+	if StatusEffect.TASTELESS in current_status_effects:
+		return tasteless_receive_order_item(item)
+	
+	# if the order is finished, we let the signal tell us
+	return order.receive_order_item(item)
+
 func reset_offset() -> void:
 	model_offset.position = default_position
 
