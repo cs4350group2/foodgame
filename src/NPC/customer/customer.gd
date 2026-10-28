@@ -526,7 +526,13 @@ func _deliver_held_edible(player: Player) -> void:
 			delivered_edible.collision_mask = 0
 			delivered_edible.queue_free()
 			
-			var action_message: String = notification_data["action_notification"].get("deliver_item") % data.get_edible_name()
+			var action_message: String = (
+				notification_data["action_notification"].get("deliver_item") 
+				% [
+					data.get_edible_name(),
+					get_customer_name()
+				]
+			)
 			restaurant_ui.show_side(action_message)
 			print("Delivered %s." % data.get_edible_name())
 	else: # is Food
@@ -552,7 +558,13 @@ func _deliver_held_edible(player: Player) -> void:
 		delivered_edible.collision_mask = 0
 		delivered_edible.queue_free()
 		
-		var action_message: String = notification_data["action_notification"].get("deliver_item") % food_data.get_edible_name()
+		var action_message: String = (
+				notification_data["action_notification"].get("deliver_item") 
+				% [
+					food_data.get_edible_name(),
+					get_customer_name()
+				]
+			)
 		restaurant_ui.show_side(action_message)
 		print("Delivered %s." % food_data.get_edible_name())
 

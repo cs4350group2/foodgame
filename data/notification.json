@@ -17,7 +17,7 @@
 		"uncooked_ingredient_error": "Ingredients cannot be delivered. Cook them first.",
 	},
 	"action_notification": {
-		"deliver_item": "Delivered %s.",
+		"deliver_item": "Delivered %s to %s.",
 	},
 	"customer_action_notification": {
 		"leaving_out_of_patience": "%s leaving because out of patience.",
