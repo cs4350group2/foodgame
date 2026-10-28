@@ -385,6 +385,9 @@ func take_order() -> void:
 	RestaurantManager.add_order(order)
 	order_taken = true
 	play_audio(AudioSfx.ORDER_TAKEN)
+	
+	var message: String = notification_data["action_notification"].get("take_order") % get_customer_name()
+	restaurant_ui.show_side(message)
 
 func start_ordering() -> void:
 	patience = max_patience
@@ -572,6 +575,11 @@ func _deliver_held_edible(player: Player) -> void:
 			restaurant_ui.show_side(action_message)
 			print("Delivered %s." % data.get_edible_name())
 	else: # is Food
+		if current_state != State.WAITING_FOR_FOOD:
+			var error_message = notification_data["error"].get("dish_deliver_before_order_taken")
+			restaurant_ui.show_notification_error_bottom(error_message)
+			return
+		
 		var food_data := data as Food
 		if food_data == null:
 			return
