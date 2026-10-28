@@ -1,16 +1,18 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://c4e678h3wic5p"]
 
-[ext_resource type="Script" path="res://src/ui/settings/settings_controls.gd" id="1_settings"]
-[ext_resource type="Theme" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="2_theme"]
+[ext_resource type="Script" uid="uid://c2e0raxq2kydi" path="res://src/ui/settings/settings_controls.gd" id="1_settings"]
+[ext_resource type="Theme" uid="uid://cp6t4mnfwas5v" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="2_theme"]
+[ext_resource type="PackedScene" uid="uid://v4xaxiqgjyfp" path="res://src/ui/settings/rhythm_preview.tscn" id="3_1dr5y"]
+[ext_resource type="Theme" uid="uid://clnyl86gan1pj" path="res://src/ui/restaurant_ui/RestaurantUIThemeRedButton.tres" id="3_l5sd5"]
 
 [sub_resource type="StyleBoxFlat" id="PanelStyle"]
 bg_color = Color(0.12, 0.12, 0.14, 0.97)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
-corner_radius_bottom_left = 8
 corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
-[node name="SettingsPage" type="CenterContainer"]
+[node name="SettingsPage" type="CenterContainer" unique_id=1817270872]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,147 +20,270 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_theme")
 
-[node name="Panel" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(480, 0)
+[node name="Panel" type="PanelContainer" parent="." unique_id=237662006]
+custom_minimum_size = Vector2(480, 440)
 layout_mode = 2
 theme_override_styles/panel = SubResource("PanelStyle")
 
-[node name="Margin" type="MarginContainer" parent="Panel"]
+[node name="Margin" type="MarginContainer" parent="Panel" unique_id=1733080983]
 layout_mode = 2
 theme_override_constants/margin_left = 28
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 24
 
-[node name="Settings" type="VBoxContainer" parent="Panel/Margin"]
+[node name="ViewManager" type="Control" parent="Panel/Margin" unique_id=2057919317]
 layout_mode = 2
-theme_override_constants/separation = 12
-script = ExtResource("1_settings")
 
-[node name="Title" type="Label" parent="Panel/Margin/Settings"]
+[node name="CategorySelection" type="VBoxContainer" parent="Panel/Margin/ViewManager" unique_id=268469379]
+visible = false
+layout_mode = 0
+offset_right = 424.0
+offset_bottom = 440.0
+theme_override_constants/separation = 110
+
+[node name="Title" type="Label" parent="Panel/Margin/ViewManager/CategorySelection" unique_id=198801888]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "Settings"
+text = "SETTINGS"
 horizontal_alignment = 1
 
-[node name="MasterRow" type="VBoxContainer" parent="Panel/Margin/Settings"]
+[node name="ButtonVBox" type="VBoxContainer" parent="Panel/Margin/ViewManager/CategorySelection" unique_id=739016076]
+layout_mode = 2
+theme_override_constants/separation = 46
+
+[node name="AudioButton" type="Button" parent="Panel/Margin/ViewManager/CategorySelection/ButtonVBox" unique_id=581688965]
+layout_mode = 2
+text = "AUDIO"
+
+[node name="RhythmButton" type="Button" parent="Panel/Margin/ViewManager/CategorySelection/ButtonVBox" unique_id=1939181942]
+layout_mode = 2
+text = "Cooking/Rhythm"
+
+[node name="Spacer" type="Control" parent="Panel/Margin/ViewManager/CategorySelection/ButtonVBox" unique_id=1844828072]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="CategoryBackButton" type="Button" parent="Panel/Margin/ViewManager/CategorySelection/ButtonVBox" unique_id=1784315826]
+layout_mode = 2
+text = "Back"
+
+[node name="AudioSettings" type="VBoxContainer" parent="Panel/Margin/ViewManager" unique_id=1512165319]
+visible = false
+layout_mode = 0
+offset_right = 424.0
+offset_bottom = 440.0
+theme_override_constants/separation = 16
+script = ExtResource("1_settings")
+
+[node name="Title" type="Label" parent="Panel/Margin/ViewManager/AudioSettings" unique_id=825950067]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "AUDIO"
+horizontal_alignment = 1
+
+[node name="MasterRow" type="VBoxContainer" parent="Panel/Margin/ViewManager/AudioSettings" unique_id=1326035276]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Panel/Margin/Settings/MasterRow"]
+[node name="Header" type="HBoxContainer" parent="Panel/Margin/ViewManager/AudioSettings/MasterRow" unique_id=485102950]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/Margin/Settings/MasterRow/Header"]
+[node name="Label" type="Label" parent="Panel/Margin/ViewManager/AudioSettings/MasterRow/Header" unique_id=1779549679]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Master"
 
-[node name="MasterValue" type="Label" parent="Panel/Margin/Settings/MasterRow/Header"]
+[node name="MasterValue" type="Label" parent="Panel/Margin/ViewManager/AudioSettings/MasterRow/Header" unique_id=1924955592]
 unique_name_in_owner = true
 layout_mode = 2
 text = "100%"
 
-[node name="MasterSlider" type="HSlider" parent="Panel/Margin/Settings/MasterRow"]
+[node name="MasterSlider" type="HSlider" parent="Panel/Margin/ViewManager/AudioSettings/MasterRow" unique_id=863244235]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 value = 100.0
 
-[node name="BGMRow" type="VBoxContainer" parent="Panel/Margin/Settings"]
+[node name="BGMRow" type="VBoxContainer" parent="Panel/Margin/ViewManager/AudioSettings" unique_id=1204190393]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Panel/Margin/Settings/BGMRow"]
+[node name="Header" type="HBoxContainer" parent="Panel/Margin/ViewManager/AudioSettings/BGMRow" unique_id=429142964]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/Margin/Settings/BGMRow/Header"]
+[node name="Label" type="Label" parent="Panel/Margin/ViewManager/AudioSettings/BGMRow/Header" unique_id=1734925751]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "BGM"
 
-[node name="BGMValue" type="Label" parent="Panel/Margin/Settings/BGMRow/Header"]
+[node name="BGMValue" type="Label" parent="Panel/Margin/ViewManager/AudioSettings/BGMRow/Header" unique_id=1221777891]
 unique_name_in_owner = true
 layout_mode = 2
 text = "100%"
 
-[node name="BGMSlider" type="HSlider" parent="Panel/Margin/Settings/BGMRow"]
+[node name="BGMSlider" type="HSlider" parent="Panel/Margin/ViewManager/AudioSettings/BGMRow" unique_id=117001461]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 value = 100.0
 
-[node name="RhythmRow" type="VBoxContainer" parent="Panel/Margin/Settings"]
+[node name="RhythmVolumeRow" type="VBoxContainer" parent="Panel/Margin/ViewManager/AudioSettings" unique_id=661545897]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Panel/Margin/Settings/RhythmRow"]
+[node name="Header" type="HBoxContainer" parent="Panel/Margin/ViewManager/AudioSettings/RhythmVolumeRow" unique_id=2053539785]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/Margin/Settings/RhythmRow/Header"]
+[node name="Label" type="Label" parent="Panel/Margin/ViewManager/AudioSettings/RhythmVolumeRow/Header" unique_id=1552428481]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Rhythm"
 
-[node name="RhythmValue" type="Label" parent="Panel/Margin/Settings/RhythmRow/Header"]
+[node name="RhythmValue" type="Label" parent="Panel/Margin/ViewManager/AudioSettings/RhythmVolumeRow/Header" unique_id=1567310469]
 unique_name_in_owner = true
 layout_mode = 2
 text = "100%"
 
-[node name="RhythmSlider" type="HSlider" parent="Panel/Margin/Settings/RhythmRow"]
+[node name="RhythmSlider" type="HSlider" parent="Panel/Margin/ViewManager/AudioSettings/RhythmVolumeRow" unique_id=545368874]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 value = 100.0
 
-[node name="SFXRow" type="VBoxContainer" parent="Panel/Margin/Settings"]
+[node name="SFXRow" type="VBoxContainer" parent="Panel/Margin/ViewManager/AudioSettings" unique_id=38946987]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Panel/Margin/Settings/SFXRow"]
+[node name="Header" type="HBoxContainer" parent="Panel/Margin/ViewManager/AudioSettings/SFXRow" unique_id=1239460843]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/Margin/Settings/SFXRow/Header"]
+[node name="Label" type="Label" parent="Panel/Margin/ViewManager/AudioSettings/SFXRow/Header" unique_id=134126057]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SFX"
 
-[node name="SFXValue" type="Label" parent="Panel/Margin/Settings/SFXRow/Header"]
+[node name="SFXValue" type="Label" parent="Panel/Margin/ViewManager/AudioSettings/SFXRow/Header" unique_id=1528193318]
 unique_name_in_owner = true
 layout_mode = 2
 text = "100%"
 
-[node name="SFXSlider" type="HSlider" parent="Panel/Margin/Settings/SFXRow"]
+[node name="SFXSlider" type="HSlider" parent="Panel/Margin/ViewManager/AudioSettings/SFXRow" unique_id=92255819]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 value = 100.0
 
-[node name="OffsetRow" type="VBoxContainer" parent="Panel/Margin/Settings"]
+[node name="OffsetHint" type="Label" parent="Panel/Margin/ViewManager/AudioSettings" unique_id=147759560]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Negative: notes earlier. Positive: notes later."
+horizontal_alignment = 1
+
+[node name="AudioBackButton" type="Button" parent="Panel/Margin/ViewManager/AudioSettings" unique_id=1941248807]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Back"
+
+[node name="RhythmSettings" type="VBoxContainer" parent="Panel/Margin/ViewManager" unique_id=626312747]
+layout_mode = 0
+offset_right = 424.0
+offset_bottom = 440.0
+theme_override_constants/separation = 34
+
+[node name="Title" type="Label" parent="Panel/Margin/ViewManager/RhythmSettings" unique_id=741483799]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Cooking/Rhythm"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings" unique_id=853442420]
+layout_mode = 2
+theme_override_constants/separation = 75
+
+[node name="SettingsVBox" type="VBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer" unique_id=240337063]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="NoteSpeedRow" type="VBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox" unique_id=573749881]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Panel/Margin/Settings/OffsetRow"]
+[node name="Header" type="HBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/NoteSpeedRow" unique_id=100389278]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/Margin/Settings/OffsetRow/Header"]
+[node name="Label" type="Label" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/NoteSpeedRow/Header" unique_id=1436611094]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Rhythm offset"
+text = "Note Speed "
 
-[node name="OffsetValue" type="Label" parent="Panel/Margin/Settings/OffsetRow/Header"]
+[node name="NoteSpeedValue" type="Label" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/NoteSpeedRow/Header" unique_id=1677252342]
+unique_name_in_owner = true
+layout_mode = 2
+text = "5.0"
+
+[node name="NoteSpeedSlider" type="HSlider" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/NoteSpeedRow" unique_id=805205953]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+step = 0.1
+value = 5.0
+
+[node name="OffsetRow" type="VBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox" unique_id=1531599533]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/OffsetRow" unique_id=1057422027]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/OffsetRow/Header" unique_id=556113517]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Rhythm Offset"
+
+[node name="OffsetValue" type="Label" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/OffsetRow/Header" unique_id=929187391]
 unique_name_in_owner = true
 layout_mode = 2
 text = "+0 ms"
 
-[node name="OffsetSlider" type="HSlider" parent="Panel/Margin/Settings/OffsetRow"]
+[node name="OffsetSlider" type="HSlider" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/OffsetRow" unique_id=948184351]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 min_value = -150.0
 max_value = 150.0
 
-[node name="OffsetHint" type="Label" parent="Panel/Margin/Settings"]
+[node name="BackgroundBrightnessRow" type="VBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox" unique_id=1527065501]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Negative: notes earlier. Positive: notes later."
-horizontal_alignment = 1
 
-[node name="BackButton" type="Button" parent="Panel/Margin/Settings"]
+[node name="Header" type="HBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/BackgroundBrightnessRow" unique_id=1001852214]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/BackgroundBrightnessRow/Header" unique_id=842275765]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BG Brightness"
+
+[node name="BackgroundBrightnessValue" type="Label" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/BackgroundBrightnessRow/Header" unique_id=976222690]
+unique_name_in_owner = true
+layout_mode = 2
+text = "50.0"
+
+[node name="BackgroundBrightnessSlider" type="HSlider" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/BackgroundBrightnessRow" unique_id=554233243]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.1
+value = 50.0
+
+[node name="RhythmPreview" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer" unique_id=1593727380 instance=ExtResource("3_1dr5y")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ResetToDefaultsButton" type="Button" parent="Panel/Margin/ViewManager/RhythmSettings" unique_id=1388827300]
+layout_mode = 2
+theme = ExtResource("3_l5sd5")
+text = "Reset to Default values"
+
+[node name="RhythmBackButton" type="Button" parent="Panel/Margin/ViewManager/RhythmSettings" unique_id=792351835]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Back"
+
+[connection signal="pressed" from="Panel/Margin/ViewManager/RhythmSettings/ResetToDefaultsButton" to="Panel/Margin/ViewManager/AudioSettings" method="_on_reset_to_defaults_button_pressed"]

@@ -4,10 +4,9 @@
 [ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/OrderUITheme.tres" id="2_14lbk"]
 [ext_resource type="FontFile" uid="uid://8vl643wgamfq" path="res://assets/fonts/upheavtt.ttf" id="2_fxpoi"]
 [ext_resource type="FontFile" uid="uid://dk6aai08i16bb" path="res://assets/fonts/W95F.otf" id="3_vt2ny"]
-
-[ext_resource type="Script" path="res://src/ui/settings/settings_controls.gd" id="5_settings"]
-
-[ext_resource type="Theme" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="6_buttons"]
+[ext_resource type="Script" uid="uid://c2e0raxq2kydi" path="res://src/ui/settings/settings_controls.gd" id="5_settings"]
+[ext_resource type="Theme" uid="uid://cp6t4mnfwas5v" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="6_buttons"]
+[ext_resource type="PackedScene" uid="uid://v4xaxiqgjyfp" path="res://src/ui/settings/rhythm_preview.tscn" id="6_tvmky"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxpoi"]
 content_margin_left = 14.0
@@ -30,6 +29,73 @@ shadow_size = 2
 shadow_offset = Vector2(0, 4)
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ResumeButton_pressed"]
+content_margin_left = 14.0
+content_margin_top = 5.0
+content_margin_right = 14.0
+content_margin_bottom = 3.0
+bg_color = Color(0.43924296, 0.17812406, 0.32989323, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ResumeButton_hover"]
+content_margin_left = 14.0
+content_margin_top = 3.0
+content_margin_right = 14.0
+content_margin_bottom = 5.0
+bg_color = Color(0.6068188, 0.30552775, 0.48064604, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.98, 0.91, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ResumeButton_hover_pressed"]
+content_margin_left = 14.0
+content_margin_top = 5.0
+content_margin_right = 14.0
+content_margin_bottom = 3.0
+bg_color = Color(0.49555615, 0.20096047, 0.37218726, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1qdr"]
 content_margin_left = 14.0
 content_margin_top = 3.0
@@ -49,6 +115,73 @@ corner_detail = 1
 shadow_color = Color(0.14, 0.06, 0.02, 1)
 shadow_size = 2
 shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_RecipeButton_pressed"]
+content_margin_left = 14.0
+content_margin_top = 5.0
+content_margin_right = 14.0
+content_margin_bottom = 3.0
+bg_color = Color(0.09438649, 0.33509645, 0.3309569, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_RecipeButton_hover"]
+content_margin_left = 14.0
+content_margin_top = 3.0
+content_margin_right = 14.0
+content_margin_bottom = 5.0
+bg_color = Color(0.20890749, 0.48664975, 0.48187336, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.98, 0.91, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_RecipeButton_hover_pressed"]
+content_margin_left = 14.0
+content_margin_top = 5.0
+content_margin_right = 14.0
+content_margin_bottom = 3.0
+bg_color = Color(0.10648732, 0.37805754, 0.37338728, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main_menu"]
@@ -116,140 +249,6 @@ shadow_size = 2
 shadow_offset = Vector2(0, 4)
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ResumeButton_hover"]
-content_margin_left = 14.0
-content_margin_top = 3.0
-content_margin_right = 14.0
-content_margin_bottom = 5.0
-bg_color = Color(0.6068188, 0.305527753, 0.480646045, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 0.98, 0.91, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-corner_detail = 1
-shadow_color = Color(0.14, 0.06, 0.02, 1)
-shadow_size = 2
-shadow_offset = Vector2(0, 4)
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ResumeButton_pressed"]
-content_margin_left = 14.0
-content_margin_top = 5.0
-content_margin_right = 14.0
-content_margin_bottom = 3.0
-bg_color = Color(0.43924296, 0.178124053, 0.329893239, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 0.956863, 0.85098, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-corner_detail = 1
-expand_margin_top = -2.0
-expand_margin_bottom = 2.0
-shadow_color = Color(0.14, 0.06, 0.02, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, 1)
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ResumeButton_hover_pressed"]
-content_margin_left = 14.0
-content_margin_top = 5.0
-content_margin_right = 14.0
-content_margin_bottom = 3.0
-bg_color = Color(0.49555616, 0.20096047, 0.372187244, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 0.956863, 0.85098, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-corner_detail = 1
-expand_margin_top = -2.0
-expand_margin_bottom = 2.0
-shadow_color = Color(0.14, 0.06, 0.02, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, 1)
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_RecipeButton_hover"]
-content_margin_left = 14.0
-content_margin_top = 3.0
-content_margin_right = 14.0
-content_margin_bottom = 5.0
-bg_color = Color(0.208907483, 0.486649765, 0.481873366, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 0.98, 0.91, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-corner_detail = 1
-shadow_color = Color(0.14, 0.06, 0.02, 1)
-shadow_size = 2
-shadow_offset = Vector2(0, 4)
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_RecipeButton_pressed"]
-content_margin_left = 14.0
-content_margin_top = 5.0
-content_margin_right = 14.0
-content_margin_bottom = 3.0
-bg_color = Color(0.0943864849, 0.335096463, 0.330956917, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 0.956863, 0.85098, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-corner_detail = 1
-expand_margin_top = -2.0
-expand_margin_bottom = 2.0
-shadow_color = Color(0.14, 0.06, 0.02, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, 1)
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_RecipeButton_hover_pressed"]
-content_margin_left = 14.0
-content_margin_top = 5.0
-content_margin_right = 14.0
-content_margin_bottom = 3.0
-bg_color = Color(0.106487316, 0.378057548, 0.373387291, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 0.956863, 0.85098, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-corner_detail = 1
-expand_margin_top = -2.0
-expand_margin_bottom = 2.0
-shadow_color = Color(0.14, 0.06, 0.02, 1)
-shadow_size = 1
-shadow_offset = Vector2(0, 1)
-anti_aliasing = false
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_MainMenuButton_hover_pressed"]
 content_margin_left = 14.0
 content_margin_top = 5.0
@@ -315,190 +314,271 @@ theme_override_font_sizes/font_size = 28
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="FoldableContainer" type="FoldableContainer" parent="Center/Panel/Margin/Settings" unique_id=653102553]
+[node name="AudioTab" type="FoldableContainer" parent="Center/Panel/Margin/Settings" unique_id=653102553]
 layout_mode = 2
 theme = ExtResource("2_14lbk")
 folded = true
-title = "Volume"
+title = "Audio"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Center/Panel/Margin/Settings/FoldableContainer" unique_id=1322528158]
+[node name="VBoxContainer" type="VBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab" unique_id=1322528158]
 visible = false
 layout_mode = 2
 script = ExtResource("5_settings")
 
-[node name="MasterRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer" unique_id=583593460]
+[node name="MasterRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer" unique_id=583593460]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/MasterRow" unique_id=1032228729]
+[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/MasterRow" unique_id=1032228729]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/MasterRow/Header" unique_id=1158947285]
+[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/MasterRow/Header" unique_id=1158947285]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "Master"
 
-[node name="MasterValue" type="Label" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/MasterRow/Header" unique_id=621602600]
+[node name="MasterValue" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/MasterRow/Header" unique_id=621602600]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "100%"
 
-[node name="MasterSlider" type="HSlider" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/MasterRow" unique_id=443844455]
+[node name="MasterSlider" type="HSlider" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/MasterRow" unique_id=443844455]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 value = 100.0
 
-[node name="BGMRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer" unique_id=1048883676]
+[node name="BGMRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer" unique_id=1048883676]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/BGMRow" unique_id=297375532]
+[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/BGMRow" unique_id=297375532]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/BGMRow/Header" unique_id=217599459]
+[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/BGMRow/Header" unique_id=217599459]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "BGM"
 
-[node name="BGMValue" type="Label" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/BGMRow/Header" unique_id=1657872592]
+[node name="BGMValue" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/BGMRow/Header" unique_id=1657872592]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "100%"
 
-[node name="BGMSlider" type="HSlider" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/BGMRow" unique_id=304676979]
+[node name="BGMSlider" type="HSlider" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/BGMRow" unique_id=304676979]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 value = 100.0
 
-[node name="RhythmRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer" unique_id=1878721656]
+[node name="RhythmRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer" unique_id=1878721656]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/RhythmRow" unique_id=1602942266]
+[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/RhythmRow" unique_id=1602942266]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/RhythmRow/Header" unique_id=892836403]
+[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/RhythmRow/Header" unique_id=892836403]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "Rhythm"
 
-[node name="RhythmValue" type="Label" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/RhythmRow/Header" unique_id=542914220]
+[node name="RhythmValue" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/RhythmRow/Header" unique_id=542914220]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "100%"
 
-[node name="RhythmSlider" type="HSlider" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/RhythmRow" unique_id=1688623855]
+[node name="RhythmSlider" type="HSlider" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/RhythmRow" unique_id=1688623855]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 value = 100.0
 
-[node name="SFXRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer" unique_id=2029696561]
+[node name="SFXRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer" unique_id=2029696561]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/SFXRow" unique_id=1161422092]
+[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/SFXRow" unique_id=1161422092]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/SFXRow/Header" unique_id=697081091]
+[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/SFXRow/Header" unique_id=697081091]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "SFX"
 
-[node name="SFXValue" type="Label" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/SFXRow/Header" unique_id=1575453734]
+[node name="SFXValue" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/SFXRow/Header" unique_id=1575453734]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vt2ny")
 theme_override_font_sizes/font_size = 21
 text = "100%"
 
-[node name="SFXSlider" type="HSlider" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/SFXRow" unique_id=1923479183]
+[node name="SFXSlider" type="HSlider" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer/SFXRow" unique_id=1923479183]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 value = 100.0
 
-[node name="OffsetRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer" unique_id=1795562154]
-layout_mode = 2
-
-[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/OffsetRow" unique_id=604925833]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/OffsetRow/Header" unique_id=1580661817]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_vt2ny")
-theme_override_font_sizes/font_size = 21
-text = "Rhythm offset"
-
-[node name="OffsetValue" type="Label" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/OffsetRow/Header" unique_id=1504878695]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_vt2ny")
-theme_override_font_sizes/font_size = 21
-text = "+0 ms"
-
-[node name="OffsetSlider" type="HSlider" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer/OffsetRow" unique_id=1672725493]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 28)
-layout_mode = 2
-min_value = -150.0
-max_value = 150.0
-
-[node name="OffsetHint" type="Label" parent="Center/Panel/Margin/Settings/FoldableContainer/VBoxContainer" unique_id=127689491]
+[node name="OffsetHint" type="Label" parent="Center/Panel/Margin/Settings/AudioTab/VBoxContainer" unique_id=127689491]
 layout_mode = 2
 theme = ExtResource("2_14lbk")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Negative: notes earlier. Positive: notes later."
 horizontal_alignment = 1
 
+[node name="RhythmTab" type="FoldableContainer" parent="Center/Panel/Margin/Settings" unique_id=1684540570]
+layout_mode = 2
+theme = ExtResource("2_14lbk")
+folded = true
+title = "Rhythm"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab" unique_id=868489397]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer" unique_id=135879379]
+layout_mode = 2
+script = ExtResource("5_settings")
+
+[node name="NoteSpeedRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer" unique_id=909670019]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/NoteSpeedRow" unique_id=223416202]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/NoteSpeedRow/Header" unique_id=501449697]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_vt2ny")
+theme_override_font_sizes/font_size = 21
+text = "Note Speed"
+
+[node name="NoteSpeedValue" type="Label" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/NoteSpeedRow/Header" unique_id=231831043]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vt2ny")
+theme_override_font_sizes/font_size = 21
+text = "5.0"
+
+[node name="NoteSpeedSlider" type="HSlider" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/NoteSpeedRow" unique_id=1029773818]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+step = 0.1
+value = 5.0
+
+[node name="OffsetRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer" unique_id=576268662]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/OffsetRow" unique_id=195923938]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/OffsetRow/Header" unique_id=901265802]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_vt2ny")
+theme_override_font_sizes/font_size = 21
+text = "Rhythm Offset"
+
+[node name="OffsetValue" type="Label" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/OffsetRow/Header" unique_id=345021177]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vt2ny")
+theme_override_font_sizes/font_size = 21
+text = "+0 ms"
+
+[node name="OffsetSlider" type="HSlider" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/OffsetRow" unique_id=47951167]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+min_value = -150.0
+max_value = 150.0
+
+[node name="BackgroundBrightnessRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer" unique_id=1914691559]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/BackgroundBrightnessRow" unique_id=1419325222]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/BackgroundBrightnessRow/Header" unique_id=1481605851]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_vt2ny")
+theme_override_font_sizes/font_size = 21
+text = "Background Brightness"
+
+[node name="BackgroundBrightnessValue" type="Label" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/BackgroundBrightnessRow/Header" unique_id=2055159681]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vt2ny")
+theme_override_font_sizes/font_size = 21
+text = "100%"
+
+[node name="BackgroundBrightnessSlider" type="HSlider" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/BackgroundBrightnessRow" unique_id=1769962480]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+value = 50.0
+
+[node name="OffsetHint" type="Label" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer" unique_id=1153301872]
+layout_mode = 2
+theme = ExtResource("2_14lbk")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Negative: notes earlier. Positive: notes later."
+horizontal_alignment = 1
+
+[node name="RhythmPreview" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer" unique_id=1593727380 instance=ExtResource("6_tvmky")]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="ResumeButton" type="Button" parent="Center/Panel/Margin/Settings" unique_id=1245879484]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+theme = ExtResource("6_buttons")
 theme_override_fonts/font = ExtResource("2_fxpoi")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_fxpoi")
-text = "Resume"
-theme_override_styles/hover = SubResource("StyleBoxFlat_ResumeButton_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ResumeButton_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ResumeButton_hover")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ResumeButton_hover_pressed")
-theme = ExtResource("6_buttons")
+text = "Resume"
 
 [node name="RecipeButton" type="Button" parent="Center/Panel/Margin/Settings" unique_id=387948340]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+theme = ExtResource("6_buttons")
 theme_override_fonts/font = ExtResource("2_fxpoi")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_o1qdr")
-text = "Recipes"
-theme_override_styles/hover = SubResource("StyleBoxFlat_RecipeButton_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_RecipeButton_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_RecipeButton_hover")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_RecipeButton_hover_pressed")
-theme = ExtResource("6_buttons")
+text = "Recipes"
 
 [node name="MainMenuButton" type="Button" parent="Center/Panel/Margin/Settings" unique_id=81174431]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+theme = ExtResource("6_buttons")
 theme_override_fonts/font = ExtResource("2_fxpoi")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_main_menu")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_main_menu_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_main_menu_hover")
-text = "Main Menu"
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_MainMenuButton_hover_pressed")
-theme = ExtResource("6_buttons")
+text = "Main Menu"

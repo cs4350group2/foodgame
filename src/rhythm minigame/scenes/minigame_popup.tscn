@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bx7cw268w4v8j" path="res://src/rhythm minigame/scenes/rhythm_main.tscn" id="1_bh6ah"]
 
 [node name="MinigamePopup" type="Control" unique_id=568447861]
-process_mode = 1
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
