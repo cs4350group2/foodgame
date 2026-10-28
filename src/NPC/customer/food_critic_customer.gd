@@ -36,9 +36,16 @@ func receive_order_item(item: OrderItem) -> bool:
 	var dish_quality: float
 	var received: bool
 	
-	if StatusEffect.TASTELESS in current_status_effects:
+	if StatusEffect.TASTELESS in current_status_effects and StatusEffect.BLIND in current_status_effects:
+		dish_quality = 100.0
+		received = anyhow_receive_order_item()
+	elif StatusEffect.TASTELESS in current_status_effects:
 		dish_quality = 100.0
 		received = tasteless_receive_order_item(item)
+	elif StatusEffect.BLIND in current_status_effects:
+		food = item.get_edible()
+		dish_quality = food.get_dish_quality()
+		received = blind_receive_order_item(item)
 	else:
 		food = item.get_edible()
 		dish_quality = food.get_dish_quality()
