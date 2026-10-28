@@ -37,7 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://bsnnh7o4hr4jg" path="res://models/environmentMeshes/Restaurant/Posters/Poster2.tscn" id="37_come4"]
 [ext_resource type="PackedScene" uid="uid://dlhc1tcg26jae" path="res://models/environmentMeshes/Restaurant/Posters/Poster3.tscn" id="38_h8e4i"]
 [ext_resource type="PackedScene" uid="uid://da5esxxk7tgjl" path="res://models/environmentMeshes/Restaurant/Posters/MenuPoster.tscn" id="39_come4"]
-[ext_resource type="PackedScene" uid="uid://b03jbfo8j711j" path="res://models/physics/food/pooOnAPlate/POOOO.tscn" id="40_h8e4i"]
+[ext_resource type="PackedScene" uid="uid://b03jbfo8j711j" path="res://models/physics/food/pooOnAPlate/mistake.tscn" id="40_h8e4i"]
 [ext_resource type="PackedScene" uid="uid://ujkr0mjx6opi" path="res://models/spawners/riceBag.tscn" id="41_0cp0l"]
 [ext_resource type="PackedScene" uid="uid://bgi1a47734pt8" path="res://models/spawners/fishTank.tscn" id="41_4lmeg"]
 [ext_resource type="PackedScene" uid="uid://ckegkpsi3apu7" path="res://models/interactable stations/microwaveStation.tscn" id="41_d2t1y"]

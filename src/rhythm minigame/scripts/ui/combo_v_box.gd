@@ -1,16 +1,16 @@
 extends VBoxContainer
 
-@onready var main: Node2D = $"../../../.."
+@onready var rhythm_main: Node2D = $"../../../.."
 
 var combo_count : int = 0
 @onready var combo_label: Label = $Combo
 @onready var combo_count_label: Label = $ComboCount
 
 func _ready() -> void:
-	main.hit.connect(update_combo)
-	main.miss.connect(update_combo)
-	main.cooking_start.connect(reset_combo_display)
-	main.results_display.connect(fade_out_combo_counter)
+	rhythm_main.hit.connect(update_combo)
+	rhythm_main.miss.connect(update_combo)
+	rhythm_main.cooking_start.connect(reset_combo_display)
+	rhythm_main.results_display.connect(fade_out_combo_counter)
 
 func update_combo(input_judgment : String) -> void:
 	if input_judgment == "PERFECT" or input_judgment == "GOOD":

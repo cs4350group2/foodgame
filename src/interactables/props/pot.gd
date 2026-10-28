@@ -10,12 +10,12 @@ const INGREDIENT_SCENES = {
 		preload("res://models/physics/food/ingredients/buns.tscn"),
 	"res://models/physics/food/ingredients/fishRaw.tscn":
 		preload("res://models/physics/food/ingredients/fishRaw.tscn"),
-	"res://models/physics/food/ingredients/potato.tscn":
-		preload("res://models/physics/food/ingredients/potato.tscn"),
+	"res://models/physics/food/ingredients/cleanPotato.tscn":
+		preload("res://models/physics/food/ingredients/cleanPotato.tscn"),
 	"res://models/physics/food/ingredients/potatoSliced.tscn":
 		preload("res://models/physics/food/ingredients/potatoSliced.tscn"),
-	"res://models/physics/food/ingredients/tomatoWhole.tscn":
-		preload("res://models/physics/food/ingredients/tomatoWhole.tscn"),
+	"res://models/physics/food/ingredients/cleanTomato.tscn":
+		preload("res://models/physics/food/ingredients/cleanTomato.tscn"),
 	"res://models/physics/food/ingredients/tomatoSliced.tscn":
 		preload("res://models/physics/food/ingredients/tomatoSliced.tscn"),
 	"res://models/physics/food/ingredients/fishSliced.tscn":
@@ -35,11 +35,11 @@ const INGREDIENT_NAMES = {
 		"chopped fish",
 	"res://models/physics/food/ingredients/buns.tscn":
 		"burger buns",
-	"res://models/physics/food/ingredients/potato.tscn":
+	"res://models/physics/food/ingredients/cleaPotato.tscn":
 		"potato",
 	"res://models/physics/food/ingredients/potatoSliced.tscn":
 		"chopped potato",
-	"res://models/physics/food/ingredients/tomatoWhole.tscn":
+	"res://models/physics/food/ingredients/cleanTomato.tscn":
 		"tomato",
 	"res://models/physics/food/ingredients/tomatoSliced.tscn":
 		"chopped tomato",

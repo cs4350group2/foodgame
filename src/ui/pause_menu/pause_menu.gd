@@ -50,6 +50,7 @@ func _on_recipe_closed() -> void:
 	$Center.show()
 
 func _on_main_menu_pressed() -> void:
+	AudioManager.rm_player.stop()
 	var scene_tree := get_tree()
 	var error := scene_tree.change_scene_to_file("res://src/ui/main_menu/MainMenu.tscn")
 	if error != OK:

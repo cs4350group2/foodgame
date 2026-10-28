@@ -29,6 +29,11 @@
 			"name": "Grilled Fish",
 			"rarity": 1.0,
 			"price": 12.50
+		},
+		{
+			"name": "Mistake",
+			"rarity": 0.0,
+			"price": 0.00
 		}
 	],
 }
