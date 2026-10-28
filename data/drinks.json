@@ -49,5 +49,12 @@
 			"description": "One of the symptoms of Covid-19 is losing your taste.",
 			"usage": "Customer accepts any food and any quality."
 		},
+		{
+			"name": "Soup Of Oblivion",
+			"scene_path": "res://models/physics/drinks/drink_placeholder.tscn",
+			"price": 0.0,
+			"description": "We got this from some grandma.",
+			"usage": "Factory resets a customer state to when they first entered the restaurant."
+		},
 	]
 }
