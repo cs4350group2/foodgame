@@ -421,6 +421,11 @@ func state_ordering(delta):
 	if order_taken:
 		change_state(State.WAITING_FOR_FOOD)
 
+func show_warning_notification() -> void:
+	var message: String = notification_data["customer_action_notification"]\
+		.get("low_patience_warning") % get_customer_name()
+	restaurant_ui.show_side(message)
+
 # Seconds that the customer will wait
 @export var max_patience: float
 var patience: float
