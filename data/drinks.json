@@ -40,7 +40,7 @@
 			"scene_path": "res://models/physics/drinks/drink_placeholder.tscn",
 			"price": 0.0,
 			"description": "Make sure this is served to customers above the age of 18.",
-			"usage": "Pause the customer’s patience level and puts the customer in an unconscious state."
+			"usage": "Pause the customer’s patience level and puts the customer in an unconscious state for 20 seconds."
 		},
 		{
 			"name": "Covid-19 Serum",

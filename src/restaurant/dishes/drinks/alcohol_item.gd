@@ -1,7 +1,7 @@
 extends EdibleItem
 
 var item_name: String = "Alcohol"
-var duration: float = 7.0
+var duration: float = 20.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
