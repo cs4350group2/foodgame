@@ -1,0 +1,58 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://6ovknlap7pq4"]
+
+[sub_resource type="Shader" id="Shader_pink_fish"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 fish_pink : source_color = vec4(0.96, 0.52, 0.54, 1.0);
+uniform vec4 stripe_white : source_color = vec4(0.99, 0.95, 0.92, 1.0);
+uniform float stripe_spacing : hint_range(0.05, 3.0, 0.05) = 0.24;
+uniform float stripe_offset : hint_range(-3.0, 3.0, 0.05) = 0.0;
+uniform float stripe_slant : hint_range(-1.0, 1.0, 0.05) = 0.0;
+uniform float stripe_softness : hint_range(0.01, 0.8, 0.01) = 0.035;
+uniform int length_axis : hint_enum(\"X\", \"Y\", \"Z\") = 1;
+uniform float surface_roughness : hint_range(0.0, 1.0, 0.05) = 0.78;
+
+varying vec3 fish_local_pos;
+
+void vertex() {
+    fish_local_pos = VERTEX;
+}
+
+void fragment() {
+    float along_body;
+    float across_body;
+    if (length_axis == 0) {
+        along_body = fish_local_pos.x;
+        across_body = fish_local_pos.y;
+    } else if (length_axis == 1) {
+        along_body = fish_local_pos.y;
+        across_body = fish_local_pos.x;
+    } else {
+        along_body = fish_local_pos.z;
+        across_body = fish_local_pos.y;
+    }
+
+    float band_coordinate = (along_body + across_body * stripe_slant + stripe_offset) / max(stripe_spacing, 0.01);
+    float band_wave = sin(band_coordinate * 6.28318530718);
+    float white_mask = smoothstep(0.55 - stripe_softness, 0.55 + stripe_softness, band_wave);
+
+    ALBEDO = mix(fish_pink.rgb, stripe_white.rgb, white_mask);
+    METALLIC = 0.0;
+    ROUGHNESS = surface_roughness;
+    SPECULAR = 0.25;
+}
+"
+
+[resource]
+resource_name = "Pink & White Striped Fish (Rotated 90, Thin)"
+render_priority = 0
+shader = SubResource("Shader_pink_fish")
+shader_parameter/fish_pink = Color(0.96, 0.52, 0.54, 1)
+shader_parameter/stripe_white = Color(0.99, 0.95, 0.92, 1)
+shader_parameter/stripe_spacing = 0.24
+shader_parameter/stripe_offset = 0.0
+shader_parameter/stripe_slant = 0.0
+shader_parameter/stripe_softness = 0.035
+shader_parameter/length_axis = 1
+shader_parameter/surface_roughness = 0.78

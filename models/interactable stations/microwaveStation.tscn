@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ckegkpsi3apu7"]
+
+[ext_resource type="PackedScene" uid="uid://bflinwj3lf3lo" path="res://models/counters/bartable.tscn" id="1_vbr1f"]
+[ext_resource type="PackedScene" uid="uid://yyvxo0i38fwb" path="res://models/props/microwave.scn" id="2_7gtg4"]
+
+[node name="MicrowaveStation" type="Node3D" unique_id=1109045891]
+
+[node name="workplan" parent="." unique_id=1513500207 instance=ExtResource("1_vbr1f")]
+
+[node name="Sketchfab_model" parent="." unique_id=2087947138 instance=ExtResource("2_7gtg4")]
+transform = Transform3D(-0.0015, 2.2649371e-10, 9.900354e-18, 0, -6.556708e-11, 0.0015, 2.2649371e-10, 0.0015, 6.556708e-11, 0, 0.4816522, 0)
