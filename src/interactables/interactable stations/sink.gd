@@ -69,7 +69,6 @@ func _get_tooltip_actions(player: Player) -> Dictionary:
 		var ingredient := player.held_edible
 		if WASHED_SCENES.has(ingredient.scene_file_path):
 			secondary = "Wash ingredient"
-			details = ingredient.get_edible_item_name()
 		else:
 			details = "Cannot wash %s" \
 					% ingredient.get_edible_item_name()
