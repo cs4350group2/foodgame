@@ -28,7 +28,6 @@ func update_dish_quality(input_judgment = ""):
 	else:
 		dish_quality_value_label.add_theme_color_override("font_color", Color.BLACK)
 	
-	print("Counts (live display) -> P: ", num_perfects, " G: ", num_goods, " M: ", num_misses)
 	dish_quality_value_label.text = str(current_dish_quality) + "%"
 
 func reset_visibility() -> void:
