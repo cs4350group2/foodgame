@@ -43,6 +43,7 @@ const STEW_TEXTURE = preload("uid://2no7u8k2e01j")
 const SUSHI_TEXTURE = preload("uid://cmeeivvg18fe2")
 const RICE_BOWL_TEXTURE = preload("uid://deyvt7atxh5xd")
 const GRILLED_FISH_TEXTURE = preload("uid://ddfmoioq0rtj7")
+const MISTAKE_TEXTURE = preload("uid://b03jbfo8j711j")
 
 const RHYTHM_MINIGAME_POPUP_SCENE = preload("uid://bl5f06ugjmaiq")
 
@@ -216,6 +217,10 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
 		"grilled_fish":
 			target_scene = GRILLED_FISH_PATH
 	
+	if dish_quality <= 20.0:
+		# for low dish quality, override texture with Mistake texture
+		target_scene = MISTAKE_TEXTURE
+	
 	var completed_edible_item := target_scene.instantiate() as EdibleItem
 	restaurant_main.add_child(completed_edible_item)
 	
@@ -255,11 +260,11 @@ func convert_ingredients_array_to_string(arr : Array) -> String:
 				names.append("Chopped meat")
 			"res://models/physics/food/ingredients/tomatoSliced.tscn":
 				names.append("Chopped tomatoes")
-			"res://models/physics/food/ingredients/tomatoWhole.tscn":
+			"res://models/physics/food/ingredients/cleanTomato.tscn":
 				names.append("Unchopped tomatoes")
 			"res://models/physics/food/ingredients/potatoSliced.tscn":
 				names.append("Chopped potatoes")
-			"res://models/physics/food/ingredients/potato.tscn":
+			"res://models/physics/food/ingredients/cleanPotato.tscn":
 				names.append("Unchopped potatoes")
 			"res://models/physics/food/ingredients/fishRaw.tscn":
 				names.append("Unchopped fish")

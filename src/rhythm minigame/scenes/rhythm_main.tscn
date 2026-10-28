@@ -14,7 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://dn5u3m4d2cn4x" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/judgment_note_left.tscn" id="11_kgy7m"]
 [ext_resource type="Theme" uid="uid://dcj8ax4pmivsw" path="res://assets/rhythm minigame/themes/input_judgment_and_combo_count.tres" id="13_30mjv"]
 [ext_resource type="Script" uid="uid://bjrqksanscus0" path="res://src/rhythm minigame/scripts/ui/input_margin.gd" id="14_vst8i"]
+[ext_resource type="Script" uid="uid://bsjin38rg7pcc" path="res://src/rhythm minigame/scripts/ui/dish_quality_v_box.gd" id="15_c5f8g"]
 [ext_resource type="Script" uid="uid://d3b8bawnqkgjd" path="res://src/rhythm minigame/scripts/ui/combo_v_box.gd" id="15_d3tvo"]
+[ext_resource type="Theme" uid="uid://cii64qdjuwj2n" path="res://assets/rhythm minigame/themes/live_dish_quality.tres" id="15_rfopb"]
 [ext_resource type="Script" uid="uid://0xvvqmn13i34" path="res://src/rhythm minigame/scripts/ui/cooking_start_and_end_popup.gd" id="16_4k77h"]
 [ext_resource type="Theme" uid="uid://1p1awuurvc8p" path="res://assets/rhythm minigame/themes/cooking_start_and_end_text.tres" id="17_tbtpv"]
 [ext_resource type="PackedScene" uid="uid://brgmty7m1iu8u" path="res://src/rhythm minigame/scenes/ui/rhythm_result_screen_v2.tscn" id="18_lgoak"]
@@ -102,6 +104,28 @@ horizontal_alignment = 1
 
 [node name="Timer" type="Timer" parent="RhythmUI/UIRoot/InputMargin/InputJudgment" unique_id=1228863083]
 wait_time = 0.3
+
+[node name="DishQualityContainer" type="MarginContainer" parent="RhythmUI/UIRoot" unique_id=968194779]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_right = -12.0
+offset_bottom = 104.0
+grow_horizontal = 0
+theme = ExtResource("15_rfopb")
+
+[node name="DishQualityVBox" type="VBoxContainer" parent="RhythmUI/UIRoot/DishQualityContainer" unique_id=1037173748]
+layout_mode = 2
+script = ExtResource("15_c5f8g")
+
+[node name="DishQuality" type="Label" parent="RhythmUI/UIRoot/DishQualityContainer/DishQualityVBox" unique_id=457205309]
+layout_mode = 2
+
+[node name="DishQualityValue" type="Label" parent="RhythmUI/UIRoot/DishQualityContainer/DishQualityVBox" unique_id=6062261]
+layout_mode = 2
+horizontal_alignment = 1
 
 [node name="ComboContainer" type="MarginContainer" parent="RhythmUI/UIRoot" unique_id=821738594]
 layout_mode = 1

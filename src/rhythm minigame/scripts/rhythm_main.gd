@@ -66,6 +66,8 @@ var adjusted_time_ms: float:
 # results screen that is shown after the minigame ends
 @onready var rhythm_result_screen_v2: Control = $RhythmUI/UIRoot/RhythmResultScreenV2
 
+@onready var dish_quality_value: Label = $RhythmUI/UIRoot/DishQualityContainer/DishQualityVBox/DishQualityValue
+
 # signals to handle hit/miss
 signal hit(input_judgment : String)
 signal miss(input_judgment : String)
@@ -86,7 +88,7 @@ var num_total_notes : int
 var num_empty_presses : int = 0
 var player_score : int
 var max_score : int
-var total_empty_press_penalty : int
+var total_empty_press_penalty : float
 var original_dish_quality : float 
 var final_dish_quality : float
 
@@ -195,12 +197,17 @@ func _ready() -> void:
 	
 	player_score = num_perfects * 100 + num_goods * 75 
 	max_score = num_total_notes * 100
-	total_empty_press_penalty = snapped(float(num_empty_presses) / num_total_notes, 0.01) * 100 # can tweak in the future if needed
-	original_dish_quality = snapped(float(player_score) / float(max_score) * 100, 0.01) # we express dish quality as a float percentage
-	final_dish_quality = max(0, original_dish_quality - total_empty_press_penalty)
+	total_empty_press_penalty = snapped(float(num_empty_presses) / float(num_total_notes) * 100, 0.01) 
+	original_dish_quality = snapped(float(player_score) / float(max_score) * 100, 0.01) 
+	final_dish_quality = snapped(max(0.0, original_dish_quality - total_empty_press_penalty), 0.01)
+	
+	if final_dish_quality <= 20.0:
+		# turn dish quality text red to indicate it's too low
+		rhythm_result_screen_v2.dish_quality_score_label.add_theme_color_override("font_color", Color(0.60, 0, 0))
 	
 	rhythm_result_screen_v2.dish_quality_score_label.text = str(final_dish_quality) + "%"
 	rhythm_result_screen_v2.total_empty_penalty_label.text += "\n" + str(total_empty_press_penalty) + "%"
+	print("Final dish quality w/o empty (rhythm_main): " + str(original_dish_quality))
 	
 	results_display.emit()
 
@@ -322,6 +329,15 @@ func spawn_note_from_data(note_data: Dictionary) -> Note:
 	
 	return new_note
 
+func get_current_dish_quality_snapped_without_empty() -> float:
+	var current_total_notes = num_perfects + num_goods + num_misses
+	if current_total_notes == 0:
+		return 100.0
+	var player_score = (num_perfects * 100) + (num_goods * 75)
+	var max_score = current_total_notes * 100
+	
+	return snapped(float(player_score) / float(max_score) * 100.0, 0.01)
+	
 func load_rhythm_chart(file_path: String, speed_mult : float) -> Array:
 	# parses fluXis chart text data and returns the HitObjects array (array of notes)
 	if not FileAccess.file_exists(file_path):
