@@ -10,6 +10,9 @@ extends CharacterBody3D
 @onready var audio_player = $AudioStreamPlayer3D
 @onready var restaurant_ui: RestaurantUI = get_tree().current_scene.get_node("RestaurantUi")
 
+# Notifications
+var notification_data: Dictionary
+
 # SFX
 const HMM_SFX = preload("res://assets/sfx/customer/hmm_new.mp3")
 const ORDER_READY_SFX = preload("res://assets/sfx/customer/order_fulfilled_new.mp3")
@@ -21,10 +24,13 @@ const LEAVING_SFX = preload("res://assets/sfx/customer/leaving_new.mp3")
 const WARNING_SFX = preload("res://assets/sfx/customer/warning_new.mp3")
 const HOBO_LAUGH_SFX = preload("res://assets/sfx/customer/hobo_laugh_new.mp3")
 const PAYMENT_SFX = preload("res://assets/sfx/customer/chaching_new.mp3")
+const SNORING_SFX = preload("res://assets/sfx/customer/snoring_sfx.mp3")
+const GULP_SFX = preload("res://assets/sfx/customer/gulp_sfx.mp3")
 
 # VFX
 const POOF_SCENE: PackedScene = preload("res://assets/vfx/customer/Poof.tscn")
 const PATIENCE_UP_SCENE: PackedScene = preload("res://assets/vfx/customer/PatienceUp.tscn")
+const SLEEP_ZZZ_SCENE: PackedScene = preload("res://assets/vfx/customer/SleepZzz.tscn")
 
 enum State {
 	IDLE,
@@ -82,6 +88,13 @@ func initialize_customer(name: String, level: int, patience: float, type: String
 	max_patience = patience
 	customer_type = type
 
+func load_notification_data() -> void:
+	var file = FileAccess.open("res://data/notification.json", FileAccess.READ)
+	if file == null:
+		push_error("Could not open notification.json")
+		return
+	notification_data = JSON.parse_string(file.get_as_text())
+
 func _ready():
 	interaction.supports_primary = true
 	interaction.accepts_primary_while_holding = true
@@ -93,6 +106,17 @@ func _ready():
 		max_patience,
 		max_patience / 100.0
 	)
+	load_notification_data()
+
+func _process(delta: float) -> void:
+	if StatusEffect.UNCONSCIOUS in current_status_effects:
+		if unconscious_effect_remaining > 0.0:
+			unconscious_effect_remaining -= delta
+			if unconscious_effect_remaining <= 0.0:
+				remove_status_effect(StatusEffect.UNCONSCIOUS)
+	
+	match current_state:
+		pass
 
 func _on_interacted(_player: Player) -> void:
 	if is_instance_valid(_player) \
@@ -106,7 +130,8 @@ func _on_interacted(_player: Player) -> void:
 
 		State.WAITING_FOR_FOOD:
 			# If reaches here, the player is 100% not holding an edible
-			print("You need to be holding a cooked dish/consumable to deliver it.")
+			var error_message: String = notification_data["error"].get("delivering_empty_handed")
+			restaurant_ui.show_notification_error_bottom(error_message)
 			return
 
 		State.PAYING:
@@ -146,16 +171,12 @@ func move_toward_navigation_target(delta) -> void:
 	var direction := global_position.direction_to(next_position)
 	var target_rotation = atan2(direction.x, direction.z) + PI / 2
 
-	velocity = direction * move_speed
+	velocity = velocity.move_toward(direction * move_speed, .25)
 	rotation.y = lerp_angle(rotation.y, target_rotation, 10.0 * delta)
 	move_and_slide()
 
 func update_target_location(target_location):
 	nav_agent.target_position = target_location
-
-func _process(delta: float) -> void:
-	match current_state:
-		pass
 
 func play_animation(anim: String) -> void:
 	match anim:
@@ -170,7 +191,7 @@ func play_animation(anim: String) -> void:
 		_:
 			pass
 
-# -------------- State Management ----------------------------------
+# <------------- State Management --------------------------------------------->
 
 func change_state(new_state: State):
 	if current_state == new_state:
@@ -304,8 +325,13 @@ enum AudioSfx {
 	PAYMENT,
 	LEAVING,
 	WARNING,
-	HOBO_LAUGH
+	HOBO_LAUGH,
+	SNORING,
+	GULP,
 }
+
+func stop_audio() -> void:
+	audio_player.stop()
 
 func play_audio(audio_type: AudioSfx):
 	match audio_type:
@@ -339,6 +365,12 @@ func play_audio(audio_type: AudioSfx):
 		AudioSfx.HOBO_LAUGH:
 			audio_player.volume_linear = 1.0
 			audio_player.stream = HOBO_LAUGH_SFX
+		AudioSfx.SNORING:
+			audio_player.volume_linear = 2.0
+			audio_player.stream = SNORING_SFX
+		AudioSfx.GULP:
+			audio_player.volume_linear = 1.5
+			audio_player.stream = GULP_SFX
 	audio_player.play()
 
 func state_sitting(delta):
@@ -374,11 +406,15 @@ func get_order() -> Order:
 
 func state_ordering(delta):
 	# Wait until player takes order
-	patience -= delta
-	patience_bar.update_patience(patience)
+	if not patience_timer_stopped:
+		patience -= delta
+		patience_bar.update_patience(patience)
+	
 	if patience <= 0.0:
 		patience = 0.0
 		print(self, " leaving because out of patience")
+		var message: String = notification_data["customer_action_notification"].get("leaving_out_of_patience") % get_customer_name()
+		restaurant_ui.show_side(message)
 		change_state(State.LEAVING_ANGRY)
 		return
 		
@@ -407,11 +443,15 @@ func start_waiting_for_food() -> void:
 
 func state_waiting_for_food(delta):
 	# Wait until restaurant tells us the food is ready
-	patience -= delta
-	patience_bar.update_patience(patience)
+	if not patience_timer_stopped:
+		patience -= delta
+		patience_bar.update_patience(patience)
+	
 	if patience <= 0.0:
 		patience = 0.0
 		print(self, " leaving because out of patience")
+		var message: String = notification_data["customer_action_notification"].get("leaving_out_of_patience") % get_customer_name()
+		restaurant_ui.show_side(message)
 		change_state(State.LEAVING_ANGRY)
 		
 		return
@@ -433,28 +473,67 @@ func receive_order_item(item: OrderItem) -> bool:
 	if current_state != State.WAITING_FOR_FOOD:
 		return false
 	
+	if StatusEffect.TASTELESS in current_status_effects:
+		return tasteless_receive_order_item()
+	
 	# if the order is finished, we let the signal tell us
 	return order.receive_order_item(item)
+
+func tasteless_receive_order_item() -> bool:
+	var order_items = order.get_order_items()
+	
+	for item in order_items:
+		var received_item = order.find_received_item_in_order(item)
+		if received_item:
+			if received_item.get_quantity() < item.get_quantity():
+				# Order havent receive sufficient qty of this item
+				var food: Food = item.get_edible()
+				food.set_dish_quality(100.0)
+				var food_item = OrderItem.new(food, 1)
+				order.receive_order_item(food_item)
+				break
+			else: # Order already received sufficient qty of this item
+				continue
+		else: # Order havent receive this item yet
+			var food: Food = item.get_edible()
+			food.set_dish_quality(100.0)
+			var food_item = OrderItem.new(food, 1)
+			order.receive_order_item(food_item)
+			break
+			
+	return true
 
 func _deliver_held_edible(player: Player) -> void:
 	var held_edible: EdibleItem = player.held_edible
 	if not is_instance_valid(held_edible):
-		print("You need to be holding a cooked dish/consumable to deliver it.")
+		var error_message: String = notification_data["error"].get("delivering_empty_handed")
+		restaurant_ui.show_notification_error_bottom(error_message)
 		return
 	
 	if held_edible.is_ingredient():
-		print("Ingredients cannot be delivered. Cook them first.")
+		var error_message: String = notification_data["error"].get("uncooked_ingredient_error")
+		restaurant_ui.show_notification_error_bottom(error_message)
 		return
 	
 	var data: Edible = held_edible.get_data()
 	if held_edible.is_drink:
 		if held_edible.affect_customer(self):
 			var delivered_edible := player._release_held_edible()
+			play_audio(AudioSfx.GULP)
 			delivered_edible.interaction.set_highlighted(false)
 			delivered_edible.interaction.enabled = false
 			delivered_edible.collision_layer = 0
 			delivered_edible.collision_mask = 0
 			delivered_edible.queue_free()
+			
+			var action_message: String = (
+				notification_data["action_notification"].get("deliver_item") 
+				% [
+					data.get_edible_name(),
+					get_customer_name()
+				]
+			)
+			restaurant_ui.show_side(action_message)
 			print("Delivered %s." % data.get_edible_name())
 	else: # is Food
 		var food_data := data as Food
@@ -467,7 +546,8 @@ func _deliver_held_edible(player: Player) -> void:
 		var delivered_item := OrderItem.new(food_data, 1)
 
 		if not receive_order_item(delivered_item):
-			print("That dish does not match the customer's order/requirement.")
+			var error_message: String = notification_data["error"].get("order_dish_requirement_not_fulfilled")
+			restaurant_ui.show_notification_error_bottom(error_message)
 			food_data.set_dish_quality(original_quality)
 			return
 
@@ -477,7 +557,15 @@ func _deliver_held_edible(player: Player) -> void:
 		delivered_edible.collision_layer = 0
 		delivered_edible.collision_mask = 0
 		delivered_edible.queue_free()
-
+		
+		var action_message: String = (
+				notification_data["action_notification"].get("deliver_item") 
+				% [
+					food_data.get_edible_name(),
+					get_customer_name()
+				]
+			)
+		restaurant_ui.show_side(action_message)
 		print("Delivered %s." % food_data.get_edible_name())
 
 func state_eating(delta):
@@ -541,7 +629,7 @@ func state_leaving_angry(delta):
 		queue_free()
 		return
 
-# --------------------------------VFX-------------------------------------------
+# <-------------------------------VFX------------------------------------------>
 func disappear_with_poof() -> void: # When customer drink EXTREMELY SAFE Drink
 	var poof := POOF_SCENE.instantiate()
 	
@@ -560,9 +648,85 @@ func show_patience_up() -> void:
 	get_tree().current_scene.add_child(effect)
 	effect.global_position = effect_anchor.global_position
 
+func show_unconscious_effect() -> void:
+	if is_instance_valid(unconscious_effect):
+		return
+
+	unconscious_effect = SLEEP_ZZZ_SCENE.instantiate() as Node3D
+	effect_anchor.add_child(unconscious_effect)
+	unconscious_effect.position = Vector3(0.0, 2.1, 0.0)
+
 func is_equal(other: Customer) -> bool:
 	return (
 		customer_name == other.get_customer_name()
 		and customer_lvl == other.get_customer_lvl()
 		and customer_type == other.get_customer_type()
 	)
+
+# <-------------------------------Status Effect-------------------------------->
+enum StatusEffect {
+	NORMAL,
+	UNCONSCIOUS,
+	TASTELESS,
+}
+
+var current_status_effects: Array[StatusEffect] = []
+var patience_timer_stopped: bool = false
+var unconscious_effect_remaining: float = 0.0
+var unconscious_effect: Node3D
+
+func enter_status_effect(status_effect: StatusEffect) -> void:
+	match status_effect:
+		StatusEffect.NORMAL:
+			pass
+		StatusEffect.UNCONSCIOUS:
+			show_unconscious_effect()
+			pass
+		StatusEffect.TASTELESS:
+			pass
+		_:
+			pass
+
+func exit_status_effect(status_effect: StatusEffect) -> void:
+	match status_effect:
+		StatusEffect.NORMAL:
+			pass
+		StatusEffect.UNCONSCIOUS:
+			stop_unconscious_effect()
+			pass
+		StatusEffect.TASTELESS:
+			pass
+		_:
+			pass
+
+func add_status_effect(status_effect: StatusEffect) -> void:
+	if status_effect == StatusEffect.NORMAL or status_effect in current_status_effects:
+		return
+	current_status_effects.append(status_effect)
+	enter_status_effect(status_effect)
+
+func remove_status_effect(status_effect: StatusEffect) -> void:
+	if not status_effect in current_status_effects:
+		return
+	current_status_effects.erase(status_effect)
+	exit_status_effect(status_effect)
+
+func set_patience_timer_stop(value: bool) -> void:
+	patience_timer_stopped = value
+
+func apply_unconscious_effect(duration: float) -> void:
+	var was_unconscious := StatusEffect.UNCONSCIOUS in current_status_effects
+	set_patience_timer_stop(true)
+	unconscious_effect_remaining = maxf(unconscious_effect_remaining, maxf(duration, 0.0))
+	add_status_effect(StatusEffect.UNCONSCIOUS)
+	if not was_unconscious:
+		play_audio(AudioSfx.SNORING)
+
+func stop_unconscious_effect() -> void:
+	set_patience_timer_stop(false)
+	if audio_player.stream == SNORING_SFX:
+		stop_audio()
+	unconscious_effect_remaining = 0.0
+	if is_instance_valid(unconscious_effect):
+		unconscious_effect.queue_free()
+		unconscious_effect = null

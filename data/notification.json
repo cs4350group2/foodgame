@@ -3,12 +3,23 @@
 		"VIP": "A VIP has entered the restaurant!",
 		"Impatient": "An impatient customer has entered the restaurant!",
 		"FoodCritic": "A food critic has entered the restaurant!",
-		"Hobo": "A hobo has entered the restaurant!"
+		"Hobo": "A hobo has entered the restaurant!",
 	},
 	"special_customer_descriptions": {
 		"VIP": "VIPs require a dish quality of at least 50 and pay a double bonus.",
 		"Impatient": "Impatient customers have half the usual patience.",
 		"FoodCritic": "Food critics judge dish quality: a high-quality dish boosts other customers' patience, while a low-quality dish reduces it.",
-		"Hobo": "Hobos leave after eating. Interact with them while they are leaving to collect payment."
-	}
+		"Hobo": "Hobos leave after eating. Interact with them while they are leaving to collect payment.",
+	},
+	"error": {
+		"order_dish_requirement_not_fulfilled": "This dish does not match the customer's order/requirement.",
+		"delivering_empty_handed": "You need to be holding a cooked dish/consumable to deliver it.",
+		"uncooked_ingredient_error": "Ingredients cannot be delivered. Cook them first.",
+	},
+	"action_notification": {
+		"deliver_item": "Delivered %s to %s.",
+	},
+	"customer_action_notification": {
+		"leaving_out_of_patience": "%s leaving because out of patience.",
+	},
 }

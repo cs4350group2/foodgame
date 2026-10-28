@@ -22,7 +22,16 @@ const LANE_MAP: Dictionary = {
 var current_time_ms: float = 0.0
 var bgm_playback_position: float
 
-@export var note_lead_time_ms: float = 1000.0 # each note takes 1 full second to fall from top of screen to judgment line (if arrow_speed in parent_arrow.gd is changed, this should be changed too)
+var note_speed: float
+
+var time_to_reach_judgment_line_sec: float:
+	get:
+		# base duration of 5.0 seconds divided by speed setting
+		return 5.0 / note_speed
+
+var time_to_reach_judgment_line_ms: float:
+	get:
+		return time_to_reach_judgment_line_sec * 1000
 
 # offset is negative -> notes arrive EARLIER than audio
 # offset is positive -> notes arrive LATER than audio
@@ -64,7 +73,7 @@ signal empty_press(input_judgment : String)
 
 # signals for cooking start/cooking end text, and results screen appearance
 signal cooking_start
-signal cooking_end
+signal cooking_end(combo_result: String)
 signal results_display
 signal return_to_restaurant(dish_quality: float)
 signal hide_lane(lane_name : String)
@@ -103,9 +112,12 @@ var chart_path : String
 var dish_string: String = "grilled_fish"
 
 func _ready() -> void:
-	background.self_modulate.a = 0.25
-	audio_offset_ms = AudioManager.audio_offset_ms
-	AudioManager.audio_offset_changed.connect(_on_offset_change)
+	note_speed = RhythmManager.note_speed
+	background.self_modulate.a = RhythmManager.background_brightness
+	audio_offset_ms = RhythmManager.audio_offset_ms
+	RhythmManager.audio_offset_changed.connect(_on_offset_change)
+	RhythmManager.note_speed_changed.connect(_on_note_speed_change)
+	RhythmManager.background_brightness_changed.connect(_on_background_brightness_change)
 	
 	match dish_string:
 		"burger":
@@ -148,7 +160,6 @@ func _ready() -> void:
 	if dish_string == "burger" \
 	or dish_string == "steak" \
 	or dish_string == "sushi" \
-	or dish_string == "rice_bowl" \
 	or dish_string == "grilled_fish": # hide "up" and "down" lanes for certain charts
 		hide_lane.emit("up")
 		hide_lane.emit("down")
@@ -157,12 +168,21 @@ func _ready() -> void:
 
 	await AudioManager.fade_out_bgm(1.5)
 	
-	current_time_ms = -note_lead_time_ms # this is to prevent the first few notes from triggering early
+	current_time_ms = -time_to_reach_judgment_line_ms # this is to prevent the first few notes from triggering early
 	is_game_started = true
 	
 	await AudioManager.rm_player.finished
 	
-	cooking_end.emit()
+	num_total_notes = num_perfects + num_goods + num_misses # calculate this early for the cooking end message
+	
+	if num_perfects == num_total_notes and num_empty_presses == 0:
+		# all perfect
+		cooking_end.emit("AP")
+	elif num_misses == 0 and num_empty_presses == 0:
+		# full combo
+		cooking_end.emit("FC")
+	else:
+		cooking_end.emit("NORMAL")
 	
 	# wait for the COOKING END! text to fade out fully
 	await get_tree().create_timer(2.5, false).timeout 
@@ -172,8 +192,6 @@ func _ready() -> void:
 	rhythm_result_screen_v2.good_count_label.text = str(num_goods)
 	rhythm_result_screen_v2.miss_count_label.text = str(num_misses)
 	rhythm_result_screen_v2.empty_count_label.text = str(num_empty_presses)
-	
-	num_total_notes = num_perfects + num_goods + num_misses
 	
 	player_score = num_perfects * 100 + num_goods * 75 
 	max_score = num_total_notes * 100
@@ -195,8 +213,6 @@ func _process(delta: float) -> void:
 	
 		if current_time_ms >= 0.0:
 			is_audio_started = true
-			AudioManager.set_rm_volume(0.5) # this value can be modified between 0 and 1 inclusive, i just felt that the original volume was quite loud
-			
 			AudioManager.play_rhythm_to_target_bpm(chart_song, bgm.bpm, 0.0) 
 			current_time_ms = 0.0
 	
@@ -204,7 +220,7 @@ func _process(delta: float) -> void:
 		var pitch: float = AudioManager.rm_player.pitch_scale
 		current_time_ms = (AudioManager.get_rhythm_playback_position() / pitch) * 1000.0
 		
-	while not chart_notes.is_empty() and (chart_notes[0]["time"] <= adjusted_time_ms + note_lead_time_ms):
+	while not chart_notes.is_empty() and (chart_notes[0]["time"] <= adjusted_time_ms + time_to_reach_judgment_line_ms):
 		var is_chord: bool = chart_notes.size() >= 2 and chart_notes[0]["time"] == chart_notes[1]["time"]
 		
 		if is_chord:
@@ -295,7 +311,8 @@ func spawn_note_from_data(note_data: Dictionary) -> Note:
 	var generator: Node2D = get("note_generator_" + lane_name.to_lower())
 	
 	var new_note: Note = generator.make_note_from_data(note_data)
-				
+
+	new_note.initialize(note_speed)
 	new_note.target_hit_time_ms = note_data["time"]
 	active_notes[lane_name].append(new_note)
 	
@@ -336,3 +353,9 @@ func load_rhythm_chart(file_path: String, speed_mult : float) -> Array:
 
 func _on_offset_change(val: float):
 	audio_offset_ms = val
+
+func _on_note_speed_change(val: float):
+	note_speed = val
+
+func _on_background_brightness_change(val: float):
+	background.self_modulate.a = val

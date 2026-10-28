@@ -26,6 +26,8 @@ const GRILLED_FISH_PATH = preload("res://models/physics/food/grilledFish/grilled
 @onready var restaurant_stove: Node3D = $"../.." # stove Node3D in restaurant_main (gazini_re)
 @onready var invalid_recipe_dialog: AcceptDialog = $"../../../RestaurantUi/InvalidRecipeDialog" # invalid recipe dialog in restaurant_main
 
+@onready var pause_menu: CanvasLayer = $"../../../PauseMenu" # restaurant pause menu
+
 @onready var dish_confirm_dialog: ConfirmationDialog = $"../../../RestaurantUi/DishConfirmDialog" # dish confirmation dialog in restaurant_main
 @onready var dish_texture: TextureRect = $"../../../RestaurantUi/DishConfirmDialog/VBoxContainer/DishTexture" # dish confirmation dialog dish texture
 @onready var dish_confirm_label: Label = $"../../../RestaurantUi/DishConfirmDialog/VBoxContainer/Label" # label for confirm dialog text
@@ -35,12 +37,12 @@ var original_camera_transform
 var target_camera_transform
 
 # preloaded dish textures for confirmation dialog
-const RENDERED_BURGER = preload("uid://d3rorjypontk5")
-const RENDERED_MEAT = preload("uid://cotpbx3nt4xan")
-const PLACEHOLDER_STEW_IMAGE = preload("uid://cfw527mfd8dg1")
-const PLACEHOLDER_SUSHI_IMAGE = preload("uid://bn23jfaurw5dx")
-const PLACEHOLDER_RICE_BOWL_IMAGE = preload("uid://b1tw7umwumc1p")
-const PLACEHOLDER_GRILLED_FISH_IMAGE = preload("uid://0jnh88u3iriw")
+const BURGER_TEXTURE = preload("uid://c0xyyibaje6e3")
+const STEAK_TEXTURE = preload("uid://b6tpa6sao7ri6")
+const STEW_TEXTURE = preload("uid://2no7u8k2e01j")
+const SUSHI_TEXTURE = preload("uid://cmeeivvg18fe2")
+const RICE_BOWL_TEXTURE = preload("uid://deyvt7atxh5xd")
+const GRILLED_FISH_TEXTURE = preload("uid://ddfmoioq0rtj7")
 
 const RHYTHM_MINIGAME_POPUP_SCENE = preload("uid://bl5f06ugjmaiq")
 
@@ -122,6 +124,8 @@ func start_cooking(dish_string: String) -> void:
 	var minigame_popup = RHYTHM_MINIGAME_POPUP_SCENE.instantiate()
 	var minigame_instance = minigame_popup.get_node("MinigameFrame/SubViewportContainer/SubViewport/RhythmMain")
 	
+	var minigame_bg = minigame_instance.get_node("Background")
+	
 	minigame_instance.dish_string = dish_string
 	
 	minigame_instance.cooking_end.connect(_on_cooking_end)
@@ -151,8 +155,11 @@ func start_cooking(dish_string: String) -> void:
 	
 	# finally add minigame popup to restaurant scene
 	restaurant_ui.add_child(minigame_popup)
-
-
+	
+	pause_menu.set_rhythm_settings_locked(true) # lock rhythm settings in pause menu
+	
+	restaurant_main.process_mode = Node.PROCESS_MODE_DISABLED # pause entire restaurant scene (except for pause menu)
+	
 func get_food_data(dish_name: String) -> Dictionary:
 	# helper function to return info for specific dish in menu.json
 	var restaurant_menu: Dictionary = RestaurantManager.get_menu()
@@ -170,6 +177,7 @@ func _on_cooking_end() -> void: # when results screen appears in minigame
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
+	restaurant_main.process_mode = Node.PROCESS_MODE_INHERIT # un-pause restaurant scene
 	# reverse tween to camera rotation in start_cooking
 	var tween_reverse = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	
@@ -182,10 +190,12 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
 	
 	minigame_node.queue_free()
 	
-	restaurant_main.visible = true
-	if restaurant_main.ui_nodes:
-		for ui: Node in restaurant_main.ui_nodes as Array[Node]:
-			ui.visible = true
+	pause_menu.set_rhythm_settings_locked(false) # unlock rhythm settings in pause menu
+	
+	# if restaurant_main.ui_nodes:
+	#	for ui: Node in restaurant_main.ui_nodes as Array[Node]:
+	#		ui.visible = true
+	
 	active_player.crosshair.visible = true
 	active_player.process_mode = Node.PROCESS_MODE_INHERIT # re-enable player controls
 	active_player.capture_mouse() # restore mouse capture and the controller's capture flag
@@ -268,17 +278,17 @@ func show_dish_confirmation(current_ingredients: Array) -> void:
 	
 	match selected_dish:
 		"burger":
-			dish_texture.texture = RENDERED_BURGER
+			dish_texture.texture = BURGER_TEXTURE
 		"steak":
-			dish_texture.texture = RENDERED_MEAT
+			dish_texture.texture = STEAK_TEXTURE
 		"stew":
-			dish_texture.texture = PLACEHOLDER_STEW_IMAGE
+			dish_texture.texture = STEW_TEXTURE
 		"sushi":
-			dish_texture.texture = PLACEHOLDER_SUSHI_IMAGE
+			dish_texture.texture = SUSHI_TEXTURE
 		"rice_bowl":
-			dish_texture.texture = PLACEHOLDER_RICE_BOWL_IMAGE
+			dish_texture.texture = RICE_BOWL_TEXTURE
 		"grilled_fish":
-			dish_texture.texture = PLACEHOLDER_GRILLED_FISH_IMAGE
+			dish_texture.texture = GRILLED_FISH_TEXTURE
 		
 	dish_confirm_label.text = "Start cooking " + formatted_dish_name + "?" + "\n" 
 		

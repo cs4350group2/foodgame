@@ -4,7 +4,6 @@ extends Customer
 @onready var vip_animation_player: AnimationPlayer = $CharacterBody3D/ModelOffset/Sketchfab_Scene/AnimationPlayer
 @onready var model_offset: Node3D = $CharacterBody3D/ModelOffset
 
-var notification_data: Dictionary
 var default_position: Vector3
 var dish_quality_requirement: float = 0.0
 
@@ -24,6 +23,9 @@ func get_dish_quality_requirement() -> float:
 func receive_order_item(item: OrderItem) -> bool:
 	if current_state != State.WAITING_FOR_FOOD:
 		return false
+	
+	if StatusEffect.TASTELESS in current_status_effects:
+		return tasteless_receive_order_item()
 	
 	var food: Food = item.get_edible()
 	var dish_quality: float = food.get_dish_quality()
@@ -57,13 +59,6 @@ func take_payment() -> float:
 	return order.get_order_total_price() + order.get_total_bonus() * 2
 
 func show_spawn_notification() -> void:
-	var file := FileAccess.open("res://data/notification.json", FileAccess.READ)
-	if file == null:
-		push_error("Could not open notification.json")
-		return
-
-	notification_data = JSON.parse_string(file.get_as_text())
-	
 	var message: String = notification_data["special_customer_notification"].get(customer_type)
 	var description_message: String = notification_data["special_customer_descriptions"].get(customer_type)
 	restaurant_ui.show_notification_top(message, true, description_message)

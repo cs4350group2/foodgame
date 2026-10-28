@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://trnwtn4ye4d7"]
+
+[ext_resource type="Script" uid="uid://caqi7kx4ccnu5" path="res://src/interactables/reusable scripts/edible_item.gd" id="1_h8v12"]
+[ext_resource type="PackedScene" uid="uid://brkod26kk2nx8" path="res://models/props/food/Ingredients/tomatoWhole.tscn" id="2_51kxr"]
+[ext_resource type="Texture2D" uid="uid://bxwxfnrmy5lus" path="res://assets/food/ingredients/dirty_tomato_color.png" id="3_f86os"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="4_1t30i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40tj8"]
+albedo_texture = ExtResource("3_f86os")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qf7sd"]
+radius = 0.20142408
+
+[node name="TomatoWhole" type="RigidBody3D" unique_id=1200164544]
+script = ExtResource("1_h8v12")
+ingredient_name = "Tomato"
+
+[node name="tomato2" parent="." unique_id=1481336563 instance=ExtResource("2_51kxr")]
+
+[node name="tomato" parent="tomato2" index="0" unique_id=420019844]
+surface_material_override/0 = SubResource("StandardMaterial3D_40tj8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1006428242]
+shape = SubResource("SphereShape3D_qf7sd")
+
+[node name="InteractComponent" type="Node" parent="." unique_id=1637159552]
+script = ExtResource("4_1t30i")
+highlight_root_path = NodePath("..")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"
+
+[editable path="tomato2"]

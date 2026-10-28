@@ -1,0 +1,222 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 661,
+      "max": [
+        0.3398197889328003,
+        0.4375142455101013,
+        0.3271717429161072
+      ],
+      "min": [
+        -0.34744447469711304,
+        -0.016366034746170044,
+        -0.3547544777393341
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 7932,
+      "componentType": 5126,
+      "count": 661,
+      "max": [
+        0.9910436868667603,
+        0.9942942261695862,
+        0.9895887970924377
+      ],
+      "min": [
+        -0.9999869465827942,
+        -0.9999875426292419,
+        -0.9770394563674927
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 661,
+      "max": [
+        1.0000017881393433,
+        1.1238925457000732
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 3432,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Matrix Rex (https://sketchfab.com/matrixrex)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/toon-poop-5fcfccbdf0414dc09c9d52f1683a1803",
+      "title": "Toon Poop"
+    },
+    "generator": "Sketchfab-14.35.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 13728,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5288,
+      "byteOffset": 13728,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 15864,
+      "byteOffset": 19016,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 34880,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "name": "Poop",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.5805942873152518,
+          0.3606564499509194,
+          0.058313955307290374,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.26666747936755614
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Object_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        0.20639775693416595,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        4.582950839585952e-17,
+        -0.20639775693416595,
+        0.0,
+        0.0,
+        0.20639775693416595,
+        4.582950839585952e-17,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "root"
+    },
+    {
+      "children": [
+        3
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "GLTF_SceneRootNode"
+    },
+    {
+      "children": [
+        4
+      ],
+      "matrix": [
+        -0.6636487544968854,
+        0.0,
+        -0.7480443373589112,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.7480443373589112,
+        0.0,
+        -0.6636487544968854,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Plane_0"
+    },
+    {
+      "mesh": 0,
+      "name": "Object_4"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
