@@ -22,7 +22,8 @@ func affect_customer(customer: Customer) -> bool:
 							customer.State.EATING,
 							customer.State.WALKING_TO_CASHIER,
 							customer.State.PAYING,
-							customer.State.LEAVING,] # Applicable to all states
+							customer.State.LEAVING,
+							customer.State.LEAVING_ANGRY,] # Applicable to all states
 	
 	if customer_state in acceptable_states:
 		customer.disappear_with_poof()
