@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://detnue8sq5d1b"]
+
+[ext_resource type="PackedScene" uid="uid://lx14e7bqwded" path="res://assets/food/poo/scene.gltf" id="1_ykn5s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf7sd"]
+albedo_color = Color(0.31607085, 0.2029801, 0.068468034, 1)
+
+[node name="Sketchfab_Scene" unique_id=867096627 instance=ExtResource("1_ykn5s")]
+
+[node name="Object_4" parent="Sketchfab_model/root/GLTF_SceneRootNode/Plane_0" parent_id_path=PackedInt32Array(351763067) index="0" unique_id=663033986]
+surface_material_override/0 = SubResource("StandardMaterial3D_qf7sd")
