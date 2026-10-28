@@ -91,7 +91,7 @@ func apply_impressed_effect() -> void:
 			)
 			
 			# Play vfx
-			customer.show_patience_up()
+			customer.show_patience_gain()
 
 func play_animation(anim: String) -> void:
 	reset_offset()

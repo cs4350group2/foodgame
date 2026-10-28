@@ -29,7 +29,7 @@ const GULP_SFX = preload("res://assets/sfx/customer/gulp_sfx.mp3")
 
 # VFX
 const POOF_SCENE: PackedScene = preload("res://assets/vfx/customer/Poof.tscn")
-const PATIENCE_UP_SCENE: PackedScene = preload("res://assets/vfx/customer/PatienceUp.tscn")
+const PATIENCE_GAIN_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_effects/patience_gain.tscn")
 const SLEEP_ZZZ_SCENE: PackedScene = preload("res://assets/vfx/customer/SleepZzz.tscn")
 
 enum State {
@@ -687,8 +687,8 @@ func disappear_with_poof() -> void: # When customer drink EXTREMELY SAFE Drink
 	poof.global_position = global_position
 	queue_free()
 
-func show_patience_up() -> void:
-	var effect := PATIENCE_UP_SCENE.instantiate()
+func show_patience_gain() -> void:
+	var effect := PATIENCE_GAIN_SCENE.instantiate()
 	get_tree().current_scene.add_child(effect)
 	effect.global_position = effect_anchor.global_position
 
