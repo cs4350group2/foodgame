@@ -4,11 +4,11 @@ class_name ChoppingBoard
 const CHOPPED_SCENES = {
 	"res://models/physics/food/ingredients/meatRaw.tscn":
 		preload("res://models/physics/food/ingredients/pattyRaw.tscn"),
-	"res://models/physics/food/ingredients/tomatoWhole.tscn":
+	"res://models/physics/food/ingredients/cleanTomato.tscn":
 		preload("res://models/physics/food/ingredients/tomatoSliced.tscn"),
-	"res://models/physics/food/ingredients/potato.tscn":
+	"res://models/physics/food/ingredients/cleanPotato.tscn":
 		preload("res://models/physics/food/ingredients/potatoSliced.tscn"),
-	"res://models/physics/food/ingredients/fishRaw.tscn":
+	"res://models/physics/food/ingredients/fishSkinned.tscn":
 		preload("res://models/physics/food/ingredients/fishSliced.tscn"),
 }
 

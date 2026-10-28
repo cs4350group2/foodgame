@@ -13,11 +13,11 @@ radius = 0.20142408
 
 [node name="TomatoWhole" type="RigidBody3D" unique_id=1200164544]
 script = ExtResource("1_h8v12")
-ingredient_name = "Tomato"
+ingredient_name = "Dirty Tomato"
 
 [node name="tomato2" parent="." unique_id=1481336563 instance=ExtResource("2_51kxr")]
 
-[node name="tomato" parent="tomato2" index="0" unique_id=420019844]
+[node name="tomato" parent="tomato2" index="0" unique_id=212729192]
 surface_material_override/0 = SubResource("StandardMaterial3D_40tj8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1006428242]

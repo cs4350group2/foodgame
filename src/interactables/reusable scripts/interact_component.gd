@@ -140,13 +140,22 @@ func _get_tooltip_category() -> String:
 		if edible.is_ingredient():
 			if edible.scene_file_path in [
 				"res://models/physics/food/ingredients/meatRaw.tscn",
-				"res://models/physics/food/ingredients/fishRaw.tscn",
-				"res://models/physics/food/ingredients/potato.tscn",
-				"res://models/physics/food/ingredients/tomatoWhole.tscn",
+				"res://models/physics/food/ingredients/fishSkinned.tscn",
+				"res://models/physics/food/ingredients/cleanPotato.tscn",
+				"res://models/physics/food/ingredients/cleanTomato.tscn",
 			]:
 				return "Choppable Ingredient"
+			elif edible.scene_file_path in [
+				"res://models/physics/food/ingredients/fishRaw.tscn",
+				"res://models/physics/food/ingredients/dirtyPotato.tscn",
+				"res://models/physics/food/ingredients/dirtyTomato.tscn",
+			]:
+				return "Dirty Ingredient"
 			return "Ingredient"
-
+		
+		elif edible.scene_file_path == "res://models/physics/food/pooOnAPlate/mistake.tscn":
+			return "Dish?"
+			
 		return "Dish"
 
 	return "Interactable Station"
