@@ -50,8 +50,8 @@ func play_animation(anim: String) -> void:
 			celebrity_animation_player.play("AnimLib/Proud_Walk")
 		
 		"Sitting_Idle":
-			model_offset.position.x -= 0.2
-			model_offset.position.y -= 1.0
+			model_offset.position.x += 0.0
+			model_offset.position.y -= 1.1
 			celebrity_animation_player.play("AnimLib/Sitting_Idle_Celeb")
 		_:
 			pass
