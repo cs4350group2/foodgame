@@ -14,6 +14,7 @@ const vip_customer_scene: PackedScene = preload("res://src/NPC/customer/vip_cust
 const impatient_customer_scene: PackedScene = preload("res://src/NPC/customer/impatient_customer.tscn")
 const food_critic_customer_scene: PackedScene = preload("res://src/NPC/customer/food_critic_customer.tscn")
 const hobo_customer_scene: PackedScene = preload("res://src/NPC/customer/hobo_customer.tscn")
+const celebrity_customer_scene: PackedScene = preload("res://src/NPC/customer/celebrity_customer.tscn")
 
 var customer_scene: PackedScene = preload("res://src/NPC/customer/customer.tscn")
 var available_names: Array[String] = []
@@ -100,6 +101,15 @@ func spawn_customer(customer_type: StringName = &"") -> void:
 			customer_scene = hobo_customer_scene
 			customer = customer_scene.instantiate()
 			customer.initialize_customer(customer_name, customer_level, patience, customer_type)
+		&"Celebrity":
+			customer_scene = celebrity_customer_scene
+			customer = customer_scene.instantiate()
+			var celeb := customer as Celebrity_Customer
+			if celeb != null:
+				var requirement: float = 50.0
+				celeb.initialize_celebrity_customer(customer_name, 
+				customer_level, patience, customer_type, requirement)
+			customer = celeb
 		_:
 			print(customer_type)
 			choose_random_customer_scene()

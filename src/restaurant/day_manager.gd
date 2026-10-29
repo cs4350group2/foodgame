@@ -54,6 +54,7 @@ func _process(delta):
 			&"Impatient",
 			&"FoodCritic",
 			&"Hobo",
+			&"Celebrity",
 		]
 		spawn_customer.emit(customer_string_names.pick_random())
 		
