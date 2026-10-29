@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b7aqgekdm3ory" path="res://assets/rhythm minigame/PNG/up_spatula.png" id="2_6plnl"]
 
 [node name="ParentArrow" unique_id=1316662934 instance=ExtResource("1_gb8jp")]
+scale = Vector2(1, 0.6)
 
 [node name="ArrowDown" parent="." index="0" unique_id=543169254]
 texture = ExtResource("2_6plnl")
