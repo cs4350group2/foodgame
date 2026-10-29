@@ -10,8 +10,10 @@ extends Control
 @onready var miss_count_label: Label = $MainMargin/MainVBox/MainHBox/StatsSection/MissRow/MissCountLabel
 @onready var empty_count_label: Label = $MainMargin/MainVBox/MainHBox/StatsSection/EmptyPressRow/EmptyCountLabel
 
+@onready var dish_quality_label: Label = $MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection/DishQualityLabel
 @onready var dish_quality_score_label: Label = $MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection/DishQualityScoreLabel
 @onready var total_empty_penalty_label: Label = $MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection/TotalEmptyPenaltyLabel
+@onready var total_empty_penalty_score_label: Label = $MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection/TotalEmptyPenaltyScoreLabel
 
 func _ready() -> void:
 	rhythm_main.results_display.connect(display_results_screen)

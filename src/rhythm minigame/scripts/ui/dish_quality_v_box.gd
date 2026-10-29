@@ -25,8 +25,10 @@ func update_dish_quality(input_judgment = ""):
 	
 	if current_dish_quality <= 20.0:
 		dish_quality_value_label.add_theme_color_override("font_color", Color(0.60, 0, 0))
+	elif current_dish_quality >= 80.0:
+		dish_quality_value_label.add_theme_color_override("font_color", Color(0, 0.60, 0))
 	else:
-		dish_quality_value_label.add_theme_color_override("font_color", Color.BLACK)
+		dish_quality_value_label.add_theme_color_override("font_color", Color(1, 0.5, 0))
 	
 	dish_quality_value_label.text = str(current_dish_quality) + "%"
 

@@ -111,7 +111,7 @@ const MUD_DAGORED = preload("uid://dibhfexgjqvj") # BGM
 var bgm : AudioData = MUD_DAGORED
 var chart_song : AudioData
 var chart_path : String
-var dish_string: String = "grilled_fish"
+var dish_string: String = "rice_bowl"
 
 func _ready() -> void:
 	note_speed = RhythmManager.note_speed
@@ -204,10 +204,15 @@ func _ready() -> void:
 	if final_dish_quality <= 20.0:
 		# turn dish quality text red to indicate it's too low
 		rhythm_result_screen_v2.dish_quality_score_label.add_theme_color_override("font_color", Color(0.60, 0, 0))
+	elif final_dish_quality >= 80.0:
+		# turn dish quality text green to indicate a good score
+		rhythm_result_screen_v2.dish_quality_score_label.add_theme_color_override("font_color", Color(0, 0.60, 0))
+	else:
+		# turn dish quality text yellow/amber to indicate a so-so score
+		rhythm_result_screen_v2.dish_quality_score_label.add_theme_color_override("font_color", Color(1, 0.5, 0))
 	
 	rhythm_result_screen_v2.dish_quality_score_label.text = str(final_dish_quality) + "%"
-	rhythm_result_screen_v2.total_empty_penalty_label.text += "\n" + str(total_empty_press_penalty) + "%"
-	print("Final dish quality w/o empty (rhythm_main): " + str(original_dish_quality))
+	rhythm_result_screen_v2.total_empty_penalty_score_label.text = str(total_empty_press_penalty) + "%"
 	
 	results_display.emit()
 
