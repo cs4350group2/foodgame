@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ymjcl47axnx0"]
+
+[ext_resource type="Script" uid="uid://db7kubkeljbul" path="res://models/environmentMeshes/Outdoors/vehicles/vehicle_spawner.gd" id="1_vxtk2"]
+[ext_resource type="PackedScene" uid="uid://bdwr65tng53lx" path="res://models/environmentMeshes/Outdoors/vehicles/smallCar.tscn" id="2_pe527"]
+[ext_resource type="PackedScene" uid="uid://b2p3cmifukf18" path="res://models/environmentMeshes/Outdoors/vehicles/blueCar.tscn" id="3_0rnpu"]
+
+[node name="VehicleSpawner" type="Node3D" unique_id=996338955 node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("1_vxtk2")
+vehicles = Array[PackedScene]([ExtResource("2_pe527"), ExtResource("3_0rnpu")])
+spawn_point = NodePath("Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=1698771755]
+
+[node name="Timer" type="Timer" parent="." unique_id=853944776]
