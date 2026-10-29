@@ -5,3 +5,9 @@ extends Node3D
 	
 func _physics_process(delta: float) -> void:
 	global_position += global_transform.basis.z * speed * delta
+
+@export var lifetime: float = 15.0
+
+func _ready() -> void:
+	await get_tree().create_timer(lifetime).timeout
+	queue_free()

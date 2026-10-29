@@ -317,7 +317,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7r3kc")
 
-[node name="small_car_48" type="Node3D" unique_id=2022676141]
+[sub_resource type="BoxShape3D" id="BoxShape3D_gajy2"]
+size = Vector3(1.5032654, 1.2185211, 2.3234863)
+
+[node name="small_car_48" type="Node3D" unique_id=2022676141 groups=["vehicle"]]
 script = ExtResource("1_gajy2")
 
 [node name="Object_237" type="MeshInstance3D" parent="." unique_id=1900562693]
@@ -351,3 +354,10 @@ skeleton = NodePath("")
 [node name="Object_244" type="MeshInstance3D" parent="." unique_id=65403909]
 mesh = SubResource("ArrayMesh_c51ds")
 skeleton = NodePath("")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=682496844]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=341730982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008529663, 0.6491318, -0.099731445)
+shape = SubResource("BoxShape3D_gajy2")

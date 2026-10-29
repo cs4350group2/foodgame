@@ -279,6 +279,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_enhbi")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_qf7sd"]
+size = Vector3(1.6226807, 1.366272, 3.918457)
+
 [node name="blue_car_43" type="Node3D" unique_id=1683620651]
 script = ExtResource("1_8c2eq")
 
@@ -309,3 +312,10 @@ skeleton = NodePath("")
 [node name="Object_199" type="MeshInstance3D" parent="." unique_id=361712623]
 mesh = SubResource("ArrayMesh_fyy1a")
 skeleton = NodePath("")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=792702737 groups=["vehicle"]]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1839951147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1035156e-05, 0.683197, 0.031982422)
+shape = SubResource("BoxShape3D_qf7sd")
