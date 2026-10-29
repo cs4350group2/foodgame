@@ -8,6 +8,7 @@ extends CharacterBody3D
 @onready var patience_bar: PatienceBar = $PatienceBar
 @onready var customer_spawner: CustomerSpawner = get_parent() as CustomerSpawner
 @onready var audio_player = $AudioStreamPlayer3D
+@onready var effect_audio_player = $EffectAudioStreamPlayer3D
 @onready var restaurant_ui: RestaurantUI = get_tree().current_scene.get_node("RestaurantUi")
 
 static var type_format_dict: Dictionary[StringName, String] = {
@@ -35,7 +36,11 @@ const GULP_SFX = preload("res://assets/sfx/customer/gulp_sfx.mp3")
 # VFX
 const POOF_SCENE: PackedScene = preload("res://assets/vfx/customer/Poof.tscn")
 const PATIENCE_GAIN_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_effects/patience_gain.tscn")
-const SLEEP_ZZZ_SCENE: PackedScene = preload("res://assets/vfx/customer/SleepZzz.tscn")
+const UNCONSCIOUS_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_effects/unconscious.tscn")
+const MOOD_GAIN_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_effects/mood_gain.tscn")
+const BLINDED_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_effects/blinded.tscn")
+const TASTELESS_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_effects/tasteless.tscn")
+const MEMORY_RESET_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_effects/memory_reset.tscn")
 
 enum State {
 	IDLE,
@@ -58,8 +63,8 @@ func get_current_state() -> State:
 
 var current_state = State.IDLE
 var assigned_sittingNode: SittingNode = null
-var order_taken = false
-var paid = false
+var order_taken: bool = false
+var paid: bool = false
 var order: Order
 var move_speed: float = 2.0
 var mood_bonus: float = 0.0
@@ -93,6 +98,14 @@ func initialize_customer(name: String, level: int, patience: float, type: String
 	max_patience = patience
 	customer_type = type
 
+func reset_customer_memory() -> void:
+	order_taken = false
+	order = null
+	paid = false
+	done_waiting_at_table = false
+	set_patience_timer_stop(false)
+	change_state(State.IDLE)
+
 func load_notification_data() -> void:
 	var file = FileAccess.open("res://data/notification.json", FileAccess.READ)
 	if file == null:
@@ -105,6 +118,7 @@ func _ready():
 	interaction.accepts_primary_while_holding = true
 	interaction.interacted.connect(_on_interacted)
 	audio_player.pitch_scale = RunManager.get_rng().randf_range(0.67, 1.3)
+	effect_audio_player.pitch_scale = RunManager.get_rng().randf_range(0.67, 1.3)
 	change_state(State.IDLE)
 	patience_bar.set_patience(
 		0.0,
@@ -126,6 +140,7 @@ func _process(delta: float) -> void:
 func _on_interacted(_player: Player) -> void:
 	if is_instance_valid(_player) \
 			and is_instance_valid(_player.held_edible):
+		print(_player.held_edible)
 		_deliver_held_edible(_player)
 		return
 
@@ -370,13 +385,20 @@ func play_audio(audio_type: AudioSfx):
 		AudioSfx.HOBO_LAUGH:
 			audio_player.volume_linear = 1.0
 			audio_player.stream = HOBO_LAUGH_SFX
-		AudioSfx.SNORING:
-			audio_player.volume_linear = 2.0
-			audio_player.stream = SNORING_SFX
 		AudioSfx.GULP:
 			audio_player.volume_linear = 1.5
 			audio_player.stream = GULP_SFX
 	audio_player.play()
+
+func play_effect_audio(audio_type: AudioSfx):
+	match audio_type:
+		AudioSfx.SNORING:
+			effect_audio_player.volume_linear = 3.0
+			effect_audio_player.stream = SNORING_SFX
+	effect_audio_player.play()
+
+func stop_effect_audio():
+	effect_audio_player.stop()
 
 func state_sitting(delta):
 	# Wait until sitting animation finish
@@ -702,13 +724,33 @@ func show_patience_gain() -> void:
 	get_tree().current_scene.add_child(effect)
 	effect.global_position = effect_anchor.global_position
 
+func show_mood_gain() -> void:
+	var effect := MOOD_GAIN_SCENE.instantiate()
+	get_tree().current_scene.add_child(effect)
+	effect.global_position = effect_anchor.global_position
+
+func show_blinded_vfx() -> void:
+	var effect := BLINDED_SCENE.instantiate()
+	get_tree().current_scene.add_child(effect)
+	effect.global_position = effect_anchor.global_position
+
+func show_tasteless_vfx() -> void:
+	var effect := TASTELESS_SCENE.instantiate()
+	get_tree().current_scene.add_child(effect)
+	effect.global_position = effect_anchor.global_position
+
 func show_unconscious_effect() -> void:
 	if is_instance_valid(unconscious_effect):
 		return
+	
+	unconscious_effect = UNCONSCIOUS_SCENE.instantiate() as Node3D
+	get_tree().current_scene.add_child(unconscious_effect)
+	unconscious_effect.global_position = effect_anchor.global_position
 
-	unconscious_effect = SLEEP_ZZZ_SCENE.instantiate() as Node3D
-	effect_anchor.add_child(unconscious_effect)
-	unconscious_effect.position = Vector3(0.0, 2.1, 0.0)
+func show_memory_reset_vfx() -> void:
+	var effect := MEMORY_RESET_SCENE.instantiate()
+	get_tree().current_scene.add_child(effect)
+	effect.global_position = effect_anchor.global_position
 
 func is_equal(other: Customer) -> bool:
 	return (
@@ -738,8 +780,10 @@ func enter_status_effect(status_effect: StatusEffect) -> void:
 			show_unconscious_effect()
 			pass
 		StatusEffect.TASTELESS:
+			show_tasteless_vfx()
 			pass
 		StatusEffect.BLIND:
+			show_blinded_vfx()
 			pass
 		_:
 			pass
@@ -774,17 +818,15 @@ func set_patience_timer_stop(value: bool) -> void:
 	patience_timer_stopped = value
 
 func apply_unconscious_effect(duration: float) -> void:
-	var was_unconscious := StatusEffect.UNCONSCIOUS in current_status_effects
+	add_status_effect(StatusEffect.UNCONSCIOUS)
 	set_patience_timer_stop(true)
 	unconscious_effect_remaining = maxf(unconscious_effect_remaining, maxf(duration, 0.0))
-	add_status_effect(StatusEffect.UNCONSCIOUS)
-	if not was_unconscious:
-		play_audio(AudioSfx.SNORING)
+	play_effect_audio(AudioSfx.SNORING)
 
 func stop_unconscious_effect() -> void:
 	set_patience_timer_stop(false)
-	if audio_player.stream == SNORING_SFX:
-		stop_audio()
+	if effect_audio_player.stream == SNORING_SFX:
+		stop_effect_audio()
 	unconscious_effect_remaining = 0.0
 	if is_instance_valid(unconscious_effect):
 		unconscious_effect.queue_free()

@@ -1,29 +1,29 @@
-[gd_scene load_steps=31 format=3]
+[gd_scene format=3 uid="uid://bu8tkq0v3unkr"]
 
-[ext_resource type="Script" path="res://addons/reeboo_vfx/vfx_effect.gd" id="1_1"]
-[ext_resource type="Shader" path="res://addons/reeboo_vfx/shaders/vfx_add.gdshader" id="2_2"]
-[ext_resource type="Texture2D" path="res://addons/reeboo_vfx/textures/noise_soft.png" id="3_3"]
-[ext_resource type="Shader" path="res://addons/reeboo_vfx/shaders/vfx_status_glyph_add.gdshader" id="4_4"]
-[ext_resource type="Shader" path="res://addons/reeboo_vfx/shaders/vfx_status_glyph_mix.gdshader" id="5_5"]
-[ext_resource type="Shader" path="res://addons/reeboo_vfx/shaders/vfx_status_ground.gdshader" id="6_6"]
+[ext_resource type="Script" uid="uid://wsrwchc2yq3q" path="res://addons/reeboo_vfx/vfx_effect.gd" id="1_hsbhf"]
+[ext_resource type="Shader" uid="uid://x7taqqhow8q0" path="res://addons/reeboo_vfx/shaders/vfx_add.gdshader" id="2_musj0"]
+[ext_resource type="Texture2D" uid="uid://bqs8hdalvlp65" path="res://addons/reeboo_vfx/textures/noise_soft.png" id="3_b0w0e"]
+[ext_resource type="Shader" uid="uid://bl6j8jho4qkfs" path="res://addons/reeboo_vfx/shaders/vfx_status_glyph_add.gdshader" id="4_m5pue"]
+[ext_resource type="Shader" uid="uid://dll4jlddf88fj" path="res://addons/reeboo_vfx/shaders/vfx_status_glyph_mix.gdshader" id="5_5bo20"]
+[ext_resource type="Shader" uid="uid://dywiqc4f648ng" path="res://addons/reeboo_vfx/shaders/vfx_status_ground.gdshader" id="6_ebhud"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7"]
 render_priority = 0
-shader = ExtResource("2_2")
+shader = ExtResource("2_musj0")
 shader_parameter/shape = 0
 shader_parameter/facing = 0
 shader_parameter/emission_energy = 1.1
 shader_parameter/softness = 1.0
-shader_parameter/ring_width = null
-shader_parameter/noise_texture = ExtResource("3_3")
-shader_parameter/noise_scale = null
-shader_parameter/noise_scroll = null
-shader_parameter/erosion = null
-shader_parameter/erosion_edge = null
-shader_parameter/edge_color = null
-shader_parameter/puff_shading = null
-shader_parameter/alpha_scale = null
-shader_parameter/proximity_fade = null
+shader_parameter/ring_width = 0.15
+shader_parameter/noise_texture = ExtResource("3_b0w0e")
+shader_parameter/noise_scale = 1.0
+shader_parameter/noise_scroll = Vector2(0, 0)
+shader_parameter/erosion = 0.0
+shader_parameter/erosion_edge = 0.06
+shader_parameter/edge_color = Color(0, 0, 0, 0)
+shader_parameter/puff_shading = 0.0
+shader_parameter/alpha_scale = 1.0
+shader_parameter/proximity_fade = 0.25
 
 [sub_resource type="Gradient" id="Gradient_8"]
 offsets = PackedFloat32Array(0, 0.3, 1)
@@ -63,8 +63,8 @@ color_ramp = SubResource("GradientTexture1D_9")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_14"]
 render_priority = 0
-shader = ExtResource("4_4")
-shader_parameter/glyph = 9
+shader = ExtResource("4_m5pue")
+shader_parameter/glyph = 6
 shader_parameter/emission_energy = 2.6
 shader_parameter/glow_strength = 0.35
 shader_parameter/glow_width = 0.18
@@ -81,7 +81,7 @@ shader_parameter/fade_in = 0.12
 shader_parameter/fade_out = 0.1
 
 [sub_resource type="Gradient" id="Gradient_15"]
-colors = PackedColorArray(0.55, 1, 0.2, 1, 0.55, 1, 0.2, 1)
+colors = PackedColorArray(0.08627451, 0.5686275, 1, 1, 0.089999974, 0.5753333, 1, 0.6862745)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_16"]
 gradient = SubResource("Gradient_15")
@@ -117,8 +117,8 @@ size = Vector2(0.2, 0.2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_21"]
 render_priority = 0
-shader = ExtResource("5_5")
-shader_parameter/glyph = 8
+shader = ExtResource("5_5bo20")
+shader_parameter/glyph = 13
 shader_parameter/emission_energy = 1.4
 shader_parameter/glow_strength = 0.6
 shader_parameter/glow_width = 0.18
@@ -135,7 +135,7 @@ shader_parameter/fade_in = 0.12
 shader_parameter/fade_out = 0.15
 
 [sub_resource type="Gradient" id="Gradient_22"]
-colors = PackedColorArray(0.5, 0.95, 0.2, 1, 0.5, 0.95, 0.2, 1)
+colors = PackedColorArray(0.53156376, 0.7506704, 1, 1, 0.60861325, 0.79275936, 1, 0.5647059)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_23"]
 gradient = SubResource("Gradient_22")
@@ -164,21 +164,21 @@ size = Vector2(0.13, 0.13)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_28"]
 render_priority = 0
-shader = ExtResource("6_6")
+shader = ExtResource("6_ebhud")
 shader_parameter/style = 4
 shader_parameter/color = Color(0.35, 0.8, 0.1, 1)
-shader_parameter/inner_color = null
+shader_parameter/inner_color = Color(1, 1, 1, 1)
 shader_parameter/emission_energy = 1.1
-shader_parameter/thickness = null
-shader_parameter/rotate_speed = null
+shader_parameter/thickness = 0.04
+shader_parameter/rotate_speed = 0.4
 shader_parameter/pulse_speed = 0.5
-shader_parameter/sides = null
-shader_parameter/inner_glow = null
-shader_parameter/start_scale = null
-shader_parameter/noise_texture = ExtResource("3_3")
+shader_parameter/sides = 6
+shader_parameter/inner_glow = 0.25
+shader_parameter/start_scale = 1.0
+shader_parameter/noise_texture = ExtResource("3_b0w0e")
 shader_parameter/life_mode = 1
-shader_parameter/fade_in = null
-shader_parameter/fade_out = null
+shader_parameter/fade_in = 0.1
+shader_parameter/fade_out = 0.4
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_29"]
 direction = Vector3(0, 1, 0)
@@ -188,21 +188,21 @@ gravity = Vector3(0, 0, 0)
 [sub_resource type="PlaneMesh" id="PlaneMesh_30"]
 size = Vector2(1.5, 1.5)
 
-[node name="Poisoned" type="Node3D"]
-script = ExtResource("1_1")
+[node name="Blinded" type="Node3D" unique_id=1796710757]
+script = ExtResource("1_hsbhf")
 
-[node name="Light" type="OmniLight3D" parent="."]
+[node name="Light" type="OmniLight3D" parent="." unique_id=2143262480]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
-light_color = Color(0.45, 1, 0.2, 1)
+light_color = Color(0.085056566, 0.569463, 0.99999946, 1)
 light_energy = 0.8
 omni_range = 3.0
 metadata/vfx_flicker = 0.2
 
-[node name="Gas" type="GPUParticles3D" parent="."]
+[node name="Gas" type="GPUParticles3D" parent="." unique_id=1529454793]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_7")
 cast_shadow = 0
-emitting = false
 amount = 12
 lifetime = 2.0
 fixed_fps = 0
@@ -210,11 +210,10 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_12")
 draw_pass_1 = SubResource("QuadMesh_13")
 
-[node name="Bubbles" type="GPUParticles3D" parent="."]
+[node name="Bubbles" type="GPUParticles3D" parent="." unique_id=57089622]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = SubResource("ShaderMaterial_14")
 cast_shadow = 0
-emitting = false
 amount = 16
 lifetime = 1.3
 fixed_fps = 0
@@ -222,11 +221,11 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_19")
 draw_pass_1 = SubResource("QuadMesh_20")
 
-[node name="Drips" type="GPUParticles3D" parent="."]
+[node name="Drips" type="GPUParticles3D" parent="." unique_id=980291698]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_21")
 cast_shadow = 0
-emitting = false
 amount = 4
 lifetime = 0.8
 fixed_fps = 0
@@ -234,11 +233,11 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_26")
 draw_pass_1 = SubResource("QuadMesh_27")
 
-[node name="Puddle" type="GPUParticles3D" parent="."]
+[node name="Puddle" type="GPUParticles3D" parent="." unique_id=362020386]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_28")
 cast_shadow = 0
-emitting = false
 amount = 2
 lifetime = 2.0
 fixed_fps = 0

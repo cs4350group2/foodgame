@@ -26,7 +26,9 @@ func affect_customer(customer: Customer) -> bool:
 							customer.State.LEAVING_ANGRY,] # Applicable to all states
 	
 	if customer_state in acceptable_states:
-		customer.change_state(customer.State.IDLE)
+		RestaurantManager.remove_order(customer.get_order())
+		customer.reset_customer_memory()
+		customer.show_memory_reset_vfx()
 		return true
 	else:
 		return false
