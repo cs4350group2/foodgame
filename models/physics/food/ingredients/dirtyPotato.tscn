@@ -51,7 +51,7 @@ albedo_texture = ExtResource("3_0rpdj")
 
 [node name="Potato" type="RigidBody3D" unique_id=1936302740]
 script = ExtResource("1_14usl")
-ingredient_name = "Potato"
+ingredient_name = "Dirty Potato"
 
 [node name="MeshInstance3D" type="CollisionShape3D" parent="." unique_id=1481602020]
 shape = SubResource("SphereShape3D_qf7sd")

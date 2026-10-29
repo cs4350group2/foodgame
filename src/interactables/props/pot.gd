@@ -8,8 +8,8 @@ const INGREDIENT_SCENES = {
 		preload("res://models/physics/food/ingredients/pattyRaw.tscn"),
 	"res://models/physics/food/ingredients/buns.tscn":
 		preload("res://models/physics/food/ingredients/buns.tscn"),
-	"res://models/physics/food/ingredients/fishRaw.tscn":
-		preload("res://models/physics/food/ingredients/fishRaw.tscn"),
+	"res://models/physics/food/ingredients/fishSkinned.tscn":
+		preload("res://models/physics/food/ingredients/fishSkinned.tscn"),
 	"res://models/physics/food/ingredients/cleanPotato.tscn":
 		preload("res://models/physics/food/ingredients/cleanPotato.tscn"),
 	"res://models/physics/food/ingredients/potatoSliced.tscn":
@@ -29,18 +29,18 @@ const INGREDIENT_NAMES = {
 		"raw meat",
 	"res://models/physics/food/ingredients/pattyRaw.tscn":
 		"chopped meat",
-	"res://models/physics/food/ingredients/fishRaw.tscn":
-		"raw fish",
+	"res://models/physics/food/ingredients/fishSkinned.tscn":
+		"raw skinned fish",
 	"res://models/physics/food/ingredients/fishSliced.tscn":
 		"chopped fish",
 	"res://models/physics/food/ingredients/buns.tscn":
 		"burger buns",
-	"res://models/physics/food/ingredients/cleaPotato.tscn":
-		"potato",
+	"res://models/physics/food/ingredients/cleanPotato.tscn":
+		"clean potato",
 	"res://models/physics/food/ingredients/potatoSliced.tscn":
 		"chopped potato",
 	"res://models/physics/food/ingredients/cleanTomato.tscn":
-		"tomato",
+		"clean tomato",
 	"res://models/physics/food/ingredients/tomatoSliced.tscn":
 		"chopped tomato",
 	"res://models/physics/food/ingredients/rice.tscn":
@@ -80,7 +80,7 @@ func _store_ingredient(player: Player) -> void:
 	var ingredient_path := ingredient.scene_file_path
 
 	if not INGREDIENT_SCENES.has(ingredient_path):
-		print("Only raw meat, burger buns, raw fish, rice, tomatoes and potatoes can go in the pot.")
+		print("Only raw meat, burger buns, raw skinned fish, rice, tomatoes and potatoes can go in the pot.")
 		return
 
 	if ingredient_buffer.has(ingredient_path):

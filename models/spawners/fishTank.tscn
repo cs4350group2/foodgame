@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bgi1a47734pt8"]
 
 [ext_resource type="PackedScene" uid="uid://bflinwj3lf3lo" path="res://models/counters/bartable.tscn" id="1_ihe8s"]
-[ext_resource type="PackedScene" uid="uid://bgmdho1u1yyym" path="res://models/spawners/aquarium.tscn" id="2_1ajds"]
+[ext_resource type="PackedScene" uid="uid://bgmdho1u1yyym" path="res://models/props/aquarium.tscn" id="2_1ajds"]
 [ext_resource type="PackedScene" uid="uid://bpwjyrtpakbl6" path="res://models/props/food/Ingredients/fishRaw.tscn" id="3_1gvmq"]
 [ext_resource type="Script" uid="uid://dcto3uhvv54ym" path="res://src/interactables/reusable scripts/food_spawner.gd" id="4_1ajds"]
 [ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="4_w0n3a"]
