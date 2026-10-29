@@ -731,26 +731,26 @@ func show_mood_gain() -> void:
 
 func show_blinded_vfx() -> void:
 	var effect := BLINDED_SCENE.instantiate()
-	get_tree().current_scene.add_child(effect)
-	effect.global_position = effect_anchor.global_position
+	effect_anchor.add_child(effect)
+	effect.position = Vector3.ZERO
 
 func show_tasteless_vfx() -> void:
 	var effect := TASTELESS_SCENE.instantiate()
-	get_tree().current_scene.add_child(effect)
-	effect.global_position = effect_anchor.global_position
+	effect_anchor.add_child(effect)
+	effect.position = Vector3.ZERO
 
 func show_unconscious_effect() -> void:
 	if is_instance_valid(unconscious_effect):
 		return
 	
 	unconscious_effect = UNCONSCIOUS_SCENE.instantiate() as Node3D
-	get_tree().current_scene.add_child(unconscious_effect)
-	unconscious_effect.global_position = effect_anchor.global_position
+	effect_anchor.add_child(unconscious_effect)
+	unconscious_effect.position = Vector3.ZERO
 
 func show_memory_reset_vfx() -> void:
 	var effect := MEMORY_RESET_SCENE.instantiate()
-	get_tree().current_scene.add_child(effect)
-	effect.global_position = effect_anchor.global_position
+	effect_anchor.add_child(effect)
+	effect.position = Vector3.ZERO
 
 func is_equal(other: Customer) -> bool:
 	return (

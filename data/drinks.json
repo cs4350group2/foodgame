@@ -17,7 +17,7 @@
 		{
 			"name": "Liquid Food",
 			"scene_path": "res://models/physics/drinks/liquidFood.tscn",
-			"price": 50.0,
+			"price": 40.0,
 			"description": "Lazy to cook? Just feed the customer these",
 			"usage": "Acts as a pseudo food that can be served as any food; Dish Quality: 50%"
 		},
@@ -38,28 +38,28 @@
 		{
 			"name": "Alcohol",
 			"scene_path": "res://models/physics/drinks/alcohol.tscn",
-			"price": 0.0,
+			"price": 25.0,
 			"description": "Make sure this is served to customers above the age of 18.",
 			"usage": "Pause the customer’s patience level and puts the customer in an unconscious state for 20 seconds."
 		},
 		{
 			"name": "Covid-19 Serum",
 			"scene_path": "res://models/physics/drinks/covid19Serum.tscn",
-			"price": 0.0,
+			"price": 50.0,
 			"description": "One of the symptoms of Covid-19 is losing your taste.",
 			"usage": "Customer accepts any quality."
 		},
 		{
 			"name": "1 Day Blinding Stew",
 			"scene_path": "res://models/physics/drinks/oneDayBlindingStew.tscn",
-			"price": 0.0,
+			"price": 75.0,
 			"description": "My daughter is biting hair.",
 			"usage": "Customer accepts any food."
 		},
 		{
 			"name": "Soup Of Oblivion",
 			"scene_path": "res://models/physics/drinks/soupOfOblivion.tscn",
-			"price": 0.0,
+			"price": 50.0,
 			"description": "We got this from some grandma.",
 			"usage": "Factory resets a customer state to when they first entered the restaurant."
 		},

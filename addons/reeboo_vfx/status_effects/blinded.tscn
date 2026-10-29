@@ -233,6 +233,7 @@ draw_pass_1 = SubResource("QuadMesh_27")
 
 [node name="Puddle" type="GPUParticles3D" parent="." unique_id=362020386]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_28")
 cast_shadow = 0
 amount = 2
