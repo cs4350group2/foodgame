@@ -1,5 +1,8 @@
 [gd_scene format=4 uid="uid://by7hlp7wb1v8x"]
 
+[ext_resource type="Script" uid="uid://bvbl00arxaedc" path="res://src/restaurant/dishes/drinks/alcohol_item.gd" id="1_ppfww"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="2_bqc08"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mm2ss"]
 resource_name = "Wine"
 cull_mode = 2
@@ -162,6 +165,7 @@ height = 0.4880371
 radius = 0.06347656
 
 [node name="Alcohol" type="RigidBody3D" unique_id=1499639258]
+script = ExtResource("1_ppfww")
 
 [node name="Wine_9" type="Node3D" parent="." unique_id=932719572]
 transform = Transform3D(0.06, 0, 0, 0, 0.2564, 0, 0, 0, 0.06, 0, 0, 0)
@@ -185,3 +189,7 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1720297132]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.009643555, 0)
 shape = SubResource("CylinderShape3D_qf7sd")
+
+[node name="InteractComponent" type="Node" parent="." unique_id=1320734466]
+script = ExtResource("2_bqc08")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"

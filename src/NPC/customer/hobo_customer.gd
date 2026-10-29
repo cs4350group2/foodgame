@@ -24,6 +24,8 @@ func _on_interacted(_player: Player) -> void:
 		State.WAITING_FOR_FOOD:
 			# If reaches here, the player is 100% not holding an edible
 			print("You need to be holding a cooked dish/consumable to deliver it.")
+			var error_message: String = notification_data["error"].get("delivering_empty_handed")
+			restaurant_ui.show_notification_error_bottom(error_message)
 			return
 
 		State.LEAVING: # Only can receive payment if confronted when they are leaving
@@ -56,6 +58,26 @@ func play_animation(anim: String) -> void:
 			hobo_animation_player.play("Sitting_Idle")
 		_:
 			pass
+
+func receive_order_item(item: OrderItem) -> bool:
+	if current_state != State.WAITING_FOR_FOOD:
+		return false
+	
+	var food_name = item.get_edible().get_edible_name()
+	if food_name == "Mistake":
+		return anyhow_receive_order_item()
+	
+	if StatusEffect.TASTELESS in current_status_effects and StatusEffect.BLIND in current_status_effects:
+		return anyhow_receive_order_item()
+	
+	if StatusEffect.TASTELESS in current_status_effects:
+		return tasteless_receive_order_item(item)
+	
+	if StatusEffect.BLIND in current_status_effects:
+		return blind_receive_order_item(item)
+	
+	# if the order is finished, we let the signal tell us
+	return order.receive_order_item(item)
 
 func reset_offset() -> void:
 	model_offset.position = default_position

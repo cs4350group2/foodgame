@@ -22,6 +22,7 @@ func affect_customer(customer: Customer) -> bool:
 		var curr_patience = customer.get_current_patience()
 		var new_patience = curr_patience + increment
 		customer.set_patience(new_patience)
+		customer.show_patience_gain()
 		return true
 	else:
 		return false

@@ -114,13 +114,15 @@ func remove_angry_customer(customer: Customer):
 	remove_customer(customer)
 
 func add_order(order: Order):
-	orders.append(order)
-	order_added.emit(order)
-	order.order_completed.connect(_on_order_complete)
+	if order not in orders:
+		orders.append(order)
+		order_added.emit(order)
+		order.order_completed.connect(_on_order_complete)
 
 func remove_order(order: Order):
-	orders.erase(order)
-	order_removed.emit(order)
+	if order in orders:
+		orders.erase(order)
+		order_removed.emit(order)
 
 func _on_order_complete(order: Order):
 	remove_order(order)

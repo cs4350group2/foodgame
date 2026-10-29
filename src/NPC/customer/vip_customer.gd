@@ -24,8 +24,14 @@ func receive_order_item(item: OrderItem) -> bool:
 	if current_state != State.WAITING_FOR_FOOD:
 		return false
 	
+	if StatusEffect.TASTELESS in current_status_effects and StatusEffect.BLIND in current_status_effects:
+		return anyhow_receive_order_item()
+	
 	if StatusEffect.TASTELESS in current_status_effects:
-		return tasteless_receive_order_item()
+		return tasteless_receive_order_item(item)
+	
+	if StatusEffect.BLIND in current_status_effects:
+		return blind_receive_order_item(item)
 	
 	var food: Food = item.get_edible()
 	var dish_quality: float = food.get_dish_quality()

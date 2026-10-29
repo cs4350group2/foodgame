@@ -39,3 +39,6 @@ bus = &"SFX"
 path_height_offset = 0.1
 
 [node name="EffectAnchor" type="Node3D" parent="." unique_id=1087833724]
+
+[node name="EffectAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=253818140]
+bus = &"SFX"

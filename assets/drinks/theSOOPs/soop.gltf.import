@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cgmc2okdmc8le"
-path="res://.godot/imported/soop.gltf-a55ada25b797672c4a39f3a7f00df9ac.scn"
+valid=false
 
 [deps]
 
 source_file="res://assets/drinks/theSOOPs/soop.gltf"
-dest_files=["res://.godot/imported/soop.gltf-a55ada25b797672c4a39f3a7f00df9ac.scn"]
 
 [params]
 
