@@ -10,6 +10,11 @@ extends CharacterBody3D
 @onready var audio_player = $AudioStreamPlayer3D
 @onready var restaurant_ui: RestaurantUI = get_tree().current_scene.get_node("RestaurantUi")
 
+static var type_format_dict: Dictionary[StringName, String] = {
+	&"": "Regular",
+	&"FoodCritic": "Food Critic",
+}
+
 # Notifications
 var notification_data: Dictionary
 
@@ -424,6 +429,11 @@ func state_ordering(delta):
 	if order_taken:
 		change_state(State.WAITING_FOR_FOOD)
 
+func show_warning_notification() -> void:
+	var message: String = notification_data["customer_action_notification"]\
+		.get("low_patience_warning") % get_customer_name()
+	restaurant_ui.show_side(message)
+
 # Seconds that the customer will wait
 @export var max_patience: float
 var patience: float
@@ -779,3 +789,13 @@ func stop_unconscious_effect() -> void:
 	if is_instance_valid(unconscious_effect):
 		unconscious_effect.queue_free()
 		unconscious_effect = null
+
+static func convert_to_formatted_type(cust_type: StringName) -> String:
+	if type_format_dict.has(cust_type):
+		return type_format_dict[cust_type]
+	
+	return cust_type
+
+# sorry for the bad name but I can't think of a good name
+func get_formatted_type() -> String:
+	return convert_to_formatted_type(self.customer_type)

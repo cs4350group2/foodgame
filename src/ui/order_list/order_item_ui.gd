@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func set_order(new_order: Order) -> void:
 	order = new_order
-	var type_label := "Regular" if order.customer_type == &"" else String(order.customer_type).replace("FoodCritic", "Food Critic")
+	var type_label: String = Customer.convert_to_formatted_type(order.customer_type)
 	customer_label.text = "%s (%s)" % [order.customer_name, type_label]
 	for item: OrderItem in order.items:
 		var label := Label.new()

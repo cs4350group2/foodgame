@@ -22,6 +22,7 @@
 		"take_order": "Took order from %s",
 	},
 	"customer_action_notification": {
-		"leaving_out_of_patience": "%s leaving because out of patience.",
+		"leaving_out_of_patience": "%s is out of patience and is leaving.",
+		"low_patience_warning": "%s is running out of patience!"
 	},
 }

@@ -57,6 +57,7 @@ func _stop_warning() -> void:
 	progress_bar.tint_under = original_under_tint
 	progress_bar.tint_progress = original_progress_tint
 
+# sorry that the warning function is here but whatever
 func _start_warning() -> void:
 	if blink_tween:
 		blink_tween.kill()
@@ -64,6 +65,7 @@ func _start_warning() -> void:
 	# soooooo bad but im soooooo lazy
 	var parent := get_parent() as Customer
 	parent.play_audio(Customer.AudioSfx.WARNING)
+	parent.show_warning_notification()
 	blink_tween.tween_property(
 		progress_bar, "tint_progress",
 		warning_progress_tint, animation_duration
