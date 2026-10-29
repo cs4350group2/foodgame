@@ -19,6 +19,7 @@ func affect_customer(customer: Customer) -> bool:
 	
 	if customer_state in acceptable_states:
 		customer.add_mood_bonus(mood_bonus)
+		customer.show_mood_gain()
 		return true
 	else:
 		return false

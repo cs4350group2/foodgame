@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://bvyhmrdoredsk"]
 
+[ext_resource type="Script" uid="uid://b47rt436i2m5w" path="res://src/restaurant/dishes/drinks/covid19_serum_item.gd" id="1_iyvfl"]
 [ext_resource type="Texture2D" uid="uid://l6icshblmkm2" path="res://assets/drinks/covid19serum/MetalPart_baseColor.png" id="1_kss2o"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="3_3kbaq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qjdrt"]
 resource_name = "MetalPart"
@@ -138,6 +140,7 @@ radius = 0.056152344
 height = 0.6281128
 
 [node name="Covid19Serum" type="RigidBody3D" unique_id=787009454]
+script = ExtResource("1_iyvfl")
 
 [node name="Syringe_with_glass" type="Node3D" parent="." unique_id=445371552]
 transform = Transform3D(-8.742279e-09, -3.2584136e-08, 0.2, -0.2, -8.742278e-09, -8.74228e-09, 8.742279e-09, -0.2, -3.2584136e-08, 0, 0, 0)
@@ -159,3 +162,7 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1833425169]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.09396362, -0.0005496781, 0)
 shape = SubResource("CapsuleShape3D_qf7sd")
+
+[node name="InteractComponent" type="Node" parent="." unique_id=332897141]
+script = ExtResource("3_3kbaq")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"

@@ -1,7 +1,9 @@
 [gd_scene format=4 uid="uid://b3t5f3kid3ugx"]
 
+[ext_resource type="Script" uid="uid://b6mxw2524espd" path="res://src/restaurant/dishes/drinks/1d_blinding_stew_item.gd" id="1_h565b"]
 [ext_resource type="ArrayMesh" uid="uid://dejc0hnidnb2a" path="res://assets/drinks/theSOOPs/SWIRL.tres" id="1_sim53"]
 [ext_resource type="Script" uid="uid://brc7htox7v6je" path="res://assets/drinks/theSOOPs/swirlstuff.gd" id="2_6vi8u"]
+[ext_resource type="Script" uid="uid://ca7pbehy5loa" path="res://src/interactables/reusable scripts/interact_component.gd" id="4_vhd6m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w1olx"]
 resource_name = "color_14789940"
@@ -110,6 +112,7 @@ height = 0.2241211
 radius = 0.19726563
 
 [node name="stew" type="RigidBody3D" unique_id=645442139]
+script = ExtResource("1_h565b")
 
 [node name="tinker_obj_cleaner_materialmerger_gles" type="Node3D" parent="." unique_id=1031790853]
 transform = Transform3D(0.01, 0, 0, 0, -0.01, 8.7422775e-10, 0, -8.7422775e-10, -0.01, 0, 0, 0)
@@ -135,3 +138,7 @@ script = ExtResource("2_6vi8u")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=41494819]
 transform = Transform3D(1, 0, 0, 0, 1, -7.1054274e-15, 0, 7.1054274e-15, 1, 0.030427337, 0.10864258, -0.020731779)
 shape = SubResource("CylinderShape3D_qf7sd")
+
+[node name="InteractComponent" type="Node" parent="." unique_id=1683369643]
+script = ExtResource("4_vhd6m")
+metadata/_custom_type_script = "uid://ca7pbehy5loa"
