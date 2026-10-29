@@ -10,7 +10,7 @@ grow_end = 200.0
 thickness = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7bug"]
-bg_color = Color(0, 0.7019804, 0.22070533, 1)
+bg_color = Color(0.8528026, 0.59869385, 0.16924095, 1)
 
 [node name="RhythmResultScreenV2" type="Control" unique_id=929106540]
 layout_mode = 3
@@ -28,7 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.46415013, 0.52706033, 0.6139927, 1)
+color = Color(1, 0.99215686, 0.8156863, 1)
 
 [node name="MainMargin" type="MarginContainer" parent="." unique_id=1512552092]
 layout_mode = 1
@@ -49,6 +49,7 @@ theme_override_constants/separation = 20
 [node name="CookingCompleteLabel" type="Label" parent="MainMargin/MainVBox" unique_id=225780904]
 layout_mode = 2
 theme = ExtResource("1_hb3k2")
+theme_override_colors/font_color = Color(0.7490196, 0.3372549, 0, 1)
 text = "COOKING COMPLETE! "
 horizontal_alignment = 1
 
@@ -72,6 +73,7 @@ layout_mode = 2
 
 [node name="PerfectLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/StatsSection/PerfectRow" unique_id=383938223]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.49926442, 1.0588765e-06, 1)
 text = "PERFECT : "
 horizontal_alignment = 1
 
@@ -94,6 +96,7 @@ layout_mode = 2
 
 [node name="GoodLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/StatsSection/GoodRow" unique_id=1134129272]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.29333606, 0.50632757, 1, 1)
 text = "GOOD :"
 horizontal_alignment = 1
 
@@ -116,6 +119,7 @@ layout_mode = 2
 
 [node name="MissLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/StatsSection/MissRow" unique_id=1759382897]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.8156863, 0, 0, 1)
 text = "MISS :"
 horizontal_alignment = 1
 
@@ -138,6 +142,7 @@ layout_mode = 2
 
 [node name="EmptyLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/StatsSection/EmptyPressRow" unique_id=47386281]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.37413925, 0.37413928, 0.37413922, 1)
 text = "EMPTY :"
 horizontal_alignment = 1
 
@@ -167,7 +172,14 @@ theme_override_constants/separation = 0
 [node name="TotalEmptyPenaltyLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=279128602]
 layout_mode = 2
 theme = ExtResource("3_v16hu")
+theme_override_colors/font_color = Color(0.474797, 8.4830447e-07, 2.4065375e-07, 1)
 text = "TOTAL EMPTY PENALTY: "
+horizontal_alignment = 1
+
+[node name="TotalEmptyPenaltyScoreLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=1800963684]
+layout_mode = 2
+theme = ExtResource("3_v16hu")
+theme_override_colors/font_color = Color(0.4745098, 0, 0, 1)
 horizontal_alignment = 1
 
 [node name="DishQualityLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=1934896529]

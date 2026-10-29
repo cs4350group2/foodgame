@@ -8,4 +8,5 @@
 script = ExtResource("2_qbj07")
 
 [node name="ArrowLeft" parent="." index="0" unique_id=1065824009]
+scale = Vector2(1, 0.6)
 texture = ExtResource("3_u71td")
