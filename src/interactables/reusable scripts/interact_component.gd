@@ -88,12 +88,14 @@ func get_tooltip_data(player: Player) -> Dictionary:
 	var primary := primary_description
 	var secondary := secondary_description
 
-	var target := get_parent() as EdibleItem
+	var target := get_parent()
 	var holding := is_instance_valid(player.held_edible)
 
 	# Food already has a naming system; reuse it.
-	if is_instance_valid(target):
+	if target is EdibleItem:
 		title = target.get_edible_item_name()
+	elif target is Customer:
+		title = target.get_customer_name()
 
 	if title.is_empty():
 		title = str(get_parent().name).capitalize()
@@ -113,7 +115,7 @@ func get_tooltip_data(player: Player) -> Dictionary:
 
 	# Match the routing in Player.try_interact().
 	if holding:
-		if is_instance_valid(target):
+		if target is EdibleItem:
 			primary = "Swap held item"
 		elif not supports_primary or not accepts_primary_while_holding:
 			primary = "Drop held item"
@@ -130,7 +132,8 @@ func _get_tooltip_category() -> String:
 	var owner_node := get_parent()
 
 	if owner_node is Customer:
-		return ""
+		var type_label: String = owner_node.get_formatted_type()
+		return type_label
 
 	var edible := owner_node as EdibleItem
 	if edible != null:
