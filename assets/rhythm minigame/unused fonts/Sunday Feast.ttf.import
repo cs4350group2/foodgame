@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dfcr5ly1prngx"
-path="res://.godot/imported/Biscuit Glitch.ttf-9a267eeb6dd50559ba3f1734604752c2.fontdata"
+uid="uid://bif2l6s6laquv"
+path="res://.godot/imported/Sunday Feast.ttf-68c40656e20396f7dd21ebfa59688208.fontdata"
 
 [deps]
 
-source_file="res://assets/rhythm minigame/fonts/Biscuit Glitch.ttf"
-dest_files=["res://.godot/imported/Biscuit Glitch.ttf-9a267eeb6dd50559ba3f1734604752c2.fontdata"]
+source_file="res://assets/rhythm minigame/unused fonts/Sunday Feast.ttf"
+dest_files=["res://.godot/imported/Sunday Feast.ttf-68c40656e20396f7dd21ebfa59688208.fontdata"]
 
 [params]
 

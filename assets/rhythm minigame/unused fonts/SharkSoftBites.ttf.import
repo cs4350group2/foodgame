@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://ccqkj7piepado"
-path="res://.godot/imported/Sauce Tomato.otf-205d711c228bffc8e21bc8c111de4220.fontdata"
+uid="uid://75iqctai1dbj"
+path="res://.godot/imported/SharkSoftBites.ttf-f3bee90ec838eb100bf182b9c4296afb.fontdata"
 
 [deps]
 
-source_file="res://assets/rhythm minigame/fonts/Sauce Tomato.otf"
-dest_files=["res://.godot/imported/Sauce Tomato.otf-205d711c228bffc8e21bc8c111de4220.fontdata"]
+source_file="res://assets/rhythm minigame/unused fonts/SharkSoftBites.ttf"
+dest_files=["res://.godot/imported/SharkSoftBites.ttf-f3bee90ec838eb100bf182b9c4296afb.fontdata"]
 
 [params]
 

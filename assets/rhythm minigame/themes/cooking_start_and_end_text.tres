@@ -1,6 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://1p1awuurvc8p"]
 
-[ext_resource type="FontFile" uid="uid://by753b80v5j7w" path="res://assets/rhythm minigame/fonts/Super Bouncer.ttf" id="1_q7bug"]
+[ext_resource type="FontFile" uid="uid://c81aw174vjenr" path="res://assets/rhythm minigame/fonts/Matcha Mint.ttf" id="1_q7bug"]
+[ext_resource type="FontFile" uid="uid://dfqf262uyebf0" path="res://assets/rhythm minigame/fonts/SuperFoods-2OxXo.ttf" id="2_5hmpn"]
 
 [resource]
 Button/colors/font_color = Color(0, 0, 0, 1)
@@ -9,5 +10,6 @@ Button/font_sizes/font_size = 40
 Button/fonts/font = ExtResource("1_q7bug")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/constants/outline_size = 10
 Label/font_sizes/font_size = 70
-Label/fonts/font = ExtResource("1_q7bug")
+Label/fonts/font = ExtResource("2_5hmpn")

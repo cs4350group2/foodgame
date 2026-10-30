@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cqx8v8nffqufr"
-path="res://.godot/imported/CrispyBread.ttf-55bf5d095aae8fe479375d8e783be587.fontdata"
+uid="uid://by753b80v5j7w"
+path="res://.godot/imported/Super Bouncer.ttf-4bcbb069d922be47107b812b627e12c9.fontdata"
 
 [deps]
 
-source_file="res://assets/rhythm minigame/fonts/CrispyBread.ttf"
-dest_files=["res://.godot/imported/CrispyBread.ttf-55bf5d095aae8fe479375d8e783be587.fontdata"]
+source_file="res://assets/rhythm minigame/unused fonts/Super Bouncer.ttf"
+dest_files=["res://.godot/imported/Super Bouncer.ttf-4bcbb069d922be47107b812b627e12c9.fontdata"]
 
 [params]
 
