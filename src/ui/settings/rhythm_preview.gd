@@ -18,6 +18,7 @@ var background_brightness: float = 0.50:
 var tween : Tween
 
 func _ready() -> void:
+	background.self_modulate.a = background_brightness
 	start_preview_loop()
 
 func start_preview_loop() -> void:

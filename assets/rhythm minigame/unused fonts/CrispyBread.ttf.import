@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bcnnflmjeyqw3"
-path="res://.godot/imported/Handmade Alphabet.otf-39e47251f890dcad34c84e250bb26be2.fontdata"
+uid="uid://cqx8v8nffqufr"
+path="res://.godot/imported/CrispyBread.ttf-3e57dc151b673b6683962fe843399253.fontdata"
 
 [deps]
 
-source_file="res://assets/rhythm minigame/fonts/Handmade Alphabet.otf"
-dest_files=["res://.godot/imported/Handmade Alphabet.otf-39e47251f890dcad34c84e250bb26be2.fontdata"]
+source_file="res://assets/rhythm minigame/unused fonts/CrispyBread.ttf"
+dest_files=["res://.godot/imported/CrispyBread.ttf-3e57dc151b673b6683962fe843399253.fontdata"]
 
 [params]
 

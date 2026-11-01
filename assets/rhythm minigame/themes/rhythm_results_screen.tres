@@ -1,8 +1,11 @@
 [gd_resource type="Theme" format=3 uid="uid://dqp3n3sc4nod3"]
 
-[ext_resource type="FontFile" uid="uid://by753b80v5j7w" path="res://assets/rhythm minigame/fonts/Super Bouncer.ttf" id="1_ur1l1"]
+[ext_resource type="FontFile" uid="uid://c81aw174vjenr" path="res://assets/rhythm minigame/fonts/Matcha Mint.ttf" id="1_dbyhr"]
 
 [resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 40
+Button/fonts/font = ExtResource("1_dbyhr")
 Label/colors/font_color = Color(0, 0, 0, 1)
-Label/font_sizes/font_size = 50
-Label/fonts/font = ExtResource("1_ur1l1")
+Label/font_sizes/font_size = 40
+Label/fonts/font = ExtResource("1_dbyhr")

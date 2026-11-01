@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dtmwikjvyb37l"
-path="res://.godot/imported/Cream Cake.otf-5d49fa8708e89d39a5feb8cb9747c525.fontdata"
+path="res://.godot/imported/Cream Cake.otf-3ad6e1677d77bd3702613978663ab3a7.fontdata"
 
 [deps]
 
-source_file="res://assets/rhythm minigame/fonts/Cream Cake.otf"
-dest_files=["res://.godot/imported/Cream Cake.otf-5d49fa8708e89d39a5feb8cb9747c525.fontdata"]
+source_file="res://assets/rhythm minigame/unused fonts/Cream Cake.otf"
+dest_files=["res://.godot/imported/Cream Cake.otf-3ad6e1677d77bd3702613978663ab3a7.fontdata"]
 
 [params]
 

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bif2l6s6laquv"
-path="res://.godot/imported/Sunday Feast.ttf-c482e35d4acfffc2ab0466bc965350d4.fontdata"
+uid="uid://csqap8l8qrm5q"
+path="res://.godot/imported/CaramelSundaeDemoRegular-q2rEl.ttf-68e74fa184b5c1bdbd605865918ab3c4.fontdata"
 
 [deps]
 
-source_file="res://assets/rhythm minigame/fonts/Sunday Feast.ttf"
-dest_files=["res://.godot/imported/Sunday Feast.ttf-c482e35d4acfffc2ab0466bc965350d4.fontdata"]
+source_file="res://assets/rhythm minigame/unused fonts/CaramelSundaeDemoRegular-q2rEl.ttf"
+dest_files=["res://.godot/imported/CaramelSundaeDemoRegular-q2rEl.ttf-68e74fa184b5c1bdbd605865918ab3c4.fontdata"]
 
 [params]
 
