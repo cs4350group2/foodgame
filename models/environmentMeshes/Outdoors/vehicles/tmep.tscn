@@ -1,8 +1,3 @@
 [gd_scene format=3 uid="uid://cjcqkgn5xbgsj"]
 
-[ext_resource type="PackedScene" uid="uid://b2p3cmifukf18" path="res://models/environmentMeshes/Outdoors/vehicles/blueCar.tscn" id="1_yu5ip"]
-
 [node name="SmallCar" type="Node3D" unique_id=1363315528]
-
-[node name="blue_car_43" parent="." unique_id=1683620651 instance=ExtResource("1_yu5ip")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.06585, 0, -3.639222)
