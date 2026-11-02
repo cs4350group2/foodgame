@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://buf4d6x0n0qfs" path="res://src/rhythm minigame/scripts/gameplay and judgment hud/note.gd" id="1_st1p1"]
 [ext_resource type="Texture2D" uid="uid://dkrk26v2vj5je" path="res://assets/rhythm minigame/PNG/down_spatula.png" id="2_st1p1"]
-[ext_resource type="Texture2D" uid="uid://cheyboofx6oli" path="res://assets/rhythm minigame/PNG/silver water drop.png" id="3_vqls6"]
+[ext_resource type="Texture2D" uid="uid://bchhw81ud7crs" path="res://assets/rhythm minigame/PNG/smoke wisp.png" id="3_st1p1"]
 [ext_resource type="AudioStream" uid="uid://b5sehvwn7fk5l" path="res://assets/rhythm minigame/sfx/mixkit-pot-hit-1810.mp3" id="4_m7ci3"]
 
 [sub_resource type="Animation" id="Animation_031kh"]
@@ -120,22 +120,18 @@ libraries/ = SubResource("AnimationLibrary_ahm44")
 [node name="PoppingParticles" type="CPUParticles2D" parent="." unique_id=1878868184]
 z_index = 10
 emitting = false
-amount = 10
-texture = ExtResource("3_vqls6")
-lifetime = 0.3
+amount = 1
+texture = ExtResource("3_st1p1")
+lifetime = 0.5
 one_shot = true
-explosiveness = 1.0
-emission_shape = 6
-emission_ring_inner_radius = 0.8
-emission_ring_radius = 1.0
 particle_flag_align_y = true
-direction = Vector2(0, 0)
-spread = 180.0
+direction = Vector2(0, -1)
+spread = 10.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 400.0
-initial_velocity_max = 400.0
-scale_amount_min = 0.05
-scale_amount_max = 0.05
+initial_velocity_min = 600.0
+initial_velocity_max = 600.0
+scale_amount_min = 0.3
+scale_amount_max = 0.3
 
 [node name="HitEffectPlayer" type="AudioStreamPlayer" parent="." unique_id=631516258]
 stream = ExtResource("4_m7ci3")

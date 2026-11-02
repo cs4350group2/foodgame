@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://75iqctai1dbj"
-path="res://.godot/imported/SharkSoftBites.ttf-7b8758846bd3fd57f1be09a3caead1a0.fontdata"
+uid="uid://dfcr5ly1prngx"
+path="res://.godot/imported/Biscuit Glitch.ttf-979d3714c152ac2e80ed8fd260d9524c.fontdata"
 
 [deps]
 
-source_file="res://assets/rhythm minigame/fonts/SharkSoftBites.ttf"
-dest_files=["res://.godot/imported/SharkSoftBites.ttf-7b8758846bd3fd57f1be09a3caead1a0.fontdata"]
+source_file="res://assets/rhythm minigame/unused fonts/Biscuit Glitch.ttf"
+dest_files=["res://.godot/imported/Biscuit Glitch.ttf-979d3714c152ac2e80ed8fd260d9524c.fontdata"]
 
 [params]
 

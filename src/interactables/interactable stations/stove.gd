@@ -6,7 +6,7 @@ const CHOPPED_MEAT_PATH = "res://models/physics/food/ingredients/pattyRaw.tscn"
 const BUNS_PATH = "res://models/physics/food/ingredients/buns.tscn"
 const CHOPPED_TOMATOES_PATH = "res://models/physics/food/ingredients/tomatoSliced.tscn"
 const CHOPPED_POTATOES_PATH = "res://models/physics/food/ingredients/potatoSliced.tscn"
-const UNCHOPPED_FISH_PATH = "res://models/physics/food/ingredients/fishRaw.tscn"
+const UNCHOPPED_FISH_PATH = "res://models/physics/food/ingredients/fishSkinned.tscn"
 const CHOPPED_FISH_PATH = "res://models/physics/food/ingredients/fishSliced.tscn"
 const RICE_PATH = "res://models/physics/food/ingredients/rice.tscn"
 
@@ -266,8 +266,8 @@ func convert_ingredients_array_to_string(arr : Array) -> String:
 				names.append("Chopped potatoes")
 			"res://models/physics/food/ingredients/cleanPotato.tscn":
 				names.append("Unchopped potatoes")
-			"res://models/physics/food/ingredients/fishRaw.tscn":
-				names.append("Unchopped fish")
+			"res://models/physics/food/ingredients/fishSkinned.tscn":
+				names.append("Unchopped skinned fish")
 			"res://models/physics/food/ingredients/fishSliced.tscn":
 				names.append("Chopped fish")
 			"res://models/physics/food/ingredients/rice.tscn":

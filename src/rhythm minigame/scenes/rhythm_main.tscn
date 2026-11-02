@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cg3si4nqe0bgk" path="res://src/rhythm minigame/scripts/rhythm_main.gd" id="1_lgoak"]
 [ext_resource type="PackedScene" uid="uid://6t0gu43db1t2" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/note_generator_left.tscn" id="2_c5f8g"]
-[ext_resource type="Texture2D" uid="uid://dgc2e0rwonki5" path="res://assets/rhythm minigame/PNG/pexels-codioful-6985185.jpg" id="2_lgoak"]
+[ext_resource type="Texture2D" uid="uid://nof0v21poajp" path="res://assets/rhythm minigame/PNG/minigame wallpaper.jpg" id="2_rfopb"]
 [ext_resource type="PackedScene" uid="uid://df6qblwknvga7" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/note_generator_right.tscn" id="3_rfopb"]
 [ext_resource type="PackedScene" uid="uid://ctcs38cs5yf3o" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/note_generator_up.tscn" id="4_weiq5"]
 [ext_resource type="PackedScene" uid="uid://cmrdu3uwy8hl1" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/note_generator_down.tscn" id="5_0vqqd"]
@@ -36,7 +36,7 @@ offset_right = 3576.0
 offset_bottom = 2324.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_lgoak")
+texture = ExtResource("2_rfopb")
 
 [node name="JudgmentHUD" type="Node2D" parent="." unique_id=1435270143]
 script = ExtResource("6_gqh03")
@@ -135,9 +135,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -188.0
-offset_top = -173.0
+offset_top = -124.0
 offset_right = -34.0
-offset_bottom = -69.0
+offset_bottom = 2.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("13_30mjv")

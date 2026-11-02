@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3]
+
+[ext_resource type="Script" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+name = &"impatient_unlock"
+display_name = &"Impatient Customers Unlocked"
+description = "Impatient customers can now visit. They have half the usual patience, so serve them quickly!"
+npc_to_unlock = &"Impatient"
+npc_spawn_weight = 1.0

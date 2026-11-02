@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3]
+
+[ext_resource type="Script" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+name = &"food_critic_unlock"
+display_name = &"Food Critics Unlocked"
+description = "Food critics can now visit. Your dish quality affects the patience of the other customers."
+npc_to_unlock = &"FoodCritic"
+npc_spawn_weight = 1.0

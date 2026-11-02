@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://8vl643wgamfq" path="res://assets/fonts/upheavtt.ttf" id="2_fxpoi"]
 [ext_resource type="FontFile" uid="uid://dk6aai08i16bb" path="res://assets/fonts/W95F.otf" id="3_vt2ny"]
 [ext_resource type="Script" uid="uid://c2e0raxq2kydi" path="res://src/ui/settings/settings_controls.gd" id="5_settings"]
+[ext_resource type="Theme" uid="uid://14sxgktt40ia" path="res://src/ui/restaurant_ui/RestaurantUIRhythmTabButton.tres" id="6_a0eq5"]
 [ext_resource type="Theme" uid="uid://cp6t4mnfwas5v" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="6_buttons"]
 [ext_resource type="PackedScene" uid="uid://v4xaxiqgjyfp" path="res://src/ui/settings/rhythm_preview.tscn" id="6_tvmky"]
 
@@ -439,11 +440,9 @@ horizontal_alignment = 1
 [node name="RhythmTab" type="FoldableContainer" parent="Center/Panel/Margin/Settings" unique_id=1684540570]
 layout_mode = 2
 theme = ExtResource("2_14lbk")
-folded = true
 title = "Rhythm"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab" unique_id=868489397]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 25
 
@@ -540,9 +539,28 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Negative: notes earlier. Positive: notes later."
 horizontal_alignment = 1
 
+[node name="NoteVFXRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer" unique_id=1660567744]
+layout_mode = 2
+
+[node name="NoteVFXCheckButton" type="CheckButton" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/NoteVFXRow" unique_id=1780278619]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("6_a0eq5")
+text = "Note VFX"
+
+[node name="NoteSFXRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer" unique_id=958528964]
+layout_mode = 2
+
+[node name="NoteSFXCheckButton" type="CheckButton" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/NoteSFXRow" unique_id=831423896]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("6_a0eq5")
+text = "Note SFX"
+
 [node name="RhythmPreview" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer" unique_id=1593727380 instance=ExtResource("6_tvmky")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="ResumeButton" type="Button" parent="Center/Panel/Margin/Settings" unique_id=1245879484]
 unique_name_in_owner = true

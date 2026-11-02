@@ -85,6 +85,8 @@ func pause_game() -> void:
 
 func unpause_game() -> void:
 	hide()
+	print("Note VFX enabled: " + str(RhythmManager.note_vfx_enabled))
+	print("Note SFX enabled: " + str(RhythmManager.note_sfx_enabled))
 	audio_tab.fold()
 	rhythm_tab.fold()
 	if is_instance_valid(player):

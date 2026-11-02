@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ch8pgbtvinj2f"]
 
 [ext_resource type="PackedScene" uid="uid://il741oy1j74u" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/arrows and notes/gold_note.tscn" id="1_dp4eh"]
-[ext_resource type="Texture2D" uid="uid://bbtroncolorsy" path="res://assets/rhythm minigame/PNG/right_spatula.png" id="2_vj1vl"]
+[ext_resource type="Texture2D" uid="uid://sn7yxvbkisl2" path="res://assets/rhythm minigame/PNG/right_spatula_trimmed.png" id="2_vj1vl"]
 
 [node name="ParentArrow" unique_id=1316662934 instance=ExtResource("1_dp4eh")]
 

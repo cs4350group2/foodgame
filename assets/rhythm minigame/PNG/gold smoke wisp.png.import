@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgbkbsulltbst"
-path="res://.godot/imported/left_spatula.png-386c1ed40cc81dd3aa05385b541f9aa7.ctex"
+uid="uid://bfdfrlpo6onux"
+path="res://.godot/imported/gold smoke wisp.png-b91145168143ce95e76e75fb7d8d46e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rhythm minigame/PNG/left_spatula.png"
-dest_files=["res://.godot/imported/left_spatula.png-386c1ed40cc81dd3aa05385b541f9aa7.ctex"]
+source_file="res://assets/rhythm minigame/PNG/gold smoke wisp.png"
+dest_files=["res://.godot/imported/gold smoke wisp.png-b91145168143ce95e76e75fb7d8d46e2.ctex"]
 
 [params]
 

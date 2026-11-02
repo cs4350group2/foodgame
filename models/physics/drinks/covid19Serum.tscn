@@ -165,4 +165,5 @@ shape = SubResource("CapsuleShape3D_qf7sd")
 
 [node name="InteractComponent" type="Node" parent="." unique_id=332897141]
 script = ExtResource("3_3kbaq")
+highlight_root_path = NodePath("..")
 metadata/_custom_type_script = "uid://ca7pbehy5loa"

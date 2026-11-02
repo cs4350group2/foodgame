@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://4xug56b4o67b"
-path="res://.godot/imported/CrabsSlab-ExtraBold.ttf-ede413122fb31e482072a2cbc80a5049.fontdata"
+uid="uid://ccqkj7piepado"
+path="res://.godot/imported/Sauce Tomato.otf-14b9f0a3f6a6852de987d665bd4435a3.fontdata"
 
 [deps]
 
-source_file="res://assets/rhythm minigame/fonts/CrabsSlab-ExtraBold.ttf"
-dest_files=["res://.godot/imported/CrabsSlab-ExtraBold.ttf-ede413122fb31e482072a2cbc80a5049.fontdata"]
+source_file="res://assets/rhythm minigame/unused fonts/Sauce Tomato.otf"
+dest_files=["res://.godot/imported/Sauce Tomato.otf-14b9f0a3f6a6852de987d665bd4435a3.fontdata"]
 
 [params]
 

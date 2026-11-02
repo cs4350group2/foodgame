@@ -122,6 +122,9 @@ shape = SubResource("ConcavePolygonShape3D_j4vlb")
 script = ExtResource("3_rrn7b")
 metadata/_custom_type_script = "uid://ca7pbehy5loa"
 
+[node name="FoodPoint" type="Marker3D" parent="Cube_008/StaticBody3D" index="2" unique_id=190897666]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.006, 0.008, 0.019)
+
 [node name="robinet" type="Node3D" parent="." index="1" unique_id=719715321]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.4363056, 0.5191097, 0)
 

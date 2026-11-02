@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://by753b80v5j7w"
-path="res://.godot/imported/Super Bouncer.ttf-c78d8f474e62b8857185e8a57d3757f2.fontdata"
+uid="uid://cm5sqbk4hc1jj"
+path="res://.godot/imported/SPATULA.ttf-832f3d8f608b801475dc0241d880a4f4.fontdata"
 
 [deps]
 
-source_file="res://assets/rhythm minigame/fonts/Super Bouncer.ttf"
-dest_files=["res://.godot/imported/Super Bouncer.ttf-c78d8f474e62b8857185e8a57d3757f2.fontdata"]
+source_file="res://assets/rhythm minigame/unused fonts/SPATULA.ttf"
+dest_files=["res://.godot/imported/SPATULA.ttf-832f3d8f608b801475dc0241d880a4f4.fontdata"]
 
 [params]
 

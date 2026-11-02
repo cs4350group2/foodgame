@@ -7,12 +7,11 @@ const THANKS_FOR_PLAYING = preload("res://src/ui/ThanksForPlaying.tscn")
 const MUD_DAGORED = preload("uid://dibhfexgjqvj")
 const CHILL_BGM = preload("res://src/music/honey_jam.tres")
 
-@export var last_customer_offset := 5.0
-@export var early_finish_delay := 2.0
 @export var fade_duration := 2.0
 var num_lives: int = 1
 var current_time: float = 0
-var total_duration: float
+var final_wave_start_time: float
+var wave_start_times: Array[float] = []
 var num_customers: int
 # this allows us to have non-uniform customer behaviors
 var timings: Array[CustomerArrival]
@@ -30,10 +29,17 @@ signal day_finished()
 func setup(arrivals: Array[CustomerArrival]):
 	assert(len(arrivals) > 0)
 	timings = arrivals.duplicate()
-	# ignore customer types for now
 	self.num_customers = len(arrivals)
 	current_time = 0
-	total_duration = timings.back().arrival_time + last_customer_offset
+	# A schedule without waves uses the last arrival as its timer endpoint
+	final_wave_start_time = timings.back().arrival_time
+	wave_start_times.clear()
+	var last_wave_index := -1
+	for arrival in timings:
+		if arrival.wave_index > last_wave_index:
+			last_wave_index = arrival.wave_index
+			wave_start_times.append(arrival.arrival_time)
+			final_wave_start_time = arrival.arrival_time
 	customers_to_serve = num_customers
 	current_customers = 0
 	
@@ -43,23 +49,9 @@ func _process(delta):
 	if not day_started:
 		return
 	current_time += delta
-	if current_customers == num_customers:
-		return
-	if (current_time >= timings[current_customers].arrival_time):
-		# Remove this randomization of spawning customer after upgrades of
-		# customers is implemented
-		var customer_string_names = [
-			&"",
-			&"VIP",
-			&"Impatient",
-			&"FoodCritic",
-			&"Hobo",
-			&"Celebrity",
-		]
-		spawn_customer.emit(customer_string_names.pick_random())
-		
-		# Then uncomment this
-		#spawn_customer.emit(timings[current_customers].customer_type)
+	while current_customers < num_customers \
+			and current_time >= timings[current_customers].arrival_time:
+		spawn_customer.emit(timings[current_customers].customer_type)
 		current_customers += 1
 
 func _ready() -> void:
@@ -71,8 +63,6 @@ func _on_customer_removed():
 	customers_to_serve -= 1
 	if customers_to_serve <= 0:
 		if num_lives > 0:
-			if current_time < total_duration:
-				await get_tree().create_timer(early_finish_delay).timeout
 			trigger_level_complete()
 
 func _on_angry_customer_left():

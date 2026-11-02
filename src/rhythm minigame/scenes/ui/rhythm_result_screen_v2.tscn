@@ -2,8 +2,8 @@
 
 [ext_resource type="Theme" uid="uid://h6jab57cg7sv" path="res://assets/rhythm minigame/themes/header_text_for_results_screen_v2.tres" id="1_hb3k2"]
 [ext_resource type="Script" uid="uid://cvbbmrrhmkkqi" path="res://src/rhythm minigame/scripts/ui/rhythm_result_screen_v2.gd" id="1_v16hu"]
-[ext_resource type="Theme" uid="uid://1p1awuurvc8p" path="res://assets/rhythm minigame/themes/cooking_start_and_end_text.tres" id="3_fnrmn"]
 [ext_resource type="Theme" uid="uid://dqp3n3sc4nod3" path="res://assets/rhythm minigame/themes/rhythm_results_screen.tres" id="3_v16hu"]
+[ext_resource type="Theme" uid="uid://m0v5iukebiyj" path="res://assets/rhythm minigame/themes/rhythm_result_screen_dish_quality.tres" id="4_v16hu"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_13qdw"]
 grow_end = 200.0
@@ -44,7 +44,7 @@ theme_override_constants/margin_bottom = 50
 
 [node name="MainVBox" type="VBoxContainer" parent="MainMargin" unique_id=1457641183]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 60
 
 [node name="CookingCompleteLabel" type="Label" parent="MainMargin/MainVBox" unique_id=225780904]
 layout_mode = 2
@@ -166,8 +166,8 @@ size_flags_horizontal = 3
 
 [node name="DishQualityAndButtonSection" type="VBoxContainer" parent="MainMargin/MainVBox/MainHBox" unique_id=4195306]
 layout_mode = 2
-theme = ExtResource("3_fnrmn")
-theme_override_constants/separation = 0
+theme = ExtResource("3_v16hu")
+theme_override_constants/separation = 10
 
 [node name="TotalEmptyPenaltyLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=279128602]
 layout_mode = 2
@@ -182,13 +182,19 @@ theme = ExtResource("3_v16hu")
 theme_override_colors/font_color = Color(0.4745098, 0, 0, 1)
 horizontal_alignment = 1
 
+[node name="Spacer3" type="Control" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=1423562868]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="DishQualityLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=1934896529]
 layout_mode = 2
+theme = ExtResource("4_v16hu")
 text = "DISH QUALITY:"
 horizontal_alignment = 1
 
 [node name="DishQualityScoreLabel" type="Label" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=1668339392]
 layout_mode = 2
+theme = ExtResource("4_v16hu")
 horizontal_alignment = 1
 
 [node name="Spacer2" type="Control" parent="MainMargin/MainVBox/MainHBox/DishQualityAndButtonSection" unique_id=1230706468]
