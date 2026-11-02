@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://6djpu0leink6"]
 
 [ext_resource type="PackedScene" uid="uid://bdssewhawp5re" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/arrows and notes/note.tscn" id="1_wvv7q"]
+[ext_resource type="Texture2D" uid="uid://ct1c5w8jatu8s" path="res://assets/rhythm minigame/PNG/down_spatula_trimmed.png" id="2_gxtad"]
 
 [node name="ParentArrow" unique_id=1316662934 instance=ExtResource("1_wvv7q")]
-scale = Vector2(1, 0.6)
+
+[node name="ArrowDown" parent="." index="0" unique_id=543169254]
+texture = ExtResource("2_gxtad")

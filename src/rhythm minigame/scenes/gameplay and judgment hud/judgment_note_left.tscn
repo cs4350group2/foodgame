@@ -2,6 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://clgejlh74tqax" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/judgment_note.tscn" id="1_exon4"]
 [ext_resource type="Script" uid="uid://7yewbfprj66u" path="res://src/rhythm minigame/scripts/gameplay and judgment hud/judgment_note.gd" id="2_exon4"]
+[ext_resource type="Texture2D" uid="uid://hhgokj1qppuc" path="res://assets/rhythm minigame/PNG/white_left_spatula_trimmed.png" id="3_kprkd"]
 
 [node name="JudgmentArrow" unique_id=1687560457 instance=ExtResource("1_exon4")]
 script = ExtResource("2_exon4")
+
+[node name="ArrowLeft" parent="." index="0" unique_id=1065824009]
+texture = ExtResource("3_kprkd")

@@ -9,6 +9,8 @@ extends VBoxContainer
 @onready var note_speed_slider: HSlider = %NoteSpeedSlider
 @onready var offset_slider: HSlider = %OffsetSlider
 @onready var background_brightness_slider: HSlider = %BackgroundBrightnessSlider
+@onready var note_vfx_check_button: CheckButton = %NoteVFXCheckButton
+@onready var note_sfx_check_button: CheckButton = %NoteSFXCheckButton
 
 @onready var rhythm_preview: Control = %RhythmPreview
 
@@ -21,6 +23,9 @@ func _ready() -> void:
 	note_speed_slider.value_changed.connect(_on_note_speed_changed)
 	offset_slider.value_changed.connect(_on_offset_changed)
 	background_brightness_slider.value_changed.connect(_on_background_brightness_changed)
+	note_vfx_check_button.toggled.connect(_on_note_vfx_check_button_toggled)
+	note_sfx_check_button.toggled.connect(_on_note_sfx_check_button_toggled)
+	
 	visibility_changed.connect(_on_visibility_changed)
 	sync_values()
 
@@ -42,6 +47,9 @@ func sync_values() -> void:
 	%NoteSpeedValue.text = "%.1f" % float(note_speed_slider.value)
 	%OffsetValue.text = "%+d ms" % int(offset_slider.value)
 	%BackgroundBrightnessValue.text = "%d%%" % int(background_brightness_slider.value)
+	
+	note_vfx_check_button.set_pressed_no_signal(RhythmManager.note_vfx_enabled)
+	note_sfx_check_button.set_pressed_no_signal(RhythmManager.note_sfx_enabled)
 
 func _on_master_changed(value: float) -> void:
 	AudioManager.set_master_setting_volume(value / 100.0)
@@ -74,6 +82,12 @@ func _on_background_brightness_changed(value: float) -> void:
 	rhythm_preview.background_brightness = normalized_brightness
 	%BackgroundBrightnessValue.text = "%d%%" % int(background_brightness_slider.value)
 
+func _on_note_vfx_check_button_toggled(toggled_on: bool) -> void:
+	RhythmManager.note_vfx_enabled = toggled_on
+	
+func _on_note_sfx_check_button_toggled(toggled_on: bool) -> void:
+	RhythmManager.note_sfx_enabled = toggled_on
+	
 func _on_reset_to_defaults_button_pressed() -> void:
 	RhythmManager.set_note_speed(5.0)
 	note_speed_slider.value = 5.0
@@ -86,3 +100,6 @@ func _on_reset_to_defaults_button_pressed() -> void:
 	RhythmManager.set_background_brightness(0.5)
 	background_brightness_slider.value = 50.0
 	%BackgroundBrightnessValue.text = "%d%%" % int(background_brightness_slider.value)
+
+	RhythmManager.note_vfx_enabled = true
+	RhythmManager.note_sfx_enabled = true

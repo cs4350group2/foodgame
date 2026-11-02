@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://blt72ehoxf21q" path="res://src/rhythm minigame/scenes/gameplay and judgment hud/arrows and notes/normal_left_note.tscn" id="1_vwadw"]
 [ext_resource type="Texture2D" uid="uid://dkrk26v2vj5je" path="res://assets/rhythm minigame/PNG/down_spatula.png" id="2_xnnrg"]
-[ext_resource type="Texture2D" uid="uid://cldaep4kieytv" path="res://assets/rhythm minigame/PNG/gold water drop.png" id="3_du7ej"]
+[ext_resource type="Texture2D" uid="uid://bfdfrlpo6onux" path="res://assets/rhythm minigame/PNG/gold smoke wisp.png" id="3_vwadw"]
 [ext_resource type="AudioStream" uid="uid://pv7trkj7exx2" path="res://assets/rhythm minigame/sfx/freesound_community-oven-timer-complete-43537.mp3" id="4_h0vwy"]
 
 [node name="ParentArrow" unique_id=1316662934 instance=ExtResource("1_vwadw")]
@@ -12,7 +12,8 @@ self_modulate = Color(0.69803923, 0.63529414, 0, 1)
 texture = ExtResource("2_xnnrg")
 
 [node name="PoppingParticles" parent="." index="2" unique_id=1878868184]
-texture = ExtResource("3_du7ej")
+texture = ExtResource("3_vwadw")
+lifetime = 0.5
 
 [node name="HitEffectPlayer" parent="." index="3" unique_id=631516258]
 stream = ExtResource("4_h0vwy")
