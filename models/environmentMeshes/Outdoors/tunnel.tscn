@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b2d3yaso64fg0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmths"]
+albedo_color = Color(0.32915837, 0.3291584, 0.3291584, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ibxtf"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="Tunnel" type="Node3D" unique_id=1858704112]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=985728106]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=717577368]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.5533764e-07, -3.553711)
+radius = 5.0
+height = 9.107422
+sides = 30
+material = SubResource("StandardMaterial3D_lmths")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1906753800]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.4384419e-07, -3.5063305)
+operation = 2
+radius = 4.3530273
+height = 9.633301
+sides = 30
+material = SubResource("StandardMaterial3D_lmths")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="." unique_id=58363425]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.5938755e-07, -3.8619213)
+operation = 2
+radius = 4.3530273
+height = 8.922119
+sides = 30
+material = SubResource("StandardMaterial3D_ibxtf")
