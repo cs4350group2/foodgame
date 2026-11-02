@@ -2,10 +2,21 @@ extends Node
 
 @export_range(1.0, 10.0, 0.1) var note_speed: float = 5.0 # 5.0 is the default note speed
 @export_range(0.0, 1.0, 0.05) var background_brightness : float = 0.5 # 0.5 is default background brightness
+@export var note_vfx_enabled : bool = true:
+	set(boolean):
+		note_vfx_enabled = boolean
+		note_vfx_toggle_changed.emit(boolean)
+		
+@export var note_sfx_enabled : bool = true:
+	set(boolean):
+		note_sfx_enabled = boolean
+		note_sfx_toggle_changed.emit(boolean)
 
 signal note_speed_changed(value: float)
 signal audio_offset_changed(value: float)
 signal background_brightness_changed(value: float)
+signal note_vfx_toggle_changed(boolean: bool)
+signal note_sfx_toggle_changed(boolean: bool)
 
 @export_range(-150.0, 150.0, 1.0)
 var audio_offset_ms: float = 0.0:

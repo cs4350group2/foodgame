@@ -24,6 +24,9 @@ var bgm_playback_position: float
 
 var note_speed: float
 
+var note_vfx_enabled: bool
+var note_sfx_enabled: bool
+
 var time_to_reach_judgment_line_sec: float:
 	get:
 		# base duration of 5.0 seconds divided by speed setting
@@ -117,9 +120,13 @@ func _ready() -> void:
 	note_speed = RhythmManager.note_speed
 	background.self_modulate.a = RhythmManager.background_brightness
 	audio_offset_ms = RhythmManager.audio_offset_ms
+	note_vfx_enabled = RhythmManager.note_vfx_enabled
+	note_sfx_enabled = RhythmManager.note_sfx_enabled
 	RhythmManager.audio_offset_changed.connect(_on_offset_change)
 	RhythmManager.note_speed_changed.connect(_on_note_speed_change)
 	RhythmManager.background_brightness_changed.connect(_on_background_brightness_change)
+	RhythmManager.note_vfx_toggle_changed.connect(_on_note_vfx_toggle_change)
+	RhythmManager.note_sfx_toggle_changed.connect(_on_note_sfx_toggle_change)
 	
 	match dish_string:
 		"burger":
@@ -285,7 +292,8 @@ func check_hit(lane_name: String, judgment_note: Node2D) -> void:
 		return
 	
 	# hit effect only plays on successful hit (good/perfect)
-	closest_note.hit_effect_player.play()
+	if note_sfx_enabled:
+		closest_note.hit_effect_player.play()
 	
 	# input judgments (timings can still be tweaked in the future if needed)
 	if time_diff <= perfect_time_window_ms:
@@ -297,7 +305,12 @@ func check_hit(lane_name: String, judgment_note: Node2D) -> void:
 		num_goods += 1
 	
 	active_notes[lane_name].erase(closest_note)
-	closest_note.play_hit_anim()
+	if note_vfx_enabled:
+		closest_note.play_hit_anim()
+	else:
+		closest_note.hide() 
+		await closest_note.hit_effect_player.finished
+		closest_note.queue_free()
 
 func check_missed_notes(adjusted_ms: float) -> void:
 	# don't check notes too early
@@ -380,3 +393,9 @@ func _on_note_speed_change(val: float):
 
 func _on_background_brightness_change(val: float):
 	background.self_modulate.a = val
+
+func _on_note_vfx_toggle_change(boolean: bool):
+	note_vfx_enabled = boolean
+
+func _on_note_sfx_toggle_change(boolean: bool):
+	note_sfx_enabled = boolean

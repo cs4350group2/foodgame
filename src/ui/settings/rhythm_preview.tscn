@@ -4,16 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://nof0v21poajp" path="res://assets/rhythm minigame/PNG/minigame wallpaper.jpg" id="2_dhevf"]
 [ext_resource type="Texture2D" uid="uid://byyqk0trirk32" path="res://assets/rhythm minigame/PNG/Black/1x/minus.png" id="3_fwrpr"]
 [ext_resource type="Texture2D" uid="uid://cefcrchlf5isn" path="res://assets/rhythm minigame/PNG/white_left_spatula.png" id="4_g5vpo"]
-[ext_resource type="Texture2D" uid="uid://dgbkbsulltbst" path="res://assets/rhythm minigame/PNG/left_spatula.png" id="5_dhevf"]
+[ext_resource type="Texture2D" path="res://assets/rhythm minigame/PNG/left_spatula.png" id="5_dhevf"]
 
 [node name="RhythmPreview" type="Control" unique_id=1593727380]
-custom_minimum_size = Vector2(100, 150)
+custom_minimum_size = Vector2(100, 225)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_wm6tv")
 
 [node name="Background" type="TextureRect" parent="." unique_id=765212807]
-custom_maximum_size = Vector2(100, 150)
+custom_maximum_size = Vector2(100, 225)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,12 +27,12 @@ grow_vertical = 2
 texture = ExtResource("2_dhevf")
 
 [node name="JudgmentLine" type="Sprite2D" parent="." unique_id=1233601619]
-position = Vector2(44.999996, 150)
+position = Vector2(45, 225)
 scale = Vector2(3.76, 1)
 texture = ExtResource("3_fwrpr")
 
 [node name="JudgmentNote" type="Sprite2D" parent="." unique_id=1918631686]
-position = Vector2(45, 150)
+position = Vector2(45, 225)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_g5vpo")
 
