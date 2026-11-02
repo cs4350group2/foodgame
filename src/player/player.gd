@@ -22,15 +22,36 @@ var _held_scale: Vector3
 @onready var crosshair: Control = $CanvasLayer/Crosshair # added reticle reference for easy access
 @onready var tooltip: Tooltip = \
 	$CanvasLayer/Crosshair/Tooltip
+	
+const WASHING_UI_SCRIPT = preload("res://src/player/washing.gd")
+
+var _washing_ui: WashingUI
+var _washing_sink: WashingSink
+var _washing_food: EdibleItem
+var _washing_complete: bool = false
+var _washing_origin: Vector3
+var _crosshair_visible_before_washing: bool = true
+
+var _washing_ui_was_visible: bool = false
 
 func _ready() -> void:
 	super._ready()
 	interact_ray.add_exception(self)
 	# the moment this player enters, take control of the mouse
 	capture_mouse()
+	
+	_washing_ui = WASHING_UI_SCRIPT.new()
+	$CanvasLayer.add_child(_washing_ui)
+	_washing_ui.configure_from_tooltip(tooltip.text_label)
 
 func _physics_process(delta: float) -> void:
+	if _washing_sink != null and not _washing_session_valid():
+		_stop_washing()
+
 	super._physics_process(delta)
+
+	if _washing_sink != null and not _washing_session_valid():
+		_stop_washing()
 
 	if is_instance_valid(held_edible):
 		update_held_food_transform()
@@ -47,7 +68,11 @@ func _physics_process(delta: float) -> void:
 
 	update_focus()
 	update_chopping_progress()
-	update_tooltip()
+
+	if is_instance_valid(_washing_sink):
+		tooltip.hide()
+	else:
+		update_tooltip()
 	
 # Interaction funcs
 func update_focus() -> void:
@@ -74,6 +99,7 @@ func update_focus() -> void:
 		focused_component.set_highlighted(true)
 
 func _exit_tree() -> void:
+	_stop_washing()
 	_release_held_edible()
 
 	if is_instance_valid(focused_component):
@@ -82,10 +108,53 @@ func _exit_tree() -> void:
 	focused_component = null
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_instance_valid(_washing_sink):
+		if event is InputEventMouseMotion:
+			if not _washing_session_valid():
+				_stop_washing()
+			elif not _washing_complete:
+				var angle_change := _washing_ui.move_cursor(
+					event.relative
+				)
+
+				if _washing_sink.add_washing_rotation(angle_change):
+					_washing_complete = true
+					_washing_food = _washing_sink.stored_edible
+					_washing_ui.show_complete()
+				else:
+					_washing_ui.set_progress(
+						_washing_sink.get_washing_progress()
+					)
+
+			# Also consume motion after completion, preventing a sudden
+			# camera turn while the player is finishing their gesture.
+			get_viewport().set_input_as_handled()
+			return
+
+		if event.is_action_pressed("alt_interact") \
+				and not event.is_echo():
+			_stop_washing()
+			get_viewport().set_input_as_handled()
+			return
+
+		if event.is_action_pressed("interact") \
+				and not event.is_echo():
+			_stop_washing()
+			_interact_requested = true
+			get_viewport().set_input_as_handled()
+			return
+
+		# Ignore F key repeats and secondary-button release.
+		# Washing continues after the initiating button is released.
+		if event.is_action("alt_interact"):
+			get_viewport().set_input_as_handled()
+			return
+
 	super._unhandled_input(event)
 
 	if event.is_action_pressed("interact") and not event.is_echo():
 		_interact_requested = true
+
 	if event.is_action_pressed("alt_interact") and not event.is_echo():
 		_alt_interact_requested = true
 		
@@ -350,3 +419,109 @@ func update_tooltip() -> void:
 		return
 
 	tooltip.show_target(focused_component, self)
+
+# Washing
+func start_washing(sink: WashingSink) -> void:
+	if is_instance_valid(_washing_sink):
+		return
+
+	if not is_instance_valid(sink) or not sink.can_wash():
+		return
+
+	if get_tree().paused \
+			or Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		return
+
+	if is_instance_valid(held_edible) or _washing_movement_requested():
+		return
+
+	interact_ray.force_raycast_update()
+	if get_look_component() != sink.interaction:
+		return
+
+	_washing_sink = sink
+	_washing_food = sink.stored_edible
+	_washing_complete = false
+	_washing_origin = global_position
+
+	_interact_requested = false
+	_alt_interact_requested = false
+
+	_crosshair_visible_before_washing = crosshair.visible
+	tooltip.hide()
+	crosshair.hide()
+	
+	_washing_ui_was_visible = true
+	_washing_ui.begin(sink.get_washing_progress())
+
+
+func _stop_washing() -> void:
+	_washing_sink = null
+	_washing_food = null
+	_washing_complete = false
+
+	if is_instance_valid(_washing_ui):
+		_washing_ui.hide()
+
+		# Only restore visibility if a washing session was actually visible.
+		if _washing_ui_was_visible:
+			crosshair.visible = _crosshair_visible_before_washing
+
+	_washing_ui_was_visible = false
+
+
+func _washing_movement_requested() -> bool:
+	return Input.get_vector(
+		input_left,
+		input_right,
+		input_forward,
+		input_back
+	).length_squared() > 0.0 \
+		or Input.is_action_pressed(input_jump)
+
+
+func _washing_session_valid() -> bool:
+	if not is_instance_valid(_washing_sink):
+		return false
+
+	if not is_instance_valid(_washing_food):
+		return false
+
+	if _washing_sink.stored_edible != _washing_food:
+		return false
+
+	if not is_instance_valid(_washing_sink.interaction) \
+			or not _washing_sink.interaction.enabled:
+		return false
+
+	if get_tree().paused \
+			or Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		return false
+
+	if is_instance_valid(held_edible):
+		return false
+
+	if _washing_movement_requested():
+		return false
+
+	# Also stop if something physically moves the player.
+	if global_position.distance_to(_washing_origin) > 0.05:
+		return false
+
+	if not _washing_complete and not _washing_sink.can_wash():
+		return false
+
+	interact_ray.force_raycast_update()
+	return get_look_component() == _washing_sink.interaction
+
+
+func release_mouse() -> void:
+	_stop_washing()
+	super.release_mouse()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		_stop_washing()
+		_interact_requested = false
+		_alt_interact_requested = false
