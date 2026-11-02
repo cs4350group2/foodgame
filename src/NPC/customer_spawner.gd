@@ -5,8 +5,8 @@ extends Node3D
 @onready var spawn_point: Marker3D = $SpawnPoint
 @onready var exit_point: Marker3D = $Exit
 
-@export var min_patience: float = 80.0
-@export var max_patience: float = 150.0
+@export var min_patience: float = 50.0
+@export var max_patience: float = 80.0
 
 # Preload all available customer scenes
 const normal_customer_scene: PackedScene = preload("res://src/NPC/customer/customer.tscn")
@@ -26,17 +26,17 @@ func _ready() -> void:
 	RestaurantManager.customer_removed.connect(_on_customer_removed)
 
 func _on_customer_removed() -> void:
-	# check if seat is avail
-	if len(to_spawn) > 0 and RestaurantManager.has_vacant_sittingNode():
-		spawn_customer(to_spawn[0])
-		to_spawn.pop_front()
+	_drain_spawn_queue()
 
 func _on_spawn_timer_timeout(customer_type: StringName) -> void:
-	if RestaurantManager.has_vacant_sittingNode():
-		spawn_customer(customer_type)
-	else:
-		print("No vacant seats; not spawning a customer.")
-		to_spawn.append(customer_type)
+	to_spawn.append(customer_type)
+	_drain_spawn_queue()
+
+func _drain_spawn_queue() -> void:
+	while not to_spawn.is_empty() and RestaurantManager.has_vacant_sittingNode():
+		if not spawn_customer(to_spawn[0]):
+			return
+		to_spawn.pop_front()
 
 func load_names() -> void:
 	var file := FileAccess.open("res://data/customer_names.txt", FileAccess.READ)
@@ -56,10 +56,10 @@ func choose_random_customer_scene() -> void:
 
 	customer_scene = customer_scenes.pick_random()
 
-func spawn_customer(customer_type: StringName = &"") -> void:
+func spawn_customer(customer_type: StringName = &"") -> bool:
 	if available_names.is_empty():
 		print("No unused customer names remain.")
-		return
+		return false
 		
 	var rng := RunManager.get_rng()
 	var customer_name: String = available_names[rng.randi_range(0, available_names.size() - 1)]
@@ -67,7 +67,8 @@ func spawn_customer(customer_type: StringName = &"") -> void:
 	
 	# var customer_level := randi_range(1, 3)
 	var customer_level := 1
-	var patience := rng.randf_range(min_patience, max_patience)
+	var patience := rng.randf_range(min_patience, max_patience) \
+		* RunManager.current_run.get_patience_multiplier()
 	
 	# Set up customer scene
 	var customer: Customer
@@ -112,6 +113,7 @@ func spawn_customer(customer_type: StringName = &"") -> void:
 	print("Spawned ", customer.get_customer_name(), 
 	" Level: ", customer.get_customer_lvl(), 
 	" Type: ", customer.get_customer_type())
+	return true
 
 func set_customer_spawn_position(customer: Customer) -> void:
 	customer.global_position = spawn_point.global_position

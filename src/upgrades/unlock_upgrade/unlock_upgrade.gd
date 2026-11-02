@@ -13,7 +13,7 @@ extends Upgrade
 
 func apply_effect(level: Level):
 	if npc_to_unlock != "":
-		level.update_customer_type(npc_to_unlock, npc_spawn_weight)
+		level.unlock_customer_type(npc_to_unlock, npc_spawn_weight)
 	if food_to_unlock != "":
 		# do something here
 		print("unlocked ", food_to_unlock)

@@ -3,33 +3,36 @@ class_name Level
 
 @onready var player: Player = %Player
 
-class CustomerDistribution:
-	var cust_name: StringName
-	var spawn_weight: float
-
-	func _init(ct: StringName, sw: float):
-		cust_name = ct
-		spawn_weight = sw
-
 @export var ui_nodes: Array[Node]
-@export var jitter_amount := 0.1
 var temp_nodes: Dictionary[int, Node] = {}
 @onready var day_manager: DayManager = %DayManager
+@onready var restaurant_ui: RestaurantUI = $RestaurantUi
 
-var available_customers: Array[CustomerDistribution] = [CustomerDistribution.new(&"", 100.0)]
-var total_weight: float = 100.0
+@export var available_customers: Array[CustomerSpawnRule] = [
+	CustomerSpawnRule.new(&"VIP", 2),
+	CustomerSpawnRule.new(&"Hobo", 1),
+	CustomerSpawnRule.new(&"Impatient", 1),
+	CustomerSpawnRule.new(&"FoodCritic", 2),
+]
+
+# This comes from RestaurantRun.current_upgrades, replaying those effects
+# rebuilds this level's unlocked set without changing the customer catalog.
+var unlocked_customer_types: Array[StringName] = []
 
 signal clear_temp()
 
-# Updates the weight of a customer type, or adds it if it doesn't already exist
+func unlock_customer_type(cust_name: StringName, cust_weight: float) -> void:
+	update_customer_type(cust_name, cust_weight)
+	if not unlocked_customer_types.has(cust_name):
+		unlocked_customer_types.append(cust_name)
+
+# Updates the selection weight of a customer type in the available rule list.
 func update_customer_type(cust_name: StringName, cust_weight: float):
-	for cd: CustomerDistribution in available_customers:
-		if cust_name == cd.cust_name:
-			total_weight += cust_weight - cd.spawn_weight
-			cd.spawn_weight = cust_weight
+	for rule in available_customers:
+		if cust_name == rule.customer_type:
+			rule.selection_weight = cust_weight
 			return
-	available_customers.append(CustomerDistribution.new(cust_name, cust_weight))
-	total_weight += cust_weight
+	push_error("No customer spawn rule configured for %s." % cust_name)
 
 # I can't think of a good name for this function
 func clear_temp_nodes() -> void:
@@ -52,35 +55,16 @@ func unregister_temp(temp: Node):
 func _exit_tree() -> void:
 	RestaurantManager.reset()
 
-func choose_customer(rng: RandomNumberGenerator) -> StringName:
-	var value := rng.randf_range(0.0, total_weight)
-	for cust: CustomerDistribution in available_customers:
-		if value < cust.spawn_weight:
-			return cust.cust_name
-		else: value -= cust.spawn_weight
-	# if we somehow don't get anybody, return the first customer
-	return available_customers[0].cust_name
-
 func generate_arrivals(config: ArrivalConfig) -> Array[CustomerArrival]:
-	var rng := RunManager.get_rng()
-	var res: Array[CustomerArrival] = []
-	var current := config.first_arrival_delay
-
-	assert(config.num_customers > 0)
-
-	var average_difference := 0.0 if config.num_customers == 0 else config.total_time / (config.num_customers - 1)
-	var random_jitter := 0.0 # random offset either way up to 10% of the spawn difference,
-	# hopefully this makes for a more natural feeling arrival
-
-	for i in range(config.num_customers):
-		var cust_type := choose_customer(rng)
-		var cust_arrival := CustomerArrival.new(cust_type, current + random_jitter)
-		res.append(cust_arrival)
-
-		current += average_difference
-		var jitter_range := average_difference * jitter_amount
-		random_jitter = rng.randf_range(-jitter_range, jitter_range)
-	return res
+	# Unlock eligibility is independent of weight, so weight modifiers cannot
+	# introduce a customer before its milestone upgrade has been granted.
+	var unlocked_rules: Array[CustomerSpawnRule] = []
+	for rule in available_customers:
+		if unlocked_customer_types.has(rule.customer_type):
+			unlocked_rules.append(rule)
+	return CustomerArrivalGenerator.new().generate(config, unlocked_rules, RunManager.get_rng())
 
 func generate_customers(config: ArrivalConfig) -> void:
-	day_manager.setup(generate_arrivals(config))
+	var arrivals := generate_arrivals(config)
+	if not arrivals.is_empty():
+		day_manager.setup(arrivals)

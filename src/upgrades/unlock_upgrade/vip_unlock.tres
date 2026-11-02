@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3]
+
+[ext_resource type="Script" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+name = &"vip_unlock"
+display_name = &"VIP Customers Unlocked"
+description = "VIP customers can now visit. They demand quality food and reward you with extra bonuses."
+npc_to_unlock = &"VIP"
+npc_spawn_weight = 1.0

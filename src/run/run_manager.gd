@@ -5,6 +5,7 @@ const LEVEL_PATH := "res://main.tscn"
 const LOADING_SCREEN = preload("res://src/ui/loading_screen/LoadingScreen.tscn")
 var is_loading: bool = false
 var active_level: Level = null
+var pending_customer_unlock: Unlock_Upgrade = null
 
 signal upgrade_selection_requested(upgrades: Array[Upgrade])
 signal day_updated(day_number: int)
@@ -13,10 +14,12 @@ func _ready() -> void:
 	UpgradeRepo.load_catalog()
 
 func retire_run() -> void:
+	pending_customer_unlock = null
 	current_run = null
 	active_level = null
 
 func start_new_run(seed_entered: bool, start_seed: int) -> void:
+	pending_customer_unlock = null
 	current_run = RestaurantRun.new(seed_entered, start_seed)
 
 func enter_level() -> void:
@@ -88,7 +91,9 @@ func add_upgrade(new_upgrade: Upgrade) -> void:
 	new_upgrade.apply_effect(active_level)
 
 func level_complete() -> void:
-	current_run.progress_day()
+	pending_customer_unlock = current_run.progress_day()
+	if pending_customer_unlock != null:
+		pending_customer_unlock.apply_effect(active_level)
 	day_updated.emit(current_run.current_day)
 	
 	# idk how decide if you should pick an upgrade
@@ -97,11 +102,19 @@ func level_complete() -> void:
 	if len(upgrades) != 0:
 		upgrade_selection_requested.emit(upgrades)
 	else:
-		active_level.generate_customers(current_run.arrival_config)
+		_prepare_next_day()
 	
 func complete_upgrade_selection(upgrade: Upgrade) -> void:
 	add_upgrade(upgrade.duplicate())
+	_prepare_next_day()
+
+func _prepare_next_day() -> void:
 	active_level.generate_customers(current_run.arrival_config)
+	# Wait until the normal choice is resolved so its UI does not hide the reward.
+	if pending_customer_unlock != null:
+		active_level.restaurant_ui.show_notification_top(
+			String(pending_customer_unlock.display_name), true, pending_customer_unlock.description)
+		pending_customer_unlock = null
 
 func get_rng() -> RandomNumberGenerator:
 	assert(current_run != null)
