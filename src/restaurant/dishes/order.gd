@@ -11,7 +11,18 @@ var items_received: Array[OrderItem] = []
 var total_bonus: float = 0.0
 
 func _init(order_items: Array[OrderItem]):
-	items = order_items
+	for order_item in order_items:
+		var edible_name := order_item.get_edible().get_edible_name()
+		var existing_item: OrderItem
+		for item in items:
+			if item.get_edible().get_edible_name() == edible_name:
+				existing_item = item
+				break
+
+		if existing_item:
+			existing_item.add_quantity(order_item.get_quantity())
+		else:
+			items.append(OrderItem.new(order_item.get_edible(), order_item.get_quantity()))
 
 func find_item_in_order(item_received: OrderItem) -> OrderItem:
 	for item in items:

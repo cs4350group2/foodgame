@@ -105,9 +105,10 @@ func spawn_customer(customer_type: StringName = &"") -> bool:
 		&"Celebrity":
 			customer_scene = celebrity_customer_scene
 			customer = customer_scene.instantiate()
+			patience = patience * 1.5
 			var celeb := customer as Celebrity_Customer
 			if celeb != null:
-				var requirement: float = 50.0
+				var requirement: float = 70.0
 				celeb.initialize_celebrity_customer(customer_name, 
 				customer_level, patience, customer_type, requirement)
 			customer = celeb
