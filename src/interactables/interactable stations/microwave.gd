@@ -84,6 +84,8 @@ var ingredient_buffer: Array[String] = []
 @onready var dish_texture: TextureRect = $"../RestaurantUi/DishConfirmDialog/VBoxContainer/DishTexture" # dish confirmation dialog dish texture
 @onready var dish_confirm_label: Label = $"../RestaurantUi/DishConfirmDialog/VBoxContainer/Label" # label for confirm dialog text
 @onready var microwave_cooking_alert: AcceptDialog = $"../RestaurantUi/MicrowaveCookingAlert" # alert produced if a dish is still cooking in the microwave
+@onready var microwave_cooking_alert_label: Label = $"../RestaurantUi/MicrowaveCookingAlert/VBoxContainer/Label"
+@onready var microwave_cooking_alert_dish_texture: TextureRect = $"../RestaurantUi/MicrowaveCookingAlert/VBoxContainer/DishTexture" 
 
 var is_cooking: bool = false # boolean to track whether microwave is currently cooking something
 var cooking_duration: float # duration to cook in microwave for, in seconds, determined by dish rarity
@@ -101,7 +103,6 @@ func _ready() -> void:
 	interaction.tooltip_provider = _get_tooltip_actions
 	
 	var invalid_dialog_label: Label = invalid_recipe_dialog.get_label()
-	var microwave_cooking_alert_label: Label = microwave_cooking_alert.get_label()
 	
 	invalid_dialog_label.add_theme_color_override("font_color", Color.WHITE)
 	dish_confirm_label.add_theme_color_override("font_color", Color.WHITE)
@@ -120,7 +121,8 @@ func _process(delta: float) -> void:
 	
 func _on_interacted(player: Player) -> void:
 	if is_cooking:
-		microwave_cooking_alert.dialog_text = "Currently cooking " + selected_dish.capitalize() + " inside microwave. Please wait until it is fully cooked!"
+		microwave_cooking_alert_label.text = "Currently cooking " + selected_dish.capitalize() + " inside microwave. Please wait until it is fully cooked!"
+		microwave_cooking_alert_dish_texture.texture = dish_texture.texture
 		microwave_cooking_alert.popup_centered()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE	# re-enable mouse control when dialog pops up
 		return
@@ -132,7 +134,8 @@ func _on_interacted(player: Player) -> void:
 
 func _on_alt_interacted(_player: Player) -> void:
 	if is_cooking:
-		microwave_cooking_alert.dialog_text = "Currently cooking " + selected_dish.capitalize() + " inside microwave. Please wait until it is fully cooked!"
+		microwave_cooking_alert_label.text = "Currently cooking " + selected_dish.capitalize() + " inside microwave. Please wait until it is fully cooked!"
+		microwave_cooking_alert_dish_texture.texture = dish_texture.texture
 		microwave_cooking_alert.popup_centered()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE	# re-enable mouse control when dialog pops up
 		return
