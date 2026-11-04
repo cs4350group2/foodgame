@@ -2793,6 +2793,14 @@ size = Vector2i(700, 100)
 theme = ExtResource("35_0rl1p")
 dialog_autowrap = true
 
+[node name="MicrowaveCookingAlert" type="AcceptDialog" parent="RestaurantUi" unique_id=800355075]
+oversampling_override = 1.0
+title = "Microwave Cooking Alert"
+position = Vector2i(375, 300)
+size = Vector2i(700, 100)
+theme = ExtResource("35_0rl1p")
+dialog_autowrap = true
+
 [node name="DishConfirmDialog" type="ConfirmationDialog" parent="RestaurantUi" unique_id=535079429]
 oversampling_override = 1.0
 title = "Dish Confirmation"
@@ -3359,3 +3367,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.310912, 0.9545536, -0.25533
 
 [node name="SoupOfOblivion" parent="." unique_id=1466406112 instance=ExtResource("46_qnost")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.772099, 0.95455366, -0.3263712)
+
+[connection signal="canceled" from="RestaurantUi/InvalidRecipeDialog" to="MicrowaveStation" method="_on_invalid_recipe_dialog_canceled"]
+[connection signal="confirmed" from="RestaurantUi/InvalidRecipeDialog" to="MicrowaveStation" method="_on_invalid_recipe_dialog_confirmed"]
+[connection signal="canceled" from="RestaurantUi/MicrowaveCookingAlert" to="MicrowaveStation" method="_on_invalid_recipe_dialog_canceled"]
+[connection signal="canceled" from="RestaurantUi/MicrowaveCookingAlert" to="MicrowaveStation" method="_on_microwave_cooking_alert_canceled"]
+[connection signal="confirmed" from="RestaurantUi/MicrowaveCookingAlert" to="MicrowaveStation" method="_on_invalid_recipe_dialog_confirmed"]
+[connection signal="confirmed" from="RestaurantUi/MicrowaveCookingAlert" to="MicrowaveStation" method="_on_microwave_cooking_alert_confirmed"]
+[connection signal="canceled" from="RestaurantUi/DishConfirmDialog" to="MicrowaveStation" method="_on_dish_confirm_dialog_canceled"]

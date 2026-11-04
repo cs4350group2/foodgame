@@ -47,8 +47,8 @@ const MISTAKE_TEXTURE = preload("uid://b03jbfo8j711j")
 
 const RHYTHM_MINIGAME_POPUP_SCENE = preload("uid://bl5f06ugjmaiq")
 
-var active_player : Player = null
-var selected_dish : String = "" # selected dish to cook
+var active_player: Player = null
+var selected_dish: String = "" # selected dish to cook
 
 @export var interact_distance: float = 1.2 # distance in front of stove for player to stand at
 @export var camera_focus_height: float = 2 # vertical offset above stove for player to look at
@@ -85,7 +85,6 @@ func _on_alt_interacted(_player: Player) -> void:
 	rice_bowl_recipe.sort()
 	
 	var grilled_fish_recipe: Array = [UNCHOPPED_FISH_PATH]
-	
 	
 	if current_ingredients == burger_recipe:
 		selected_dish = "burger"
@@ -243,7 +242,7 @@ func _on_return_to_restaurant(dish_quality: float, minigame_node: Node) -> void:
 		str(completed_edible_item.food_data.dish_quality)
 	])
 	
-func convert_ingredients_array_to_string(arr : Array) -> String:
+func convert_ingredients_array_to_string(arr: Array) -> String:
 	# helper function for debugging that converts the current_ingredients array into a clean string with the actual ingredient names
 	if arr.size() == 0:
 		return "Nothing"
@@ -302,3 +301,12 @@ func show_dish_confirmation(current_ingredients: Array) -> void:
 
 func _on_dish_confirmed() -> void:
 	start_cooking(selected_dish)
+
+func _on_dish_confirm_dialog_canceled() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _on_invalid_recipe_dialog_confirmed() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _on_invalid_recipe_dialog_canceled() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
