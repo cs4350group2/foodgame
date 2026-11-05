@@ -80,6 +80,8 @@ func show_side(message: String) -> void:
 	visible = true
 	var side_label: Label = side_label_node.instantiate()
 	side_label.text = message
+	side_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	side_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	side_label.scale = Vector2(0.8, 0.8)
 	side_label.modulate = Color(1, 1, 1, 0)
 	side.add_child(side_label)

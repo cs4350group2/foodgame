@@ -192,7 +192,8 @@ func _store_ingredient(player: Player) -> void:
 	var ingredient_path := ingredient.scene_file_path
 
 	if not INGREDIENT_SCENES.has(ingredient_path):
-		print("Only raw meat, burger buns, raw skinned fish, rice, tomatoes and potatoes can go in the microwave.")
+		var error_message = NotificationManager.get_notification_data()["error"].get("only_ingredients_valid_in_microwave")
+		NotificationManager.show_error(error_message)
 		return
 
 	if ingredient_buffer.has(ingredient_path):
@@ -214,6 +215,8 @@ func _store_ingredient(player: Player) -> void:
 func _take_ingredient(player: Player) -> void:
 	if ingredient_buffer.is_empty():
 		print("The microwave is empty.")
+		var error_message: String = NotificationManager.get_notification_data()["error"].get("empty_microwave")
+		NotificationManager.show_error(error_message)
 		return
 
 	var ingredient_path: String = ingredient_buffer.back()
@@ -232,9 +235,15 @@ func _take_ingredient(player: Player) -> void:
 func start_cooking(dish_string: String):
 	is_cooking = true
 	print("Started cooking: ", dish_string, " for ", cooking_duration, " seconds.")
+	var message: String = NotificationManager.get_notification_data()["action_notification"].get("microwave_start_cooking")
+	message = message % [dish_string, cooking_duration]
+	NotificationManager.show_side(message)
 	
 func finish_cooking() -> void:
 	print("Cooking complete! Spawning dish: ", selected_dish)
+	var message: String = NotificationManager.get_notification_data()["action_notification"].get("microwave_finish_cooking")
+	message = message % [selected_dish]
+	NotificationManager.show_side(message)
 	
 	self.ingredient_buffer.clear()
 	

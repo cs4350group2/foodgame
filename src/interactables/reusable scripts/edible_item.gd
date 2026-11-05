@@ -53,10 +53,19 @@ func is_ingredient() -> bool:
 func _on_interacted(player: Player) -> void:
 	if is_ingredient():
 		print("Picked up ingredient: ", ingredient_name)
+		var message: String = NotificationManager.get_notification_data()["action_notification"].get("picked_up_ingredient")
+		message = message % ingredient_name
+		NotificationManager.show_side(message)
 	elif is_drink:
 		print("Picked up edible: ", drink_data.get_edible_name())
-	else: # dish/drink
+		var message: String = NotificationManager.get_notification_data()["action_notification"].get("picked_up_edible")
+		message = message % drink_data.get_edible_name()
+		NotificationManager.show_side(message)
+	else: # food
 		print("Picked up edible: ", food_data.get_edible_name())
+		var message: String = NotificationManager.get_notification_data()["action_notification"].get("picked_up_edible")
+		message = message % food_data.get_edible_name()
+		NotificationManager.show_side(message)
 	# Add shared food pickup behavior here later.
 	player.pick_up_edible(self)
 
