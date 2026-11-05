@@ -2,8 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bleu56ats4lt1" path="res://src/NPC/npc_sitting_node.gd" id="1_t7noo"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blkrb"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
 [node name="SittingNode" type="CSGBox3D" unique_id=747953572]
 size = Vector3(0.5, 0.5, 0.5)
+material = SubResource("StandardMaterial3D_blkrb")
 script = ExtResource("1_t7noo")
 
 [node name="SeatPose" type="Marker3D" parent="." unique_id=2045694313]

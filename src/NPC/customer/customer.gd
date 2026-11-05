@@ -43,6 +43,15 @@ const TASTELESS_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_eff
 const MEMORY_RESET_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_effects/memory_reset.tscn")
 const STARSTRUCK_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_effects/starstruck.tscn")
 
+const FOOD_SCENES: Dictionary[String, PackedScene] = {
+	"Steak": preload("res://models/physics/food/steak/meatCookedPlated.tscn"),
+	"Burger": preload("res://models/physics/food/burger/burgerallPlated.tscn"),
+	"Stew": preload("res://models/physics/food/stew/stewPlate.tscn"),
+	"Sushi": preload("res://models/physics/food/sushi/sushi.tscn"),
+	"Rice Bowl": preload("res://models/physics/food/riceBowl/riceBowl.tscn"),
+	"Grilled Fish": preload("res://models/physics/food/grilledFish/grilledFish.tscn"),
+}
+
 enum State {
 	IDLE,
 	WALKING_TO_TABLE,
@@ -298,6 +307,7 @@ func exit_state(state:State):
 
 		State.EATING:
 			global_transform = prev_transform
+			assigned_sittingNode.clear_display_dish()
 			pass
 
 		State.WALKING_TO_CASHIER:
@@ -493,12 +503,34 @@ func state_waiting_for_food(delta):
 		return
 
 func start_eating(eating_time: float = 10.0) -> void:
+	display_dish_on_table()
 	play_audio(AudioSfx.COMPLETE)
 	await get_tree().create_timer(eating_time).timeout
 
 	# Do nothing if the customer changed state while waiting.
 	if current_state == State.EATING:
 		change_state(State.WALKING_TO_CASHIER)
+
+func display_dish_on_table() -> void:
+	if order == null or assigned_sittingNode == null:
+		return
+
+	var order_items := order.get_order_items()
+	if order_items.is_empty():
+		return
+
+	var rng := RunManager.get_rng()
+	var random_item: OrderItem = order_items[rng.randi_range(0, order_items.size() - 1)]
+	var edible := random_item.get_edible()
+	if edible == null:
+		return
+
+	var dish_scene: PackedScene = FOOD_SCENES.get(edible.get_edible_name())
+	if dish_scene == null:
+		push_warning("No display scene configured for food '%s'." % edible.get_edible_name())
+		return
+
+	assigned_sittingNode.set_display_dish(dish_scene)
 	
 func _on_order_complete(completed_order: Order):
 	# some guard checks

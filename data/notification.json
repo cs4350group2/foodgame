@@ -18,6 +18,8 @@
 		"delivering_empty_handed": "You need to be holding a cooked dish/consumable to deliver it.",
 		"uncooked_ingredient_error": "Ingredients cannot be delivered. Cook them first!",
 		"dish_deliver_before_order_taken": "Take the customer's order first!",
+		"chopping_board_occupied": "The chopping board is occupied.",
+		"item_cannot_be_chopped": "This item cannot be chopped.",
 	},
 	"action_notification": {
 		"deliver_item": "Delivered %s to %s.",

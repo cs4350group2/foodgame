@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cgsfbe7go6lf" path="res://models/tables and charis/table.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://dwkfsyoxn7eun" path="res://models/tables and charis/chair.tscn" id="12_dg77c"]
 [ext_resource type="PackedScene" uid="uid://8pmn7ri3q83k" path="res://models/spawners/fridge.tscn" id="18_074og"]
+[ext_resource type="PackedScene" uid="uid://rf1x05wxwb0l" path="res://src/restaurant/dishes/dish_node.tscn" id="18_blkrb"]
 [ext_resource type="PackedScene" uid="uid://de1mj6x1iytdx" path="res://models/props/lamp.tscn" id="18_cegan"]
 [ext_resource type="PackedScene" uid="uid://c5toepeu4b86f" path="res://models/interactable stations/stoveWPot.tscn" id="19_cegan"]
 [ext_resource type="PackedScene" uid="uid://dnog75r3ow708" path="res://models/interactable stations/bartablePlate.tscn" id="19_getpj"]
@@ -2747,17 +2748,29 @@ metadata/_custom_type_script = "uid://c08kngi0a0cac"
 
 [node name="SittingNodes" type="Node2D" parent="Restaurant" unique_id=1273397510]
 
-[node name="SittingNode2" parent="Restaurant/SittingNodes" unique_id=1818272558 instance=ExtResource("27_htxhm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.3, -2.4)
-
 [node name="SittingNode" parent="Restaurant/SittingNodes" unique_id=747953572 instance=ExtResource("27_htxhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.3, 0.90000004)
 
-[node name="SittingNode4" parent="Restaurant/SittingNodes" unique_id=969281728 instance=ExtResource("27_htxhm")]
+[node name="DishNode" parent="Restaurant/SittingNodes/SittingNode" unique_id=1886803002 instance=ExtResource("18_blkrb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0.8)
+
+[node name="SittingNode2" parent="Restaurant/SittingNodes" unique_id=1818272558 instance=ExtResource("27_htxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.3, -2.4)
+
+[node name="DishNode" parent="Restaurant/SittingNodes/SittingNode2" unique_id=1614250098 instance=ExtResource("18_blkrb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0.8)
+
+[node name="SittingNode3" parent="Restaurant/SittingNodes" unique_id=969281728 instance=ExtResource("27_htxhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0825784, 0.31423625, 0.83624053)
 
-[node name="SittingNode3" parent="Restaurant/SittingNodes" unique_id=1063073881 instance=ExtResource("27_htxhm")]
+[node name="DishNode" parent="Restaurant/SittingNodes/SittingNode3" unique_id=636394553 instance=ExtResource("18_blkrb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0.8)
+
+[node name="SittingNode4" parent="Restaurant/SittingNodes" unique_id=1063073881 instance=ExtResource("27_htxhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2056277, 0.26298296, -2.4488146)
+
+[node name="DishNode" parent="Restaurant/SittingNodes/SittingNode4" unique_id=709479187 instance=ExtResource("18_blkrb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0.8)
 
 [node name="CustomerSpawner" type="Node3D" parent="Restaurant" unique_id=1733515437]
 script = ExtResource("28_kq58d")
@@ -3384,8 +3397,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.772099, 0.95455366, -0.3263
 
 [connection signal="canceled" from="RestaurantUi/InvalidRecipeDialog" to="MicrowaveStation" method="_on_invalid_recipe_dialog_canceled"]
 [connection signal="confirmed" from="RestaurantUi/InvalidRecipeDialog" to="MicrowaveStation" method="_on_invalid_recipe_dialog_confirmed"]
-[connection signal="canceled" from="RestaurantUi/MicrowaveCookingAlert" to="MicrowaveStation" method="_on_invalid_recipe_dialog_canceled"]
 [connection signal="canceled" from="RestaurantUi/MicrowaveCookingAlert" to="MicrowaveStation" method="_on_microwave_cooking_alert_canceled"]
-[connection signal="confirmed" from="RestaurantUi/MicrowaveCookingAlert" to="MicrowaveStation" method="_on_invalid_recipe_dialog_confirmed"]
+[connection signal="canceled" from="RestaurantUi/MicrowaveCookingAlert" to="MicrowaveStation" method="_on_invalid_recipe_dialog_canceled"]
 [connection signal="confirmed" from="RestaurantUi/MicrowaveCookingAlert" to="MicrowaveStation" method="_on_microwave_cooking_alert_confirmed"]
+[connection signal="confirmed" from="RestaurantUi/MicrowaveCookingAlert" to="MicrowaveStation" method="_on_invalid_recipe_dialog_confirmed"]
 [connection signal="canceled" from="RestaurantUi/DishConfirmDialog" to="MicrowaveStation" method="_on_dish_confirm_dialog_canceled"]

@@ -16,12 +16,22 @@ const REQUIRED_CLICKS: int = 4
 
 @onready var interaction: InteractComponent = $InteractComponent
 @onready var food_point: Marker3D = $FoodPoint
+@onready var restaurant_ui: RestaurantUI = get_tree().current_scene.get_node("RestaurantUi")
 
 var stored_edible: EdibleItem
 var _stored_original_freeze: bool
 var _stored_original_interaction_enabled: bool
 var _chop_clicks: int = 0
 
+# Notifications
+var notification_data: Dictionary
+
+func load_notification_data() -> void:
+	var file = FileAccess.open("res://data/notification.json", FileAccess.READ)
+	if file == null:
+		push_error("Could not open notification.json")
+		return
+	notification_data = JSON.parse_string(file.get_as_text())
 
 func _ready() -> void:
 	interaction.supports_primary = true
@@ -33,7 +43,7 @@ func _ready() -> void:
 	
 	interaction.display_name = "Chopping Board"
 	interaction.tooltip_provider = _get_tooltip_actions
-
+	load_notification_data()
 
 func _on_interacted(player: Player) -> void:
 	if not is_instance_valid(stored_edible):
@@ -43,9 +53,13 @@ func _on_interacted(player: Player) -> void:
 	if is_instance_valid(player.held_edible):
 		if stored_edible != null:
 			print("The chopping board is occupied.")
+			var error_message: String = notification_data["error"].get("chopping_board_occupied")
+			restaurant_ui.show_notification_error_bottom(error_message)
 			return
 
 		if not CHOPPED_SCENES.has(player.held_edible.scene_file_path):
+			var error_message: String = notification_data["error"].get("item_cannot_be_chopped")
+			restaurant_ui.show_notification_error_bottom(error_message)
 			print("This item cannot be chopped.")
 			return
 

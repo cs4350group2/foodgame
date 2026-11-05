@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://rf1x05wxwb0l"]
+
+[ext_resource type="Script" uid="uid://dso57ki77edff" path="res://src/restaurant/dishes/dish_node.gd" id="1_td5yh"]
+
+[node name="DishNode" type="Node3D" unique_id=747953572]
+script = ExtResource("1_td5yh")
+
+[node name="DishMarker" type="Marker3D" parent="." unique_id=2045694313]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
