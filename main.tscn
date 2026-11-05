@@ -2643,9 +2643,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0ogbs")
 
-[node name="Main" type="Node3D" unique_id=579835186 node_paths=PackedStringArray("ui_nodes")]
+[node name="Main" type="Node3D" unique_id=579835186]
 script = ExtResource("1_0rl1p")
-ui_nodes = [NodePath("CanvasLayer"), NodePath("RestaurantUi")]
 
 [node name="Player" parent="." unique_id=1842546302 instance=ExtResource("1_074og")]
 unique_name_in_owner = true

@@ -41,6 +41,7 @@ const MOOD_GAIN_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_eff
 const BLINDED_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_effects/blinded.tscn")
 const TASTELESS_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_effects/tasteless.tscn")
 const MEMORY_RESET_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_effects/memory_reset.tscn")
+const STARSTRUCK_SCENE: PackedScene = preload("res://addons/reeboo_vfx/status_effects/starstruck.tscn")
 
 enum State {
 	IDLE,
@@ -752,6 +753,21 @@ func show_memory_reset_vfx() -> void:
 	effect_anchor.add_child(effect)
 	effect.position = Vector3.ZERO
 
+func show_starstruck_effect() -> void:
+	if is_instance_valid(starstruck_effect):
+		return
+
+	starstruck_effect = STARSTRUCK_SCENE.instantiate() as Node3D
+	effect_anchor.add_child(starstruck_effect)
+	starstruck_effect.position = Vector3.ZERO
+
+func unshow_starstruck_effect() -> void:
+	if not is_instance_valid(starstruck_effect):
+		return
+
+	starstruck_effect.queue_free()
+	starstruck_effect = null
+
 func is_equal(other: Customer) -> bool:
 	return (
 		customer_name == other.get_customer_name()
@@ -765,12 +781,14 @@ enum StatusEffect {
 	UNCONSCIOUS,
 	TASTELESS,
 	BLIND,
+	STARSTRUCK,
 }
 
 var current_status_effects: Array[StatusEffect] = []
 var patience_timer_stopped: bool = false
 var unconscious_effect_remaining: float = 0.0
 var unconscious_effect: Node3D
+var starstruck_effect: Node3D
 
 func enter_status_effect(status_effect: StatusEffect) -> void:
 	match status_effect:
@@ -785,6 +803,8 @@ func enter_status_effect(status_effect: StatusEffect) -> void:
 		StatusEffect.BLIND:
 			show_blinded_vfx()
 			pass
+		StatusEffect.STARSTRUCK:
+			show_starstruck_effect()
 		_:
 			pass
 
@@ -799,6 +819,8 @@ func exit_status_effect(status_effect: StatusEffect) -> void:
 			pass
 		StatusEffect.BLIND:
 			pass
+		StatusEffect.STARSTRUCK:
+			unshow_starstruck_effect()
 		_:
 			pass
 
@@ -816,6 +838,14 @@ func remove_status_effect(status_effect: StatusEffect) -> void:
 
 func set_patience_timer_stop(value: bool) -> void:
 	patience_timer_stopped = value
+
+func apply_starstruck_effect() -> void:
+	add_status_effect(StatusEffect.STARSTRUCK)
+	set_patience_timer_stop(true)
+
+func stop_starstruck_effect() -> void:
+	remove_status_effect(StatusEffect.STARSTRUCK)
+	set_patience_timer_stop(false)
 
 func apply_unconscious_effect(duration: float) -> void:
 	add_status_effect(StatusEffect.UNCONSCIOUS)

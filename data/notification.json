@@ -4,12 +4,14 @@
 		"Impatient": "An impatient customer has entered the restaurant!",
 		"FoodCritic": "A food critic has entered the restaurant!",
 		"Hobo": "A hobo has entered the restaurant!",
+		"Celebrity": "A celebrity has entered the restaurant!",
 	},
 	"special_customer_descriptions": {
 		"VIP": "VIPs require a dish quality of at least 50 and pay a double bonus.",
 		"Impatient": "Impatient customers have half the usual patience.",
 		"FoodCritic": "Food critics judge dish quality: a high-quality dish boosts other customers' patience, while a low-quality dish reduces it.",
 		"Hobo": "Hobos leave after eating, interact with them before they leave to collect payment. They also don't mind trash food.",
+		"Celebrity": "Pauses patience of all customers in the restaurants, pays 3x bonus, but more demanding in order and quality. (>80% dish quality requirement)",
 	},
 	"error": {
 		"order_dish_requirement_not_fulfilled": "This dish does not match the customer's order/requirement.",
