@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c2e0raxq2kydi" path="res://src/ui/settings/settings_controls.gd" id="1_settings"]
 [ext_resource type="Theme" uid="uid://cp6t4mnfwas5v" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="2_theme"]
 [ext_resource type="PackedScene" uid="uid://v4xaxiqgjyfp" path="res://src/ui/settings/rhythm_preview.tscn" id="3_1dr5y"]
+[ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/OrderUITheme.tres" id="3_5ukuq"]
 [ext_resource type="Theme" uid="uid://clnyl86gan1pj" path="res://src/ui/restaurant_ui/RestaurantUIThemeRedButton.tres" id="3_l5sd5"]
 [ext_resource type="Theme" uid="uid://14sxgktt40ia" path="res://src/ui/restaurant_ui/RestaurantUIRhythmTabButton.tres" id="3_vi0fa"]
 
@@ -187,7 +188,7 @@ text = "Back"
 layout_mode = 0
 offset_right = 424.0
 offset_bottom = 440.0
-theme_override_constants/separation = 20
+theme_override_constants/separation = 5
 
 [node name="Title" type="Label" parent="Panel/Margin/ViewManager/RhythmSettings" unique_id=741483799]
 layout_mode = 2
@@ -197,10 +198,10 @@ horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings" unique_id=853442420]
 layout_mode = 2
-theme_override_constants/separation = 75
+theme_override_constants/separation = 50
 
 [node name="SettingsVBox" type="VBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer" unique_id=240337063]
-custom_minimum_size = Vector2(225, 0)
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme_override_constants/separation = 5
 
@@ -228,6 +229,28 @@ max_value = 10.0
 step = 0.1
 value = 5.0
 
+[node name="BackgroundBrightnessRow" type="VBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox" unique_id=1527065501]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/BackgroundBrightnessRow" unique_id=1001852214]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/BackgroundBrightnessRow/Header" unique_id=842275765]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Background Brightness"
+
+[node name="BackgroundBrightnessValue" type="Label" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/BackgroundBrightnessRow/Header" unique_id=976222690]
+unique_name_in_owner = true
+layout_mode = 2
+text = "50.0"
+
+[node name="BackgroundBrightnessSlider" type="HSlider" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/BackgroundBrightnessRow" unique_id=554233243]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.1
+value = 50.0
+
 [node name="OffsetRow" type="VBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox" unique_id=1531599533]
 layout_mode = 2
 
@@ -251,27 +274,13 @@ layout_mode = 2
 min_value = -150.0
 max_value = 150.0
 
-[node name="BackgroundBrightnessRow" type="VBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox" unique_id=1527065501]
+[node name="OffsetHint" type="Label" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/OffsetRow" unique_id=829817613]
 layout_mode = 2
-
-[node name="Header" type="HBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/BackgroundBrightnessRow" unique_id=1001852214]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/BackgroundBrightnessRow/Header" unique_id=842275765]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "BG Brightness"
-
-[node name="BackgroundBrightnessValue" type="Label" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/BackgroundBrightnessRow/Header" unique_id=976222690]
-unique_name_in_owner = true
-layout_mode = 2
-text = "50.0"
-
-[node name="BackgroundBrightnessSlider" type="HSlider" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox/BackgroundBrightnessRow" unique_id=554233243]
-unique_name_in_owner = true
-layout_mode = 2
-step = 0.1
-value = 50.0
+theme = ExtResource("3_5ukuq")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Negative: notes earlier. 
+Positive: notes later."
+horizontal_alignment = 1
 
 [node name="NoteVFXRow" type="VBoxContainer" parent="Panel/Margin/ViewManager/RhythmSettings/HBoxContainer/SettingsVBox" unique_id=825505281]
 layout_mode = 2

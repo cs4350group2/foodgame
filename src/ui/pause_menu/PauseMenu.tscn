@@ -479,6 +479,32 @@ max_value = 10.0
 step = 0.1
 value = 5.0
 
+[node name="BackgroundBrightnessRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer" unique_id=1914691559]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/BackgroundBrightnessRow" unique_id=1419325222]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/BackgroundBrightnessRow/Header" unique_id=1481605851]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_vt2ny")
+theme_override_font_sizes/font_size = 21
+text = "Background Brightness"
+
+[node name="BackgroundBrightnessValue" type="Label" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/BackgroundBrightnessRow/Header" unique_id=2055159681]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vt2ny")
+theme_override_font_sizes/font_size = 21
+text = "100%"
+
+[node name="BackgroundBrightnessSlider" type="HSlider" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/BackgroundBrightnessRow" unique_id=1769962480]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+value = 50.0
+
 [node name="OffsetRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer" unique_id=576268662]
 layout_mode = 2
 
@@ -505,32 +531,6 @@ custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 min_value = -150.0
 max_value = 150.0
-
-[node name="BackgroundBrightnessRow" type="VBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer" unique_id=1914691559]
-layout_mode = 2
-
-[node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/BackgroundBrightnessRow" unique_id=1419325222]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/BackgroundBrightnessRow/Header" unique_id=1481605851]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_vt2ny")
-theme_override_font_sizes/font_size = 21
-text = "Background Brightness"
-
-[node name="BackgroundBrightnessValue" type="Label" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/BackgroundBrightnessRow/Header" unique_id=2055159681]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_vt2ny")
-theme_override_font_sizes/font_size = 21
-text = "100%"
-
-[node name="BackgroundBrightnessSlider" type="HSlider" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer/BackgroundBrightnessRow" unique_id=1769962480]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 28)
-layout_mode = 2
-value = 50.0
 
 [node name="OffsetHint" type="Label" parent="Center/Panel/Margin/Settings/RhythmTab/HBoxContainer/VBoxContainer" unique_id=1153301872]
 layout_mode = 2
