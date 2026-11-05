@@ -98,7 +98,7 @@ func _on_reset_to_defaults_button_pressed() -> void:
 	%OffsetValue.text = "%+d ms" % int(RhythmManager.audio_offset_ms)
 	
 	RhythmManager.set_background_brightness(0.5)
-	background_brightness_slider.value = 50.0
+	background_brightness_slider.value = 50
 	%BackgroundBrightnessValue.text = "%d%%" % int(background_brightness_slider.value)
 
 	RhythmManager.note_vfx_enabled = true
