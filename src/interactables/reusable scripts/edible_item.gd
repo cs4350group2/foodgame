@@ -22,6 +22,7 @@ func _ready() -> void:
 	if is_instance_valid(owning_level):
 		owning_level.register_temp(self)
 	interaction.primary_description = "Pick up"
+	interaction.tooltip_provider = _get_tooltip_actions
 	
 func _exit_tree() -> void:
 	if is_instance_valid(owning_level):
@@ -86,3 +87,14 @@ func get_edible_item_name() -> String:
 # Mainly used by drinks which will affect customers
 func affect_customer(customer: Customer) -> bool:
 	return true
+
+func _get_tooltip_actions(player: Player) -> Dictionary:
+	var details := ""
+	
+	if not is_drink and food_data:
+		var dish_quality: float = food_data.get_dish_quality()
+		details = "Quality: %.2f%%" % dish_quality
+	
+	return {
+		"details": details,
+	}
