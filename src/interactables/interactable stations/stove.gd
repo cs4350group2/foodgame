@@ -28,9 +28,9 @@ const GRILLED_FISH_PATH = preload("res://models/physics/food/grilledFish/grilled
 
 @onready var pause_menu: CanvasLayer = $"../../../PauseMenu" # restaurant pause menu
 
-@onready var dish_confirm_dialog: ConfirmationDialog = $"../../../RestaurantUi/DishConfirmDialog" # dish confirmation dialog in restaurant_main
-@onready var dish_texture: TextureRect = $"../../../RestaurantUi/DishConfirmDialog/VBoxContainer/DishTexture" # dish confirmation dialog dish texture
-@onready var dish_confirm_label: Label = $"../../../RestaurantUi/DishConfirmDialog/VBoxContainer/Label" # label for confirm dialog text
+@onready var stove_dish_confirm_dialog: ConfirmationDialog = $"../../../RestaurantUi/StoveDishConfirmDialog" # stove dish confirmation dialog in restaurant_main
+@onready var dish_texture: TextureRect = $"../../../RestaurantUi/StoveDishConfirmDialog/VBoxContainer/DishTexture" # dish confirmation dialog dish texture
+@onready var stove_dish_confirm_label: Label = $"../../../RestaurantUi/StoveDishConfirmDialog/VBoxContainer/Label" # label for confirm dialog text
 
 var camera3d
 var original_camera_transform
@@ -60,7 +60,7 @@ func _ready() -> void:
 	var invalid_dialog_label: Label = invalid_recipe_dialog.get_label()
 	
 	invalid_dialog_label.add_theme_color_override("font_color", Color.WHITE)
-	dish_confirm_label.add_theme_color_override("font_color", Color.WHITE)
+	stove_dish_confirm_label.add_theme_color_override("font_color", Color.WHITE)
 	interaction.display_name = "Stove"
 	interaction.secondary_description = "Check recipe / Cook"
 
@@ -275,8 +275,8 @@ func convert_ingredients_array_to_string(arr: Array) -> String:
 	return ", ".join(names)
 	
 func show_dish_confirmation(current_ingredients: Array) -> void:
-	if not dish_confirm_dialog.confirmed.is_connected(_on_dish_confirmed):
-		dish_confirm_dialog.confirmed.connect(_on_dish_confirmed)
+	if not stove_dish_confirm_dialog.confirmed.is_connected(_on_dish_confirmed):
+		stove_dish_confirm_dialog.confirmed.connect(_on_dish_confirmed)
 	
 	var formatted_dish_name = selected_dish.capitalize()
 	
@@ -294,15 +294,15 @@ func show_dish_confirmation(current_ingredients: Array) -> void:
 		"grilled_fish":
 			dish_texture.texture = GRILLED_FISH_TEXTURE
 		
-	dish_confirm_label.text = "Start cooking " + formatted_dish_name + "?" + "\n" 
+	stove_dish_confirm_label.text = "Start cooking " + formatted_dish_name + "?" + "\n" 
 		
-	dish_confirm_dialog.popup_centered()
+	stove_dish_confirm_dialog.popup_centered()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE	# re-enable mouse control when dialog pops up
 
 func _on_dish_confirmed() -> void:
 	start_cooking(selected_dish)
 
-func _on_dish_confirm_dialog_canceled() -> void:
+func _on_stove_dish_confirm_dialog_canceled() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _on_invalid_recipe_dialog_confirmed() -> void:

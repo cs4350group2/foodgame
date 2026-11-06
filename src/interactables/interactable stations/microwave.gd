@@ -85,9 +85,9 @@ var ingredient_buffer: Array[String] = []
 @onready var restaurant_main: Level = $".." # restaurant main node
 
 @onready var invalid_recipe_dialog: AcceptDialog = $"../RestaurantUi/InvalidRecipeDialog" # invalid recipe dialog in restaurant_main
-@onready var dish_confirm_dialog: ConfirmationDialog = $"../RestaurantUi/DishConfirmDialog" # dish confirmation dialog in restaurant_main
-@onready var dish_texture: TextureRect = $"../RestaurantUi/DishConfirmDialog/VBoxContainer/DishTexture" # dish confirmation dialog dish texture
-@onready var dish_confirm_label: Label = $"../RestaurantUi/DishConfirmDialog/VBoxContainer/Label" # label for confirm dialog text
+@onready var microwave_dish_confirm_dialog: ConfirmationDialog = $"../RestaurantUi/MicrowaveDishConfirmDialog"
+@onready var dish_texture: TextureRect = $"../RestaurantUi/MicrowaveDishConfirmDialog/VBoxContainer/DishTexture"
+@onready var microwave_dish_confirm_label: Label = $"../RestaurantUi/MicrowaveDishConfirmDialog/VBoxContainer/Label"
 @onready var microwave_cooking_alert: AcceptDialog = $"../RestaurantUi/MicrowaveCookingAlert" # alert produced if a dish is still cooking in the microwave
 @onready var microwave_cooking_alert_label: Label = $"../RestaurantUi/MicrowaveCookingAlert/VBoxContainer/Label"
 @onready var microwave_cooking_alert_dish_texture: TextureRect = $"../RestaurantUi/MicrowaveCookingAlert/VBoxContainer/DishTexture" 
@@ -117,7 +117,7 @@ func _ready() -> void:
 	var invalid_dialog_label: Label = invalid_recipe_dialog.get_label()
 	
 	invalid_dialog_label.add_theme_color_override("font_color", Color.WHITE)
-	dish_confirm_label.add_theme_color_override("font_color", Color.WHITE)
+	microwave_dish_confirm_label.add_theme_color_override("font_color", Color.WHITE)
 	microwave_cooking_alert_label.add_theme_color_override("font_color", Color.WHITE)
 
 func _process(delta: float) -> void:
@@ -372,9 +372,6 @@ func _get_tooltip_actions(player: Player) -> Dictionary:
 	}
 
 func show_dish_confirmation(current_ingredients: Array) -> void:
-	if not dish_confirm_dialog.confirmed.is_connected(_on_dish_confirmed):
-		dish_confirm_dialog.confirmed.connect(_on_dish_confirmed)
-	
 	var formatted_dish_name = selected_dish.capitalize()
 	
 	match selected_dish:
@@ -397,18 +394,18 @@ func show_dish_confirmation(current_ingredients: Array) -> void:
 			dish_texture.texture = GRILLED_FISH_TEXTURE
 			cooking_duration = 10.0
 	
-	dish_confirm_label.text = "Start cooking " + formatted_dish_name + " in the microwave?" + "\n" + "Cooking duration: " + str(cooking_duration) + " seconds" 
+	microwave_dish_confirm_label.text = "Start cooking " + formatted_dish_name + " in the microwave?" + "\n" + "Cooking duration: " + str(cooking_duration) + " seconds" 
 		
-	dish_confirm_dialog.popup_centered()
+	microwave_dish_confirm_dialog.popup_centered()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE	# re-enable mouse control when dialog pops up
 
-func _on_dish_confirmed() -> void:
+func _on_microwave_dish_confirm_dialog_confirmed() -> void:
 	start_cooking(selected_dish)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
-func _on_dish_confirm_dialog_canceled() -> void:
+	
+func _on_microwave_dish_confirm_dialog_canceled() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
+	
 func _on_invalid_recipe_dialog_confirmed() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 

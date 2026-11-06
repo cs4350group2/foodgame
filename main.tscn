@@ -2828,26 +2828,48 @@ size_flags_horizontal = 4
 [node name="Label" type="Label" parent="RestaurantUi/MicrowaveCookingAlert/VBoxContainer" unique_id=1962888754]
 layout_mode = 2
 
-[node name="DishConfirmDialog" type="ConfirmationDialog" parent="RestaurantUi" unique_id=535079429]
+[node name="StoveDishConfirmDialog" type="ConfirmationDialog" parent="RestaurantUi" unique_id=535079429]
 oversampling_override = 1.0
 title = "Dish Confirmation"
 size = Vector2i(700, 100)
 theme = ExtResource("35_0rl1p")
 ok_button_text = "OK"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="RestaurantUi/DishConfirmDialog" unique_id=927774041]
+[node name="VBoxContainer" type="VBoxContainer" parent="RestaurantUi/StoveDishConfirmDialog" unique_id=927774041]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 692.0
 offset_bottom = 54.0
 theme = ExtResource("35_0rl1p")
 
-[node name="DishTexture" type="TextureRect" parent="RestaurantUi/DishConfirmDialog/VBoxContainer" unique_id=1437975914]
+[node name="DishTexture" type="TextureRect" parent="RestaurantUi/StoveDishConfirmDialog/VBoxContainer" unique_id=1437975914]
 custom_maximum_size = Vector2(400, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="RestaurantUi/DishConfirmDialog/VBoxContainer" unique_id=1324105463]
+[node name="Label" type="Label" parent="RestaurantUi/StoveDishConfirmDialog/VBoxContainer" unique_id=1324105463]
+layout_mode = 2
+
+[node name="MicrowaveDishConfirmDialog" type="ConfirmationDialog" parent="RestaurantUi" unique_id=810208855]
+oversampling_override = 1.0
+title = "Dish Confirmation"
+size = Vector2i(700, 100)
+theme = ExtResource("35_0rl1p")
+ok_button_text = "OK"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RestaurantUi/MicrowaveDishConfirmDialog" unique_id=1767850448]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 692.0
+offset_bottom = 54.0
+theme = ExtResource("35_0rl1p")
+
+[node name="DishTexture" type="TextureRect" parent="RestaurantUi/MicrowaveDishConfirmDialog/VBoxContainer" unique_id=603494583]
+custom_maximum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="RestaurantUi/MicrowaveDishConfirmDialog/VBoxContainer" unique_id=132203046]
 layout_mode = 2
 
 [node name="PauseMenu" parent="." unique_id=902983238 instance=ExtResource("36_ok6jj")]
@@ -3401,4 +3423,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.772099, 0.95455366, -0.3263
 [connection signal="canceled" from="RestaurantUi/MicrowaveCookingAlert" to="MicrowaveStation" method="_on_invalid_recipe_dialog_canceled"]
 [connection signal="confirmed" from="RestaurantUi/MicrowaveCookingAlert" to="MicrowaveStation" method="_on_microwave_cooking_alert_confirmed"]
 [connection signal="confirmed" from="RestaurantUi/MicrowaveCookingAlert" to="MicrowaveStation" method="_on_invalid_recipe_dialog_confirmed"]
-[connection signal="canceled" from="RestaurantUi/DishConfirmDialog" to="MicrowaveStation" method="_on_dish_confirm_dialog_canceled"]
+[connection signal="canceled" from="RestaurantUi/StoveDishConfirmDialog" to="MicrowaveStation" method="_on_dish_confirm_dialog_canceled"]
+[connection signal="confirmed" from="RestaurantUi/StoveDishConfirmDialog" to="." method="_on_stove_dish_confirm_dialog_confirmed"]
+[connection signal="confirmed" from="RestaurantUi/StoveDishConfirmDialog" to="MicrowaveStation" method="_on_stove_dish_confirm_dialog_confirmed"]
+[connection signal="canceled" from="RestaurantUi/MicrowaveDishConfirmDialog" to="MicrowaveStation" method="_on_dish_confirm_dialog_canceled"]
+[connection signal="canceled" from="RestaurantUi/MicrowaveDishConfirmDialog" to="MicrowaveStation" method="_on_microwave_dish_confirm_dialog_canceled"]
+[connection signal="confirmed" from="RestaurantUi/MicrowaveDishConfirmDialog" to="MicrowaveStation" method="_on_microwave_dish_confirm_dialog_confirmed"]
