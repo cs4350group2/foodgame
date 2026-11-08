@@ -305,10 +305,15 @@ func drop_edible() -> void:
 		return
 
 	if not _can_drop_food():
-		print("Not enough space to drop the food.")
+		print("Not enough space to drop the item.")
+		var error_message: String = NotificationManager.get_notification_data()["error"].get("not_enough_space_drop_item")
+		NotificationManager.show_error(error_message)
 		return
 	
-	print("Dropped edible/ingredient: ", held_edible.get_edible_item_name())
+	print("Dropped item: ", held_edible.get_edible_item_name())
+	var message: String = NotificationManager.get_notification_data()["action_notification"].get("dropped_item")
+	message = message % held_edible.get_edible_item_name()
+	NotificationManager.show_side(message)
 	_release_held_edible()
 	
 func _can_drop_food(ignore_item: EdibleItem = null) -> bool:

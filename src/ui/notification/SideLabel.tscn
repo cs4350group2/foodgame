@@ -12,6 +12,7 @@ bg_color = Color(0.2592937, 0.2592937, 0.2592937, 0.6862745)
 [node name="Label" type="Label" unique_id=299211405]
 offset_right = 32.0
 offset_bottom = 26.0
+size_flags_horizontal = 3
 pivot_offset_ratio = Vector2(1, 0.5)
 theme = ExtResource("1_3g8e3")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
@@ -21,3 +22,4 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1wuc7")
 text = "Item"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3

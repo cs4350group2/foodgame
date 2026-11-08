@@ -29,6 +29,7 @@ AudioManager="*uid://diljxx64vyoov"
 RestaurantManager="*uid://c13jwmdtv0dqf"
 RunManager="*uid://bj0llj26dtai1"
 RhythmManager="*uid://cn8pkdyon37cg"
+NotificationManager="*uid://c1ixsvmfr4kgm"
 
 [display]
 

@@ -13,6 +13,9 @@ func _ready() -> void:
 	show_spawn_notification()
 	apply_starstruck_effects()
 
+func _exit_tree() -> void:
+	remove_starstruck_effects()
+
 func initialize_celebrity_customer(name: String, level: int, patience: float, 
 							 type: StringName, requirement: float = 70.0) -> void:
 	initialize_customer(name, level, patience, type)
@@ -92,8 +95,6 @@ func reset_offset() -> void:
 
 func take_payment() -> float:
 	paid = true
-	# Other customers no longer starstruck
-	remove_starstruck_effects()
 	# Gives 3x bonus
 	return order.get_order_total_price() + order.get_total_bonus() * 3
 

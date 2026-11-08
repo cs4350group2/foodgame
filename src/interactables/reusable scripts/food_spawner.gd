@@ -32,6 +32,9 @@ func _on_interacted(player: Player) -> void:
 		food.ingredient_name,
 		spawner_name,
 	])
+	var message: String = NotificationManager.get_notification_data()["action_notification"].get("pulled_ingredient")
+	message = message % [food.ingredient_name, spawner_name]
+	NotificationManager.show_side(message)
 
 func _get_tooltip_actions(_player: Player) -> Dictionary:
 	var prompt := ""

@@ -1,6 +1,11 @@
 extends Node3D
 
 @onready var interaction: InteractComponent = $InteractComponent
+@onready var cooking_timer_bar: CookingTimerBar = $CookingTimerBar
+@onready var sfx_player: AudioStreamPlayer3D = $SfxPlayer3D
+
+const MICROWAVE_START_SFX = preload("res://assets/sfx/microwave/microwave_start.mp3")
+const MICROWAVE_DONE_SFX = preload("res://assets/sfx/microwave/microwave_done.mp3")
 
 const INGREDIENT_SCENES = {
 	"res://models/physics/food/ingredients/meatRaw.tscn":
@@ -89,8 +94,15 @@ var ingredient_buffer: Array[String] = []
 
 var is_cooking: bool = false # boolean to track whether microwave is currently cooking something
 var cooking_duration: float # duration to cook in microwave for, in seconds, determined by dish rarity
+var total_cooking_duration: float
 var active_player: Player = null
 var selected_dish: String = "" # selected dish to cook
+
+func play_sfx(stream: AudioStream = null) -> void:
+	if stream != null:
+		sfx_player.stream = stream
+	if sfx_player.stream != null:
+		sfx_player.play()
 
 func _ready() -> void:
 	interaction.display_name = "Microwave"
@@ -113,10 +125,12 @@ func _process(delta: float) -> void:
 		return
 	
 	cooking_duration -= delta 
+	cooking_timer_bar.update_timer(cooking_duration)
 	
 	if cooking_duration <= 0:
 		cooking_duration = 0.0
 		is_cooking = false
+		cooking_timer_bar.stop_timer()
 		finish_cooking()
 	
 func _on_interacted(player: Player) -> void:
@@ -192,7 +206,8 @@ func _store_ingredient(player: Player) -> void:
 	var ingredient_path := ingredient.scene_file_path
 
 	if not INGREDIENT_SCENES.has(ingredient_path):
-		print("Only raw meat, burger buns, raw skinned fish, rice, tomatoes and potatoes can go in the microwave.")
+		var error_message = NotificationManager.get_notification_data()["error"].get("only_ingredients_valid_in_microwave")
+		NotificationManager.show_error(error_message)
 		return
 
 	if ingredient_buffer.has(ingredient_path):
@@ -214,6 +229,8 @@ func _store_ingredient(player: Player) -> void:
 func _take_ingredient(player: Player) -> void:
 	if ingredient_buffer.is_empty():
 		print("The microwave is empty.")
+		var error_message: String = NotificationManager.get_notification_data()["error"].get("empty_microwave")
+		NotificationManager.show_error(error_message)
 		return
 
 	var ingredient_path: String = ingredient_buffer.back()
@@ -231,10 +248,20 @@ func _take_ingredient(player: Player) -> void:
 
 func start_cooking(dish_string: String):
 	is_cooking = true
+	total_cooking_duration = cooking_duration
+	cooking_timer_bar.start_timer(total_cooking_duration)
+	play_sfx(MICROWAVE_START_SFX)
 	print("Started cooking: ", dish_string, " for ", cooking_duration, " seconds.")
+	var message: String = NotificationManager.get_notification_data()["action_notification"].get("microwave_start_cooking")
+	message = message % [dish_string, cooking_duration]
+	NotificationManager.show_side(message)
 	
 func finish_cooking() -> void:
+	play_sfx(MICROWAVE_DONE_SFX)
 	print("Cooking complete! Spawning dish: ", selected_dish)
+	var message: String = NotificationManager.get_notification_data()["action_notification"].get("microwave_finish_cooking")
+	message = message % [selected_dish]
+	NotificationManager.show_side(message)
 	
 	self.ingredient_buffer.clear()
 	

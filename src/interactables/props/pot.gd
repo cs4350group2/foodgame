@@ -80,7 +80,8 @@ func _store_ingredient(player: Player) -> void:
 	var ingredient_path := ingredient.scene_file_path
 
 	if not INGREDIENT_SCENES.has(ingredient_path):
-		print("Only raw meat, burger buns, raw skinned fish, rice, tomatoes and potatoes can go in the pot.")
+		var error_message = NotificationManager.get_notification_data()["error"].get("only_ingredients_valid_in_microwave")
+		NotificationManager.show_error(error_message)
 		return
 
 	if ingredient_buffer.has(ingredient_path):
@@ -98,10 +99,15 @@ func _store_ingredient(player: Player) -> void:
 	ingredient.queue_free()
 
 	print("Put ", item_name, " in the pot.")
+	var message: String = NotificationManager.get_notification_data()["action_notification"].get("put_item_in_pot")
+	message = message % item_name
+	NotificationManager.show_side(message)
 
 
 func _take_ingredient(player: Player) -> void:
 	if ingredient_buffer.is_empty():
+		var error_message: String = NotificationManager.get_notification_data()["error"].get("empty_pot")
+		NotificationManager.show_error(error_message)
 		print("The pot is empty.")
 		return
 
@@ -115,6 +121,9 @@ func _take_ingredient(player: Player) -> void:
 	if player.held_edible == ingredient:
 		ingredient_buffer.pop_back()
 		print("Took ", ingredient.get_edible_item_name(), " from the pot.")
+		var message: String = NotificationManager.get_notification_data()["action_notification"].get("took_item_from_pot")
+		message = message % ingredient.get_edible_item_name()
+		NotificationManager.show_side(message)
 	else:
 		ingredient.queue_free()
 
