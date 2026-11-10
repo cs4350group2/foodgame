@@ -53,6 +53,7 @@ script = ExtResource("1_w1qe3")
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=412562727]
 custom_minimum_size = Vector2(280, 300)
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("2_qymb1")
 theme_override_styles/panel = SubResource("StyleBoxFlat_af53c")
 
@@ -91,6 +92,7 @@ autowrap_mode = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1035872323]
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxLine_ggipf")
 
 [node name="Desc" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=622912468]

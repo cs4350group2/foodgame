@@ -377,13 +377,13 @@ func show_dish_confirmation(current_ingredients: Array) -> void:
 	match selected_dish:
 		"burger":
 			dish_texture.texture = BURGER_TEXTURE
-			cooking_duration = 10.0
+			cooking_duration = 15.0
 		"steak":
 			dish_texture.texture = STEAK_TEXTURE
-			cooking_duration = 20.0
+			cooking_duration = 10.0
 		"stew":
 			dish_texture.texture = STEW_TEXTURE
-			cooking_duration = 15.0
+			cooking_duration = 20.0
 		"sushi":
 			dish_texture.texture = SUSHI_TEXTURE
 			cooking_duration = 15.0
