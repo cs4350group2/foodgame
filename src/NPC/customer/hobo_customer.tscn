@@ -11,6 +11,7 @@ height = 1.5
 
 [node name="HoboCustomer" type="CharacterBody3D" unique_id=259023669 groups=["customers"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
 script = ExtResource("1_1yk10")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1135132478]

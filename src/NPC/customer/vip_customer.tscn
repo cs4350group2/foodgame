@@ -10,6 +10,7 @@ radius = 0.3
 height = 1.8
 
 [node name="VipCustomer" type="CharacterBody3D" unique_id=1663120077]
+collision_layer = 2
 script = ExtResource("1_axcya")
 metadata/_custom_type_script = "uid://3jayeuijk1q5"
 
