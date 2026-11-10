@@ -1,7 +1,7 @@
 extends Control
 class_name UpgradeUi
 
-@onready var container: HBoxContainer = $CenterContainer/HBoxContainer
+@onready var container: HBoxContainer = %HBoxContainer
 
 @export var fade_in_duration: float = 0.15
 @export var box_delay = 0.1

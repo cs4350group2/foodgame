@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3 uid="uid://c2vf5ln7oboiu"]
+
+[ext_resource type="Script" uid="uid://bxux2xb3f10ma" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1_1iya3"]
+
+[resource]
+script = ExtResource("1_1iya3")
+drink_to_unlock = &"Soda"
+name = &"Unlock Soda"
+display_name = &"Install soda dispensing"
+price = 40.0
+metadata/_custom_type_script = "uid://bxux2xb3f10ma"

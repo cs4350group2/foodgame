@@ -125,6 +125,57 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bst06"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.36078432, 0.34117648, 0.32941177, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.19, 0.025, 0.035, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6m770"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.36078432, 0.34117648, 0.32941177, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.19, 0.025, 0.035, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mm8e7"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.36078432, 0.34117648, 0.32941177, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.19, 0.025, 0.035, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jjx5v"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1mj5m"]
@@ -161,8 +212,9 @@ fill_to = Vector2(0, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1mj5m"]
 shader = ExtResource("3_1mj5m")
 shader_parameter/glass_tint = Color(0.85, 0.95, 1, 1)
-shader_parameter/reflection_strength = 0.3450000163875
-shader_parameter/base_opacity = 0.0470000022325
+shader_parameter/reflection_strength = 0.25
+shader_parameter/base_opacity = 0.04
+shader_parameter/edge_shadow_strength = 0.6
 
 [sub_resource type="Gradient" id="Gradient_d4ukr"]
 
@@ -200,6 +252,9 @@ pressed_style = SubResource("StyleBoxFlat_card_pressed")
 disabled_style = SubResource("StyleBoxFlat_card_disabled")
 accepted_style = SubResource("StyleBoxFlat_card_accepted")
 rejected_style = SubResource("StyleBoxFlat_card_rejected")
+locked_style = SubResource("StyleBoxFlat_bst06")
+locked_hover_style = SubResource("StyleBoxFlat_6m770")
+locked_pressed_style = SubResource("StyleBoxFlat_mm8e7")
 
 [node name="Button" type="Button" parent="." unique_id=168712078]
 layout_mode = 2

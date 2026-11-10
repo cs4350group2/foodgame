@@ -83,6 +83,17 @@ func load_menu():
 func get_menu() -> Dictionary:
 	return menu_data
 
+func get_available_foods() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	var run = RunManager.current_run
+	
+	for food: Dictionary in menu_data.get("foods", []):
+		var dish_name := StringName(food.get("name", ""))
+		if run.is_dish_unlocked(dish_name):
+			result.append(food)
+	
+	return result
+
 func get_drinks_menu() -> Dictionary:
 	return drinks_menu_data
 

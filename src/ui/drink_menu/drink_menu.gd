@@ -2,7 +2,20 @@ extends Control
 
 const DRINK_ENTRY_SCENE: PackedScene = preload("res://src/ui/drink_menu/DrinkEntry.tscn")
 
-@export var buy_timeout := 0.2
+@export var buy_timeout := 0.05
+@export var upgrades_panel_style: StyleBox
+@export var drink_unlock_upgrades: Array[Unlock_Upgrade] = [
+	preload("res://src/upgrades/drink_unlock/alcohol_unlock.tres"),
+	preload("res://src/upgrades/drink_unlock/cooler_soda_unlock.tres"),	
+	preload("res://src/upgrades/drink_unlock/covid19_serum_unlock.tres"),
+	preload("res://src/upgrades/drink_unlock/extremely_safe_drink_unlock.tres"),
+	preload("res://src/upgrades/drink_unlock/iced_lemon_tea_unlock.tres"),
+	preload("res://src/upgrades/drink_unlock/liquid_food_unlock.tres"),
+	preload("res://src/upgrades/drink_unlock/one_day_blinding_stew_unlock.tres"),
+	preload("res://src/upgrades/drink_unlock/soda_unlock.tres"),
+	preload("res://src/upgrades/drink_unlock/soup_of_oblivion_unlock.tres")
+	
+]
 
 @onready var coins_label: Label = %CoinsLabel
 @onready var drink_list: GridContainer = %DrinkList
@@ -11,6 +24,13 @@ const DRINK_ENTRY_SCENE: PackedScene = preload("res://src/ui/drink_menu/DrinkEnt
 @onready var panel_margin: MarginContainer = $Panel/Margin
 @onready var menu_content: VBoxContainer = $Panel/Margin/Content
 @onready var close_button: Button = %CloseButton
+@onready var drinks_tab: Button = %DrinksTab
+@onready var upgrades_tab: Button = %UpgradesTab
+@onready var upgrade_menu: UpgradeMenu = %UpgradeMenu
+@onready var tab_bar: HBoxContainer = $Tabs
+@onready var menu_title: Label = $Panel/Margin/Content/Header/Title
+@onready var drinks_banner: PanelContainer = $Panel/Margin/Content/TextureRect
+@onready var drinks_panel_style: StyleBox = menu_panel.get_theme_stylebox("panel")
 
 var _player: Player
 var _run: RestaurantRun
@@ -25,10 +45,34 @@ var _previous_crosshair_visible := true
 func _ready() -> void:
 	hide()
 	close_button.pressed.connect(close_menu)
+	drinks_tab.pressed.connect(_select_tab.bind(false))
+	upgrades_tab.pressed.connect(_select_tab.bind(true))
+	upgrade_menu.purchased.connect(_refresh_availability)
 	_build_drink_list()
+	_select_tab(false)
 	resized.connect(_update_drink_columns)
 	_update_drink_columns.call_deferred()
 
+func _on_drink_purchase_requested(
+	_drink_name: String,
+	_price: float,
+	entry: DrinkEntry
+) -> void:
+	if not _active or _closing or _buying:
+		return
+
+	var drink_name := StringName(entry.current_drink.edible_name)
+
+	if not _run.has_drink_unlock(drink_name):
+		var upgrade := _get_drink_unlock(drink_name)
+		if upgrade == null:
+			return
+
+		if _buy_drink_unlock(upgrade):
+			entry.reset_feedback()
+		return
+
+	_buy_drink(entry.current_drink.edible_name, entry.price, entry)
 
 func _build_drink_list() -> void:
 	for drink: Dictionary in RestaurantManager.get_drinks_menu().get("drinks", []):
@@ -47,8 +91,23 @@ func _build_drink_list() -> void:
 		)
 		entry.add_child(drink_data)
 		entry.setup(drink_data)
-		entry.buy_requested.connect(_buy_drink.bind(entry))
+		entry.buy_requested.connect(_on_drink_purchase_requested.bind(entry))
 		_entries.append(entry)
+
+
+func _select_tab(show_upgrades: bool) -> void:
+	if _closing or _buying:
+		return
+	drink_scroll.visible = not show_upgrades
+	upgrade_menu.visible = show_upgrades
+	drinks_banner.visible = not show_upgrades
+	menu_title.text = "UPGRADES" if show_upgrades else "EZ-DRINKS"
+	menu_panel.add_theme_stylebox_override(
+		"panel", upgrades_panel_style if show_upgrades else drinks_panel_style)
+	drinks_tab.set_pressed_no_signal(not show_upgrades)
+	upgrades_tab.set_pressed_no_signal(show_upgrades)
+	_refresh_availability()
+	_update_drink_columns.call_deferred()
 
 
 func _update_drink_columns() -> void:
@@ -64,16 +123,15 @@ func _update_drink_columns() -> void:
 	panel_padding += panel_margin.get_theme_constant("margin_left") + panel_margin.get_theme_constant("margin_right")
 	# Use the viewport budget rather than the shrinking panel to avoid feedback.
 	var scrollbar_width := drink_scroll.get_v_scroll_bar().get_combined_minimum_size().x
-	var available_width := size.x * 0.84 - panel_padding - scrollbar_width
+	# Both tabs share a stable width, including when the drinks grid is hidden.
+	var panel_width := minf(size.x * 0.84, 1050.0)
+	var available_width := panel_width - panel_padding - scrollbar_width
 	var columns_that_fit := floori((available_width + spacing) / maxf(entry_width + spacing, 1.0))
 	drink_list.columns = clampi(columns_that_fit, 1, entry_count)
-	var content_width := drink_list.get_combined_minimum_size().x + scrollbar_width
-	for child: Control in menu_content.get_children():
-		if child != drink_scroll:
-			content_width = maxf(content_width, child.get_combined_minimum_size().x)
-	var panel_width := content_width + panel_padding
 	menu_panel.offset_left = -panel_width / 2.0
 	menu_panel.offset_right = panel_width / 2.0
+	tab_bar.offset_left = -panel_width / 2.0
+	tab_bar.offset_right = panel_width / 2.0
 
 
 func open_menu(player: Player) -> void:
@@ -86,6 +144,7 @@ func open_menu(player: Player) -> void:
 	_previous_crosshair_visible = player.crosshair.visible
 	_active = true
 	_closing = false
+	_select_tab(false)
 	_session_id += 1
 	for entry in _entries:
 		entry.reset_feedback()
@@ -113,21 +172,66 @@ func _on_coins_updated(_amount: float) -> void:
 func _refresh_availability() -> void:
 	if not _active:
 		return
+
 	coins_label.text = "Coins: %s" % str(_run.coins)
+	drinks_tab.disabled = _closing or _buying
+	upgrades_tab.disabled = _closing or _buying
+	upgrade_menu.refresh(_closing or _buying or not upgrade_menu.visible)
 	_update_drink_columns.call_deferred()
-	var hands_full := is_instance_valid(_player) and is_instance_valid(_player.held_edible)
+
+	var hands_full := (
+		is_instance_valid(_player)
+		and is_instance_valid(_player.held_edible)
+	)
+
 	for entry in _entries:
+		var drink_name := StringName(entry.current_drink.edible_name)
+		var upgrade := _get_drink_unlock(drink_name)
+		var unlocked := _run.has_drink_unlock(drink_name)
+
+		entry.set_unlock_state(upgrade, unlocked)
+
 		var reason := ""
+		var cost := entry.get_purchase_price()
+
 		if _closing:
 			reason = "CLOSING..."
 		elif _buying:
-			reason = "DISPENSING..."
-		elif hands_full:
+			reason = "PROCESSING..."
+		elif not unlocked and upgrade == null:
+			reason = "UNAVAILABLE"
+		elif cost < 0.0 or not is_finite(cost):
+			reason = "UNAVAILABLE"
+		elif unlocked and hands_full:
 			reason = "HANDS FULL"
-		elif _run.coins < entry.price:
+		elif _run.coins < cost:
 			reason = "NOT ENOUGH COINS"
+
 		entry.set_availability(reason.is_empty(), reason)
 
+func _get_drink_unlock(drink_name: StringName) -> Unlock_Upgrade:
+	for upgrade: Unlock_Upgrade in drink_unlock_upgrades:
+		if upgrade.drink_to_unlock == drink_name:
+			return upgrade
+	return null
+
+func _buy_drink_unlock(upgrade: Unlock_Upgrade) -> bool:
+	if not _active or _closing or _buying:
+		return false
+	if _run.has_drink_unlock(upgrade.drink_to_unlock):
+		return false
+	
+	_buying =  true
+	if not _run.try_remove_coins(upgrade.price):
+		_buying = false
+		_refresh_availability()
+		return false
+	
+	RunManager.add_upgrade(upgrade.duplicate() as Upgrade)
+	
+	_buying = false
+	_refresh_availability()
+	return true
 
 func _buy_drink(_drink_name: String, price: float, entry: DrinkEntry) -> void:
 	if not _active or _closing or _buying or not is_instance_valid(_player):

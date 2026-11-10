@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="EarningUpgrade" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://src/upgrades/food_upgrade/earning_params.gd" id="1_params"]
+[ext_resource type="Script" path="res://src/upgrades/food_upgrade/earning_upgrade.gd" id="2_upgrade"]
+
+[sub_resource type="Resource" id="Resource_effect_0"]
+script = ExtResource("1_params")
+food = &"Steak"
+multiplier = 1.05
+overwrite_existing_value = false
+
+[sub_resource type="Resource" id="Resource_effect_1"]
+script = ExtResource("1_params")
+food = &"Burger"
+multiplier = 1.05
+overwrite_existing_value = false
+
+[sub_resource type="Resource" id="Resource_effect_2"]
+script = ExtResource("1_params")
+food = &"Stew"
+multiplier = 1.05
+overwrite_existing_value = false
+
+[sub_resource type="Resource" id="Resource_effect_3"]
+script = ExtResource("1_params")
+food = &"Rice Bowl"
+multiplier = 1.05
+overwrite_existing_value = false
+
+[resource]
+script = ExtResource("2_upgrade")
+effects = Array[ExtResource("1_params")]([SubResource("Resource_effect_0"), SubResource("Resource_effect_1"), SubResource("Resource_effect_2"), SubResource("Resource_effect_3")])
+name = &"ingredient_meat_upgrade"
+display_name = &"Premium Meat I"
+description = "Increase base payouts of meals containing meat by 5%, regardless of preparation: Steak, Burger, Stew, Rice Bowl. Stacks multiplicatively with other earnings upgrades."
+dependencies = Array[StringName]([])
+price = 100.0

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3 uid="uid://c8hxa22tqiud7"]
+
+[ext_resource type="Script" uid="uid://bxux2xb3f10ma" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+drink_to_unlock = &"Cooler Soda"
+name = &"Unlock Cooler Soda"
+display_name = &"Install cooler soda dispensing"
+description = "Unlock Cooler Soda for purchase at the drink dispenser."
+price = 200.0

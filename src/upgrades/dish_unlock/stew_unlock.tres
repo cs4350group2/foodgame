@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3 uid="uid://d3v0ogwn3qy8l"]
+
+[ext_resource type="Script" uid="uid://bxux2xb3f10ma" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1_0jyto"]
+[ext_resource type="Texture2D" uid="uid://2no7u8k2e01j" path="res://pictures/New Textures/03_stew.png" id="1_us1rv"]
+
+[resource]
+script = ExtResource("1_0jyto")
+food_to_unlock = &"Stew"
+food_price_modifier = 1.0
+name = &"unlock_dish_stew"
+display_name = &"Stew"
+icon = ExtResource("1_us1rv")
+description = "Serve up a luxurious stew made from meat, potatoes and tomatoes! Hard to cook, but people will pay through the nose for a good one!"
+metadata/_custom_type_script = "uid://bxux2xb3f10ma"

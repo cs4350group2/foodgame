@@ -10,3 +10,4 @@ display_name = &"Nice Shoes"
 description = "Get a pair of shoes that make you run even faster."
 dependencies = Array[StringName]([&"speed_boost_small"])
 metadata/_custom_type_script = "uid://f6rsg3htlyqw"
+price = 300.0

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3 uid="uid://cl1he74v5r0fn"]
+
+[ext_resource type="Script" uid="uid://bxux2xb3f10ma" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+drink_to_unlock = &"EXTREMELY SAFE Drink"
+name = &"Unlock EXTREMELY SAFE Drink"
+display_name = &"Install extremely safe drink dispensing"
+description = "Unlock EXTREMELY SAFE Drink for purchase at the drink dispenser."
+price = 400.0

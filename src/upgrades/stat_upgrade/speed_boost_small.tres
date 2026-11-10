@@ -9,3 +9,4 @@ name = &"speed_boost_small"
 display_name = &"Leg Day"
 description = "You do leg day at the gym and can run 5% faster."
 metadata/_custom_type_script = "uid://f6rsg3htlyqw"
+price = 125.0

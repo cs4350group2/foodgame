@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3 uid="uid://d02s6qvbooe4a"]
+
+[ext_resource type="Texture2D" uid="uid://b6tpa6sao7ri6" path="res://pictures/New Textures/01_steak.png" id="1_d3s83"]
+[ext_resource type="Script" uid="uid://bxux2xb3f10ma" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1_uos58"]
+
+[resource]
+script = ExtResource("1_uos58")
+food_to_unlock = &"Steak"
+food_price_modifier = 1.0
+name = &"unlock_dish_steak"
+display_name = &"Steak"
+icon = ExtResource("1_d3s83")
+description = "The classic."
+metadata/_custom_type_script = "uid://bxux2xb3f10ma"

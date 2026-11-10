@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3 uid="uid://21dxavhpban7"]
+
+[ext_resource type="Texture2D" uid="uid://c0xyyibaje6e3" path="res://pictures/New Textures/02_burger.png" id="1_0nj58"]
+[ext_resource type="Script" uid="uid://bxux2xb3f10ma" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1_ntbej"]
+
+[resource]
+script = ExtResource("1_ntbej")
+food_to_unlock = &"Burger"
+food_price_modifier = 1.0
+name = &"unlock_dish_burger"
+display_name = &"Burger"
+icon = ExtResource("1_0nj58")
+description = "Serve up burgers the old-fashioned way! Easy to make, but customers won't pay too much for them either!"
+metadata/_custom_type_script = "uid://bxux2xb3f10ma"

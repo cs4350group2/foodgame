@@ -10,3 +10,4 @@ display_name = &"Cybernetic Legs"
 description = "Rid yourself of the burden of flesh and equip blazingly fast legs."
 dependencies = Array[StringName]([&"speed_boost_medium"])
 metadata/_custom_type_script = "uid://f6rsg3htlyqw"
+price = 750.0

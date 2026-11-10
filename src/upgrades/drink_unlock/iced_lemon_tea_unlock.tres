@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3 uid="uid://c2hisbros2su7"]
+
+[ext_resource type="Script" uid="uid://bxux2xb3f10ma" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+drink_to_unlock = &"Iced Lemon Tea"
+name = &"Unlock Iced Lemon Tea"
+display_name = &"Install iced lemon tea dispensing"
+description = "Unlock Iced Lemon Tea for purchase at the drink dispenser."
+price = 80.0

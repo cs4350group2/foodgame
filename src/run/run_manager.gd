@@ -1,11 +1,14 @@
 extends Node
 
+const DISH_UNLOCK_INTERVAL := 2
+
 var current_run: RestaurantRun = null
 const LEVEL_PATH := "res://main.tscn"
 const LOADING_SCREEN = preload("res://src/ui/loading_screen/LoadingScreen.tscn")
 var is_loading: bool = false
 var active_level: Level = null
 var pending_customer_unlock: Unlock_Upgrade = null
+var pending_dish_choices: Array[Upgrade]
 
 signal upgrade_selection_requested(upgrades: Array[Upgrade])
 signal day_updated(day_number: int)
@@ -20,6 +23,7 @@ func retire_run() -> void:
 
 func start_new_run(seed_entered: bool, start_seed: int) -> void:
 	pending_customer_unlock = null
+	AudioManager.bgm_bpm = AudioManager.MUD_DAGORED.bpm
 	current_run = RestaurantRun.new(seed_entered, start_seed)
 
 func enter_level() -> void:
@@ -72,8 +76,10 @@ func enter_level() -> void:
 	# Keep the overlay through scene initialization and the first rendered frame.
 	await get_tree().process_frame
 	await get_tree().process_frame
+	loading_screen.hide()
 	loading_screen.queue_free()
 	is_loading = false
+	AudioManager.play_bgm(active_level.day_manager.CHILL_BGM)
 
 func _show_loading_error(loading_screen: CanvasLayer, message: String) -> void:
 	push_error(message)
@@ -91,16 +97,19 @@ func add_upgrade(new_upgrade: Upgrade) -> void:
 	new_upgrade.apply_effect(active_level)
 
 func level_complete() -> void:
+	var completed_day := current_run.current_day
+	
 	pending_customer_unlock = current_run.progress_day()
 	if pending_customer_unlock != null:
 		pending_customer_unlock.apply_effect(active_level)
 	day_updated.emit(current_run.current_day)
 	
-	# idk how decide if you should pick an upgrade
-	var upgrades := current_run.get_random_available_upgrades(3)
-	# generate some upgrades here
-	if len(upgrades) != 0:
-		upgrade_selection_requested.emit(upgrades)
+	pending_dish_choices.clear()
+	if completed_day % DISH_UNLOCK_INTERVAL == 0:
+		pending_dish_choices = current_run.get_dish_unlock_choices()
+	
+	if not pending_dish_choices.is_empty():
+		upgrade_selection_requested.emit(pending_dish_choices)
 	else:
 		_prepare_next_day()
 	
