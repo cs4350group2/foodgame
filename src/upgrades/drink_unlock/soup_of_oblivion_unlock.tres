@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3 uid="uid://bkfmb2u2hlws3"]
+
+[ext_resource type="Script" uid="uid://bxux2xb3f10ma" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+drink_to_unlock = &"Soup Of Oblivion"
+name = &"Unlock Soup Of Oblivion"
+display_name = &"Install soup of oblivion dispensing"
+description = "Unlock Soup Of Oblivion for purchase at the drink dispenser."
+price = 300.0

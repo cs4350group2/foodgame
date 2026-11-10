@@ -10,3 +10,4 @@ display_name = &"SPR-JMP Carbon-Fibre Insoles"
 description = "Stuff carbon plates in your shoes! Gives you a large boost to your vertical. Banned from the NBA. "
 dependencies = Array[StringName]([&"jump_boost_small"])
 metadata/_custom_type_script = "uid://f6rsg3htlyqw"
+price = 150.0

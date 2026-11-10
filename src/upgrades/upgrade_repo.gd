@@ -13,7 +13,6 @@ static var is_catalog_loaded := false
 static func load_catalog(path: String = "res://src/upgrades/upgrades.txt") -> void:
 	var file := FileAccess.open(path, FileAccess.READ)
 	assert(file != null)
-	var text := file.get_as_text()
 	
 	while not file.eof_reached():
 		var resource_path := file.get_line().strip_edges()
@@ -48,19 +47,25 @@ func _init() -> void:
 
 func on_upgrade_chosen(upgrade: Upgrade) -> void:
 	assert(available_upgrades.has(upgrade.name))
-	# add the upgrade to active upgrades
-	chosen_ids[upgrade.name] = 1
-	# remove the upgrades from available upgrades
-	available_upgrades.erase(upgrade.name)
-	# find all upgrades that we fulfil dependencies and add it
-	for u: Upgrade in upgrade_catalog.values():
-		if chosen_ids.has(u.name) or available_upgrades.has(u.name):
+	mark_dependency_satisfied(upgrade.name)
+
+
+func mark_dependency_satisfied(upgrade_id: StringName) -> void:
+	chosen_ids[upgrade_id] = 1
+	available_upgrades.erase(upgrade_id)
+
+	for upgrade: Upgrade in upgrade_catalog.values():
+		if chosen_ids.has(upgrade.name):
 			continue
-		var to_add = true
-		for dep: StringName in u.dependencies:
-			to_add = to_add and chosen_ids.has(dep)
-		if to_add:
-			available_upgrades[u.name] = u
+
+		var dependencies_met := true
+		for dependency: StringName in upgrade.dependencies:
+			if not chosen_ids.has(dependency):
+				dependencies_met = false
+				break
+
+		if dependencies_met:
+			available_upgrades[upgrade.name] = upgrade
 
 func get_random_upgrades(n: int, rng: RandomNumberGenerator) -> Array[Upgrade]:
 	var pool: Array[Upgrade] = []

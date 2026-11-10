@@ -21,6 +21,7 @@ const LANE_MAP: Dictionary = {
 
 var current_time_ms: float = 0.0
 var bgm_playback_position: float
+var _audio_output_latency_sec: float = 0.0
 
 var note_speed: float
 
@@ -157,7 +158,7 @@ func _ready() -> void:
 			
 	rhythm_result_screen_v2.visible = false
 	
-	var speed_mult : float = bgm.bpm / chart_song.bpm # since this happens before audio starts playing and the values are set
+	var speed_mult : float = AudioManager.bgm_bpm / chart_song.bpm # since this happens before audio starts playing and the values are set
 	
 	chart_notes = load_rhythm_chart(chart_path, speed_mult) 
 	
@@ -232,12 +233,22 @@ func _process(delta: float) -> void:
 	
 		if current_time_ms >= 0.0:
 			is_audio_started = true
-			AudioManager.play_rhythm_to_target_bpm(chart_song, bgm.bpm, 0.0) 
+			_audio_output_latency_sec = AudioServer.get_output_latency()
+			AudioManager.play_rhythm_to_target_bpm(chart_song, AudioManager.bgm_bpm, 0.0)
 			current_time_ms = 0.0
 	
 	else:
 		var pitch: float = AudioManager.rm_player.pitch_scale
-		current_time_ms = (AudioManager.get_rhythm_playback_position() / pitch) * 1000.0
+		# Playback position is in source-song seconds; chart timestamps are
+		# already divided by pitch. Mix and output delays are real seconds.
+		var elapsed_seconds := (
+			AudioManager.get_rhythm_playback_position() / pitch
+			+ AudioServer.get_time_since_last_mix()
+			- _audio_output_latency_sec
+		)
+		# Audio-thread updates can jitter backwards. Hold at zero until audible
+		# playback begins, then keep the gameplay clock moving forwards.
+		current_time_ms = maxf(current_time_ms, elapsed_seconds * 1000.0)
 		
 	while not chart_notes.is_empty() and (chart_notes[0]["time"] <= adjusted_time_ms + time_to_reach_judgment_line_ms):
 		var is_chord: bool = chart_notes.size() >= 2 and chart_notes[0]["time"] == chart_notes[1]["time"]

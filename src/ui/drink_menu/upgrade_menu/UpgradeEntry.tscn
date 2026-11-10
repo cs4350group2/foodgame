@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://b8xkkjsm1nk0d"]
+
+[ext_resource type="Script" uid="uid://bpifye1cid5op" path="res://src/ui/drink_menu/upgrade_menu/upgrade_entry.gd" id="1_kwjlo"]
+[ext_resource type="Theme" uid="uid://cp6t4mnfwas5v" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="2_j6c2c"]
+[ext_resource type="FontFile" uid="uid://dk6aai08i16bb" path="res://assets/fonts/W95F.otf" id="3_gu0t3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+content_margin_left = 18.0
+content_margin_top = 14.0
+content_margin_right = 18.0
+content_margin_bottom = 14.0
+bg_color = Color(0.04, 0.22, 0.23, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.09, 0.36, 0.37, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buy_normal"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.06, 0.36, 0.38, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.24, 0.66, 0.65, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buy_hover"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.08, 0.46, 0.47, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.84, 0.8, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buy_pressed"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.04, 0.26, 0.28, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.19, 0.54, 0.54, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buy_disabled"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.1, 0.2, 0.21, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.19, 0.29, 0.3, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buy_focus"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.63, 0.95, 0.87, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[node name="UpgradeEntry" type="PanelContainer" unique_id=2920662]
+custom_minimum_size = Vector2(0, 130)
+offset_right = 227.0
+offset_bottom = 116.0
+theme = ExtResource("2_j6c2c")
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+script = ExtResource("1_kwjlo")
+
+[node name="Content" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content" unique_id=1163033403]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="UpgradeName" type="Label" parent="Content/VBoxContainer" unique_id=1016690027]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_j6c2c")
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 24
+text = "THIS IS AN UPGRADE NAME"
+autowrap_mode = 3
+
+[node name="Description" type="Label" parent="Content/VBoxContainer" unique_id=2095873035]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_j6c2c")
+theme_override_font_sizes/font_size = 16
+text = "DESCRIPTION"
+autowrap_mode = 3
+
+[node name="Price" type="Label" parent="Content/VBoxContainer" unique_id=768148878]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_j6c2c")
+
+[node name="Status" type="Label" parent="Content/VBoxContainer" unique_id=1103718318]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_j6c2c")
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Content" unique_id=537506856]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_j6c2c")
+theme_override_fonts/font = ExtResource("3_gu0t3")
+theme_override_font_sizes/font_size = 19
+theme_override_colors/font_color = Color(0.92, 1, 0.98, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.92, 1, 0.98, 1)
+theme_override_colors/font_disabled_color = Color(0.48, 0.61, 0.61, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_buy_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_buy_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_buy_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_buy_disabled")
+theme_override_styles/focus = SubResource("StyleBoxFlat_buy_focus")
+text = "BUY"

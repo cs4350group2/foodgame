@@ -9,3 +9,4 @@ name = &"jump_boost_small"
 display_name = &"High Jumpers"
 description = "Do a little bit of exercise that lets you jump higher."
 metadata/_custom_type_script = "uid://f6rsg3htlyqw"
+price = 60.0

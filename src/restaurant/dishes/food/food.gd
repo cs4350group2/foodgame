@@ -19,7 +19,12 @@ func set_dish_quality(new_dish_quality: float) -> void:
 	dish_quality = minf(new_dish_quality, 100.0)
 
 func get_price() -> float:
-	return price
+	var level: Level = RunManager.active_level
+	if not is_instance_valid(level):
+		return price
+
+	var multiplier := level.get_meal_payout_mult(StringName(edible_name))
+	return snappedf(price * multiplier, 0.01)
 
 # Calculates the bonus according to dish_quality
 func get_bonus() -> float:

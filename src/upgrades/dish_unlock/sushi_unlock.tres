@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3 uid="uid://bh0xoejb0ekst"]
+
+[ext_resource type="Script" uid="uid://bxux2xb3f10ma" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1_3f62f"]
+[ext_resource type="Texture2D" uid="uid://cmeeivvg18fe2" path="res://pictures/New Textures/04_sushi.png" id="1_g5ar8"]
+
+[resource]
+script = ExtResource("1_3f62f")
+food_to_unlock = &"Sushi"
+food_price_modifier = 1.0
+name = &"unlock_dish_sushi"
+display_name = &"Sushi"
+icon = ExtResource("1_g5ar8")
+description = "Somehow putting rice and raw fish in a pot creates sushi. Don't question it."
+metadata/_custom_type_script = "uid://bxux2xb3f10ma"

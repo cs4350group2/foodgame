@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3 uid="uid://dmsr65bk7t3wv"]
+
+[ext_resource type="Script" uid="uid://bxux2xb3f10ma" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1_5ixu1"]
+[ext_resource type="Texture2D" uid="uid://ddfmoioq0rtj7" path="res://pictures/New Textures/06_grilled_fish.png" id="1_cyhi1"]
+
+[resource]
+script = ExtResource("1_5ixu1")
+food_to_unlock = &"Grilled Fish"
+food_price_modifier = 1.0
+name = &"unlock_dish_grilled_fish"
+display_name = &"Grilled Fish"
+icon = ExtResource("1_cyhi1")
+description = "A simple, easy to make, fish, grilled in a pot."
+metadata/_custom_type_script = "uid://bxux2xb3f10ma"

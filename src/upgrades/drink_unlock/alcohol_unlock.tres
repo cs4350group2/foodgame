@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3]
+
+[ext_resource type="Script" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+drink_to_unlock = &"Alcohol"
+name = &"Unlock Alcohol"
+display_name = &"Install alcohol dispensing"
+description = "Unlock Alcohol for purchase at the drink dispenser."
+price = 100.0

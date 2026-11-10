@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EarningUpgrade" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://src/upgrades/food_upgrade/earning_params.gd" id="1_params"]
+[ext_resource type="Script" path="res://src/upgrades/food_upgrade/earning_upgrade.gd" id="2_upgrade"]
+
+[sub_resource type="Resource" id="Resource_effect_0"]
+script = ExtResource("1_params")
+food = &"Stew"
+multiplier = 1.05
+overwrite_existing_value = false
+[resource]
+script = ExtResource("2_upgrade")
+effects = Array[ExtResource("1_params")]([SubResource("Resource_effect_0")])
+name = &"ingredient_chopped_potato_upgrade"
+display_name = &"Premium Chopped Potato"
+description = "Increase base payouts of meals containing chopped potato by 5%: Stew. Stacks multiplicatively with other earnings upgrades."
+dependencies = Array[StringName]([])
+price = 40.0

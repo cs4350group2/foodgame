@@ -433,9 +433,12 @@ func start_ordering() -> void:
 	# Decide order
 	if order == null:
 		var menu: Dictionary = RestaurantManager.get_menu()
-		var foods: Array = menu["foods"]
-		var food_data = foods[RunManager.get_rng().randi_range(0, foods.size() - 1)]
-		print(food_data["name"], food_data["price"], food_data["rarity"])
+		var foods: Array[Dictionary] = RestaurantManager.get_available_foods()
+		if foods.is_empty():
+			push_error("No dishes unlocked for some reason")
+			return
+		
+		var food_data: Dictionary = foods[RunManager.get_rng().randi_range(0, foods.size() - 1)]
 		var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"])
 		var order_item = OrderItem.new(food, customer_lvl)
 		order = Order.new([order_item])	
@@ -519,7 +522,7 @@ func display_dish_on_table() -> void:
 	if order_items.is_empty():
 		return
 
-	var rng := RunManager.get_rng()
+	var rng: RandomNumberGenerator = RunManager.get_rng()
 	var random_item: OrderItem = order_items[rng.randi_range(0, order_items.size() - 1)]
 	var edible := random_item.get_edible()
 	if edible == null:

@@ -17,6 +17,9 @@ class_name DrinkEntry
 @export var disabled_style: StyleBoxFlat
 @export var accepted_style: StyleBoxFlat
 @export var rejected_style: StyleBoxFlat
+@export var locked_style: StyleBoxFlat
+@export var locked_hover_style: StyleBoxFlat
+@export var locked_pressed_style: StyleBoxFlat
 
 enum Feedback { NONE, ACCEPTED, REJECTED }
 
@@ -28,11 +31,43 @@ var _feedback_remaining := 0.0
 
 const TOOLTIP_SCENE: PackedScene = preload("res://src/ui/drink_menu/DrinkMenuTooltip.tscn")
 const DRINK_IMAGES: Dictionary[String, String] = {
-	
+	"Soda": "res://assets/drinks/icons/soda.png",
+	"Cooler Soda": "res://assets/drinks/icons/cooler_soda.png",
+	"Liquid Food": "res://assets/drinks/icons/liquid_food.png",
+	"Iced Lemon Tea": "res://assets/drinks/icons/iced_lemon_tea.png",
+	"EXTREMELY SAFE Drink": "res://assets/drinks/icons/extremely_safe_drink.png",
+	"Alcohol": "res://assets/drinks/icons/alcohol.png",
+	"Covid-19 Serum": "res://assets/drinks/icons/covid19_serum.png",
+	"1 Day Blinding Stew": "res://assets/drinks/icons/one_day_blinding_stew.png",
+	"Soup Of Oblivion": "res://assets/drinks/icons/soup_of_oblivion.png",
 }
 var current_drink: Drink
 var price: float
 var limit: int = 2000
+
+var unlock_upgrade: Unlock_Upgrade
+var locked := true
+
+func set_unlock_state(upgrade: Unlock_Upgrade, unlocked: bool) -> void:
+	unlock_upgrade = upgrade
+	locked = not unlocked
+
+	if locked:
+		drink_price.text = (
+			"Unlock: %.2f" % upgrade.price
+			if upgrade != null else "UNAVAILABLE"
+		)
+	else:
+		drink_price.text = "%.2f coins" % price
+
+	drink_image.modulate = Color(0, 0, 0, 1) if locked else Color(0.82, 0.88, 0.92, 1)
+	_refresh_feedback()
+
+
+func get_purchase_price() -> float:
+	if locked and unlock_upgrade != null:
+		return unlock_upgrade.price
+	return price
 
 signal buy_requested(drink_name: String, price: float)
 
@@ -105,7 +140,7 @@ func _refresh_feedback() -> void:
 	var state := "normal"
 	var color := hover_style.border_color
 	var icon_state := 0
-	status_label.text = "PRESS TO BUY"
+	status_label.text = "PRESS TO UNLOCK" if locked else "PRESS TO BUY"
 	if _feedback == Feedback.ACCEPTED:
 		state = "accepted"
 		color = accepted_style.border_color
@@ -121,7 +156,7 @@ func _refresh_feedback() -> void:
 		color = rejected_style.border_color
 		icon_state = 2
 		status_label.text = _unavailable_reason
-		if _unavailable_reason in ["DISPENSING...", "CLOSING..."]:
+		if _unavailable_reason in ["DISPENSING...", "PROCESSING...", "CLOSING..."]:
 			color = hover_style.border_color
 			icon_state = 0
 		elif _hovered or button.has_focus():
@@ -141,12 +176,21 @@ func _refresh_feedback() -> void:
 		drink_price.add_theme_color_override("font_color", price_color)
 
 func _get_state_style(state: String) -> StyleBoxFlat:
+	if locked:
+		match state:
+			"hover":
+				return locked_hover_style
+			"pressed":
+				return locked_pressed_style
+			"normal", "disabled":
+				return locked_style
 	match state:
 		"hover": return hover_style
 		"pressed": return pressed_style
 		"disabled": return disabled_style
 		"accepted": return accepted_style
 		"rejected": return rejected_style
+		
 	return normal_style
 
 func _on_pressed() -> void:

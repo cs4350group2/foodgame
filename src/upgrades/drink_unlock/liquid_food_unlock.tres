@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3 uid="uid://bax1n8pqfkjsg"]
+
+[ext_resource type="Script" uid="uid://bxux2xb3f10ma" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+drink_to_unlock = &"Liquid Food"
+name = &"Unlock Liquid Food"
+display_name = &"Install liquid food dispensing"
+description = "Unlock Liquid Food for purchase at the drink dispenser."
+price = 150.0

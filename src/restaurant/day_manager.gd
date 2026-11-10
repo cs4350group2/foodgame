@@ -57,7 +57,6 @@ func _process(delta):
 func _ready() -> void:
 	RestaurantManager.angry_customer_left.connect(_on_angry_customer_left)
 	RestaurantManager.customer_removed.connect(_on_customer_removed)
-	AudioManager.play_bgm(CHILL_BGM)
 
 func _on_customer_removed():
 	customers_to_serve -= 1
@@ -76,7 +75,11 @@ func start_day() -> void:
 	day_started = true
 
 	await AudioManager.fade_out_bgm(3.0)
-	AudioManager.play_bgm(MUD_DAGORED)
+	var multiplier: float = RunManager.current_run.get_music_speed_multiplier()
+	AudioManager.play_bgm_to_target_bpm(
+		MUD_DAGORED,
+		MUD_DAGORED.bpm * multiplier
+	)
 
 func trigger_level_complete() -> void:
 	day_started = false

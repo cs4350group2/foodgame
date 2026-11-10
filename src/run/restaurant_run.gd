@@ -10,6 +10,16 @@ const CUSTOMER_UNLOCK_UPGRADES: Array[Unlock_Upgrade] = [
 	preload("res://src/upgrades/unlock_upgrade/food_critic_unlock.tres"),
 ]
 
+const DISH_UNLOCK_UPGRADES: Array[Unlock_Upgrade] = [
+	preload("res://src/upgrades/dish_unlock/steak_unlock.tres"),
+	preload("res://src/upgrades/dish_unlock/sushi_unlock.tres"),
+	preload("res://src/upgrades/dish_unlock/burger_unlock.tres"),
+	preload("res://src/upgrades/dish_unlock/stew_unlock.tres"),
+	preload("res://src/upgrades/dish_unlock/rice_bowl_unlock.tres"),
+	preload("res://src/upgrades/dish_unlock/grilled_fish_unlock.tres"),
+]
+
+@export var day_speed_multiplier: float = 1.01
 @export var starting_gradual_customers: int = 1
 @export var gradual_increase_per_day: int = 1
 @export_range(0, 1000, 1) var starting_danger: int = 0
@@ -29,6 +39,7 @@ var current_upgrades: Array[Upgrade]
 var upgrade_repo: UpgradeRepo
 var current_day: int = 0
 var coins: float = 0
+var current_speed: float = 1.0
 
 var rng_seed: int = 0
 var rng : RandomNumberGenerator
@@ -36,6 +47,11 @@ var customer_unlock_rng := RandomNumberGenerator.new()
 var remaining_customer_unlocks: Array[Unlock_Upgrade] = []
 
 var arrival_config: ArrivalConfig = ArrivalConfig.new()
+
+# starter dishes if don't like can change
+var starter_dishes := [&"Steak", &"Grilled Fish"]
+var unlocked_dishes: Array[StringName] = []
+var unlocked_drinks: Array[StringName] = []
 
 signal coins_updated(amount)
 
@@ -57,6 +73,11 @@ func _init(set_seed: bool, run_seed: int = 0) -> void:
 	current_upgrades = []
 	current_day = 1
 	coins = 0
+	
+	unlocked_dishes.clear()
+	for dish: StringName in starter_dishes:
+		unlock_dish(dish)
+	
 	arrival_config = ArrivalConfig.new()
 	_update_arrival_config()
 	arrival_config.total_time = starting_total_time
@@ -77,8 +98,10 @@ func apply_upgrades(level: Level) -> void:
 		upgrade.apply_effect(level)
 
 func add_upgrade(new_upgrade: Upgrade) -> void:
+	if UpgradeRepo.upgrade_catalog.has(new_upgrade.name):
+		upgrade_repo.on_upgrade_chosen(new_upgrade)
+
 	current_upgrades.append(new_upgrade)
-	upgrade_repo.on_upgrade_chosen(new_upgrade)
 
 func get_random_available_upgrades(n: int) -> Array[Upgrade]:
 	return upgrade_repo.get_random_upgrades(n, rng)
@@ -127,3 +150,38 @@ func _update_arrival_config() -> void:
 	arrival_config.gradual_customer_count = _calculate_gradual_customer_count(current_day)
 	arrival_config.wave_sizes = _calculate_wave_sizes(current_day)
 	arrival_config.danger_rating = _calculate_danger_rating(current_day)
+
+func get_dish_unlock_choices() -> Array[Upgrade]:
+	var pool: Array[Upgrade] = []
+	for upgrade: Unlock_Upgrade in DISH_UNLOCK_UPGRADES:
+		if not is_dish_unlocked(upgrade.food_to_unlock):
+			pool.append(upgrade)
+	
+	var choices: Array[Upgrade] = []
+	for i in range(mini(2, pool.size())):
+		var index := rng.randi_range(0, pool.size() - 1)
+		choices.append(pool[index])
+		pool.remove_at(index)
+	
+	return choices
+
+func get_music_speed_multiplier() -> float:
+	return pow(1.01, maxi(current_day - 1, 0))
+
+func is_dish_unlocked(dish_name: StringName) -> bool:
+	return unlocked_dishes.has(dish_name)
+	
+func unlock_dish(dish_name: StringName) -> void:
+	if not is_dish_unlocked(dish_name):
+		unlocked_dishes.append(dish_name)
+	
+	for upgrade: Unlock_Upgrade in DISH_UNLOCK_UPGRADES:
+		if upgrade.food_to_unlock == dish_name:
+			upgrade_repo.mark_dependency_satisfied(upgrade.name)
+		
+func has_drink_unlock(drink_name: StringName) -> bool:
+	return unlocked_drinks.has(drink_name)
+
+func unlock_drink(drink_name: StringName) -> void:
+	if not has_drink_unlock(drink_name):
+		unlocked_drinks.append(drink_name)

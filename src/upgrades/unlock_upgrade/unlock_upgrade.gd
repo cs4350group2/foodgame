@@ -8,14 +8,13 @@ extends Upgrade
 @export var food_price_modifier: float
 @export_category("Drink Unlock/Modifier")
 @export var drink_to_unlock: StringName
-@export var drink_price_modifier: float
-@export var drink_effect_multiplier: float
+@export var drink_price_modifier: float = 1.0
+@export var drink_effect_multiplier: float = 1.0
 
 func apply_effect(level: Level):
 	if npc_to_unlock != "":
 		level.unlock_customer_type(npc_to_unlock, npc_spawn_weight)
 	if food_to_unlock != "":
-		# do something here
-		print("unlocked ", food_to_unlock)
+		RunManager.current_run.unlock_dish(food_to_unlock)
 	if drink_to_unlock != "":
-		print("unlocked ", drink_to_unlock)
+		RunManager.current_run.unlock_drink(drink_to_unlock)

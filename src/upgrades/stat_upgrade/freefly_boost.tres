@@ -10,3 +10,4 @@ display_name = &"Ominous Orb Surgery"
 description = "Go through an expensive procedure that allows you to float as if gravity doesn't exist. Press forward to fly in the direction you're facing."
 dependencies = Array[StringName]([&"jump_boost_medium", &"speed_boost_large"])
 metadata/_custom_type_script = "uid://f6rsg3htlyqw"
+price = 1600.0

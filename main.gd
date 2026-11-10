@@ -19,7 +19,15 @@ var temp_nodes: Dictionary[int, Node] = {}
 # rebuilds this level's unlocked set without changing the customer catalog.
 var unlocked_customer_types: Array[StringName] = []
 
+var meal_payout_bonuses: Dictionary[StringName, float] = {}
+
 signal clear_temp()
+
+func set_meal_payout_mult(meal_name: StringName, bonus: float) -> void:
+	meal_payout_bonuses[meal_name] = bonus
+
+func get_meal_payout_mult(meal_name: StringName) -> float:
+	return meal_payout_bonuses.get(meal_name, 1.0)
 
 func unlock_customer_type(cust_name: StringName, cust_weight: float) -> void:
 	update_customer_type(cust_name, cust_weight)

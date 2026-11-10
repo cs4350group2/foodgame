@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Unlock_Upgrade" format=3 uid="uid://ckbwr3rcdlyae"]
+
+[ext_resource type="Script" uid="uid://bxux2xb3f10ma" path="res://src/upgrades/unlock_upgrade/unlock_upgrade.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+drink_to_unlock = &"1 Day Blinding Stew"
+name = &"Unlock 1 Day Blinding Stew"
+display_name = &"Install blinding stew dispensing"
+description = "Unlock 1 Day Blinding Stew for purchase at the drink dispenser."
+price = 300.0

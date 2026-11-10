@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="EarningParams" format=3 uid="uid://djs5i7lftttbp"]
+
+[ext_resource type="Script" uid="uid://o282d2dsdnap" path="res://src/upgrades/food_upgrade/earning_params.gd" id="1_pjv0b"]
+
+[resource]
+script = ExtResource("1_pjv0b")
+metadata/_custom_type_script = "uid://o282d2dsdnap"

@@ -2,21 +2,46 @@
 
 [ext_resource type="Script" uid="uid://dj4mhv8bmthcu" path="res://src/ui/upgrade_ui/upgrade_box.gd" id="1_w1qe3"]
 [ext_resource type="Theme" uid="uid://thrhjvfrigx3" path="res://src/ui/OrderUITheme.tres" id="2_ggipf"]
+[ext_resource type="Theme" uid="uid://cp6t4mnfwas5v" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="2_qymb1"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qymb1"]
-bg_color = Color(0.19215687, 0.15686275, 0, 0.972549)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.8, 0.8, 0.8, 0.40392157)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_af53c"]
+bg_color = Color(0.13636401, 0.066086836, 1.2032688e-08, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.16078432, 0.07450981, 0.023529412, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_ggipf"]
-color = Color(1, 1, 1, 0.5647059)
+color = Color(1, 0.95686275, 0.8509804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qymb1"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
 
 [node name="UpgradeBox" type="MarginContainer" unique_id=1716650055]
 custom_minimum_size = Vector2(280, 0)
@@ -28,8 +53,8 @@ script = ExtResource("1_w1qe3")
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=412562727]
 custom_minimum_size = Vector2(280, 300)
 layout_mode = 2
-theme = ExtResource("2_ggipf")
-theme_override_styles/panel = SubResource("StyleBoxFlat_qymb1")
+theme = ExtResource("2_qymb1")
+theme_override_styles/panel = SubResource("StyleBoxFlat_af53c")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1363645755]
 custom_maximum_size = Vector2(280, -1)
@@ -58,6 +83,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_ggipf")
 theme_type_variation = &"HeaderLarge"
+theme_override_colors/font_color = Color(1, 0.95686275, 0.8509804, 1)
 theme_override_font_sizes/font_size = 30
 text = "Big boots"
 horizontal_alignment = 1
@@ -71,7 +97,7 @@ theme_override_styles/panel = SubResource("StyleBoxLine_ggipf")
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_ggipf")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 0.95686275, 0.8509804, 1)
 text = "grgjraoijoweijerowijetoeijtwoitjwoiejtoweitjowiejtoewijtowjetowiejtoiwejtowietoweijtowijtoweijtioj"
 autowrap_mode = 3
 
@@ -80,4 +106,5 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 10
 theme = ExtResource("2_ggipf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qymb1")
 text = "Select"

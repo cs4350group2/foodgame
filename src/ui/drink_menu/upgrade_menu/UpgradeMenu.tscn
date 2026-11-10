@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cv8pn3vg7l28b"]
+
+[ext_resource type="Theme" uid="uid://cp6t4mnfwas5v" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="1_e3cir"]
+[ext_resource type="Script" uid="uid://bpb2f1ekw8ro8" path="res://src/ui/drink_menu/upgrade_menu/upgrade_menu.gd" id="1_ktmbf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_panel"]
+
+[node name="UpgradeMenu" type="PanelContainer" unique_id=892945577]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_e3cir")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_panel")
+script = ExtResource("1_ktmbf")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=998857137]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=341594976]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12

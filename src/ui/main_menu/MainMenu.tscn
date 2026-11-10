@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://da3uo20xndj24" path="res://models/props/food/Burger/burgerall.tscn" id="3_af53c"]
 [ext_resource type="Theme" uid="uid://cp6t4mnfwas5v" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="3_mlydd"]
 [ext_resource type="PackedScene" uid="uid://dm0v8o2ocl357" path="res://models/props/food/sushi/sushi.tscn" id="4_ldwx4"]
-[ext_resource type="PackedScene" path="res://src/ui/main_menu/MainMenuSettings.tscn" id="4_settings"]
+[ext_resource type="PackedScene" uid="uid://c4e678h3wic5p" path="res://src/ui/main_menu/MainMenuSettings.tscn" id="4_settings"]
 [ext_resource type="PackedScene" path="res://src/ui/main_menu/FoodBackdrop.tscn" id="5_food_backdrop"]
 [ext_resource type="PackedScene" uid="uid://dyay3u62ej8fu" path="res://models/props/food/Steak/meatCooked.tscn" id="5_omtnj"]
 [ext_resource type="PackedScene" uid="uid://bb5ywm1b7dvp2" path="res://models/props/food/GrilledFish/GrilledFish.tscn" id="6_j86ma"]
