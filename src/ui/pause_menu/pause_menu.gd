@@ -10,12 +10,25 @@ var previous_mouse_mode: Input.MouseMode
 @onready var rhythm_tab: FoldableContainer = $Center/Panel/Margin/Settings/RhythmTab
 
 const RECIPE_MENU_SCENE = preload("res://src/ui/recipe_menu/RecipeMenu.tscn")
+const INSTRUCTIONS_SCENE = preload("res://src/ui/instructions/Instructions.tscn")
+
+var instructions_window: Control = null
+
+func show_first_time_instructions() -> void:
+	if RunManager.instructions_shown:
+		return
+	pause_game()
+	_on_instructions_pressed()
+	RunManager.instructions_shown = true
 
 func _input(event: InputEvent) -> void:
 	if RunManager.is_loading:
 		return
 	if event.is_action_pressed("pause_game") and not event.is_echo():
 		get_viewport().set_input_as_handled()
+		if instructions_window and instructions_window.visible:
+			_on_instructions_closed()
+			return
 		var drink_menu := get_parent().get_node_or_null("RestaurantUi/DrinkMenu") as Control
 		if is_instance_valid(drink_menu) and drink_menu.visible:
 			drink_menu.close_menu()
@@ -33,9 +46,23 @@ func _ready() -> void:
 	%ResumeButton.pressed.connect(unpause_game)
 	%MainMenuButton.pressed.connect(_on_main_menu_pressed)
 	%RecipeButton.pressed.connect(_on_recipe_pressed)
+	%InstructionsButton.pressed.connect(_on_instructions_pressed)
 	settings_controls.sync_values()
 
 var recipe_menu: Control = null
+
+func _on_instructions_pressed() -> void:
+	if not instructions_window:
+		instructions_window = INSTRUCTIONS_SCENE.instantiate()
+		add_child(instructions_window)
+		instructions_window.closed.connect(_on_instructions_closed)
+	$Center.hide()
+	instructions_window.show()
+
+func _on_instructions_closed() -> void:
+	instructions_window.hide()
+	$Center.show()
+	%InstructionsButton.grab_focus()
 
 func _on_recipe_pressed():
 	if not recipe_menu:
@@ -84,6 +111,9 @@ func pause_game() -> void:
 	show()
 
 func unpause_game() -> void:
+	if instructions_window:
+		instructions_window.hide()
+	$Center.show()
 	hide()
 	print("Note VFX enabled: " + str(RhythmManager.note_vfx_enabled))
 	print("Note SFX enabled: " + str(RhythmManager.note_sfx_enabled))

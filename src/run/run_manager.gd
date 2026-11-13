@@ -2,6 +2,9 @@ extends Node
 
 const DISH_UNLOCK_INTERVAL := 2
 
+# Shared across scenes and runs, and reset when the app starts.
+var instructions_shown: bool = false
+
 var current_run: RestaurantRun = null
 const LEVEL_PATH := "res://main.tscn"
 const LOADING_SCREEN = preload("res://src/ui/loading_screen/LoadingScreen.tscn")

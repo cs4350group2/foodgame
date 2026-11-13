@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://d0n8k0dbumlrc"]
+
+[ext_resource type="Script" uid="uid://cktx16ktcnclj" path="res://src/ui/instructions/instructions.gd" id="1_script"]
+[ext_resource type="Theme" uid="uid://cp6t4mnfwas5v" path="res://src/ui/restaurant_ui/RestaurantUITheme.tres" id="2_theme"]
+[ext_resource type="FontFile" uid="uid://dk6aai08i16bb" path="res://assets/fonts/W95F.otf" id="3_font"]
+
+[sub_resource type="StyleBoxFlat" id="PanelStyle"]
+bg_color = Color(0.12, 0.12, 0.14, 0.97)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="InstructionsWindow" type="Control" unique_id=602033350]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
+
+[node name="Center" type="CenterContainer" parent="." unique_id=772524616]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=1578718126]
+custom_minimum_size = Vector2(800, 640)
+layout_mode = 2
+theme_override_styles/panel = SubResource("PanelStyle")
+
+[node name="Margin" type="MarginContainer" parent="Center/Panel" unique_id=2067537808]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Content" type="VBoxContainer" parent="Center/Panel/Margin" unique_id=1328810216]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="Center/Panel/Margin/Content" unique_id=1701313653]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Instructions"
+horizontal_alignment = 1
+
+[node name="InstructionsScroll" type="ScrollContainer" parent="Center/Panel/Margin/Content" unique_id=293608488]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="InstructionsText" type="RichTextLabel" parent="Center/Panel/Margin/Content/InstructionsScroll" unique_id=1825676981]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("3_font")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "[color=#ffd475]HOW TO PLAY[/color]
+Prepare dishes and serve customers before their patience runs out. Finish the day's customers to progress to the next day, with new dishes and customers unlocking as you go. Beware! A single enemy customer will bring an untimely end to your restaurant (and maybe even your life)!
+
+[color=#a7c7ff]MOVEMENT & INTERACTION[/color]
+W / A / S / D: Move. Move the mouse to look around.
+Space: Jump. Shift: Sprint.
+E or left click: Primary action, such as picking up, placing, or dropping an item.
+F or right click: Secondary action, such as chopping, washing, or starting cooking.
+Look at an object and follow its on-screen action prompts.
+Tab: Show orders. Escape: Pause / go back.
+
+[color=#c7a4f4]SERVING & PROGRESSION[/color]
+Check orders and bring the matching finished dish or drink to the customer. Keep an eye on customer patience while preparing other orders. After a customer finishes, take payment from them at the cashier by interacting with them.
+
+[color=#7ddde8]DRINKS[/color]
+Drinks are useful consumables that can buy you time or help with tricky customers. Look at the Drink Dispenser and press F / right click to open the drinks menu. Bring the drink to a customer and serve it with E / left click to apply its effect. For example, Soda increases patience, while Liquid Food can substitute for a dish. Browse the Upgrades tab for available upgrades.
+
+[color=#ffb77d]STARTING THE DAY[/color]
+Before opening, explore the kitchen and check the Recipes window in the pause menu. Press Shift when ready to start the day. Take the time to practice recipes or just vibe.
+
+[color=#a9df90]PREPARING INGREDIENTS[/color]
+Collect the ingredients for the dish you want to make. Some ingredients must be chopped, some washed, and some neither! Click the \"RECIPES\" button in the Pause Menu to see what ingredients are required.
+Washing: Place a washable ingredient in the sink with E / left click. Start washing with F / right click, then move the mouse in circles until it is clean. Use E / left click to take it, or F / right click to stop washing.
+Chopping: Place a suitable ingredient on the chopping board with E / left click. Press F / right click repeatedly to chop it, then pick it up with E / left click.
+
+[color=#ff96ac]COOKING & RHYTHM[/color]
+Add the recipe's ingredients to the pot, then use F / right click at the stove to check the recipe and confirm cooking.
+During cooking, press the matching arrow key or W / A / S / D as each note reaches the judgment line. Follow the displayed note directions and timing to cook your dish.
+You can adjust note speed, brightness, and timing offset in the pause menu's Rhythm settings when available.
+The better you do, the more customers will pay!
+
+[color=#e4d6ba]NEED A REMINDER?[/color]
+Open Instructions from the main menu or the in-game pause menu. Use Back or Escape to return. Closing these instructions in-game keeps the game paused; press Resume or Escape again when you are ready."
+fit_content = true
+scroll_active = false
+
+[node name="BackButton" type="Button" parent="Center/Panel/Margin/Content" unique_id=649915611]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Back"

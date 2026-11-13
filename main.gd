@@ -52,6 +52,13 @@ func clear_temp_nodes() -> void:
 
 func _ready() -> void:
 	day_manager.day_starting.connect(clear_temp_nodes)
+	_show_first_time_instructions.call_deferred()
+
+func _show_first_time_instructions() -> void:
+	# Let the loading overlay finish before pausing and showing instructions.
+	while RunManager.is_loading:
+		await get_tree().process_frame
+	$PauseMenu.show_first_time_instructions()
 
 func register_temp(temp: Node):
 	temp_nodes[temp.get_instance_id()] = temp

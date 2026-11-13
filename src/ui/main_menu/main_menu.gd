@@ -7,6 +7,8 @@ extends Node3D
 @onready var seed_text: LineEdit = %LineEdit
 @onready var menu_buttons: VBoxContainer = %NewGameButton.get_parent()
 @onready var settings_page: CenterContainer = %SettingsPage
+@onready var instructions_window: Control = %InstructionsWindow
+@onready var instructions_button: Button = %InstructionsButton
 
 # settings buttons
 @onready var audio_button: Button = $CanvasLayer/Control/SettingsPage/Panel/Margin/ViewManager/CategorySelection/ButtonVBox/AudioButton
@@ -32,6 +34,8 @@ func _ready() -> void:
 	new_game_button.pressed.connect(_start_game)
 	continue_button.pressed.connect(_continue_game)
 	settings_button.pressed.connect(_open_settings_selection)
+	instructions_button.pressed.connect(_open_instructions)
+	instructions_window.closed.connect(_close_instructions)
 	audio_button.pressed.connect(_open_audio_settings)
 	rhythm_button.pressed.connect(_open_rhythm_settings)
 	category_back_button.pressed.connect(_close_settings)
@@ -47,9 +51,22 @@ func _on_quit() -> void:
 	get_tree().quit()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if instructions_window.visible and event.is_action_pressed("pause_game") and not event.is_echo():
+		get_viewport().set_input_as_handled()
+		_close_instructions()
+		return
 	if settings_page.visible and event.is_action_pressed("pause_game") and not event.is_echo():
 		get_viewport().set_input_as_handled()
 		_close_settings()
+
+func _open_instructions() -> void:
+	menu_buttons.hide()
+	instructions_window.show()
+
+func _close_instructions() -> void:
+	instructions_window.hide()
+	menu_buttons.show()
+	instructions_button.grab_focus()
 
 func _open_settings_selection() -> void:
 	menu_buttons.hide()
