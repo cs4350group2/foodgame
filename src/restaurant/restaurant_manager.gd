@@ -11,7 +11,7 @@ var coins: float = 0
 
 # Customers waiting to pay, ordered from the register outward.
 var cashier_queue: Array[Customer] = []
-const CASHIER_QUEUE_SPACING: float = 1.25
+const CASHIER_QUEUE_SPACING: float = 2
 
 signal coins_updated(amount)
 
