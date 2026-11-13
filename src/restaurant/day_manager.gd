@@ -99,6 +99,7 @@ func trigger_game_over():
 	overlay.add_child(fade)
 	fade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var tween := create_tween().set_parallel(true)
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(fade, "color:a", 1.0, fade_duration)
 	tween.tween_property(AudioManager.bgm_player, "pitch_scale",
 		0.05, fade_duration)
