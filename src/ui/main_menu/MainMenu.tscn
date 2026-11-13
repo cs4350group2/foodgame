@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://brkod26kk2nx8" path="res://models/props/food/Ingredients/tomatoWhole.tscn" id="8_m1p38"]
 [ext_resource type="PackedScene" uid="uid://sv76vmelok6f" path="res://models/props/food/Ingredients/potato.tscn" id="9_mhuh5"]
 [ext_resource type="PackedScene" uid="uid://dnfgneyk71oyy" path="res://models/physics/food/stew/stewPlate.tscn" id="10_8mlxt"]
+[ext_resource type="PackedScene" uid="uid://d0n8k0dbumlrc" path="res://src/ui/instructions/Instructions.tscn" id="11_instructions"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seed_input"]
 content_margin_left = 14.0
@@ -215,6 +216,94 @@ content_margin_top = 10.0
 content_margin_right = 14.0
 content_margin_bottom = 8.0
 bg_color = Color(4.6590566e-07, 0.4335562, 0.50917506, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_InstructionsButton_normal"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.55411565, 0.029102018, 0.4741884, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_InstructionsButton_pressed"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.52, 0.41, 0.64, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+expand_margin_top = -2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_InstructionsButton_hover"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.75, 0.63, 0.86, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.98, 0.91, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_InstructionsButton_hover_pressed"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.59, 0.47, 0.71, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
@@ -499,6 +588,18 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ContinueButton_hover")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ContinueButton_hover_pressed")
 text = "Continue"
 
+[node name="InstructionsButton" type="Button" parent="CanvasLayer/Control/MenuCenter/VBoxContainer" unique_id=726369171]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+theme = ExtResource("3_mlydd")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_InstructionsButton_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_InstructionsButton_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_InstructionsButton_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_InstructionsButton_hover_pressed")
+text = "Instructions"
+
 [node name="SettingsButton" type="Button" parent="CanvasLayer/Control/MenuCenter/VBoxContainer" unique_id=1691446546]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 68)
@@ -526,6 +627,10 @@ text = "Quit"
 [node name="SettingsPage" parent="CanvasLayer/Control" unique_id=1364403805 instance=ExtResource("4_settings")]
 unique_name_in_owner = true
 visible = false
+layout_mode = 1
+
+[node name="InstructionsWindow" parent="CanvasLayer/Control" unique_id=2108200839 instance=ExtResource("11_instructions")]
+unique_name_in_owner = true
 layout_mode = 1
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=498241883]

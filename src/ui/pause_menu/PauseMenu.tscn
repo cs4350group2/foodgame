@@ -14,7 +14,7 @@ content_margin_left = 14.0
 content_margin_top = 3.0
 content_margin_right = 14.0
 content_margin_bottom = 5.0
-bg_color = Color(0.563132, 0.22836417, 0.42294005, 1)
+bg_color = Color(8.4228816e-07, 0.44822282, 0.15028286, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
@@ -183,6 +183,27 @@ expand_margin_bottom = 2.0
 shadow_color = Color(0.14, 0.06, 0.02, 1)
 shadow_size = 1
 shadow_offset = Vector2(0, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a0eq5"]
+content_margin_left = 14.0
+content_margin_top = 3.0
+content_margin_right = 14.0
+content_margin_bottom = 5.0
+bg_color = Color(0.5207767, 4.1777494e-05, 0.42918587, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.956863, 0.85098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+shadow_color = Color(0.14, 0.06, 0.02, 1)
+shadow_size = 2
+shadow_offset = Vector2(0, 4)
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main_menu"]
@@ -587,6 +608,19 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_RecipeButton_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_RecipeButton_hover")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_RecipeButton_hover_pressed")
 text = "Recipes"
+
+[node name="InstructionsButton" type="Button" parent="Center/Panel/Margin/Settings" unique_id=1675142480]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme = ExtResource("6_buttons")
+theme_override_fonts/font = ExtResource("2_fxpoi")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_a0eq5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_RecipeButton_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_RecipeButton_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_RecipeButton_hover_pressed")
+text = "Instructions"
 
 [node name="MainMenuButton" type="Button" parent="Center/Panel/Margin/Settings" unique_id=81174431]
 unique_name_in_owner = true
