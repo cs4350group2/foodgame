@@ -14,17 +14,12 @@ const INSTRUCTIONS_SCENE = preload("res://src/ui/instructions/Instructions.tscn"
 
 var instructions_window: Control = null
 
-func show_first_time_instructions(save_path: String = "user://onboarding.cfg") -> void:
-	var onboarding := ConfigFile.new()
-	onboarding.load(save_path)
-	if onboarding.get_value("instructions", "shown", false):
+func show_first_time_instructions() -> void:
+	if RunManager.instructions_shown:
 		return
 	pause_game()
 	_on_instructions_pressed()
-	onboarding.set_value("instructions", "shown", true)
-	var error := onboarding.save(save_path)
-	if error != OK:
-		push_warning("Could not save instructions preference: %s" % error_string(error))
+	RunManager.instructions_shown = true
 
 func _input(event: InputEvent) -> void:
 	if RunManager.is_loading:
