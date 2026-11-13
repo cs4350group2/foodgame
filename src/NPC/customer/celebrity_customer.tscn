@@ -10,6 +10,7 @@ radius = 0.3
 height = 1.8
 
 [node name="CelebrityCustomer" type="CharacterBody3D" unique_id=114687315]
+collision_layer = 2
 script = ExtResource("3_oo56t")
 metadata/_custom_type_script = "uid://xsplvt0r4k2"
 
@@ -24,7 +25,7 @@ shape = SubResource("CapsuleShape3D_xrivr")
 [node name="CelebrityCustomerModel" parent="CharacterBody3D/ModelOffset" unique_id=250778569 instance=ExtResource("2_nliax")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 
-[node name="Skeleton3D" parent="CharacterBody3D/ModelOffset/CelebrityCustomerModel/Character" parent_id_path=PackedInt32Array(250778569, 52444051) index="0" unique_id=1133123676]
+[node name="Skeleton3D" parent="CharacterBody3D/ModelOffset/CelebrityCustomerModel/Character" parent_id_path=PackedInt32Array(250778569, 52444051) index="0" unique_id=1531887260]
 bones/0/position = Vector3(-0.0022951723, 0.942919, 0.040227536)
 bones/0/rotation = Quaternion(-0.003976843, -0.007935895, -0.009993349, 0.9999108)
 bones/1/rotation = Quaternion(-0.053151608, -0.0008831783, -0.016545432, 0.9984491)
