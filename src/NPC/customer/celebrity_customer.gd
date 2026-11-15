@@ -29,10 +29,9 @@ func start_ordering() -> void:
 	patience_bar.update_patience(max_patience)
 	# Decide order
 	if order == null:
-		var menu: Dictionary = RestaurantManager.get_menu()
+		var foods: Array[Dictionary] = RestaurantManager.get_available_foods()
 		var order_items: Array[OrderItem] = []
 		for i in range(3):
-			var foods: Array = menu["foods"]
 			var food_data = foods[RunManager.get_rng().randi_range(0, foods.size() - 1)]
 			print(food_data["name"], food_data["price"], food_data["rarity"])
 			var food = Food.new(food_data["name"], food_data["price"], food_data["rarity"])

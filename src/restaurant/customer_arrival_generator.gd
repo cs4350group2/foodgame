@@ -15,6 +15,12 @@ func generate(config: ArrivalConfig, rules: Array[CustomerSpawnRule],
 			eligible.append(rule)
 	var pool := _choose_special_pool(config.danger_rating, arrivals.size(), eligible, rng)
 	_assign_specials(arrivals, pool, config.wave_special_weight, rng)
+	# Append after random assignments so the boss is guaranteed and does not
+	# consume a regular customer slot or the day's special-customer budget.
+	if config.celebrity_boss:
+		var last: CustomerArrival = arrivals.back()
+		arrivals.append(CustomerArrival.new(&"Celebrity",
+			last.arrival_time + config.wave_spawn_interval, last.wave_index))
 	print("--- Customer schedule: %d customers, danger budget %d ---" % [arrivals.size(), config.danger_rating])
 	for i in range(arrivals.size()):
 		var arrival := arrivals[i]

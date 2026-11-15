@@ -2,6 +2,7 @@ extends Resource
 class_name RestaurantRun
 
 const CUSTOMER_UNLOCK_INTERVAL := 3
+const CELEBRITY_BOSS_INTERVAL := 5
 # Milestone rewards deliberately stay out of UpgradeRepo's selectable catalog.
 const CUSTOMER_UNLOCK_UPGRADES: Array[Unlock_Upgrade] = [
 	preload("res://src/upgrades/unlock_upgrade/vip_unlock.tres"),
@@ -150,6 +151,7 @@ func _update_arrival_config() -> void:
 	arrival_config.gradual_customer_count = _calculate_gradual_customer_count(current_day)
 	arrival_config.wave_sizes = _calculate_wave_sizes(current_day)
 	arrival_config.danger_rating = _calculate_danger_rating(current_day)
+	arrival_config.celebrity_boss = current_day % CELEBRITY_BOSS_INTERVAL == 0
 
 func get_dish_unlock_choices() -> Array[Upgrade]:
 	var pool: Array[Upgrade] = []
